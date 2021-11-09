@@ -1,3 +1,8 @@
+package facebook.yoga;
+
+import facebook.yoga.detail.CompactValue;
+import java.util.Iterator;
+
 public class YGNode
 {
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
