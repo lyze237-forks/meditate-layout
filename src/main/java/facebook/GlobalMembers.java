@@ -1,6 +1,27 @@
 package facebook;
 
-import java.util.*;
+import facebook.yoga.YGAlign;
+import facebook.yoga.YGConfig;
+import facebook.yoga.YGDimension;
+import facebook.yoga.YGDirection;
+import facebook.yoga.YGDisplay;
+import facebook.yoga.YGEdge;
+import facebook.yoga.YGExperimentalFeature;
+import facebook.yoga.YGFlexDirection;
+import facebook.yoga.YGFloatOptional;
+import facebook.yoga.YGJustify;
+import facebook.yoga.YGLogLevel;
+import facebook.yoga.YGMeasureMode;
+import facebook.yoga.YGNode;
+import facebook.yoga.YGNodeType;
+import facebook.yoga.YGOverflow;
+import facebook.yoga.YGPositionType;
+import facebook.yoga.YGPrintOptions;
+import facebook.yoga.YGUnit;
+import facebook.yoga.YGValue;
+import facebook.yoga.YGWrap;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GlobalMembers
 {
@@ -498,9 +519,7 @@ public class GlobalMembers
 
 
 
-
-
-	public static final Integer __nan = 0x7fc00000;
+	public static final float YGUndefined = Float.NaN;
 
 //C++ TO JAVA CONVERTER NOTE: 'extern' variable declarations are not required in Java:
 	//extern const YGValue YGValueAuto;
@@ -520,8 +539,6 @@ public class GlobalMembers
 
 
 
-
-
 	 public static YGNode YGNodeNew() //Method definition originates from: Yoga.cpp
 	 {
 	   return YGNodeNewWithConfig(YGConfigGetDefault());
@@ -529,7 +546,7 @@ public class GlobalMembers
 
 	 public static YGNode YGNodeNewWithConfig(YGConfig config) //Method definition originates from: Yoga.cpp
 	 {
-	   YGNode node = new YGNode((config));
+	   YGNode node = new YGNode(null, (config));
 	   YGAssertWithConfig(config, node != null, "Could not allocate memory for node");
 	   Event.<Event.NodeAllocation>publish(node, {config});
 
