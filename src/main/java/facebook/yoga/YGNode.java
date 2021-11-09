@@ -75,7 +75,7 @@ public class YGNode
 	  }
 	  else
 	  {
-		return new CompactValue(defaultValue);
+		return CompactValue.createCompactValue(defaultValue);
 	  }
 	}
 
@@ -96,7 +96,7 @@ public class YGNode
 	  }
 	  else
 	  {
-		return new CompactValue(defaultValue);
+		return CompactValue.createCompactValue(defaultValue);
 	  }
 	}
 

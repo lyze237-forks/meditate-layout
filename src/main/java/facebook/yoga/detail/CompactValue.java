@@ -19,32 +19,14 @@ public class CompactValue //Type originates from: CompactValue.h
     private static final Integer AUTO_BITS = 0x7faaaaaa;
     private static final Integer ZERO_BITS_POINT = 0x7f8f0f0f;
     private static final Integer ZERO_BITS_PERCENT = 0x7f80f0f0;
-    private Payload payload_ = new Payload();
+    private Payload payload_ = new Payload(0);
 
     public CompactValue() {
         this.payload_ = new facebook.yoga.detail.CompactValue.Payload(Float.NaN);
     }
 
-    public CompactValue(final YGValue x) {
-        this.payload_ = new facebook.yoga.detail.CompactValue.Payload(0);
-        switch (x.unit) {
-            case YGUnitUndefined:
-                this = ofUndefined();
-                break;
-            case YGUnitAuto:
-                this = ofAuto();
-                break;
-            case YGUnitPoint:
-                this = facebook.yoga.detail.CompactValue.of(x.value, YGUnit.YGUnitPoint);
-                break;
-            case YGUnitPercent:
-                this = facebook.yoga.detail.CompactValue.of(x.value, YGUnit.YGUnitPercent);
-                break;
-        }
-    }
-
     private CompactValue(Payload data) {
-        this.payload_ = new facebook.yoga.detail.CompactValue.Payload(data);
+        this.payload_ = data;
     }
 
     //C++ TO JAVA CONVERTER TODO TASK: Most C++ 'constraints' are not converted by C++ to Java Converter:
@@ -89,6 +71,27 @@ public class CompactValue //Type originates from: CompactValue.h
         return new CompactValue(new Payload(AUTO_BITS));
     }
 
+    public static CompactValue createCompactValue(final YGValue x) {
+        CompactValue compactValue = null;
+        switch (x.unit) {
+            case YGUnitUndefined:
+                compactValue = ofUndefined();
+                break;
+            case YGUnitAuto:
+                compactValue = ofAuto();
+                break;
+            case YGUnitPoint:
+                compactValue = facebook.yoga.detail.CompactValue.of(x.value, YGUnit.YGUnitPoint);
+                break;
+            case YGUnitPercent:
+                compactValue = facebook.yoga.detail.CompactValue.of(x.value, YGUnit.YGUnitPercent);
+                break;
+        }
+        compactValue.payload_ = new facebook.yoga.detail.CompactValue.Payload(0);
+
+        return compactValue;
+    }
+
     private boolean equalsTo(CompactValue a, CompactValue b) //Method definition originates from: CompactValue.h
     {
         return a.payload_.repr.equals(b.payload_.repr);
@@ -96,13 +99,12 @@ public class CompactValue //Type originates from: CompactValue.h
 
     //C++ TO JAVA CONVERTER TODO TASK: The following operator cannot be converted to Java:
     YGValue convertToYgValue() {
-        switch (payload_.repr) {
-            case AUTO_BITS:
-                return YGValueAuto;
-            case ZERO_BITS_POINT:
-                return new YGValue(0.0f, YGUnit.YGUnitPoint);
-            case ZERO_BITS_PERCENT:
-                return new YGValue(0.0f, YGUnit.YGUnitPercent);
+        if (payload_.repr.equals(AUTO_BITS)) {
+            return YGValueAuto;
+        } else if (payload_.repr.equals(ZERO_BITS_POINT)) {
+            return new YGValue(0.0f, YGUnit.YGUnitPoint);
+        } else if (payload_.repr.equals(ZERO_BITS_PERCENT)) {
+            return new YGValue(0.0f, YGUnit.YGUnitPercent);
         }
 
         if (Float.isNaN(payload_.value)) {

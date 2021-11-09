@@ -1,6 +1,5 @@
 package facebook.yoga.detail;
 
-import facebook.*;
 import java.util.*;
 
 //C++ TO JAVA CONVERTER TODO TASK: Most C++ 'constraints' are not converted by C++ to Java Converter:
@@ -22,7 +21,7 @@ public class Values<Size> //Type originates from: Yoga-internal.h
   {
 //C++ TO JAVA CONVERTER TODO TASK: The following line was determined to contain a copy constructor call - this should be verified and a copy constructor should be created:
 //ORIGINAL LINE: return values_[i];
-	  return new facebook.yoga.detail.CompactValue(values_.get(i));
+	  return CompactValue.createCompactValue(values_.get(i));
   }
   public final void set(Integer i, CompactValue value)
   {
@@ -32,7 +31,7 @@ public class Values<Size> //Type originates from: Yoga-internal.h
   {
 //C++ TO JAVA CONVERTER TODO TASK: The following line was determined to contain a copy constructor call - this should be verified and a copy constructor should be created:
 //ORIGINAL LINE: return values_[i];
-	  return new facebook.yoga.detail.CompactValue(values_.get(i));
+	  return CompactValue.createCompactValue(values_.get(i));
   }
   public final void set(Integer i, CompactValue value)
   {
