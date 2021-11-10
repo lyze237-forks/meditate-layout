@@ -24,12 +24,12 @@ public class GlobalMembers {
         return (log2ceilFn(e.getEnumConstants().length - 1));
     }
 
-    public static <E extends Enum<E>> E getEnumData(Class<E> e, int flags, Integer index) {
+    public static <E extends Enum<E>> E getEnumData(Class<E> e, int flags, Integer index) { //TODO: Change to ByRef
         E[] constants = e.getEnumConstants();
         return constants[((flags & mask(bitWidthFn(e), index)) >> index)];
     }
 
-    public static <E extends Enum<E>> byte setEnumData(Class<E> e, byte flags, int index, E newValue) {
+    public static <E extends Enum<E>> byte setEnumData(Class<E> e, byte flags, int index, E newValue) { //TODO: Change to ByRef
         return (byte) ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e), index))));
     }
 
@@ -37,7 +37,7 @@ public class GlobalMembers {
         return ((flags >> index) & 1) != 0;
     }
 
-    public static byte setBooleanData(byte flags, int index, boolean value) {
+    public static byte setBooleanData(byte flags, int index, boolean value) { //TODO: Change to ByRef
         if (value) {
             return (byte) (flags | 1 << index);
         } else {

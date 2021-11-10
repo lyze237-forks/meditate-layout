@@ -99,7 +99,7 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     //C++ TO JAVA CONVERTER TODO TASK: The following operator cannot be converted to Java:
-    YGValue convertToYgValue() {
+    public YGValue convertToYgValue() {
         if (payload_.repr.equals(AUTO_BITS)) {
             return YGValueAuto;
         } else if (payload_.repr.equals(ZERO_BITS_POINT)) {

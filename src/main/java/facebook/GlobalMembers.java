@@ -1,5 +1,6 @@
 package facebook;
 
+import facebook.CompactValue;
 import static facebook.yoga.GlobalMembers.isUndefined;
 import facebook.yoga.YGAlign;
 import facebook.yoga.YGBaselineFunc;
@@ -42,6 +43,7 @@ import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class GlobalMembers
 {
@@ -60,7 +62,7 @@ public class GlobalMembers
 	  return Math.abs(a.value - b.value) < 0.0001f;
 	}
 
-	public static boolean YGValueEqual(facebook.yoga.detail.CompactValue a, facebook.yoga.detail.CompactValue b)
+	public static boolean YGValueEqual(facebook.CompactValue a, facebook.CompactValue b)
 	{
 	  return YGValueEqual((YGValue) a, (YGValue) b);
 	}
@@ -155,17 +157,17 @@ public class GlobalMembers
 	  switch (value.unit)
 	  {
 		case YGUnitPoint:
-		  return YGFloatOptional(value.value);
+		  return new YGFloatOptional(value.value);
 		case YGUnitPercent:
-		  return YGFloatOptional(value.value * ownerSize * 0.01f);
+		  return new YGFloatOptional(value.value * ownerSize * 0.01f);
 		default:
-		  return YGFloatOptional();
+		  return new YGFloatOptional();
 	  }
 	}
 
-	public static YGFloatOptional YGResolveValue(yoga.detail.CompactValue value, float ownerSize)
+	public static YGFloatOptional YGResolveValue(CompactValue value, float ownerSize)
 	{
-	  return new YGFloatOptional(YGResolveValue((YGValue) value, ownerSize));
+	  return YGResolveValue(value.convertToYgValue(), ownerSize);
 	}
 
 	public static boolean YGFlexDirectionIsColumn(final YGFlexDirection flexDirection)
@@ -190,14 +192,14 @@ public class GlobalMembers
 	  return flexDirection;
 	}
 
-	public static YGFloatOptional YGResolveValueMargin(yoga.detail.CompactValue value, final float ownerSize)
+	public static YGFloatOptional YGResolveValueMargin(CompactValue value, final float ownerSize)
 	{
-	  return value.isAuto() ? YGFloatOptional(0) : YGResolveValue(new yoga.detail.CompactValue(value), ownerSize);
+	  return value.isAuto() ? new YGFloatOptional(0) : YGResolveValue(value, ownerSize);
 	}
 
 	public static void throwLogicalErrorWithMessage(String message) //Method definition originates from: Utils.cpp
 	{
-	  throw std::logic_error(message);
+	  throw new RuntimeException(message);
 	}
 
 	public static String YGAlignToString(final YGAlign value) //Method definition originates from: YGEnums.cpp
@@ -1554,16 +1556,16 @@ public class GlobalMembers
 
 	public static YGNode YGNodeDeepClone(YGNode oldNode)
 	{
-	  var config = YGConfigClone(*oldNode.getConfig());
+	  var config = YGConfigClone(oldNode.getConfig());
 	  var node = new YGNode((oldNode, config));
 	  node.setOwner(null);
 	  /* Event.NodeAllocation */ Event.publish(node, {node.getConfig()});
 
-	  ArrayList<YGNode> vec = YGVector();
+	  ArrayList<YGNode> vec = new ArrayList<>();
 	  vec.ensureCapacity(oldNode.getChildren().size());
 	  YGNode childNode = null;
-//C++ TO JAVA CONVERTER NOTE: 'auto' variable declarations are not supported in Java:
-//ORIGINAL LINE: for (auto* item : oldNode->getChildren())
+//C++ TO JAVA CONVERTER NOTE: 'auto' variable declarations are not supported in Java: ORIGINAL LINE: for (auto* item :
+//oldNode->getChildren())
 	  for (var item : oldNode.getChildren())
 	  {
 		childNode = YGNodeDeepClone(item);
@@ -1689,7 +1691,7 @@ interface propDelegate
 	Ref invoke();
 }
 
-	public static <Ref, Idx> void updateIndexedStyleProp(YGNode node, propDelegate prop, Idx idx, facebook.yoga.detail.CompactValue value)
+	public static <Ref, Idx> void updateIndexedStyleProp(YGNode node, propDelegate prop, Idx idx, facebook.CompactValue value)
 	{
 //C++ TO JAVA CONVERTER TODO TASK: Only lambda expressions having all locals passed by reference can be converted to Java:
 //ORIGINAL LINE: updateStyle(node, value, [idx, prop](YGStyle& s, CompactValue x)
@@ -3765,31 +3767,31 @@ interface voidDelegate
 	}
 	private boolean notEqualsTo(YGFloatOptional lhs, YGFloatOptional rhs)
 	{
-	  return !(lhs == rhs);
+	  return !(Objects.equals(lhs, rhs));
 	}
 
 	private boolean equalsTo(YGFloatOptional lhs, float rhs)
 	{
-	  return lhs == YGFloatOptional(rhs);
+	  return Objects.equals(lhs, new YGFloatOptional(rhs));
 	}
 	private boolean notEqualsTo(YGFloatOptional lhs, float rhs)
 	{
-	  return !(lhs == rhs);
+	  return !(Objects.equals(lhs, rhs));
 	}
 
 	private boolean equalsTo(float lhs, YGFloatOptional rhs)
 	{
-	  return rhs == lhs;
+	  return Objects.equals(rhs, lhs);
 	}
 	private boolean notEqualsTo(float lhs, YGFloatOptional rhs)
 	{
-	  return !(lhs == rhs);
+	  return !(Objects.equals(lhs, rhs));
 	}
 
 //C++ TO JAVA CONVERTER TODO TASK: The following operator cannot be converted to Java:
-	YGFloatOptional operator + (YGFloatOptional lhs, YGFloatOptional rhs)
+	public static YGFloatOptional plus(YGFloatOptional lhs, YGFloatOptional rhs)
 	{
-	  return YGFloatOptional(lhs.unwrap() + rhs.unwrap());
+	  return new YGFloatOptional(lhs.unwrap() + rhs.unwrap());
 	}
 
 	private boolean greaterThan(YGFloatOptional lhs, YGFloatOptional rhs)

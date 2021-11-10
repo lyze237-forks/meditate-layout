@@ -1,15 +1,75 @@
 package facebook.yoga;
 
+import static facebook.GlobalMembers.YGAssertWithNode;
+import static facebook.GlobalMembers.YGFlexDirectionIsRow;
+import static facebook.GlobalMembers.YGResolveValue;
+import static facebook.GlobalMembers.YGResolveValueMargin;
+import static facebook.GlobalMembers.YGValueUndefined;
+import static facebook.GlobalMembers.plus;
 import facebook.yoga.detail.CompactValue;
-import java.util.Iterator;
-
 import static facebook.yoga.detail.GlobalMembers.getBooleanData;
 import static facebook.yoga.detail.GlobalMembers.setBooleanData;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
-public class YGNode
+
+public class YGNode implements YGNodeRef
 {
-//C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
-	public YGNode(YGNode && node)
+
+	private static final int hasNewLayout_ = 0;
+	private static final int isReferenceBaseline_ = 1;
+	private static final int isDirty_ = 2;
+	private static final int nodeType_ = 3;
+	private static final int measureUsesContext_ = 4;
+	private static final int baselineUsesContext_ = 5;
+	private static final int printUsesContext_ = 6;
+	private static final int useWebDefaults_ = 7;
+
+	private Object context_ = null;
+	private byte flags = 1;
+	private byte reserved_ = 0;
+	private static class measure_Struct
+	{
+
+		public YGMeasureFunc noContext = null;
+		public MeasureWithContextFn withContext;
+
+	}
+
+	private measure_Struct measure_ = null;
+	private static class baseline_Struct
+	{
+
+		public YGBaselineFunc noContext = null;
+		public BaselineWithContextFn withContext;
+
+	}
+
+
+	private baseline_Struct baseline_ = null;
+	private static class print_Struct
+	{
+
+		public YGPrintFunc noContext = null;
+		public PrintWithContextFn withContext;
+
+	}
+
+	private print_Struct print_ = null;
+	private YGDirtiedFunc dirtied_ = null;
+	private YGStyle style_ = new YGStyle();
+	private YGLayout layout_ = new YGLayout();
+	private int lineIndex_ = 0;
+	private YGNodeRef owner_ = null;
+	private ArrayList<YGNode> children_ = new ArrayList<>();
+	private YGConfigRef config_ = new YGConfigRef();
+	private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<YGValue>(
+			Arrays.asList(YGValueUndefined, YGValueUndefined));
+
+
+	//C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
+	public YGNode(YGNode node)
 	{
 	  context_ = node.context_;
 	  flags = node.flags;
@@ -21,7 +81,7 @@ public class YGNode
 	  layout_ = node.layout_;
 	  lineIndex_ = node.lineIndex_;
 	  owner_ = node.owner_;
-	  children_ = std::move(node.children_);
+	  children_ = node.children_; //TODO: Make full copy
 	  config_ = node.config_;
 	  resolvedDimensions_ = node.resolvedDimensions_;
 	  for (var c : children_)
@@ -60,6 +120,7 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public CompactValue computeEdgeValueForRow(final YGStyle.Edges edges, YGEdge rowEdge, YGEdge edge, CompactValue defaultValue)
 	{
+
 	  if (!edges[(int)rowEdge].isUndefined())
 	  {
 		return edges[(int)rowEdge];
@@ -107,14 +168,14 @@ public class YGNode
 	public YGFloatOptional getLeadingPosition(final YGFlexDirection axis, final float axisSize)
 	{
 	  var leadingPosition = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart, leading[(int)axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(), leading[(int)axis], CompactValue.ofZero());
-	  return new YGFloatOptional(YGResolveValue(new auto(leadingPosition), axisSize));
+	  return YGResolveValue(leadingPosition, axisSize);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public YGFloatOptional getTrailingPosition(final YGFlexDirection axis, final float axisSize)
 	{
 	  var trailingPosition = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd, trailing[(int)axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(), trailing[(int)axis], CompactValue.ofZero());
-	  return new YGFloatOptional(YGResolveValue(new auto(trailingPosition), axisSize));
+	  return YGResolveValue(trailingPosition, axisSize);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -135,48 +196,44 @@ public class YGNode
 	public YGFloatOptional getLeadingMargin(final YGFlexDirection axis, final float widthSize)
 	{
 	  var leadingMargin = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeStart, leading[(int)axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(), leading[(int)axis], CompactValue.ofZero());
-	  return new YGFloatOptional(YGResolveValueMargin(new auto(leadingMargin), widthSize));
+	  return YGResolveValueMargin(leadingMargin, widthSize);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public YGFloatOptional getTrailingMargin(final YGFlexDirection axis, final float widthSize)
 	{
 	  var trailingMargin = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeEnd, trailing[(int)axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(), trailing[(int)axis], CompactValue.ofZero());
-	  return new YGFloatOptional(YGResolveValueMargin(new auto(trailingMargin), widthSize));
+	  return YGResolveValueMargin(trailingMargin, widthSize);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public YGFloatOptional getMarginForAxis(final YGFlexDirection axis, final float widthSize)
 	{
-	  return getLeadingMargin(axis, widthSize) + getTrailingMargin(axis, widthSize);
+	  return plus(getLeadingMargin(axis, widthSize), getTrailingMargin(axis, widthSize));
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public YGSize measure(float width, YGMeasureMode widthMode, float height, YGMeasureMode heightMode, Object layoutContext)
 	{
-	  return getBooleanData(flags, measureUsesContext_) ? measure_.withContext(this, width, widthMode, height, heightMode, layoutContext) : measure_.noContext(this, width, widthMode, height, heightMode);
+	  return getBooleanData(flags, measureUsesContext_) ? measure_.withContext.invoke(this, width, widthMode, height, heightMode, layoutContext) : measure_.noContext.invoke(this, width, widthMode, height, heightMode);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public float baseline(float width, float height, Object layoutContext)
 	{
-	  return getBooleanData(flags, baselineUsesContext_) ? baseline_.withContext(this, width, height, layoutContext) : baseline_.noContext(this, width, height);
+	  return getBooleanData(flags, baselineUsesContext_) ? baseline_.withContext.invoke(this, width, height, layoutContext) : baseline_.noContext.invoke(this, width, height);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
-	public void setMeasureFunc(decltype(YGNode.measure_) measureFunc)
+	public void setMeasureFunc(measure_Struct measureFunc)
 	{
 	  if (measureFunc.noContext == null)
 	  {
-
-
 		setNodeType(YGNodeType.YGNodeTypeDefault);
 	  }
 	  else
 	  {
 		YGAssertWithNode(this, children_.size() == 0, "Cannot set measure function: Nodes with measure functions cannot have " + "children.");
-
-
 		setNodeType(YGNodeType.YGNodeTypeText);
 	  }
 
@@ -188,9 +245,8 @@ public class YGNode
 	{
 	  setBooleanData(flags, measureUsesContext_, false);
 	//C++ TO JAVA CONVERTER TODO TASK: There is no Java equivalent to 'decltype':
-	  decltype(YGNode.measure_) m;
-	  m.noContext = measureFunc;
-	  setMeasureFunc(m);
+	  measure_.noContext = measureFunc;
+	  setMeasureFunc(measure_);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -198,9 +254,8 @@ public class YGNode
 	{
 	  setBooleanData(flags, measureUsesContext_, true);
 	//C++ TO JAVA CONVERTER TODO TASK: There is no Java equivalent to 'decltype':
-	  decltype(YGNode.measure_) m;
-	  m.withContext = measureFunc;
-	  setMeasureFunc(m);
+		measure_.withContext = measureFunc;
+		setMeasureFunc(measure_);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -229,9 +284,9 @@ public class YGNode
 		return;
 	  }
 	  setBooleanData(flags, isDirty_, isDirty);
-	  if (isDirty && dirtied_)
+	  if (isDirty && dirtied_ != null)
 	  {
-		dirtied_(this);
+		dirtied_.invoke(this);
 	  }
 	}
 
