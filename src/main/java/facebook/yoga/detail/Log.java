@@ -6,24 +6,17 @@ package facebook.yoga.detail;
 //struct YGConfig;
 
 
+import facebook.yoga.YGConfig;
+import facebook.yoga.YGLogLevel;
+import facebook.yoga.YGNode;
 
-public class Log //Type originates from: log.h
-{
-  public static void log(YGNode node, YGLogLevel level, Object context, String format, Object... LegacyParamArray) //Method definition originates from: log.cpp
-  {
-//	va_list args;
-	int ParamCount = -1;
-//	va_start(args, format);
-	GlobalMembers.vlog(node == null ? null : node.getConfig(), node, level, context, format, new va_list(args));
-//	va_end(args);
-  }
+public class Log {
 
-  public static void log(YGConfig config, YGLogLevel level, Object context, String format, Object... LegacyParamArray) //Method definition originates from: log.cpp
-  {
-//	va_list args;
-	int ParamCount = -1;
-//	va_start(args, format);
-	GlobalMembers.vlog(config, null, level, context, format, new va_list(args));
-//	va_end(args);
-  }
+    public static void log(YGNode node, YGLogLevel level, Object context, String format, Object... args) {
+        GlobalMembers.vlog(node == null ? null : node.getConfig(), node, level, context, format, args);
+    }
+
+    public static void log(YGConfig config, YGLogLevel level, Object context, String format, Object... args) {
+        GlobalMembers.vlog(config, null, level, context, format, args);
+    }
 }

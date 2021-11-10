@@ -4,10 +4,11 @@ package facebook.yoga.detail;
 //static_assert(std::numeric_limits<float>::is_iec559, "facebook::yoga::detail::CompactValue only works with IEEE754 floats");
 
 
-import static facebook.GlobalMembers.YGValueAuto;
-import static facebook.GlobalMembers.YGValueUndefined;
 import facebook.yoga.YGUnit;
 import facebook.yoga.YGValue;
+
+import static facebook.GlobalMembers.YGValueAuto;
+import static facebook.GlobalMembers.YGValueUndefined;
 
 public class CompactValue //Type originates from: CompactValue.h
 {
@@ -22,7 +23,7 @@ public class CompactValue //Type originates from: CompactValue.h
     private Payload payload_ = new Payload(0);
 
     public CompactValue() {
-        this.payload_ = new facebook.yoga.detail.CompactValue.Payload(Float.NaN);
+        this.payload_ = new CompactValue.Payload(Float.NaN);
     }
 
     private CompactValue(Payload data) {
@@ -56,7 +57,7 @@ public class CompactValue //Type originates from: CompactValue.h
 //C++ TO JAVA CONVERTER WARNING: The original C++ template specifier was replaced with a Java generic specifier, which may not produce the same behavior:
 //ORIGINAL LINE: template <typename Unit> requires YGUnit<Unit>
     public static CompactValue ofMaybe(float value, YGUnit Unit) {
-        return Float.isNaN(value) || Float.isInfinite(value) ? ofUndefined() : facebook.yoga.detail.CompactValue.of(value, Unit);
+        return Float.isNaN(value) || Float.isInfinite(value) ? ofUndefined() : CompactValue.of(value, Unit);
     }
 
     public static CompactValue ofZero() {
@@ -81,13 +82,13 @@ public class CompactValue //Type originates from: CompactValue.h
                 compactValue = ofAuto();
                 break;
             case YGUnitPoint:
-                compactValue = facebook.yoga.detail.CompactValue.of(x.value, YGUnit.YGUnitPoint);
+                compactValue = CompactValue.of(x.value, YGUnit.YGUnitPoint);
                 break;
             case YGUnitPercent:
-                compactValue = facebook.yoga.detail.CompactValue.of(x.value, YGUnit.YGUnitPercent);
+                compactValue = CompactValue.of(x.value, YGUnit.YGUnitPercent);
                 break;
         }
-        compactValue.payload_ = new facebook.yoga.detail.CompactValue.Payload(0);
+        compactValue.payload_ = new CompactValue.Payload(0);
 
         return compactValue;
     }

@@ -43,7 +43,7 @@ public class YGNode
 	{
 	  if (print_.noContext != null)
 	  {
-		if (facebook.yoga.detail.getBooleanData(flags, printUsesContext_))
+		if (getBooleanData(flags, printUsesContext_))
 		{
 		  print_.withContext(this, printContext);
 		}
@@ -151,13 +151,13 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public YGSize measure(float width, YGMeasureMode widthMode, float height, YGMeasureMode heightMode, Object layoutContext)
 	{
-	  return facebook.yoga.detail.getBooleanData(flags, measureUsesContext_) ? measure_.withContext(this, width, widthMode, height, heightMode, layoutContext) : measure_.noContext(this, width, widthMode, height, heightMode);
+	  return getBooleanData(flags, measureUsesContext_) ? measure_.withContext(this, width, widthMode, height, heightMode, layoutContext) : measure_.noContext(this, width, widthMode, height, heightMode);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public float baseline(float width, float height, Object layoutContext)
 	{
-	  return facebook.yoga.detail.getBooleanData(flags, baselineUsesContext_) ? baseline_.withContext(this, width, height, layoutContext) : baseline_.noContext(this, width, height);
+	  return getBooleanData(flags, baselineUsesContext_) ? baseline_.withContext(this, width, height, layoutContext) : baseline_.noContext(this, width, height);
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -165,25 +165,25 @@ public class YGNode
 	{
 	  if (measureFunc.noContext == null)
 	  {
-    
-    
+
+
 		setNodeType(YGNodeType.YGNodeTypeDefault);
 	  }
 	  else
 	  {
 		YGAssertWithNode(this, children_.size() == 0, "Cannot set measure function: Nodes with measure functions cannot have " + "children.");
-    
-    
+
+
 		setNodeType(YGNodeType.YGNodeTypeText);
 	  }
-    
+
 	  measure_ = measureFunc;
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public void setMeasureFunc(YGMeasureFunc measureFunc)
 	{
-	  facebook.yoga.detail.setBooleanData(flags, measureUsesContext_, false);
+	  setBooleanData(flags, measureUsesContext_, false);
 	//C++ TO JAVA CONVERTER TODO TASK: There is no Java equivalent to 'decltype':
 	  decltype(YGNode.measure_) m;
 	  m.noContext = measureFunc;
@@ -193,7 +193,7 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public void setMeasureFunc(MeasureWithContextFn measureFunc)
 	{
-	  facebook.yoga.detail.setBooleanData(flags, measureUsesContext_, true);
+	  setBooleanData(flags, measureUsesContext_, true);
 	//C++ TO JAVA CONVERTER TODO TASK: There is no Java equivalent to 'decltype':
 	  decltype(YGNode.measure_) m;
 	  m.withContext = measureFunc;
@@ -221,11 +221,11 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public void setDirty(boolean isDirty)
 	{
-	  if (isDirty == facebook.yoga.detail.getBooleanData(flags, isDirty_))
+	  if (isDirty == getBooleanData(flags, isDirty_))
 	  {
 		return;
 	  }
-	  facebook.yoga.detail.setBooleanData(flags, isDirty_, isDirty);
+	  setBooleanData(flags, isDirty_, isDirty);
 	  if (isDirty && dirtied_)
 	  {
 		dirtied_(this);
@@ -324,7 +324,7 @@ public class YGNode
 	  {
 		return getLeadingPosition(axis, axisSize);
 	  }
-    
+
 	  YGFloatOptional trailingPosition = getTrailingPosition(axis, axisSize);
 	  if (!trailingPosition.isUndefined())
 	  {
@@ -336,18 +336,18 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public void setPosition(final YGDirection direction, final float mainSize, final float crossSize, final float ownerWidth)
 	{
-    
-    
+
+
 	  final YGDirection directionRespectingRoot = owner_ != null ? direction : YGDirection.YGDirectionLTR;
 	  final YGFlexDirection mainAxis = YGResolveFlexDirection(style_.flexDirection(), directionRespectingRoot);
 	  final YGFlexDirection crossAxis = YGFlexDirectionCross(mainAxis, directionRespectingRoot);
-    
-    
-    
-    
+
+
+
+
 	  final YGFloatOptional relativePositionMain = relativePosition(mainAxis, mainSize);
 	  final YGFloatOptional relativePositionCross = relativePosition(crossAxis, crossSize);
-    
+
 	  setLayoutPosition((getLeadingMargin(mainAxis, ownerWidth) + relativePositionMain).unwrap(), leading[(int)mainAxis]);
 	  setLayoutPosition((getTrailingMargin(mainAxis, ownerWidth) + relativePositionMain).unwrap(), trailing[(int)mainAxis]);
 	  setLayoutPosition((getLeadingMargin(crossAxis, ownerWidth) + relativePositionCross).unwrap(), leading[(int)crossAxis]);
@@ -392,7 +392,7 @@ public class YGNode
 	  }
 	  if (!style_.flex().isUndefined() && style_.flex().unwrap() > 0.0f)
 	  {
-		return facebook.yoga.detail.getBooleanData(flags, useWebDefaults_) ? YGValueAuto : YGValueZero;
+		return getBooleanData(flags, useWebDefaults_) ? YGValueAuto : YGValueZero;
 	  }
 	  return YGValueAuto;
 	}
@@ -445,7 +445,7 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public void markDirtyAndPropogate()
 	{
-	  if (!facebook.yoga.detail.getBooleanData(flags, isDirty_))
+	  if (!getBooleanData(flags, isDirty_))
 	  {
 		setDirty(true);
 		setLayoutComputedFlexBasis(YGFloatOptional());
@@ -459,7 +459,7 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public void markDirtyAndPropogateDownwards()
 	{
-	  facebook.yoga.detail.setBooleanData(flags, isDirty_, true);
+	  setBooleanData(flags, isDirty_, true);
 	  for_each(children_.begin(), children_.end(), (YGNode childNode) ->
 	  {
 		  childNode.markDirtyAndPropogateDownwards();
@@ -469,7 +469,7 @@ public class YGNode
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
 	public float resolveFlexGrow()
 	{
-    
+
 	  if (owner_ == null)
 	  {
 		return 0.0F;
@@ -496,11 +496,11 @@ public class YGNode
 	  {
 		return style_.flexShrink().unwrap();
 	  }
-	  if (!facebook.yoga.detail.getBooleanData(flags, useWebDefaults_) && !style_.flex().isUndefined() && style_.flex().unwrap() < 0.0f)
+	  if (!getBooleanData(flags, useWebDefaults_) && !style_.flex().isUndefined() && style_.flex().unwrap() < 0.0f)
 	  {
 		return -style_.flex().unwrap();
 	  }
-	  return facebook.yoga.detail.getBooleanData(flags, useWebDefaults_) ? kWebDefaultFlexShrink : kDefaultFlexShrink;
+	  return getBooleanData(flags, useWebDefaults_) ? kWebDefaultFlexShrink : kDefaultFlexShrink;
 	}
 
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -595,7 +595,7 @@ public class YGNode
 	  {
 		return true;
 	  }
-    
+
 	  boolean isLayoutTreeEqual = true;
 	  YGNode otherNodeChildren = null;
 	  for (ArrayList<struct YGNode>.Integerype i = 0; i < children_.size(); ++i)
@@ -615,10 +615,10 @@ public class YGNode
 	{
 	  YGAssertWithNode(this, children_.size() == 0, "Cannot reset a node which still has children attached");
 	  YGAssertWithNode(this, owner_ == null, "Cannot reset a node still attached to a owner");
-    
+
 	  clearChildren();
-    
-	  var webDefaults = facebook.yoga.detail.getBooleanData(flags, useWebDefaults_);
+
+	  var webDefaults = getBooleanData(flags, useWebDefaults_);
 	  this = YGNode((getConfig()));
 	  if (webDefaults != null)
 	  {

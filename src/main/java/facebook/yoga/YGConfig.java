@@ -67,7 +67,7 @@ private Struct struct = new Struct();
 	loggerUsesContext_ = false;
   }
 
-  public final void log(YGConfig config, YGNode node, YGLogLevel logLevel, Object logContext, String format, va_list args) //Method definition originates from: YGConfig.cpp
+  public final void log(YGConfig config, YGNode node, YGLogLevel logLevel, Object logContext, String format, Object... args) //Method definition originates from: YGConfig.cpp
   {
 	if (loggerUsesContext_)
 	{
