@@ -29,7 +29,7 @@ public class GlobalMembers {
         return constants[((flags & mask(bitWidthFn(e), index)) >> index)];
     }
 
-    public static <E extends Enum<E>> byte setEnumData(Class<E> e, byte flags, int index, E newValue) { //TODO: Change to ByRef
+    public static <E extends Enum<E>> byte setEnumData(Class<E> e, byte flags, int index, E newValue) {
         return (byte) ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e), index))));
     }
 
@@ -37,7 +37,7 @@ public class GlobalMembers {
         return ((flags >> index) & 1) != 0;
     }
 
-    public static byte setBooleanData(byte flags, int index, boolean value) { //TODO: Change to ByRef
+    public static byte setBooleanData(byte flags, int index, boolean value) {
         if (value) {
             return (byte) (flags | 1 << index);
         } else {

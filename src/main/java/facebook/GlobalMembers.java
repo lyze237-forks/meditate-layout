@@ -1350,7 +1350,7 @@ public class GlobalMembers
 	 {
 	   if (!condition)
 	   {
-		 Log.log(YGNodeRef((null)), YGLogLevel.YGLogLevelFatal, null, "%s\n", message);
+		 Log.log(YGNode((null)), YGLogLevel.YGLogLevelFatal, null, "%s\n", message);
 		 throwLogicalErrorWithMessage(message);
 	   }
 	 }

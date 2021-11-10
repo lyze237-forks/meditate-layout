@@ -1,12 +1,16 @@
 package facebook.yoga;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static facebook.GlobalMembers.YGFloatArrayEqual;
 import static facebook.GlobalMembers.YGUndefined;
-import static facebook.yoga.event.GlobalMembers.isUndefined;
-import static facebook.yoga.detail.GlobalMembers.*;
+import static facebook.yoga.GlobalMembers.isUndefined;
+import static facebook.yoga.detail.GlobalMembers.bitWidthFn;
+import static facebook.yoga.detail.GlobalMembers.getBooleanData;
+import static facebook.yoga.detail.GlobalMembers.getEnumData;
+import static facebook.yoga.detail.GlobalMembers.setBooleanData;
+import static facebook.yoga.detail.GlobalMembers.setEnumData;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class YGLayout {
 
@@ -85,15 +89,15 @@ public class YGLayout {
     {
         boolean isEqual = YGFloatArrayEqual(position, layout.position) && YGFloatArrayEqual(dimensions, layout.dimensions) && YGFloatArrayEqual(margin, layout.margin) && YGFloatArrayEqual(border, layout.border) && YGFloatArrayEqual(padding, layout.padding) && direction() == layout.direction() && hadOverflow() == layout.hadOverflow() && lastOwnerDirection == layout.lastOwnerDirection && nextCachedMeasurementsIndex == layout.nextCachedMeasurementsIndex && cachedLayout.equalsTo(layout.cachedLayout) && computedFlexBasis == layout.computedFlexBasis;
 
-        for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT && isEqual; ++i) {
-            isEqual = isEqual && cachedMeasurements.get(i).equalsTo(layout.cachedMeasurements.get(i));
+        for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT && isEqual; ++i) { //TODO: Verify if this is correct
+            isEqual = cachedMeasurements.get(i).equalsTo(layout.cachedMeasurements.get(i));
         }
 
         if (!isUndefined(measuredDimensions.get(0)) || !isUndefined(layout.measuredDimensions.get(0))) {
-            isEqual = isEqual && (measuredDimensions.get(0) == layout.measuredDimensions.get(0));
+            isEqual = isEqual && (Objects.equals(measuredDimensions.get(0), layout.measuredDimensions.get(0)));
         }
         if (!isUndefined(measuredDimensions.get(1)) || !isUndefined(layout.measuredDimensions.get(1))) {
-            isEqual = isEqual && (measuredDimensions.get(1) == layout.measuredDimensions.get(1));
+            isEqual = isEqual && (Objects.equals(measuredDimensions.get(1), layout.measuredDimensions.get(1)));
         }
 
         return isEqual;

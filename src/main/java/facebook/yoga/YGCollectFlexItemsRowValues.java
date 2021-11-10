@@ -1,7 +1,6 @@
 package facebook.yoga;
 
-import facebook.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class YGCollectFlexItemsRowValues //Type originates from: Utils.h
 {
@@ -12,11 +11,6 @@ public class YGCollectFlexItemsRowValues //Type originates from: Utils.h
   public Integer endOfLineIndex;
   public ArrayList<YGNode> relativeChildren = new ArrayList<>();
   public float remainingFreeSpace;
-
-
-
   public float mainDim;
-
-
   public float crossDim;
 }
