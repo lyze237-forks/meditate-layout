@@ -1,5 +1,7 @@
 package facebook.yoga;
 
+import facebook.GlobalMembers;
+import static facebook.GlobalMembers.*;
 import static facebook.GlobalMembers.YGAssertWithNode;
 import static facebook.GlobalMembers.YGFlexDirectionIsRow;
 import static facebook.GlobalMembers.YGResolveValue;

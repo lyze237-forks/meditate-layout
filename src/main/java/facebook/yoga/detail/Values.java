@@ -4,16 +4,22 @@ import facebook.yoga.YGValue;
 import java.util.ArrayList;
 
 
-public class Values //Type originates from: Yoga-internal.h
+public class Values<T> //Type originates from: Yoga-internal.h
 {
     private ArrayList<CompactValue> values_;
-    private final int size;
 
 
-    //  Values() = default;
+    public Values() {
+        values_ = new ArrayList<>();
+    }
+
+    public Values(final YGValue defaultValue) {
+        values_ = new ArrayList<>();
+        values_.add(CompactValue.createCompactValue(defaultValue));
+    }
+
     public Values(final YGValue defaultValue, int size) {
         values_ = new ArrayList<>(size);
-        this.size = size;
         values_.add(CompactValue.createCompactValue(defaultValue));
     }
 
@@ -29,8 +35,6 @@ public class Values //Type originates from: Yoga-internal.h
         return CompactValue.createCompactValue(values_.get(i).convertToYgValue());
     }
 
-
-
     public final YGValue get(int i) {
         return values_.get(i).convertToYgValue();
     }
@@ -40,8 +44,8 @@ public class Values //Type originates from: Yoga-internal.h
         values_.set(i, CompactValue.createCompactValue(value));
     }
 
-    public boolean equalsTo(final Values other) {
-        for (int i = 0; i < size; ++i) {
+    public boolean equalsTo(final Values<T> other) {
+        for (int i = 0; i < values_.size(); ++i) {
             if (values_.get(i) != other.values_.get(i)) {
                 return false;
             }
