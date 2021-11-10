@@ -8,4 +8,8 @@ import facebook.yoga.YGConfig;
 public class NodeAllocationEventData extends CallableEvent  //Type originates from: event.h
 {
   public YGConfig config;
+
+  public NodeAllocationEventData(YGConfig config) {
+    this.config = config;
+  }
 }

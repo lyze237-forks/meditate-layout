@@ -30,6 +30,7 @@ import facebook.yoga.YGPositionType;
 import facebook.yoga.YGPrintFunc;
 import facebook.yoga.YGPrintOptions;
 import facebook.yoga.YGSize;
+import facebook.yoga.YGStyle;
 import facebook.yoga.YGUnit;
 import facebook.yoga.YGValue;
 import facebook.yoga.YGWrap;
@@ -39,6 +40,8 @@ import facebook.yoga.event.Event;
 import facebook.yoga.event.LayoutData;
 import facebook.yoga.event.LayoutPassReason;
 import facebook.yoga.event.LayoutType;
+import facebook.yoga.event.NodeAllocationEventData;
+import facebook.yoga.event.NodeDeallocationEventData;
 import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,9 +65,9 @@ public class GlobalMembers
 	  return Math.abs(a.value - b.value) < 0.0001f;
 	}
 
-	public static boolean YGValueEqual(facebook.CompactValue a, facebook.CompactValue b)
+	public static boolean YGValueEqual(CompactValue a, CompactValue b)
 	{
-	  return YGValueEqual((YGValue) a, (YGValue) b);
+	  return YGValueEqual(a.convertToYgValue(), b.convertToYgValue());
 	}
 
 
@@ -91,20 +94,20 @@ public class GlobalMembers
 	{
 	  if (!isUndefined(a) && !isUndefined(b))
 	  {
-		return fmaxf(a, b);
+		return Math.max(a, b);
 	  }
 	  return isUndefined(a) ? b : a;
 	}
 
 	public static YGFloatOptional YGFloatOptionalMax(YGFloatOptional op1, YGFloatOptional op2) //Method definition originates from: Utils.cpp
 	{
-	  if (op1 >= op2)
+	  if (greaterThanOrEqualTo(op1, op2))
 	  {
-		return new YGFloatOptional(op1);
+		return op1;
 	  }
-	  if (op2 > op1)
+	  if (greaterThan(op2, op1))
 	  {
-		return new YGFloatOptional(op2);
+		return op2;
 	  }
 	  return op1.isUndefined() ? op2 : op1;
 	}
@@ -113,7 +116,7 @@ public class GlobalMembers
 	{
 	  if (!isUndefined(a) && !isUndefined(b))
 	  {
-		return fminf(a, b);
+		return Math.min(a, b);
 	  }
 
 	  return isUndefined(a) ? b : a;
@@ -126,10 +129,10 @@ public class GlobalMembers
 	//ORIGINAL LINE: template <std::size_t size>
 //C++ TO JAVA CONVERTER WARNING: The original C++ template specifier was replaced with a Java generic specifier, which may not produce the same behavior:
 //ORIGINAL LINE: template <typename size> requires int<size>
-	public static <size> boolean YGFloatArrayEqual(final ArrayList<Float> val1, final ArrayList<Float> val2)
+	public static boolean YGFloatArrayEqual(final ArrayList<Float> val1, final ArrayList<Float> val2)
 	{
 	  boolean areEqual = true;
-	  for (int i = 0; i < size && areEqual; ++i)
+	  for (int i = 0; i < val1.size() && areEqual; ++i)
 	  {
 		areEqual = YGFloatsEqual(val1.get(i), val2.get(i));
 	  }
@@ -570,7 +573,7 @@ public class GlobalMembers
 	 {
 	   YGNode node = new YGNode(null, (config));
 	   YGAssertWithConfig(config, node != null, "Could not allocate memory for node");
-	   /* Event.NodeAllocation */ Event.publish(node, {config});
+	   Event.publish(node, new NodeAllocationEventData(config));
 
 	   return node;
 	 }
@@ -579,14 +582,15 @@ public class GlobalMembers
 	 {
 	   YGNode node = new YGNode(oldNode);
 	   YGAssertWithConfig(oldNode.getConfig(), node != null, "Could not allocate memory for node");
-	   /* Event.NodeAllocation */ Event.publish(node, {node.getConfig()});
+	   Event.publish(node, new NodeAllocationEventData(node.getConfig()));
 	   node.setOwner(null);
 	   return node;
 	 }
 
 	 public static void YGNodeFree(YGNode node) //Method definition originates from: Yoga.cpp
 	 {
-	   if (struct YGNode * owner = node.getOwner())
+		 YGNode owner = node.getOwner();
+		 if (owner != null)
 	   {
 		 owner.removeChild(node);
 		 node.setOwner(null);
@@ -600,7 +604,7 @@ public class GlobalMembers
 	   }
 
 	   node.clearChildren();
-	   /* Event.NodeDeallocation */ Event.publish(node, {node.getConfig()});
+	   Event.publish(node, new NodeDeallocationEventData(node.getConfig()) );
 	   node = null;
 	 }
 
@@ -630,7 +634,7 @@ public class GlobalMembers
 
 	 public static void YGNodeFreeRecursive(YGNode root) //Method definition originates from: Yoga.cpp
 	 {
-	   return YGNodeFreeRecursiveWithCleanupFunc(root, null);
+	   YGNodeFreeRecursiveWithCleanupFunc(root, null);
 	 }
 
 	 public static void YGNodeReset(YGNode node) //Method definition originates from: Yoga.cpp
@@ -671,7 +675,7 @@ public class GlobalMembers
 	   {
 		 if (owner == childOwner)
 		 {
-		   excludedChild.setLayout(());
+		   excludedChild.setLayout(null);
 		   excludedChild.setOwner(null);
 		 }
 		 owner.markDirtyAndPropogate();
@@ -694,7 +698,7 @@ public class GlobalMembers
 		 for (Integer i = 0; i < childCount; i++)
 		 {
 		   YGNode oldChild = YGNodeGetChild(owner, i);
-		   oldChild.setLayout((new YGNode()).getLayout());
+		   oldChild.setLayout(null);
 		   oldChild.setOwner(null);
 		 }
 		 owner.clearChildren();
@@ -703,7 +707,7 @@ public class GlobalMembers
 	   }
 
 
-	   owner.setChildren(YGVector());
+	   owner.getChildren().clear();
 	   owner.markDirtyAndPropogate();
 	 }
 
@@ -733,7 +737,7 @@ public class GlobalMembers
 
 	 public static void YGNodeSetChildren(YGNode owner, YGNode[] c, final Integer count) //Method definition originates from: Yoga.cpp
 	 {
-	   ArrayList<YGNode> children = new ArrayList<YGNode>(Arrays.asList(c, c + count));
+	   ArrayList<YGNode> children = new ArrayList<YGNode>(Arrays.asList(c));
 	   YGNodeSetChildrenInternal(owner, children);
 	 }
 
@@ -775,7 +779,7 @@ public class GlobalMembers
 
 	 public static void YGNodeMarkDirtyAndPropogateToDescendants(YGNode node) //Method definition originates from: Yoga.cpp
 	 {
-	   return node.markDirtyAndPropogateDownwards();
+	   node.markDirtyAndPropogateDownwards();
 	 }
 
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
@@ -783,7 +787,7 @@ public class GlobalMembers
 
 	 public static boolean YGFloatIsUndefined(final float value) //Method definition originates from: Yoga.cpp
 	 {
-	   return facebook.yoga.isUndefined(value);
+	   return isUndefined(value);
 	 }
 
 	 public static boolean YGNodeCanUseCachedMeasurement(final YGMeasureMode widthMode, final float width, final YGMeasureMode heightMode, final float height, final YGMeasureMode lastWidthMode, final float lastWidth, final YGMeasureMode lastHeightMode, final float lastHeight, final float lastComputedWidth, final float lastComputedHeight, final float marginRow, final float marginColumn, YGConfig config) //Method definition originates from: Yoga.cpp
@@ -824,7 +828,7 @@ public class GlobalMembers
 
 	 public static void YGNodeSetContext(YGNode node, Object context) //Method definition originates from: Yoga.cpp
 	 {
-	   return node.setContext(context);
+	   node.setContext(context);
 	 }
 
 	public static void YGConfigSetPrintTreeFlag(YGConfig config, boolean enabled) //Method definition originates from: Yoga.cpp
@@ -3794,24 +3798,24 @@ interface voidDelegate
 	  return new YGFloatOptional(lhs.unwrap() + rhs.unwrap());
 	}
 
-	private boolean greaterThan(YGFloatOptional lhs, YGFloatOptional rhs)
+	public static boolean greaterThan(YGFloatOptional lhs, YGFloatOptional rhs)
 	{
 	  return lhs.unwrap() > rhs.unwrap();
 	}
 
-	private boolean lessThan(YGFloatOptional lhs, YGFloatOptional rhs)
+	public static boolean lessThan(YGFloatOptional lhs, YGFloatOptional rhs)
 	{
 	  return lhs.unwrap() < rhs.unwrap();
 	}
 
-	private boolean greaterThanOrEqualTo(YGFloatOptional lhs, YGFloatOptional rhs)
+	public static boolean greaterThanOrEqualTo(YGFloatOptional lhs, YGFloatOptional rhs)
 	{
-	  return lhs > rhs || lhs == rhs;
+	  return lhs.unwrap() > rhs.unwrap() || lhs.unwrap() == rhs.unwrap();
 	}
 
-	private boolean lessThanOrEqualTo(YGFloatOptional lhs, YGFloatOptional rhs)
+	public static boolean lessThanOrEqualTo(YGFloatOptional lhs, YGFloatOptional rhs)
 	{
-	  return lhs < rhs || lhs == rhs;
+	  return lhs.unwrap() < rhs.unwrap() || lhs.unwrap() == rhs.unwrap();
 	}
 
 

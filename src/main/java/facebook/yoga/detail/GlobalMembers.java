@@ -5,6 +5,7 @@ import facebook.yoga.YGLogLevel;
 import facebook.yoga.YGNode;
 
 import static facebook.GlobalMembers.YGConfigGetDefault;
+import org.jetbrains.annotations.Contract;
 
 public class GlobalMembers {
     public static void vlog(YGConfig config, YGNode node, YGLogLevel level, Object context, String format, Object... args) {
@@ -37,6 +38,7 @@ public class GlobalMembers {
         return ((flags >> index) & 1) != 0;
     }
 
+    @Contract(pure = true)
     public static byte setBooleanData(byte flags, int index, boolean value) {
         if (value) {
             return (byte) (flags | 1 << index);

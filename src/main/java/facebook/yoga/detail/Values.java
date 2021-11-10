@@ -1,5 +1,6 @@
 package facebook.yoga.detail;
 
+import facebook.yoga.YGEdge;
 import facebook.yoga.YGValue;
 import java.util.ArrayList;
 
@@ -29,6 +30,10 @@ public class Values<T> //Type originates from: Yoga-internal.h
 
     public final void set(Integer i, CompactValue value) {
         values_.set(i, value);
+    }
+
+    public final CompactValue getCompactValue(YGEdge edge) {
+        return getCompactValue(edge.getValue());
     }
 
     public final CompactValue getCompactValue(Integer i) {

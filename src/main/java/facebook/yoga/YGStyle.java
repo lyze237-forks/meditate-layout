@@ -188,11 +188,11 @@ public class YGStyle //Type originates from: YGStyle.h
             this.offset = offset;
         }
 
-        public T convertToEnum(Class<T> enumClazz) {
+        public T getValue(Class<T> enumClazz) {
             return getEnumData(enumClazz, style.flags, offset);
         }
 
-        public final BitfieldRef<T> copyFromBitfieldRef(T x) {
+        public final BitfieldRef<T> setValue(T x) {
             style.flags = setEnumData((Class<T>) x.getClass(), style.flags, offset, x);
             return this;
         }

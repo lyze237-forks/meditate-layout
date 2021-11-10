@@ -1,19 +1,30 @@
 package facebook.yoga;
 
-import facebook.GlobalMembers;
-import static facebook.GlobalMembers.*;
 import static facebook.GlobalMembers.YGAssertWithNode;
+import static facebook.GlobalMembers.YGFlexDirectionCross;
 import static facebook.GlobalMembers.YGFlexDirectionIsRow;
+import static facebook.GlobalMembers.YGFloatOptionalMax;
+import static facebook.GlobalMembers.YGResolveFlexDirection;
 import static facebook.GlobalMembers.YGResolveValue;
 import static facebook.GlobalMembers.YGResolveValueMargin;
+import static facebook.GlobalMembers.YGValueAuto;
+import static facebook.GlobalMembers.YGValueEqual;
 import static facebook.GlobalMembers.YGValueUndefined;
+import static facebook.GlobalMembers.YGValueZero;
+import static facebook.GlobalMembers.kDefaultFlexGrow;
+import static facebook.GlobalMembers.kDefaultFlexShrink;
+import static facebook.GlobalMembers.kWebDefaultFlexShrink;
+import static facebook.GlobalMembers.leading;
 import static facebook.GlobalMembers.plus;
+import static facebook.GlobalMembers.trailing;
 import facebook.yoga.detail.CompactValue;
 import static facebook.yoga.detail.GlobalMembers.getBooleanData;
 import static facebook.yoga.detail.GlobalMembers.setBooleanData;
+import static facebook.yoga.detail.GlobalMembers.setEnumData;
+import facebook.yoga.detail.Values;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.function.BiConsumer;
 
 
 public class YGNode {
@@ -42,6 +53,7 @@ public class YGNode {
     private YGConfig config_ = new YGConfig(null);
     private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<YGValue>(
             Arrays.asList(YGValueUndefined, YGValueUndefined));
+
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGNode(YGNode node) {
         context_ = node.context_;
@@ -61,13 +73,50 @@ public class YGNode {
             c.setOwner(this);
         }
     }
+
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGNode(final YGNode node, YGConfig config) {
-        this.YGNode = node;
+        this(node);
         config_ = config;
         if (config.useWebDefaults) {
             useWebDefaults();
         }
+    }
+
+    //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
+    public static CompactValue computeEdgeValueForRow(final Values<YGEdge> edges, YGEdge rowEdge, YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp
+    {
+        if (!edges.getCompactValue(rowEdge).isUndefined()) {
+            return edges.getCompactValue(rowEdge);
+        } else if (!edges.getCompactValue(edge).isUndefined()) {
+            return edges.getCompactValue(edge);
+        } else if (!edges.getCompactValue(YGEdge.YGEdgeHorizontal).isUndefined()) {
+            return edges.getCompactValue(YGEdge.YGEdgeHorizontal);
+        } else if (!edges.getCompactValue(YGEdge.YGEdgeAll).isUndefined()) {
+            return edges.getCompactValue(YGEdge.YGEdgeAll);
+        } else {
+            return defaultValue;
+        }
+    }
+
+    //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
+    public static CompactValue computeEdgeValueForColumn(final Values<YGEdge> edges, YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp
+    {
+        if (!edges.getCompactValue(edge).isUndefined()) {
+            return edges.getCompactValue(edge);
+        } else if (!edges.getCompactValue(YGEdge.YGEdgeVertical).isUndefined()) {
+            return edges.getCompactValue(YGEdge.YGEdgeVertical);
+        } else if (!edges.getCompactValue(YGEdge.YGEdgeAll).isUndefined()) {
+            return edges.getCompactValue(YGEdge.YGEdgeAll);
+        } else {
+            return defaultValue;
+        }
+    }
+
+    private void useWebDefaults() {
+        flags = setBooleanData(flags, useWebDefaults_, true);
+        style_.flexDirectionBitfieldRef().setValue(YGFlexDirection.YGFlexDirectionRow);
+        style_.alignContentBitfieldRef().setValue(YGAlign.YGAlignStretch);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -82,79 +131,51 @@ public class YGNode {
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
-    public CompactValue computeEdgeValueForRow(final YGStyle.Edges edges, YGEdge rowEdge, YGEdge edge, CompactValue defaultValue) {
-
-        if (!edges[(int) rowEdge].isUndefined()) {
-            return edges[(int) rowEdge];
-        } else if (!edges[(int) edge].isUndefined()) {
-            return edges[(int) edge];
-        } else if (!edges[(int) YGEdge.YGEdgeHorizontal].isUndefined()) {
-            return edges[(int) YGEdge.YGEdgeHorizontal];
-        } else if (!edges[(int) YGEdge.YGEdgeAll].isUndefined()) {
-            return edges[(int) YGEdge.YGEdgeAll];
-        } else {
-            return CompactValue.createCompactValue(defaultValue);
-        }
-    }
-
-    //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
-    public CompactValue computeEdgeValueForColumn(final YGStyle.Edges edges, YGEdge edge, CompactValue defaultValue) {
-        if (!edges[(int) edge].isUndefined()) {
-            return edges[(int) edge];
-        } else if (!edges[(int) YGEdge.YGEdgeVertical].isUndefined()) {
-            return edges[(int) YGEdge.YGEdgeVertical];
-        } else if (!edges[(int) YGEdge.YGEdgeAll].isUndefined()) {
-            return edges[(int) YGEdge.YGEdgeAll];
-        } else {
-            return CompactValue.createCompactValue(defaultValue);
-        }
-    }
-
-    //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getLeadingPosition(final YGFlexDirection axis, final float axisSize) {
         var leadingPosition = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
-                leading[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
-                leading[(int) axis], CompactValue.ofZero());
+                leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
+                leading.get(axis.getValue()), CompactValue.ofZero());
         return YGResolveValue(leadingPosition, axisSize);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getTrailingPosition(final YGFlexDirection axis, final float axisSize) {
         var trailingPosition = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
-                trailing[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
-                trailing[(int) axis], CompactValue.ofZero());
+                trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
+                trailing.get(axis.getValue()), CompactValue.ofZero());
         return YGResolveValue(trailingPosition, axisSize);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public boolean isLeadingPositionDefined(final YGFlexDirection axis) {
         var leadingPosition = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
-                leading[(int) axis], CompactValue.ofUndefined()) : computeEdgeValueForColumn(style_.position(),
-                leading[(int) axis], CompactValue.ofUndefined());
+                leading.get(axis.getValue()), CompactValue.ofUndefined()) : computeEdgeValueForColumn(style_.position(),
+                leading.get(axis.getValue()), CompactValue.ofUndefined());
         return !leadingPosition.isUndefined();
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public boolean isTrailingPosDefined(final YGFlexDirection axis) {
         var trailingPosition = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
-                trailing[(int) axis], CompactValue.ofUndefined()) : computeEdgeValueForColumn(style_.position(),
-                trailing[(int) axis], CompactValue.ofUndefined());
+                trailing.get(axis.getValue()), CompactValue.ofUndefined()) : computeEdgeValueForColumn(
+                style_.position(),
+                trailing.get(axis.getValue()), CompactValue.ofUndefined());
         return !trailingPosition.isUndefined();
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getLeadingMargin(final YGFlexDirection axis, final float widthSize) {
         var leadingMargin = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeStart,
-                leading[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
-                leading[(int) axis], CompactValue.ofZero());
+                leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
+                leading.get(axis.getValue()), CompactValue.ofZero());
         return YGResolveValueMargin(leadingMargin, widthSize);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getTrailingMargin(final YGFlexDirection axis, final float widthSize) {
         var trailingMargin = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeEnd,
-                trailing[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
-                trailing[(int) axis], CompactValue.ofZero());
+                trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
+                trailing.get(axis.getValue()), CompactValue.ofZero());
         return YGResolveValueMargin(trailingMargin, widthSize);
     }
 
@@ -173,6 +194,10 @@ public class YGNode {
     public float baseline(float width, float height, Object layoutContext) {
         return getBooleanData(flags, baselineUsesContext_) ? baseline_.withContext.invoke(this, width, height,
                 layoutContext) : baseline_.noContext.invoke(this, width, height);
+    }
+
+    public final void setNodeType(YGNodeType nodeType) {
+        setEnumData(YGNodeType.class, flags, nodeType_, nodeType);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -211,12 +236,12 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void replaceChild(YGNode oldChild, YGNode newChild) {
-        std::replace (children_.begin(), children_.end(), oldChild, newChild);
+        children_.replaceAll(ygNode -> ygNode.equals(oldChild) ? newChild : ygNode);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void insertChild(YGNode child, Integer index) {
-        children_.insert(children_.begin() + index, child);
+        children_.add(index, child);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -232,18 +257,12 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public boolean removeChild(YGNode child) {
-        Iterator<YGNode> p = std::find (children_.begin(), children_.end(), child);
-        //C++ TO JAVA CONVERTER TODO TASK: Iterators are only converted within the context of 'while' and 'for' loops:
-        if (p != children_.end()) {
-            children_.erase(p);
-            return true;
-        }
-        return false;
+        return children_.remove(child);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
-    public void removeChild(Integer index) {
-        children_.erase(children_.begin() + index);
+    public void removeChild(int index) {
+        children_.remove(index);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -309,9 +328,9 @@ public class YGNode {
 
         YGFloatOptional trailingPosition = getTrailingPosition(axis, axisSize);
         if (!trailingPosition.isUndefined()) {
-            trailingPosition = YGFloatOptional((-1 * trailingPosition.unwrap()));
+            trailingPosition = new YGFloatOptional((-1 * trailingPosition.unwrap()));
         }
-        return new YGFloatOptional(trailingPosition);
+        return trailingPosition;
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -326,41 +345,41 @@ public class YGNode {
         final YGFloatOptional relativePositionMain = relativePosition(mainAxis, mainSize);
         final YGFloatOptional relativePositionCross = relativePosition(crossAxis, crossSize);
 
-        setLayoutPosition((getLeadingMargin(mainAxis, ownerWidth) + relativePositionMain).unwrap(),
-                leading[(int) mainAxis]);
-        setLayoutPosition((getTrailingMargin(mainAxis, ownerWidth) + relativePositionMain).unwrap(),
-                trailing[(int) mainAxis]);
-        setLayoutPosition((getLeadingMargin(crossAxis, ownerWidth) + relativePositionCross).unwrap(),
-                leading[(int) crossAxis]);
-        setLayoutPosition((getTrailingMargin(crossAxis, ownerWidth) + relativePositionCross).unwrap(),
-                trailing[(int) crossAxis]);
+        setLayoutPosition(plus(getLeadingMargin(mainAxis, ownerWidth), relativePositionMain).unwrap(),
+                leading.get(mainAxis.getValue()).getValue());
+        setLayoutPosition(plus(getTrailingMargin(mainAxis, ownerWidth), relativePositionMain).unwrap(),
+                trailing.get(mainAxis.getValue()).getValue());
+        setLayoutPosition(plus(getLeadingMargin(crossAxis, ownerWidth), relativePositionCross).unwrap(),
+                leading.get(crossAxis.getValue()).getValue());
+        setLayoutPosition(plus(getTrailingMargin(crossAxis, ownerWidth), relativePositionCross).unwrap(),
+                trailing.get(crossAxis.getValue()).getValue());
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGValue marginLeadingValue(final YGFlexDirection axis) {
-        if (YGFlexDirectionIsRow(axis) && !style_.margin()[(int) YGEdge.YGEdgeStart].isUndefined()) {
-            return style_.margin()[(int) YGEdge.YGEdgeStart];
+        if (YGFlexDirectionIsRow(axis) && !style_.margin().getCompactValue(YGEdge.YGEdgeStart).isUndefined()) {
+            return style_.margin().get(YGEdge.YGEdgeStart.getValue());
         } else {
-            return style_.margin()[leading[(int) axis]];
+            return style_.margin().get(leading.get(axis.getValue()).getValue());
         }
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGValue marginTrailingValue(final YGFlexDirection axis) {
-        if (YGFlexDirectionIsRow(axis) && !style_.margin()[(int) YGEdge.YGEdgeEnd].isUndefined()) {
-            return style_.margin()[(int) YGEdge.YGEdgeEnd];
+        if (YGFlexDirectionIsRow(axis) && !style_.margin().getCompactValue(YGEdge.YGEdgeEnd).isUndefined()) {
+            return style_.margin().get(YGEdge.YGEdgeEnd.getValue());
         } else {
-            return style_.margin()[trailing[(int) axis]];
+            return style_.margin().get(trailing.get(axis.getValue()).getValue());
         }
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGValue resolveFlexBasisPtr() {
-        YGValue flexBasis = style_.flexBasis();
+        YGValue flexBasis = style_.flexBasis().convertToYgValue();
         if (flexBasis.unit != YGUnit.YGUnitAuto && flexBasis.unit != YGUnit.YGUnitUndefined) {
             //C++ TO JAVA CONVERTER TODO TASK: The following line was determined to contain a copy constructor call - this should be verified and a copy constructor should be created:
             //ORIGINAL LINE: return flexBasis;
-            return new YGValue(flexBasis);
+            return flexBasis;
         }
         if (!style_.flex().isUndefined() && style_.flex().unwrap() > 0.0f) {
             return getBooleanData(flags, useWebDefaults_) ? YGValueAuto : YGValueZero;
@@ -371,12 +390,14 @@ public class YGNode {
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void resolveDimension() {
         final YGStyle style = getStyle();
-        for (var dim : {YGDimension.YGDimensionWidth, YGDimension.YGDimensionHeight}) {
-            if (!style.maxDimensions()[dim].isUndefined() && YGValueEqual(style.maxDimensions[dim],
-                    style.minDimensions[dim])) {
-                resolvedDimensions_[dim] = style.maxDimensions()[dim];
+        YGDimension[] dimensions = new YGDimension[]{YGDimension.YGDimensionWidth, YGDimension.YGDimensionHeight};
+        for (var dim : dimensions) {
+            if (!style.maxDimensions().getCompactValue(dim.getValue()).isUndefined() && YGValueEqual(
+                    style.maxDimensions().getCompactValue(dim.getValue()),
+                    style.minDimensions().getCompactValue(dim.getValue()))) {
+                resolvedDimensions_.set(dim.getValue(), style.maxDimensions().get(dim.getValue()));
             } else {
-                resolvedDimensions_[dim] = style.dimensions()[dim];
+                resolvedDimensions_.set(dim.getValue(), style.dimensions().get(dim.getValue()));
             }
         }
     }
@@ -393,7 +414,6 @@ public class YGNode {
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void clearChildren() {
         children_.clear();
-        children_.shrink_to_fit();
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -403,12 +423,26 @@ public class YGNode {
         }, cloneContext);
     }
 
+
+    public final <T> void iterChildrenAfterCloningIfNeeded(BiConsumer<YGNode, Object> callback, Object cloneContext) {
+        int i = 0;
+        for (YGNode child : children_) {
+            if (child.getOwner() != this) {
+                child = config_.cloneNode(child, this, i, cloneContext);
+                child.setOwner(this);
+            }
+            i += 1;
+
+            callback.accept(child, cloneContext);
+        }
+    }
+
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void markDirtyAndPropogate() {
         if (!getBooleanData(flags, isDirty_)) {
             setDirty(true);
-            setLayoutComputedFlexBasis(YGFloatOptional());
-            if (owner_) {
+            setLayoutComputedFlexBasis(new YGFloatOptional());
+            if (owner_ != null) {
                 owner_.markDirtyAndPropogate();
             }
         }
@@ -417,7 +451,7 @@ public class YGNode {
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void markDirtyAndPropogateDownwards() {
         flags = setBooleanData(flags, isDirty_, true);
-        for_each(children_.begin(), children_.end(), (YGNode childNode) ->
+        children_.forEach((YGNode childNode) ->
         {
             childNode.markDirtyAndPropogateDownwards();
         });
@@ -459,46 +493,45 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public float getLeadingBorder(final YGFlexDirection axis) {
-        YGValue leadingBorder = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.border(), YGEdge.YGEdgeStart,
-                leading[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.border(),
-                leading[(int) axis], CompactValue.ofZero());
-        return fmaxf(leadingBorder.value, 0.0f);
+        YGValue leadingBorder = (YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.border(),
+                YGEdge.YGEdgeStart,
+                leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.border(),
+                leading.get(axis.getValue()), CompactValue.ofZero())).convertToYgValue();
+        return Math.max(leadingBorder.value, 0.0f);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public float getTrailingBorder(final YGFlexDirection axis) {
-        YGValue trailingBorder = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.border(), YGEdge.YGEdgeEnd,
-                trailing[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.border(),
-                trailing[(int) axis], CompactValue.ofZero());
-        return fmaxf(trailingBorder.value, 0.0f);
+        YGValue trailingBorder = (YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.border(), YGEdge.YGEdgeEnd,
+                trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.border(),
+                trailing.get(axis.getValue()), CompactValue.ofZero())).convertToYgValue();
+        return Math.max(trailingBorder.value, 0.0f);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getLeadingPadding(final YGFlexDirection axis, final float widthSize) {
         var leadingPadding = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeStart,
-                leading[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
-                leading[(int) axis], CompactValue.ofZero());
-        return new YGFloatOptional(
-                YGFloatOptionalMax(YGResolveValue(new auto(leadingPadding), widthSize), YGFloatOptional(0.0f)));
+                leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
+                leading.get(axis.getValue()), CompactValue.ofZero());
+        return YGFloatOptionalMax(YGResolveValue(leadingPadding, widthSize), new YGFloatOptional(0.0f));
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getTrailingPadding(final YGFlexDirection axis, final float widthSize) {
         var trailingPadding = YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeEnd,
-                trailing[(int) axis], CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
-                trailing[(int) axis], CompactValue.ofZero());
-        return new YGFloatOptional(
-                YGFloatOptionalMax(YGResolveValue(new auto(trailingPadding), widthSize), YGFloatOptional(0.0f)));
+                trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
+                trailing.get(axis.getValue()), CompactValue.ofZero());
+        return YGFloatOptionalMax(YGResolveValue(trailingPadding, widthSize), new YGFloatOptional(0.0f));
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getLeadingPaddingAndBorder(final YGFlexDirection axis, final float widthSize) {
-        return getLeadingPadding(axis, widthSize) + YGFloatOptional(getLeadingBorder(axis));
+        return plus(getLeadingPadding(axis, widthSize), new YGFloatOptional(getLeadingBorder(axis)));
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGFloatOptional getTrailingPaddingAndBorder(final YGFlexDirection axis, final float widthSize) {
-        return getTrailingPadding(axis, widthSize) + YGFloatOptional(getTrailingBorder(axis));
+        return plus(getTrailingPadding(axis, widthSize), new YGFloatOptional(getTrailingBorder(axis)));
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -539,15 +572,11 @@ public class YGNode {
         }
 
         boolean isLayoutTreeEqual = true;
-        YGNode otherNodeChildren = null;
-        for (ArrayList<struct YGNode>.Integerype i = 0;
-        i<children_.size (); ++i)
-        {
-            otherNodeChildren = node.children_[i];
-            isLayoutTreeEqual = children_[i].isLayoutTreeEqualToNode(otherNodeChildren);
-            if (!isLayoutTreeEqual) {
-                return false;
-            }
+        for (int i = 0, children_size = children_.size(); i < children_size; i++) {
+            YGNode child = children_.get(i);
+            YGNode otherNodeChildren = node.children_.get(i);
+            isLayoutTreeEqual = child.isLayoutTreeEqualToNode(otherNodeChildren);
+            break;
         }
         return isLayoutTreeEqual;
     }
@@ -560,31 +589,10 @@ public class YGNode {
         clearChildren();
 
         var webDefaults = getBooleanData(flags, useWebDefaults_);
-        this = YGNode((getConfig()));
-        if (webDefaults != null) {
+        this.config_ = new YGConfig(null);
+        if (webDefaults) {
             useWebDefaults();
         }
-    }
-
-    private static class measure_Struct {
-
-        public YGMeasureFunc noContext = null;
-        public MeasureWithContextFn withContext;
-
-    }
-
-    private static class baseline_Struct {
-
-        public YGBaselineFunc noContext = null;
-        public BaselineWithContextFn withContext;
-
-    }
-
-    private static class print_Struct {
-
-        public YGPrintFunc noContext = null;
-        public PrintWithContextFn withContext;
-
     }
 
     public Object getContext() {
@@ -697,5 +705,26 @@ public class YGNode {
 
     public void setResolvedDimensions(ArrayList<YGValue> resolvedDimensions_) {
         this.resolvedDimensions_ = resolvedDimensions_;
+    }
+
+    private static class measure_Struct {
+
+        public YGMeasureFunc noContext = null;
+        public MeasureWithContextFn withContext;
+
+    }
+
+    private static class baseline_Struct {
+
+        public YGBaselineFunc noContext = null;
+        public BaselineWithContextFn withContext;
+
+    }
+
+    private static class print_Struct {
+
+        public YGPrintFunc noContext = null;
+        public PrintWithContextFn withContext;
+
     }
 }
