@@ -34,11 +34,6 @@ public class YGStyle //Type originates from: YGStyle.h
     private final @NotNull YGAlign alignContent;
     private final @NotNull YGAlign alignItems;
     private YGFloatOptional aspectRatio_ = new YGFloatOptional();
-
-    public void setAspectRatio(YGFloatOptional aspectRatio_) {
-        this.aspectRatio_ = aspectRatio_;
-    }
-
     private YGFloatOptional flex_ = new YGFloatOptional();
     private YGFloatOptional flexGrow_ = new YGFloatOptional();
     private YGFloatOptional flexShrink_ = new YGFloatOptional();
@@ -47,6 +42,10 @@ public class YGStyle //Type originates from: YGStyle.h
     public YGStyle() {
         alignContent = YGAlign.YGAlignFlexStart;
         alignItems = YGAlign.YGAlignStretch;
+    }
+
+    public void setAspectRatio(YGFloatOptional aspectRatio_) {
+        this.aspectRatio_ = aspectRatio_;
     }
 
     public void setFlex(YGFloatOptional flex_) {

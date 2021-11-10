@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Values<T> //Type originates from: Yoga-internal.h
 {
-    private ArrayList<CompactValue> values_;
+    private final ArrayList<CompactValue> values_;
 
 
     public Values() {

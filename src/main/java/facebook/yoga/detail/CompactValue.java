@@ -4,11 +4,10 @@ package facebook.yoga.detail;
 //static_assert(std::numeric_limits<float>::is_iec559, "facebook::yoga::detail::CompactValue only works with IEEE754 floats");
 
 
-import facebook.yoga.YGUnit;
-import facebook.yoga.YGValue;
-
 import static facebook.GlobalMembers.YGValueAuto;
 import static facebook.GlobalMembers.YGValueUndefined;
+import facebook.yoga.YGUnit;
+import facebook.yoga.YGValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -124,7 +123,8 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     public final boolean isUndefined() {
-        return undefined || (!payload_.repr.equals(AUTO_BITS) && !payload_.repr.equals(ZERO_BITS_POINT) && !payload_.repr.equals(
+        return undefined || (!payload_.repr.equals(AUTO_BITS) && !payload_.repr.equals(
+                ZERO_BITS_POINT) && !payload_.repr.equals(
                 ZERO_BITS_PERCENT) && Float.isNaN(
                 payload_.value));
     }

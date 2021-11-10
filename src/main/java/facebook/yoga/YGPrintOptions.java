@@ -14,10 +14,6 @@ public enum YGPrintOptions {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public static @Nullable YGPrintOptions forValue(int value) {
         for (@NotNull YGPrintOptions options : values()) {
             if (options.value == value) {
@@ -26,5 +22,9 @@ public enum YGPrintOptions {
         }
 
         return null;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

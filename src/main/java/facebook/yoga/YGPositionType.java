@@ -5,11 +5,11 @@ public enum YGPositionType {
     YGPositionTypeRelative,
     YGPositionTypeAbsolute;
 
-    public int getValue() {
-        return this.ordinal();
-    }
-
     public static YGPositionType forValue(int value) {
         return values()[value];
+    }
+
+    public int getValue() {
+        return this.ordinal();
     }
 }

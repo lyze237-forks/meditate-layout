@@ -10,11 +10,11 @@ public enum YGJustify {
 
     public static final int SIZE = java.lang.Integer.SIZE;
 
-    public int getValue() {
-        return this.ordinal();
-    }
-
     public static YGJustify forValue(int value) {
         return values()[value];
+    }
+
+    public int getValue() {
+        return this.ordinal();
     }
 }

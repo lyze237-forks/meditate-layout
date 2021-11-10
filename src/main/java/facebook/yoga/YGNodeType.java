@@ -6,11 +6,11 @@ public enum YGNodeType {
 
     public static final int SIZE = java.lang.Integer.SIZE;
 
-    public int getValue() {
-        return this.ordinal();
-    }
-
     public static YGNodeType forValue(int value) {
         return values()[value];
+    }
+
+    public int getValue() {
+        return this.ordinal();
     }
 }

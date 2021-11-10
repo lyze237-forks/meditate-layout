@@ -1,10 +1,9 @@
 package facebook.yoga.detail;
 
+import static facebook.GlobalMembers.YGConfigGetDefault;
 import facebook.yoga.YGConfig;
 import facebook.yoga.YGLogLevel;
 import facebook.yoga.YGNode;
-
-import static facebook.GlobalMembers.YGConfigGetDefault;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +34,8 @@ public class GlobalMembers {
 
     @Contract(pure = true)
     public static <E extends Enum<E>> byte setEnumData(@NotNull Class<E> e, byte flags, int index, @NotNull E newValue) {
-        return (byte) ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e), index))));
+        return (byte) ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e),
+                index))));
     }
 
     public static boolean getBooleanData(byte flags, Integer index) {

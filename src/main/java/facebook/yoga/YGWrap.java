@@ -2,19 +2,17 @@ package facebook.yoga;
 
 public enum YGWrap //Type originates from: YGEnums.h
 {
-	YGWrapNoWrap,
-	YGWrapWrap,
-	YGWrapWrapReverse;
+    YGWrapNoWrap,
+    YGWrapWrap,
+    YGWrapWrapReverse;
 
-	public static final int SIZE = java.lang.Integer.SIZE;
+    public static final int SIZE = java.lang.Integer.SIZE;
 
-	public int getValue()
-	{
-		return this.ordinal();
-	}
+    public static YGWrap forValue(int value) {
+        return values()[value];
+    }
 
-	public static YGWrap forValue(int value)
-	{
-		return values()[value];
-	}
+    public int getValue() {
+        return this.ordinal();
+    }
 }

@@ -5,11 +5,11 @@ package facebook.yoga.event;
 //C++ TO JAVA CONVERTER TODO TASK: C++ template specialization was removed by C++ to Java Converter:
 public class NodeLayoutEventData extends CallableEvent  //Type originates from: event.h
 {
-  public LayoutType layoutType;
-  public Object layoutContext;
+    public LayoutType layoutType;
+    public Object layoutContext;
 
-  public NodeLayoutEventData(LayoutType layoutType, Object layoutContext) {
-    this.layoutType = layoutType;
-    this.layoutContext = layoutContext;
-  }
+    public NodeLayoutEventData(LayoutType layoutType, Object layoutContext) {
+        this.layoutType = layoutType;
+        this.layoutContext = layoutContext;
+    }
 }

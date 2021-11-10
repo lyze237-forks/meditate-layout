@@ -7,25 +7,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 {
-    @Override
-    public @NotNull YGConfig clone() {
-        try {
-            return (YGConfig) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public boolean useWebDefaults = false;
     public boolean useLegacyStretchBehaviour = false;
     public boolean shouldDiffLayoutWithoutLegacyStretchBehaviour = false;
-//C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
+    //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //struct;
 //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //Struct;
     public boolean printTree = false;
     public float pointScaleFactor = 1.0f;
-//C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
+    //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //struct;
 //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //Struct;
@@ -36,15 +27,23 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
     private @Nullable cloneNodeCallback_Struct cloneNodeCallback_struct = new cloneNodeCallback_Struct();
     //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //struct;
-    private @NotNull logger_Struct logger_struct = new logger_Struct();
+    private final @NotNull logger_Struct logger_struct = new logger_Struct();
     private boolean cloneNodeUsesContext_;
     private boolean loggerUsesContext_;
-
     public YGConfig(YGLogger logger) //Method definition originates from: YGConfig.cpp
     {
         this.cloneNodeCallback_struct = null;
         logger_struct.noContext = logger;
         loggerUsesContext_ = false;
+    }
+
+    @Override
+    public @NotNull YGConfig clone() {
+        try {
+            return (YGConfig) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public final void log(YGConfig config, YGNode node, YGLogLevel logLevel, Object logContext, String format, Object... args) //Method definition originates from: YGConfig.cpp

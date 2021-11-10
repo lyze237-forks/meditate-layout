@@ -9,6 +9,10 @@ public enum Experiment {
 
     private static final Set<Experiment> ENABLED_EXPERIMENTS = EnumSet.noneOf(Experiment.class);
 
+    public static void disableAllExperiments() {
+        ENABLED_EXPERIMENTS.clear();
+    }
+
     public void enable() {
         ENABLED_EXPERIMENTS.add(this);
     }
@@ -28,9 +32,5 @@ public enum Experiment {
 
     public boolean isEnabled() {
         return ENABLED_EXPERIMENTS.contains(this);
-    }
-
-    public static void disableAllExperiments() {
-        ENABLED_EXPERIMENTS.clear();
     }
 }

@@ -55,6 +55,7 @@ public class YGNode {
     private @Nullable YGConfig config_ = new YGConfig(null);
     private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<YGValue>(
             Arrays.asList(YGValueUndefined, YGValueUndefined));
+
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGNode(@NotNull YGNode node) {
         context_ = node.context_;
@@ -83,6 +84,7 @@ public class YGNode {
             useWebDefaults();
         }
     }
+
     public YGNode(@NotNull YGConfig config) {
         config_ = config;
         if (config.useWebDefaults) {
