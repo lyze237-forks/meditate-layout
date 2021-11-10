@@ -37,7 +37,7 @@ public class YGNode {
     private int lineIndex_ = 0;
     private YGNode owner_ = null;
     private ArrayList<YGNode> children_ = new ArrayList<>();
-    private YGConfigRef config_ = new YGConfigRef();
+    private YGConfig config_ = new YGConfig(null);
     private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<YGValue>(
             Arrays.asList(YGValueUndefined, YGValueUndefined));
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -204,7 +204,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void replaceChild(YGNode child, Integer index) {
-        children_[index] = child;
+        children_.set(index, child);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -251,17 +251,17 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutMargin(float margin, int index) {
-        layout_.margin[index] = margin;
+        layout_.margin.set(index, margin);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutBorder(float border, int index) {
-        layout_.border[index] = border;
+        layout_.border.set(index, border);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutPadding(float padding, int index) {
-        layout_.padding[index] = padding;
+        layout_.padding.set(index, padding);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -276,7 +276,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutPosition(float position, int index) {
-        layout_.position[index] = position;
+        layout_.position.set(index, position);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -286,7 +286,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutMeasuredDimension(float measuredDimension, int index) {
-        layout_.measuredDimensions[index] = measuredDimension;
+        layout_.measuredDimensions.set(index, measuredDimension);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -296,7 +296,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutDimension(float dimension, int index) {
-        layout_.dimensions[index] = dimension;
+        layout_.dimensions.set(index, dimension);
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
@@ -583,5 +583,117 @@ public class YGNode {
         public YGPrintFunc noContext = null;
         public PrintWithContextFn withContext;
 
+    }
+
+    public Object getContext() {
+        return context_;
+    }
+
+    public void setContext(Object context_) {
+        this.context_ = context_;
+    }
+
+    public byte getFlags() {
+        return flags;
+    }
+
+    public void setFlags(byte flags) {
+        this.flags = flags;
+    }
+
+    public byte getReserved() {
+        return reserved_;
+    }
+
+    public void setReserved(byte reserved_) {
+        this.reserved_ = reserved_;
+    }
+
+    public measure_Struct getMeasure() {
+        return measure_;
+    }
+
+    public void setMeasure(measure_Struct measure_) {
+        this.measure_ = measure_;
+    }
+
+    public baseline_Struct getBaseline() {
+        return baseline_;
+    }
+
+    public void setBaseline(baseline_Struct baseline_) {
+        this.baseline_ = baseline_;
+    }
+
+    public print_Struct getPrint() {
+        return print_;
+    }
+
+    public void setPrint(print_Struct print_) {
+        this.print_ = print_;
+    }
+
+    public YGDirtiedFunc getDirtied() {
+        return dirtied_;
+    }
+
+    public void setDirtied(YGDirtiedFunc dirtied_) {
+        this.dirtied_ = dirtied_;
+    }
+
+    public YGStyle getStyle() {
+        return style_;
+    }
+
+    public void setStyle(YGStyle style_) {
+        this.style_ = style_;
+    }
+
+    public YGLayout getLayout() {
+        return layout_;
+    }
+
+    public void setLayout(YGLayout layout_) {
+        this.layout_ = layout_;
+    }
+
+    public int getLineIndex() {
+        return lineIndex_;
+    }
+
+    public void setLineIndex(int lineIndex_) {
+        this.lineIndex_ = lineIndex_;
+    }
+
+    public YGNode getOwner() {
+        return owner_;
+    }
+
+    public void setOwner(YGNode owner_) {
+        this.owner_ = owner_;
+    }
+
+    public ArrayList<YGNode> getChildren() {
+        return children_;
+    }
+
+    public void setChildren(ArrayList<YGNode> children_) {
+        this.children_ = children_;
+    }
+
+    public YGConfig getConfig() {
+        return config_;
+    }
+
+    public void setConfig(YGConfig config_) {
+        this.config_ = config_;
+    }
+
+    public ArrayList<YGValue> getResolvedDimensions() {
+        return resolvedDimensions_;
+    }
+
+    public void setResolvedDimensions(ArrayList<YGValue> resolvedDimensions_) {
+        this.resolvedDimensions_ = resolvedDimensions_;
     }
 }
