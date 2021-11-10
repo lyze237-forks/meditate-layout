@@ -1,6 +1,7 @@
 package facebook.yoga.event;
 
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
 
 public class LayoutData extends CallableEvent //Type originates from: event.h
 {
@@ -10,5 +11,5 @@ public class LayoutData extends CallableEvent //Type originates from: event.h
   public int cachedLayouts;
   public int cachedMeasures;
   public int measureCallbacks;
-  public ArrayList<Integer> measureCallbackReasonsCount = new ArrayList<>(LayoutPassReason.COUNT.getValue());
+  public @NotNull ArrayList<Integer> measureCallbackReasonsCount = new ArrayList<>(LayoutPassReason.COUNT.getValue());
 }

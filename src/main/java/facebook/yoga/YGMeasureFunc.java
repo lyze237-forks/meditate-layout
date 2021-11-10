@@ -1,7 +1,9 @@
 package facebook.yoga;
 
+import org.jetbrains.annotations.NotNull;
+
 @FunctionalInterface
 public
 interface YGMeasureFunc {
-    YGSize invoke(YGNode node, float width, YGMeasureMode widthMode, float height, YGMeasureMode heightMode);
+    @NotNull YGSize invoke(YGNode node, float width, YGMeasureMode widthMode, float height, YGMeasureMode heightMode);
 }

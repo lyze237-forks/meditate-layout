@@ -57,6 +57,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tangible.RefObject;
 
 public class GlobalMembers {
@@ -79,13 +81,13 @@ public class GlobalMembers {
     public static final float kWebDefaultFlexShrink = 1.0f;
     public static int gConfigInstanceCount = 0;
     //C++ TO JAVA CONVERTER NOTE: This was formerly a static local variable declaration (not allowed in Java):
-    public static YGConfig defaultConfig = YGConfigNew();
+    public static @NotNull YGConfig defaultConfig = YGConfigNew();
     //C++ TO JAVA CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
-    public static AtomicInteger gCurrentGenerationCount = new AtomicInteger();
+    public static @NotNull AtomicInteger gCurrentGenerationCount = new AtomicInteger();
     public static boolean gPrintChanges = false;
     public static boolean gPrintSkips = false;
 
-    public static boolean YGValueEqual(final YGValue a, final YGValue b) //Method definition originates from: Utils.cpp
+    public static boolean YGValueEqual(final @NotNull YGValue a, final @NotNull YGValue b) //Method definition originates from: Utils.cpp
     {
         if (a.unit != b.unit) {
             return false;
@@ -98,7 +100,7 @@ public class GlobalMembers {
         return Math.abs(a.value - b.value) < 0.0001f;
     }
 
-    public static boolean YGValueEqual(CompactValue a, CompactValue b) {
+    public static boolean YGValueEqual(@NotNull CompactValue a, @NotNull CompactValue b) {
         return YGValueEqual(a.convertToYgValue(), b.convertToYgValue());
     }
 
@@ -126,7 +128,7 @@ public class GlobalMembers {
         return isUndefined(a) ? b : a;
     }
 
-    public static YGFloatOptional YGFloatOptionalMax(YGFloatOptional op1, YGFloatOptional op2) //Method definition originates from: Utils.cpp
+    public static @NotNull YGFloatOptional YGFloatOptionalMax(@NotNull YGFloatOptional op1, @NotNull YGFloatOptional op2) //Method definition originates from: Utils.cpp
     {
         if (greaterThanOrEqualTo(op1, op2)) {
             return op1;
@@ -150,7 +152,7 @@ public class GlobalMembers {
     //ORIGINAL LINE: template <std::size_t size>
 //C++ TO JAVA CONVERTER WARNING: The original C++ template specifier was replaced with a Java generic specifier, which may not produce the same behavior:
 //ORIGINAL LINE: template <typename size> requires int<size>
-    public static boolean YGFloatArrayEqual(final ArrayList<Float> val1, final ArrayList<Float> val2) {
+    public static boolean YGFloatArrayEqual(final @NotNull ArrayList<Float> val1, final @NotNull ArrayList<Float> val2) {
         boolean areEqual = true;
         for (int i = 0; i < val1.size() && areEqual; ++i) {
             areEqual = YGFloatsEqual(val1.get(i), val2.get(i));
@@ -163,7 +165,7 @@ public class GlobalMembers {
         return isUndefined(val) ? 0F : val;
     }
 
-    public static YGFlexDirection YGFlexDirectionCross(final YGFlexDirection flexDirection, final YGDirection direction) //Method definition originates from: Utils.cpp
+    public static @NotNull YGFlexDirection YGFlexDirectionCross(final YGFlexDirection flexDirection, final YGDirection direction) //Method definition originates from: Utils.cpp
     {
         return YGFlexDirectionIsColumn(flexDirection) ? YGResolveFlexDirection(YGFlexDirection.YGFlexDirectionRow,
                 direction) : YGFlexDirection.YGFlexDirectionColumn;
@@ -173,7 +175,7 @@ public class GlobalMembers {
         return flexDirection == YGFlexDirection.YGFlexDirectionRow || flexDirection == YGFlexDirection.YGFlexDirectionRowReverse;
     }
 
-    public static YGFloatOptional YGResolveValue(final YGValue value, final float ownerSize) {
+    public static @NotNull YGFloatOptional YGResolveValue(final @NotNull YGValue value, final float ownerSize) {
         switch (value.unit) {
             case YGUnitPoint:
                 return new YGFloatOptional(value.value);
@@ -184,7 +186,7 @@ public class GlobalMembers {
         }
     }
 
-    public static YGFloatOptional YGResolveValue(CompactValue value, float ownerSize) {
+    public static @NotNull YGFloatOptional YGResolveValue(@NotNull CompactValue value, float ownerSize) {
         return YGResolveValue(value.convertToYgValue(), ownerSize);
     }
 
@@ -204,7 +206,7 @@ public class GlobalMembers {
         return flexDirection;
     }
 
-    public static YGFloatOptional YGResolveValueMargin(CompactValue value, final float ownerSize) {
+    public static @NotNull YGFloatOptional YGResolveValueMargin(@NotNull CompactValue value, final float ownerSize) {
         return value.isAuto() ? new YGFloatOptional(0) : YGResolveValue(value, ownerSize);
     }
 
@@ -213,7 +215,7 @@ public class GlobalMembers {
         throw new RuntimeException(message);
     }
 
-    public static String YGAlignToString(final YGAlign value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGAlignToString(final @NotNull YGAlign value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGAlignAuto:
@@ -236,7 +238,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String LayoutPassReasonToString(final LayoutPassReason value) {
+    public static @NotNull String LayoutPassReasonToString(final LayoutPassReason value) {
         if (value == LayoutPassReason.kInitial) {
             return "initial";
         } else if (value == LayoutPassReason.kAbsLayout) {
@@ -266,7 +268,7 @@ public class GlobalMembers {
 
     //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
     //					   ;
-    public static String YGDimensionToString(final YGDimension value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGDimensionToString(final @NotNull YGDimension value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGDimensionWidth:
@@ -277,7 +279,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGDirectionToString(final YGDirection value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGDirectionToString(final @NotNull YGDirection value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGDirectionInherit:
@@ -290,7 +292,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGDisplayToString(final YGDisplay value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGDisplayToString(final @NotNull YGDisplay value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGDisplayFlex:
@@ -301,7 +303,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGEdgeToString(final YGEdge value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGEdgeToString(final @NotNull YGEdge value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGEdgeLeft:
@@ -326,7 +328,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGExperimentalFeatureToString(final YGExperimentalFeature value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGExperimentalFeatureToString(final @NotNull YGExperimentalFeature value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGExperimentalFeatureWebFlexBasis:
@@ -335,7 +337,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGFlexDirectionToString(final YGFlexDirection value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGFlexDirectionToString(final @NotNull YGFlexDirection value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGFlexDirectionColumn:
@@ -350,7 +352,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGJustifyToString(final YGJustify value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGJustifyToString(final @NotNull YGJustify value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGJustifyFlexStart:
@@ -369,7 +371,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGLogLevelToString(final YGLogLevel value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGLogLevelToString(final @NotNull YGLogLevel value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGLogLevelError:
@@ -388,7 +390,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGMeasureModeToString(final YGMeasureMode value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGMeasureModeToString(final @NotNull YGMeasureMode value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGMeasureModeUndefined:
@@ -401,7 +403,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGNodeTypeToString(final YGNodeType value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGNodeTypeToString(final @NotNull YGNodeType value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGNodeTypeDefault:
@@ -412,7 +414,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGOverflowToString(final YGOverflow value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGOverflowToString(final @NotNull YGOverflow value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGOverflowVisible:
@@ -425,7 +427,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGPositionTypeToString(final YGPositionType value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGPositionTypeToString(final @NotNull YGPositionType value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGPositionTypeStatic:
@@ -438,7 +440,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGPrintOptionsToString(final YGPrintOptions value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGPrintOptionsToString(final @NotNull YGPrintOptions value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGPrintOptionsLayout:
@@ -451,7 +453,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGUnitToString(final YGUnit value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGUnitToString(final @NotNull YGUnit value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGUnitUndefined:
@@ -466,7 +468,7 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static String YGWrapToString(final YGWrap value) //Method definition originates from: YGEnums.cpp
+    public static @NotNull String YGWrapToString(final @NotNull YGWrap value) //Method definition originates from: YGEnums.cpp
     {
         switch (value) {
             case YGWrapNoWrap:
@@ -479,40 +481,40 @@ public class GlobalMembers {
         return "unknown";
     }
 
-    public static YGNode YGNodeNew() //Method definition originates from: Yoga.cpp
+    public static @NotNull YGNode YGNodeNew() //Method definition originates from: Yoga.cpp
     {
         return YGNodeNewWithConfig(YGConfigGetDefault());
     }
 
-    public static YGNode YGNodeNewWithConfig(YGConfig config) //Method definition originates from: Yoga.cpp
+    public static @NotNull YGNode YGNodeNewWithConfig(YGConfig config) //Method definition originates from: Yoga.cpp
     {
-        YGNode node = new YGNode((config));
+        @NotNull YGNode node = new YGNode((config));
         YGAssertWithConfig(config, node != null, "Could not allocate memory for node");
         Event.publish(node, new NodeAllocationEventData(config));
 
         return node;
     }
 
-    public static YGNode YGNodeClone(YGNode oldNode) //Method definition originates from: Yoga.cpp
+    public static @NotNull YGNode YGNodeClone(@NotNull YGNode oldNode) //Method definition originates from: Yoga.cpp
     {
-        YGNode node = new YGNode(oldNode);
+        @NotNull YGNode node = new YGNode(oldNode);
         YGAssertWithConfig(oldNode.getConfig(), node != null, "Could not allocate memory for node");
         Event.publish(node, new NodeAllocationEventData(node.getConfig()));
         node.setOwner(null);
         return node;
     }
 
-    public static void YGNodeFree(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeFree(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
-        YGNode owner = node.getOwner();
+        @Nullable YGNode owner = node.getOwner();
         if (owner != null) {
             owner.removeChild(node);
             node.setOwner(null);
         }
 
-        final Integer childCount = YGNodeGetChildCount(node);
-        for (Integer i = 0; i < childCount; i++) {
-            YGNode child = YGNodeGetChild(node, i);
+        final @NotNull Integer childCount = YGNodeGetChildCount(node);
+        for (@NotNull Integer i = 0; i < childCount; i++) {
+            @Nullable YGNode child = YGNodeGetChild(node, i);
             child.setOwner(null);
         }
 
@@ -521,11 +523,11 @@ public class GlobalMembers {
         node = null;
     }
 
-    public static void YGNodeFreeRecursiveWithCleanupFunc(YGNode root, YGNodeCleanupFunc cleanup) //Method definition originates from: Yoga.cpp
+    public static void YGNodeFreeRecursiveWithCleanupFunc(@NotNull YGNode root, @Nullable YGNodeCleanupFunc cleanup) //Method definition originates from: Yoga.cpp
     {
-        Integer skipped = 0;
+        @NotNull Integer skipped = 0;
         while (YGNodeGetChildCount(root) > skipped) {
-            YGNode child = YGNodeGetChild(root, skipped);
+            @Nullable YGNode child = YGNodeGetChild(root, skipped);
             if (child.getOwner() != root) {
 
                 skipped += 1;
@@ -540,17 +542,17 @@ public class GlobalMembers {
         YGNodeFree(root);
     }
 
-    public static void YGNodeFreeRecursive(YGNode root) //Method definition originates from: Yoga.cpp
+    public static void YGNodeFreeRecursive(@NotNull YGNode root) //Method definition originates from: Yoga.cpp
     {
         YGNodeFreeRecursiveWithCleanupFunc(root, null);
     }
 
-    public static void YGNodeReset(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeReset(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         node.reset();
     }
 
-    public static void YGNodeInsertChild(YGNode owner, YGNode child, final Integer index) //Method definition originates from: Yoga.cpp
+    public static void YGNodeInsertChild(@NotNull YGNode owner, @NotNull YGNode child, final Integer index) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithNode(owner, child.getOwner() == null, "Child already has a owner, it must be removed first.");
 
@@ -562,7 +564,7 @@ public class GlobalMembers {
         owner.markDirtyAndPropogate();
     }
 
-    public static void YGNodeSwapChild(YGNode owner, YGNode child, final Integer index) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSwapChild(@NotNull YGNode owner, @NotNull YGNode child, final Integer index) //Method definition originates from: Yoga.cpp
     {
         owner.replaceChild(child, index);
         child.setOwner(owner);
@@ -571,7 +573,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // void YGNodePrint(YGNode node, YGPrintOptions options);
 
-    public static void YGNodeRemoveChild(YGNode owner, YGNode excludedChild) //Method definition originates from: Yoga.cpp
+    public static void YGNodeRemoveChild(@NotNull YGNode owner, @NotNull YGNode excludedChild) //Method definition originates from: Yoga.cpp
     {
         if (YGNodeGetChildCount(owner) == 0) {
 
@@ -579,7 +581,7 @@ public class GlobalMembers {
         }
 
 
-        var childOwner = excludedChild.getOwner();
+        @Nullable var childOwner = excludedChild.getOwner();
         if (owner.removeChild(excludedChild)) {
             if (owner == childOwner) {
                 excludedChild.setLayout(null);
@@ -589,19 +591,19 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGNodeRemoveAllChildren(YGNode owner) //Method definition originates from: Yoga.cpp
+    public static void YGNodeRemoveAllChildren(@NotNull YGNode owner) //Method definition originates from: Yoga.cpp
     {
-        final Integer childCount = YGNodeGetChildCount(owner);
+        final @NotNull Integer childCount = YGNodeGetChildCount(owner);
         if (childCount == 0) {
 
             return;
         }
-        YGNode firstChild = YGNodeGetChild(owner, 0);
+        @Nullable YGNode firstChild = YGNodeGetChild(owner, 0);
         if (firstChild.getOwner() == owner) {
 
 
-            for (Integer i = 0; i < childCount; i++) {
-                YGNode oldChild = YGNodeGetChild(owner, i);
+            for (@NotNull Integer i = 0; i < childCount; i++) {
+                @Nullable YGNode oldChild = YGNodeGetChild(owner, i);
                 oldChild.setLayout(null);
                 oldChild.setOwner(null);
             }
@@ -615,7 +617,7 @@ public class GlobalMembers {
         owner.markDirtyAndPropogate();
     }
 
-    public static YGNode YGNodeGetChild(YGNode node, final Integer index) //Method definition originates from: Yoga.cpp
+    public static @Nullable YGNode YGNodeGetChild(@NotNull YGNode node, final Integer index) //Method definition originates from: Yoga.cpp
     {
         if (index < node.getChildren().size()) {
             return node.getChild(index);
@@ -623,28 +625,28 @@ public class GlobalMembers {
         return null;
     }
 
-    public static YGNode YGNodeGetOwner(YGNode node) //Method definition originates from: Yoga.cpp
+    public static @Nullable YGNode YGNodeGetOwner(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getOwner();
     }
 
-    public static YGNode YGNodeGetParent(YGNode node) //Method definition originates from: Yoga.cpp
+    public static @Nullable YGNode YGNodeGetParent(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getOwner();
     }
 
-    public static Integer YGNodeGetChildCount(YGNode node) //Method definition originates from: Yoga.cpp
+    public static Integer YGNodeGetChildCount(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getChildren().size();
     }
 
     public static void YGNodeSetChildren(YGNode owner, YGNode[] c, final Integer count) //Method definition originates from: Yoga.cpp
     {
-        ArrayList<YGNode> children = new ArrayList<YGNode>(Arrays.asList(c));
+        @NotNull ArrayList<YGNode> children = new ArrayList<YGNode>(Arrays.asList(c));
         YGNodeSetChildrenInternal(owner, children);
     }
 
-    public static void YGNodeSetIsReferenceBaseline(YGNode node, boolean isReferenceBaseline) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetIsReferenceBaseline(@NotNull YGNode node, boolean isReferenceBaseline) //Method definition originates from: Yoga.cpp
     {
         if (node.isReferenceBaseline() != isReferenceBaseline) {
             node.setIsReferenceBaseline(isReferenceBaseline);
@@ -652,17 +654,17 @@ public class GlobalMembers {
         }
     }
 
-    public static boolean YGNodeIsReferenceBaseline(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeIsReferenceBaseline(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.isReferenceBaseline();
     }
 
-    public static void YGNodeCalculateLayout(YGNode node, final float ownerWidth, final float ownerHeight, final YGDirection ownerDirection) //Method definition originates from: Yoga.cpp
+    public static void YGNodeCalculateLayout(@NotNull YGNode node, final float ownerWidth, final float ownerHeight, final @NotNull YGDirection ownerDirection) //Method definition originates from: Yoga.cpp
     {
         YGNodeCalculateLayoutWithContext(node, ownerWidth, ownerHeight, ownerDirection, null);
     }
 
-    public static void YGNodeMarkDirty(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeMarkDirty(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithNode(node, node.hasMeasureFunc(),
                 "Only leaf nodes with custom measure functions" + "should manually mark themselves as dirty");
@@ -670,7 +672,7 @@ public class GlobalMembers {
         node.markDirtyAndPropogate();
     }
 
-    public static void YGNodeMarkDirtyAndPropogateToDescendants(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeMarkDirtyAndPropogateToDescendants(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         node.markDirtyAndPropogateDownwards();
     }
@@ -680,7 +682,7 @@ public class GlobalMembers {
         return isUndefined(value);
     }
 
-    public static boolean YGNodeCanUseCachedMeasurement(final YGMeasureMode widthMode, final float width, final YGMeasureMode heightMode, final float height, final YGMeasureMode lastWidthMode, final float lastWidth, final YGMeasureMode lastHeightMode, final float lastHeight, final float lastComputedWidth, final float lastComputedHeight, final float marginRow, final float marginColumn, YGConfig config) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeCanUseCachedMeasurement(final YGMeasureMode widthMode, final float width, final YGMeasureMode heightMode, final float height, final YGMeasureMode lastWidthMode, final float lastWidth, final YGMeasureMode lastHeightMode, final float lastHeight, final float lastComputedWidth, final float lastComputedHeight, final float marginRow, final float marginColumn, @Nullable YGConfig config) //Method definition originates from: Yoga.cpp
     {
         if ((!YGFloatIsUndefined(lastComputedHeight) && lastComputedHeight < 0F) || (!YGFloatIsUndefined(
                 lastComputedWidth) && lastComputedWidth < 0F)) {
@@ -716,7 +718,7 @@ public class GlobalMembers {
         return widthIsCompatible && heightIsCompatible;
     }
 
-    public static void YGNodeCopyStyle(YGNode dstNode, YGNode srcNode) //Method definition originates from: Yoga.cpp
+    public static void YGNodeCopyStyle(@NotNull YGNode dstNode, @NotNull YGNode srcNode) //Method definition originates from: Yoga.cpp
     {
         if (!(dstNode.getStyle() == srcNode.getStyle())) {
             dstNode.setStyle(srcNode.getStyle());
@@ -724,27 +726,27 @@ public class GlobalMembers {
         }
     }
 
-    public static Object YGNodeGetContext(YGNode node) //Method definition originates from: Yoga.cpp
+    public static @Nullable Object YGNodeGetContext(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getContext();
     }
 
-    public static void YGNodeSetContext(YGNode node, Object context) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetContext(@NotNull YGNode node, Object context) //Method definition originates from: Yoga.cpp
     {
         node.setContext(context);
     }
 
-    public static void YGConfigSetPrintTreeFlag(YGConfig config, boolean enabled) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetPrintTreeFlag(@NotNull YGConfig config, boolean enabled) //Method definition originates from: Yoga.cpp
     {
         config.printTree = enabled;
     }
 
-    public static boolean YGNodeHasMeasureFunc(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeHasMeasureFunc(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.hasMeasureFunc();
     }
 
-    public static void YGNodeSetMeasureFunc(YGNode node, YGMeasureFunc measureFunc) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetMeasureFunc(@NotNull YGNode node, YGMeasureFunc measureFunc) //Method definition originates from: Yoga.cpp
     {
         node.setMeasureFunc(measureFunc);
     }
@@ -752,7 +754,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGDirection YGNodeStyleGetDirection(YGNode node);
 
-    public static boolean YGNodeHasBaselineFunc(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeHasBaselineFunc(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.hasBaselineFunc();
     }
@@ -760,7 +762,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGFlexDirection YGNodeStyleGetFlexDirection(YGNode node);
 
-    public static void YGNodeSetBaselineFunc(YGNode node, YGBaselineFunc baselineFunc) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetBaselineFunc(@NotNull YGNode node, YGBaselineFunc baselineFunc) //Method definition originates from: Yoga.cpp
     {
         node.setBaselineFunc(baselineFunc);
     }
@@ -768,7 +770,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGJustify YGNodeStyleGetJustifyContent(YGNode node);
 
-    public static YGDirtiedFunc YGNodeGetDirtiedFunc(YGNode node) //Method definition originates from: Yoga.cpp
+    public static @Nullable YGDirtiedFunc YGNodeGetDirtiedFunc(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getDirtied();
     }
@@ -776,7 +778,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGAlign YGNodeStyleGetAlignContent(YGNode node);
 
-    public static void YGNodeSetDirtiedFunc(YGNode node, YGDirtiedFunc dirtiedFunc) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetDirtiedFunc(@NotNull YGNode node, YGDirtiedFunc dirtiedFunc) //Method definition originates from: Yoga.cpp
     {
         node.setDirtiedFunc(dirtiedFunc);
     }
@@ -784,7 +786,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGAlign YGNodeStyleGetAlignItems(YGNode node);
 
-    public static void YGNodeSetPrintFunc(YGNode node, YGPrintFunc printFunc) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetPrintFunc(@NotNull YGNode node, YGPrintFunc printFunc) //Method definition originates from: Yoga.cpp
     {
         node.setPrintFunc(printFunc);
     }
@@ -792,7 +794,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGAlign YGNodeStyleGetAlignSelf(YGNode node);
 
-    public static boolean YGNodeGetHasNewLayout(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeGetHasNewLayout(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getHasNewLayout();
     }
@@ -800,7 +802,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGPositionType YGNodeStyleGetPositionType(YGNode node);
 
-    public static void YGNodeSetHasNewLayout(YGNode node, boolean hasNewLayout) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetHasNewLayout(@NotNull YGNode node, boolean hasNewLayout) //Method definition originates from: Yoga.cpp
     {
         node.setHasNewLayout(hasNewLayout);
     }
@@ -808,7 +810,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGWrap YGNodeStyleGetFlexWrap(YGNode node);
 
-    public static YGNodeType YGNodeGetNodeType(YGNode node) //Method definition originates from: Yoga.cpp
+    public static YGNodeType YGNodeGetNodeType(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getNodeType();
     }
@@ -816,7 +818,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGOverflow YGNodeStyleGetOverflow(YGNode node);
 
-    public static void YGNodeSetNodeType(YGNode node, YGNodeType nodeType) //Method definition originates from: Yoga.cpp
+    public static void YGNodeSetNodeType(@NotNull YGNode node, @NotNull YGNodeType nodeType) //Method definition originates from: Yoga.cpp
     {
         node.setNodeType(nodeType);
     }
@@ -824,7 +826,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     //TODO: YGDisplay YGNodeStyleGetDisplay(YGNode node);
 
-    public static boolean YGNodeIsDirty(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeIsDirty(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.isDirty();
     }
@@ -832,7 +834,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // float YGNodeStyleGetFlex(YGNode node);
 
-    public static boolean YGNodeLayoutGetDidUseLegacyFlag(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeLayoutGetDidUseLegacyFlag(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.didUseLegacyFlag();
     }
@@ -840,7 +842,7 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // float YGNodeStyleGetFlexGrow(YGNode node);
 
-    public static void YGNodeStyleSetDirection(YGNode node, final YGDirection value) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetDirection(@NotNull YGNode node, final YGDirection value) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGDirection.class, value, YGStyle::directionBitfieldRef);
     }
@@ -848,18 +850,18 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // float YGNodeStyleGetFlexShrink(YGNode node);
 
-    public static void YGNodeStyleSetFlexDirection(YGNode node, final YGFlexDirection flexDirection) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexDirection(@NotNull YGNode node, final YGFlexDirection flexDirection) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGFlexDirection.class, flexDirection, YGStyle::flexDirectionBitfieldRef);
     }
 
-    public static void YGNodeStyleSetJustifyContent(YGNode node, final YGJustify justifyContent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetJustifyContent(@NotNull YGNode node, final YGJustify justifyContent) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGJustify.class, justifyContent, YGStyle::justifyContentBitfieldRef);
 
     }
 
-    public static void YGNodeStyleSetAlignContent(YGNode node, final YGAlign alignContent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetAlignContent(@NotNull YGNode node, final YGAlign alignContent) //Method definition originates from: Yoga.cpp
     {
 
         updateStyle(node, YGAlign.class, alignContent, YGStyle::alignContentBitfieldRef);
@@ -868,44 +870,44 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGValue YGNodeStyleGetFlexBasis(YGNode node);
 
-    public static void YGNodeStyleSetAlignItems(YGNode node, final YGAlign alignItems) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetAlignItems(@NotNull YGNode node, final YGAlign alignItems) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGAlign.class, alignItems, YGStyle::alignItemsBitfieldRef);
     }
 
-    public static void YGNodeStyleSetAlignSelf(YGNode node, final YGAlign alignSelf) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetAlignSelf(@NotNull YGNode node, final YGAlign alignSelf) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGAlign.class, alignSelf, YGStyle::alignSelfBitfieldRef);
     }
 
-    public static void YGNodeStyleSetPositionType(YGNode node, final YGPositionType positionType) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetPositionType(@NotNull YGNode node, final YGPositionType positionType) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGPositionType.class, positionType, YGStyle::positionTypeBitfieldRef);
     }
 
-    public static void YGNodeStyleSetFlexWrap(YGNode node, final YGWrap flexWrap) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexWrap(@NotNull YGNode node, final YGWrap flexWrap) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGWrap.class, flexWrap, YGStyle::flexWrapBitfieldRef);
     }
 
-    public static void YGNodeStyleSetOverflow(YGNode node, final YGOverflow overflow) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetOverflow(@NotNull YGNode node, final YGOverflow overflow) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGOverflow.class, overflow, YGStyle::overflowBitfieldRef);
     }
 
-    public static void YGNodeStyleSetDisplay(YGNode node, final YGDisplay display) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetDisplay(@NotNull YGNode node, final YGDisplay display) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, YGDisplay.class, display, YGStyle::displayBitfieldRef);
     }
 
-    public static void YGNodeStyleSetFlex(YGNode node, final float flex) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlex(@NotNull YGNode node, final float flex) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, flex, (ygStyle, val) -> val != ygStyle.flex().unwrap(), (ygStyle, val) -> {
             ygStyle.setFlex(new YGFloatOptional(val));
         });
     }
 
-    public static void YGNodeStyleSetFlexGrow(YGNode node, final float flexGrow) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexGrow(@NotNull YGNode node, final float flexGrow) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, flexGrow, (ygStyle, val) -> val != ygStyle.flexGrow().unwrap(), (ygStyle, val) -> {
             ygStyle.setFlexGrow(new YGFloatOptional(val));
@@ -913,39 +915,39 @@ public class GlobalMembers {
 
     }
 
-    public static void YGNodeStyleSetFlexShrink(YGNode node, final float flexShrink) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexShrink(@NotNull YGNode node, final float flexShrink) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, flexShrink, (ygStyle, val) -> val != ygStyle.flexShrink().unwrap(), (ygStyle, val) -> {
             ygStyle.setFlexGrow(new YGFloatOptional(val));
         });
     }
 
-    public static void YGNodeStyleSetFlexBasis(YGNode node, final float flexBasis) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexBasis(@NotNull YGNode node, final float flexBasis) //Method definition originates from: Yoga.cpp
     {
-        var value = CompactValue.ofMaybe(flexBasis, YGUnit.YGUnitPoint);
+        @NotNull var value = CompactValue.ofMaybe(flexBasis, YGUnit.YGUnitPoint);
         updateStyle(node, value, (ygStyle, val) -> !CompactValue.equalsTo(ygStyle.flexBasis(), val), (ygStyle, val) -> {
             ygStyle.setFlexBasis(value);
         });
 
     }
 
-    public static void YGNodeStyleSetFlexBasisPercent(YGNode node, final float flexBasisPercent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexBasisPercent(@NotNull YGNode node, final float flexBasisPercent) //Method definition originates from: Yoga.cpp
     {
-        var value = CompactValue.ofMaybe(flexBasisPercent, YGUnit.YGUnitPercent);
+        @NotNull var value = CompactValue.ofMaybe(flexBasisPercent, YGUnit.YGUnitPercent);
         updateStyle(node, value, (ygStyle, val) -> !CompactValue.equalsTo(ygStyle.flexBasis(), val), (ygStyle, val) -> {
             ygStyle.setFlexBasis(value);
         });
     }
 
-    public static void YGNodeStyleSetFlexBasisAuto(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetFlexBasisAuto(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
-        var value = CompactValue.ofAuto();
+        @NotNull var value = CompactValue.ofAuto();
         updateStyle(node, value, (ygStyle, val) -> !CompactValue.equalsTo(ygStyle.flexBasis(), val), (ygStyle, val) -> {
             ygStyle.setFlexBasis(value);
         });
     }
 
-    public static void YGNodeStyleSetPosition(YGNode node, YGEdge edge, float points) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetPosition(@NotNull YGNode node, @NotNull YGEdge edge, float points) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, points, YGUnit.YGUnitPoint, YGStyle::position);
     }
@@ -953,26 +955,26 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // float YGNodeStyleGetBorder(YGNode node, YGEdge edge);
 
-    public static void YGNodeStyleSetPositionPercent(YGNode node, YGEdge edge, float percent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetPositionPercent(@NotNull YGNode node, @NotNull YGEdge edge, float percent) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, percent, YGUnit.YGUnitPercent, YGStyle::position);
     }
 
-    public static YGValue YGNodeStyleGetPosition(YGNode node, YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static YGValue YGNodeStyleGetPosition(@NotNull YGNode node, @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         return node.getStyle().position().get(edge.getValue());
     }
 
-    public static void YGNodeStyleSetMargin(YGNode node, YGEdge edge, float points) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMargin(@NotNull YGNode node, @NotNull YGEdge edge, float points) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, points, YGUnit.YGUnitPoint, YGStyle::margin);
     }
 
-    private static <T extends Enum<T>> void updateStyleIndexed(YGNode node, T edge, float value, YGUnit unit, Function<YGStyle, Values<T>> values) {
+    private static <T extends Enum<T>> void updateStyleIndexed(@NotNull YGNode node, @NotNull T edge, float value, YGUnit unit, @NotNull Function<YGStyle, Values<T>> values) {
         updateStyleIndexed(node, edge, CompactValue.ofMaybe(value, unit), values);
     }
 
-    private static <T extends Enum<T>> void updateStyleIndexed(YGNode node, T edge, CompactValue value, Function<YGStyle, Values<T>> values) {
+    private static <T extends Enum<T>> void updateStyleIndexed(@NotNull YGNode node, @NotNull T edge, CompactValue value, @NotNull Function<YGStyle, Values<T>> values) {
         updateStyle(node, value,
                 (ygStyle, val) -> !CompactValue.equalsTo(values.apply(node.getStyle()).getCompactValue(edge.ordinal()),
                         val), (ygStyle, val) -> {
@@ -980,27 +982,27 @@ public class GlobalMembers {
                 });
     }
 
-    public static void YGNodeStyleSetMarginPercent(YGNode node, YGEdge edge, float percent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMarginPercent(@NotNull YGNode node, @NotNull YGEdge edge, float percent) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, percent, YGUnit.YGUnitPercent, YGStyle::margin);
     }
 
-    public static void YGNodeStyleSetMarginAuto(YGNode node, YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMarginAuto(@NotNull YGNode node, @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, CompactValue.ofAuto(), YGStyle::margin);
     }
 
-    public static YGValue YGNodeStyleGetMargin(YGNode node, YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static YGValue YGNodeStyleGetMargin(@NotNull YGNode node, @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         return node.getStyle().margin().get(edge.getValue());
     }
 
-    public static void YGNodeStyleSetPadding(YGNode node, YGEdge edge, float points) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetPadding(@NotNull YGNode node, @NotNull YGEdge edge, float points) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, points, YGUnit.YGUnitPoint, YGStyle::padding);
     }
 
-    public static void YGNodeStyleSetPaddingPercent(YGNode node, YGEdge edge, float percent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetPaddingPercent(@NotNull YGNode node, @NotNull YGEdge edge, float percent) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, percent, YGUnit.YGUnitPercent, YGStyle::padding);
     }
@@ -1008,12 +1010,12 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGValue YGNodeStyleGetMinWidth(YGNode node);
 
-    public static YGValue YGNodeStyleGetPadding(YGNode node, YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static YGValue YGNodeStyleGetPadding(@NotNull YGNode node, @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         return node.getStyle().padding().get(edge.getValue());
     }
 
-    public static void YGNodeStyleSetBorder(YGNode node, final YGEdge edge, final float border) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetBorder(@NotNull YGNode node, final @NotNull YGEdge edge, final float border) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, edge, border, YGUnit.YGUnitPoint, YGStyle::border);
     }
@@ -1021,12 +1023,12 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGValue YGNodeStyleGetMinHeight(YGNode node);
 
-    public static void YGNodeStyleSetWidth(YGNode node, float points) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetWidth(@NotNull YGNode node, float points) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, points, YGUnit.YGUnitPoint, YGStyle::dimensions);
     }
 
-    public static void YGNodeStyleSetWidthPercent(YGNode node, float percent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetWidthPercent(@NotNull YGNode node, float percent) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, percent, YGUnit.YGUnitPercent, YGStyle::dimensions);
     }
@@ -1034,17 +1036,17 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGValue YGNodeStyleGetMaxWidth(YGNode node);
 
-    public static void YGNodeStyleSetWidthAuto(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetWidthAuto(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, CompactValue.ofAuto(), YGStyle::dimensions);
     }
 
-    public static YGValue YGNodeStyleGetWidth(YGNode node) //Method definition originates from: Yoga.cpp
+    public static YGValue YGNodeStyleGetWidth(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getStyle().dimensions().get(YGDimension.YGDimensionWidth.getValue());
     }
 
-    public static void YGNodeStyleSetHeight(YGNode node, float points) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetHeight(@NotNull YGNode node, float points) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, points, YGUnit.YGUnitPoint, YGStyle::dimensions);
     }
@@ -1052,58 +1054,58 @@ public class GlobalMembers {
 //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // float YGNodeStyleGetAspectRatio(YGNode node);
 
-    public static void YGNodeStyleSetHeightPercent(YGNode node, float percent) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetHeightPercent(@NotNull YGNode node, float percent) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, percent, YGUnit.YGUnitPercent, YGStyle::dimensions);
     }
 
-    public static void YGNodeStyleSetHeightAuto(YGNode node) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetHeightAuto(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, CompactValue.ofAuto(), YGStyle::dimensions);
     }
 
-    public static YGValue YGNodeStyleGetHeight(YGNode node) //Method definition originates from: Yoga.cpp
+    public static YGValue YGNodeStyleGetHeight(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getStyle().dimensions().get(YGDimension.YGDimensionHeight.getValue());
     }
 
-    public static void YGNodeStyleSetMinWidth(YGNode node, final float minWidth) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMinWidth(@NotNull YGNode node, final float minWidth) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, minWidth, YGUnit.YGUnitPoint, YGStyle::minDimensions);
     }
 
-    public static void YGNodeStyleSetMinWidthPercent(YGNode node, final float minWidth) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMinWidthPercent(@NotNull YGNode node, final float minWidth) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, minWidth, YGUnit.YGUnitPercent, YGStyle::minDimensions);
     }
 
-    public static void YGNodeStyleSetMinHeight(YGNode node, final float minHeight) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMinHeight(@NotNull YGNode node, final float minHeight) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, minHeight, YGUnit.YGUnitPoint, YGStyle::minDimensions);
     }
 
-    public static void YGNodeStyleSetMinHeightPercent(YGNode node, final float minHeight) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMinHeightPercent(@NotNull YGNode node, final float minHeight) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, minHeight, YGUnit.YGUnitPercent,
                 YGStyle::minDimensions);
     }
 
-    public static void YGNodeStyleSetMaxWidth(YGNode node, final float maxWidth) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMaxWidth(@NotNull YGNode node, final float maxWidth) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, maxWidth, YGUnit.YGUnitPoint, YGStyle::maxDimensions);
     }
 
-    public static void YGNodeStyleSetMaxWidthPercent(YGNode node, final float maxWidth) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMaxWidthPercent(@NotNull YGNode node, final float maxWidth) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionWidth, maxWidth, YGUnit.YGUnitPercent, YGStyle::maxDimensions);
     }
 
-    public static void YGNodeStyleSetMaxHeight(YGNode node, final float maxHeight) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMaxHeight(@NotNull YGNode node, final float maxHeight) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, maxHeight, YGUnit.YGUnitPoint, YGStyle::maxDimensions);
     }
 
-    public static void YGNodeStyleSetMaxHeightPercent(YGNode node, final float maxHeight) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetMaxHeightPercent(@NotNull YGNode node, final float maxHeight) //Method definition originates from: Yoga.cpp
     {
         updateStyleIndexed(node, YGDimension.YGDimensionHeight, maxHeight, YGUnit.YGUnitPercent,
                 YGStyle::maxDimensions);
@@ -1111,59 +1113,59 @@ public class GlobalMembers {
 
     //C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
     // YGValue YGNodeStyleGetMaxHeight(YGNode node);
-    public static void YGNodeStyleSetAspectRatio(YGNode node, final float aspectRatio) //Method definition originates from: Yoga.cpp
+    public static void YGNodeStyleSetAspectRatio(@NotNull YGNode node, final float aspectRatio) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, aspectRatio, (ygStyle, val) -> val != ygStyle.aspectRatio().unwrap(), (ygStyle, val) -> {
             ygStyle.setAspectRatio(new YGFloatOptional(val));
         });
     }
 
-    public static float YGNodeLayoutGetLeft(YGNode node) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetLeft(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().position.get(YGEdge.YGEdgeLeft.getValue());
     }
 
-    public static float YGNodeLayoutGetTop(YGNode node) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetTop(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().position.get(YGEdge.YGEdgeTop.getValue());
     }
 
-    public static float YGNodeLayoutGetRight(YGNode node) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetRight(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().position.get(YGEdge.YGEdgeRight.getValue());
     }
 
-    public static float YGNodeLayoutGetBottom(YGNode node) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetBottom(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().position.get(YGEdge.YGEdgeBottom.getValue());
     }
 
-    public static float YGNodeLayoutGetWidth(YGNode node) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetWidth(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().dimensions.get(YGDimension.YGDimensionWidth.getValue());
     }
 
-    public static float YGNodeLayoutGetHeight(YGNode node) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetHeight(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().dimensions.get(YGDimension.YGDimensionHeight.getValue());
     }
 
-    public static YGDirection YGNodeLayoutGetDirection(YGNode node) //Method definition originates from: Yoga.cpp
+    public static YGDirection YGNodeLayoutGetDirection(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().direction();
     }
 
-    public static boolean YGNodeLayoutGetHadOverflow(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeLayoutGetHadOverflow(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().hadOverflow();
     }
 
-    public static boolean YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(YGNode node) //Method definition originates from: Yoga.cpp
+    public static boolean YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(@NotNull YGNode node) //Method definition originates from: Yoga.cpp
     {
         return node.getLayout().doesLegacyStretchFlagAffectsLayout();
     }
 
-    public static float YGNodeLayoutGetMargin(YGNode node, final YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetMargin(@NotNull YGNode node, final @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithNode(node, edge.getValue() <= YGEdge.YGEdgeEnd.getValue(),
                 "Cannot get layout properties of multi-edge shorthands");
@@ -1184,7 +1186,7 @@ public class GlobalMembers {
         return node.getLayout().margin.get(edge.getValue());
     }
 
-    public static float YGNodeLayoutGetBorder(YGNode node, final YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetBorder(@NotNull YGNode node, final @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithNode(node, edge.getValue() <= YGEdge.YGEdgeEnd.getValue(),
                 "Cannot get layout properties of multi-edge shorthands");
@@ -1205,7 +1207,7 @@ public class GlobalMembers {
         return node.getLayout().border.get(edge.getValue());
     }
 
-    public static float YGNodeLayoutGetPadding(YGNode node, final YGEdge edge) //Method definition originates from: Yoga.cpp
+    public static float YGNodeLayoutGetPadding(@NotNull YGNode node, final @NotNull YGEdge edge) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithNode(node, edge.getValue() <= YGEdge.YGEdgeEnd.getValue(),
                 "Cannot get layout properties of multi-edge shorthands");
@@ -1226,7 +1228,7 @@ public class GlobalMembers {
         return node.getLayout().padding.get(edge.getValue());
     }
 
-    public static void YGConfigSetLogger(YGConfig config, YGLogger logger) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetLogger(@NotNull YGConfig config, @Nullable YGLogger logger) //Method definition originates from: Yoga.cpp
     {
         if (logger != null) {
             config.setLogger(logger);
@@ -1259,7 +1261,7 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGConfigSetPointScaleFactor(YGConfig config, final float pixelsInPoint) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetPointScaleFactor(@NotNull YGConfig config, final float pixelsInPoint) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithConfig(config, pixelsInPoint >= 0.0f, "Scale factor should not be less than zero");
 
@@ -1272,21 +1274,21 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(YGConfig config, final boolean shouldDiffLayout) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(@NotNull YGConfig config, final boolean shouldDiffLayout) //Method definition originates from: Yoga.cpp
     {
         config.shouldDiffLayoutWithoutLegacyStretchBehaviour = shouldDiffLayout;
     }
 
-    public static void YGConfigSetUseLegacyStretchBehaviour(YGConfig config, final boolean useLegacyStretchBehaviour) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetUseLegacyStretchBehaviour(@NotNull YGConfig config, final boolean useLegacyStretchBehaviour) //Method definition originates from: Yoga.cpp
     {
         config.useLegacyStretchBehaviour = useLegacyStretchBehaviour;
     }
 
-    public static YGConfig YGConfigNew() //Method definition originates from: Yoga.cpp
+    public static @NotNull YGConfig YGConfigNew() //Method definition originates from: Yoga.cpp
     {
 
 
-        YGConfig config = new YGConfig(GlobalMembers::YGDefaultLog);
+        @NotNull YGConfig config = new YGConfig(GlobalMembers::YGDefaultLog);
 
         gConfigInstanceCount++;
         return config;
@@ -1313,44 +1315,44 @@ public class GlobalMembers {
         return gConfigInstanceCount;
     }
 
-    public static void YGConfigSetExperimentalFeatureEnabled(YGConfig config, final YGExperimentalFeature feature, final boolean enabled) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetExperimentalFeatureEnabled(@NotNull YGConfig config, final @NotNull YGExperimentalFeature feature, final boolean enabled) //Method definition originates from: Yoga.cpp
     {
         config.experimentalFeatures.set(feature.getValue(), enabled);
     }
 
-    public static boolean YGConfigIsExperimentalFeatureEnabled(YGConfig config, final YGExperimentalFeature feature) //Method definition originates from: Yoga.cpp
+    public static boolean YGConfigIsExperimentalFeatureEnabled(@NotNull YGConfig config, final @NotNull YGExperimentalFeature feature) //Method definition originates from: Yoga.cpp
     {
         return config.experimentalFeatures.get(feature.getValue());
     }
 
-    public static void YGConfigSetUseWebDefaults(YGConfig config, final boolean enabled) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetUseWebDefaults(@NotNull YGConfig config, final boolean enabled) //Method definition originates from: Yoga.cpp
     {
         config.useWebDefaults = enabled;
     }
 
-    public static boolean YGConfigGetUseWebDefaults(YGConfig config) //Method definition originates from: Yoga.cpp
+    public static boolean YGConfigGetUseWebDefaults(@NotNull YGConfig config) //Method definition originates from: Yoga.cpp
     {
         return config.useWebDefaults;
     }
 
-    public static void YGConfigSetCloneNodeFunc(YGConfig config, final YGCloneNodeFunc callback) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetCloneNodeFunc(@NotNull YGConfig config, final YGCloneNodeFunc callback) //Method definition originates from: Yoga.cpp
     {
         config.setCloneNodeCallback(callback);
     }
 
-    public static YGConfig YGConfigGetDefault() //Method definition originates from: Yoga.cpp
+    public static @NotNull YGConfig YGConfigGetDefault() //Method definition originates from: Yoga.cpp
     {
         //C++ TO JAVA CONVERTER NOTE: This static local variable declaration (not allowed in Java) has been moved just prior to the method:
         //   static struct YGConfig* defaultConfig = YGConfigNew();
         return defaultConfig;
     }
 
-    public static void YGConfigSetContext(YGConfig config, Object context) //Method definition originates from: Yoga.cpp
+    public static void YGConfigSetContext(@NotNull YGConfig config, Object context) //Method definition originates from: Yoga.cpp
     {
         config.context = context;
     }
 
-    public static Object YGConfigGetContext(YGConfig config) //Method definition originates from: Yoga.cpp
+    public static @Nullable Object YGConfigGetContext(@NotNull YGConfig config) //Method definition originates from: Yoga.cpp
     {
         return config.context;
     }
@@ -1383,7 +1385,7 @@ public class GlobalMembers {
                 pointScaleFactor)) ? YGUndefined : (float) (scaledValue / pointScaleFactor);
     }
 
-    public static int YGDefaultLog(YGConfig ygConfig, YGNode ygNode, YGLogLevel ygLogLevel, String s, Object... objects) //Method definition originates from: Yoga.cpp
+    public static int YGDefaultLog(YGConfig ygConfig, YGNode ygNode, @NotNull YGLogLevel ygLogLevel, String s, Object... objects) //Method definition originates from: Yoga.cpp
     {
         switch (ygLogLevel) {
             case YGLogLevelError:
@@ -1406,23 +1408,23 @@ public class GlobalMembers {
         return isUndefined(value);
     }
 
-    public static YGConfig YGConfigClone(final YGConfig oldConfig) {
-        YGConfig config = oldConfig.clone();
+    public static @NotNull YGConfig YGConfigClone(final @NotNull YGConfig oldConfig) {
+        @NotNull YGConfig config = oldConfig.clone();
         YGAssert(config != null, "Could not allocate memory for config");
         gConfigInstanceCount++;
         return config;
     }
 
-    public static YGNode YGNodeDeepClone(YGNode oldNode) {
-        var config = YGConfigClone(oldNode.getConfig());
-        var node = new YGNode(oldNode, config);
+    public static @NotNull YGNode YGNodeDeepClone(@NotNull YGNode oldNode) {
+        @NotNull var config = YGConfigClone(oldNode.getConfig());
+        @NotNull var node = new YGNode(oldNode, config);
         node.setOwner(null);
         Event.publish(node, new NodeAllocationEventData(node.getConfig()));
 
-        ArrayList<YGNode> vec = new ArrayList<>();
+        @NotNull ArrayList<YGNode> vec = new ArrayList<>();
         vec.ensureCapacity(oldNode.getChildren().size());
-        YGNode childNode = null;
-        for (var item : oldNode.getChildren()) {
+        @Nullable YGNode childNode = null;
+        for (@NotNull var item : oldNode.getChildren()) {
             childNode = YGNodeDeepClone(item);
             childNode.setOwner(node);
             vec.add(childNode);
@@ -1434,7 +1436,7 @@ public class GlobalMembers {
         return new YGNode(node);
     }
 
-    public static void YGConfigFreeRecursive(YGNode root) {
+    public static void YGConfigFreeRecursive(@NotNull YGNode root) {
         if (root.getConfig() != null) {
             gConfigInstanceCount--;
             root.setConfig(null);
@@ -1442,18 +1444,18 @@ public class GlobalMembers {
 
 //C++ TO JAVA CONVERTER NOTE: 'auto' variable declarations are not supported in Java:
 //ORIGINAL LINE: for (auto* child : root->getChildren())
-        for (var child : root.getChildren()) {
+        for (@NotNull var child : root.getChildren()) {
             YGConfigFreeRecursive(child);
         }
     }
 
-    public static void YGNodeSetChildrenInternal(final YGNode owner, final ArrayList<YGNode> children) {
+    public static void YGNodeSetChildrenInternal(final @Nullable YGNode owner, final @NotNull ArrayList<YGNode> children) {
         if (owner == null) {
             return;
         }
         if (children.size() == 0) {
             if (YGNodeGetChildCount(owner) > 0) {
-                for (YGNode child : owner.getChildren()) {
+                for (@NotNull YGNode child : owner.getChildren()) {
                     child.setLayout(null);
                     child.setOwner(null);
                 }
@@ -1462,7 +1464,7 @@ public class GlobalMembers {
             }
         } else {
             if (YGNodeGetChildCount(owner) > 0) {
-                for (YGNode oldChild : owner.getChildren()) {
+                for (@NotNull YGNode oldChild : owner.getChildren()) {
 
 //TODO: What is this??
                     //if (std::find (children.iterator(), children.end(), oldChild) ==children.end())
@@ -1474,84 +1476,84 @@ public class GlobalMembers {
                 }
             }
             owner.setChildren(children);
-            for (YGNode child : children) {
+            for (@NotNull YGNode child : children) {
                 child.setOwner(owner);
             }
             owner.markDirtyAndPropogate();
         }
     }
 
-    public static void YGNodeSetChildren(final YGNode owner, final ArrayList<YGNode> children) {
+    public static void YGNodeSetChildren(final YGNode owner, final @NotNull ArrayList<YGNode> children) {
         YGNodeSetChildrenInternal(owner, children);
     }
 
-    public static float YGNodeStyleGetFlexGrow(YGNode node) {
+    public static float YGNodeStyleGetFlexGrow(@NotNull YGNode node) {
         return node.getStyle().flexGrow().isUndefined() ? kDefaultFlexGrow : node.getStyle().flexGrow().unwrap();
     }
 
-    public static float YGNodeStyleGetFlexShrink(YGNode node) {
+    public static float YGNodeStyleGetFlexShrink(@NotNull YGNode node) {
         return node.getStyle().flexShrink()
                 .isUndefined() ? (node.getConfig().useWebDefaults ? kWebDefaultFlexShrink : kDefaultFlexShrink) : node.getStyle()
                 .flexShrink().unwrap();
     }
 
-    public static <T extends Enum<T>> void updateStyle(YGNode node, Class<T> enumClazz, T value, Function<YGStyle, YGStyle.BitfieldRef<T>> fieldRef) {
+    public static <T extends Enum<T>> void updateStyle(@NotNull YGNode node, @NotNull Class<T> enumClazz, T value, @NotNull Function<YGStyle, YGStyle.BitfieldRef<T>> fieldRef) {
         updateStyle(node, value, (ygStyle, newVal) -> fieldRef.apply(node.getStyle()).getValue(enumClazz) != newVal,
                 (ygStyle, newVal) -> fieldRef.apply(node.getStyle()).setValue(newVal));
     }
 
-    public static <T> void updateStyle(YGNode node, T value, BiFunction<YGStyle, T, Boolean> needsUpdate, BiConsumer<YGStyle, T> update) {
+    public static <T> void updateStyle(@NotNull YGNode node, T value, @NotNull BiFunction<YGStyle, T, Boolean> needsUpdate, @NotNull BiConsumer<YGStyle, T> update) {
         if (needsUpdate.apply(node.getStyle(), value)) {
             update.accept(node.getStyle(), value);
             node.markDirtyAndPropogate();
         }
     }
 
-    public static YGDirection YGNodeStyleGetDirection(YGNode node) {
+    public static YGDirection YGNodeStyleGetDirection(@NotNull YGNode node) {
         return node.getStyle().direction();
     }
 
-    public static YGFlexDirection YGNodeStyleGetFlexDirection(YGNode node) {
+    public static YGFlexDirection YGNodeStyleGetFlexDirection(@NotNull YGNode node) {
         return node.getStyle().flexDirection();
     }
 
-    public static YGJustify YGNodeStyleGetJustifyContent(YGNode node) {
+    public static YGJustify YGNodeStyleGetJustifyContent(@NotNull YGNode node) {
         return node.getStyle().justifyContent();
     }
 
-    public static YGAlign YGNodeStyleGetAlignContent(YGNode node) {
+    public static YGAlign YGNodeStyleGetAlignContent(@NotNull YGNode node) {
         return node.getStyle().alignContent();
     }
 
-    public static YGAlign YGNodeStyleGetAlignItems(YGNode node) {
+    public static YGAlign YGNodeStyleGetAlignItems(@NotNull YGNode node) {
         return node.getStyle().alignItems();
     }
 
-    public static YGAlign YGNodeStyleGetAlignSelf(YGNode node) {
+    public static YGAlign YGNodeStyleGetAlignSelf(@NotNull YGNode node) {
         return node.getStyle().alignSelf();
     }
 
-    public static YGPositionType YGNodeStyleGetPositionType(YGNode node) {
+    public static YGPositionType YGNodeStyleGetPositionType(@NotNull YGNode node) {
         return node.getStyle().positionType();
     }
 
-    public static YGWrap YGNodeStyleGetFlexWrap(YGNode node) {
+    public static YGWrap YGNodeStyleGetFlexWrap(@NotNull YGNode node) {
         return node.getStyle().flexWrap();
     }
 
-    public static YGOverflow YGNodeStyleGetOverflow(YGNode node) {
+    public static YGOverflow YGNodeStyleGetOverflow(@NotNull YGNode node) {
         return node.getStyle().overflow();
     }
 
-    public static YGDisplay YGNodeStyleGetDisplay(YGNode node) {
+    public static YGDisplay YGNodeStyleGetDisplay(@NotNull YGNode node) {
         return node.getStyle().display();
     }
 
-    public static float YGNodeStyleGetFlex(YGNode node) {
+    public static float YGNodeStyleGetFlex(@NotNull YGNode node) {
         return node.getStyle().flex().isUndefined() ? YGUndefined : node.getStyle().flex().unwrap();
     }
 
-    public static YGValue YGNodeStyleGetFlexBasis(YGNode node) {
+    public static YGValue YGNodeStyleGetFlexBasis(@NotNull YGNode node) {
         YGValue flexBasis = node.getStyle().flexBasis().convertToYgValue();
         if (flexBasis.unit == YGUnit.YGUnitUndefined || flexBasis.unit == YGUnit.YGUnitAuto) {
 
@@ -1562,8 +1564,8 @@ public class GlobalMembers {
         return flexBasis;
     }
 
-    public static float YGNodeStyleGetBorder(YGNode node, final YGEdge edge) {
-        var border = node.getStyle().border().getCompactValue(edge.getValue());
+    public static float YGNodeStyleGetBorder(@NotNull YGNode node, final @NotNull YGEdge edge) {
+        @NotNull var border = node.getStyle().border().getCompactValue(edge.getValue());
         if (border.isUndefined() || border.isAuto()) {
 
 
@@ -1573,28 +1575,28 @@ public class GlobalMembers {
         return border.convertToYgValue().value;
     }
 
-    public static float YGNodeStyleGetAspectRatio(YGNode node) {
+    public static float YGNodeStyleGetAspectRatio(@NotNull YGNode node) {
         final YGFloatOptional op = node.getStyle().aspectRatio();
         return op.isUndefined() ? YGUndefined : op.unwrap();
     }
 
-    public static YGValue YGNodeStyleGetMinWidth(YGNode node) {
+    public static YGValue YGNodeStyleGetMinWidth(@NotNull YGNode node) {
         return node.getStyle().minDimensions().get(YGDimension.YGDimensionWidth.getValue());
     }
 
-    public static YGValue YGNodeStyleGetMinHeight(YGNode node) {
+    public static YGValue YGNodeStyleGetMinHeight(@NotNull YGNode node) {
         return node.getStyle().minDimensions().get(YGDimension.YGDimensionHeight.getValue());
     }
 
-    public static YGValue YGNodeStyleGetMaxWidth(YGNode node) {
+    public static YGValue YGNodeStyleGetMaxWidth(@NotNull YGNode node) {
         return node.getStyle().maxDimensions().get(YGDimension.YGDimensionWidth.getValue());
     }
 
-    public static YGValue YGNodeStyleGetMaxHeight(YGNode node) {
+    public static YGValue YGNodeStyleGetMaxHeight(@NotNull YGNode node) {
         return node.getStyle().maxDimensions().get(YGDimension.YGDimensionHeight.getValue());
     }
 
-    public static boolean YGLayoutNodeInternal(YGNode node, final float availableWidth, final float availableHeight, final YGDirection ownerDirection, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight, final boolean performLayout, final LayoutPassReason reason, YGConfig config, LayoutData layoutMarkerData, final Object layoutContext, Integer depth, final Integer generationCount) //Method definition originates from: Yoga.cpp
+    public static boolean YGLayoutNodeInternal(@NotNull YGNode node, final float availableWidth, final float availableHeight, final @NotNull YGDirection ownerDirection, final @NotNull YGMeasureMode widthMeasureMode, final @NotNull YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight, final boolean performLayout, final @NotNull LayoutPassReason reason, YGConfig config, @NotNull LayoutData layoutMarkerData, final Object layoutContext, Integer depth, final Integer generationCount) //Method definition originates from: Yoga.cpp
     {
         YGLayout layout = node.getLayout();
 
@@ -1613,7 +1615,7 @@ public class GlobalMembers {
             layout.cachedLayout.computedHeight = -1;
         }
 
-        YGCachedMeasurement cachedResults = null;
+        @Nullable YGCachedMeasurement cachedResults = null;
         if (node.hasMeasureFunc()) {
             final float marginAxisRow = node.getMarginForAxis(YGFlexDirection.YGFlexDirectionRow, ownerWidth).unwrap();
             final float marginAxisColumn = node.getMarginForAxis(YGFlexDirection.YGFlexDirectionColumn, ownerWidth)
@@ -1628,7 +1630,7 @@ public class GlobalMembers {
                 cachedResults = layout.cachedLayout;
             } else {
 
-                for (Integer i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
+                for (@NotNull Integer i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
                     if (YGNodeCanUseCachedMeasurement(widthMeasureMode, availableWidth, heightMeasureMode,
                             availableHeight, layout.cachedMeasurements.get(i).widthMeasureMode,
                             layout.cachedMeasurements.get(i).availableWidth,
@@ -1648,7 +1650,7 @@ public class GlobalMembers {
                 cachedResults = layout.cachedLayout;
             }
         } else {
-            for (Integer i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
+            for (@NotNull Integer i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
                 if (YGFloatsEqual(layout.cachedMeasurements.get(i).availableWidth, availableWidth) && YGFloatsEqual(
                         layout.cachedMeasurements.get(i).availableHeight,
                         availableHeight) && layout.cachedMeasurements.get(
@@ -1756,12 +1758,12 @@ public class GlobalMembers {
         return (needToVisitNode || cachedResults == null);
     }
 
-    public static float YGNodePaddingAndBorderForAxis(YGNode node, final YGFlexDirection axis, final float widthSize) {
+    public static float YGNodePaddingAndBorderForAxis(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float widthSize) {
         return plus(node.getLeadingPaddingAndBorder(axis, widthSize),
                 node.getTrailingPaddingAndBorder(axis, widthSize)).unwrap();
     }
 
-    public static YGAlign YGNodeAlignItem(YGNode node, YGNode child) {
+    public static YGAlign YGNodeAlignItem(@NotNull YGNode node, @NotNull YGNode child) {
         final YGAlign align = child.getStyle().alignSelf() == YGAlign.YGAlignAuto ? node.getStyle()
                 .alignItems() : child.getStyle().alignSelf();
         if (align == YGAlign.YGAlignBaseline && YGFlexDirectionIsColumn(node.getStyle().flexDirection())) {
@@ -1770,7 +1772,7 @@ public class GlobalMembers {
         return align;
     }
 
-    public static float YGBaseline(YGNode node, Object layoutContext) {
+    public static float YGBaseline(@NotNull YGNode node, Object layoutContext) {
         if (node.hasBaselineFunc()) {
 
             /* Event.NodeBaselineStart */
@@ -1787,10 +1789,10 @@ public class GlobalMembers {
             return baseline;
         }
 
-        YGNode baselineChild = null;
-        final Integer childCount = YGNodeGetChildCount(node);
-        for (Integer i = 0; i < childCount; i++) {
-            YGNode child = YGNodeGetChild(node, i);
+        @Nullable YGNode baselineChild = null;
+        final @NotNull Integer childCount = YGNodeGetChildCount(node);
+        for (@NotNull Integer i = 0; i < childCount; i++) {
+            @Nullable YGNode child = YGNodeGetChild(node, i);
             if (child.getLineIndex() > 0) {
                 break;
             }
@@ -1815,16 +1817,16 @@ public class GlobalMembers {
         return baseline + baselineChild.getLayout().position.get(YGEdge.YGEdgeTop.getValue());
     }
 
-    public static boolean YGIsBaselineLayout(YGNode node) {
+    public static boolean YGIsBaselineLayout(@NotNull YGNode node) {
         if (YGFlexDirectionIsColumn(node.getStyle().flexDirection())) {
             return false;
         }
         if (node.getStyle().alignItems() == YGAlign.YGAlignBaseline) {
             return true;
         }
-        final Integer childCount = YGNodeGetChildCount(node);
-        for (Integer i = 0; i < childCount; i++) {
-            YGNode child = YGNodeGetChild(node, i);
+        final @NotNull Integer childCount = YGNodeGetChildCount(node);
+        for (@NotNull Integer i = 0; i < childCount; i++) {
+            @Nullable YGNode child = YGNodeGetChild(node, i);
             if (child.getStyle().positionType() != YGPositionType.YGPositionTypeAbsolute && child.getStyle()
                     .alignSelf() == YGAlign.YGAlignBaseline) {
                 return true;
@@ -1834,12 +1836,12 @@ public class GlobalMembers {
         return false;
     }
 
-    public static float YGNodeDimWithMargin(YGNode node, final YGFlexDirection axis, final float widthSize) {
+    public static float YGNodeDimWithMargin(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float widthSize) {
         return plus(new YGFloatOptional(node.getLayout().measuredDimensions.get(dim.get(axis.getValue()).getValue())),
                 plus(node.getLeadingMargin(axis, widthSize), node.getTrailingMargin(axis, widthSize))).unwrap();
     }
 
-    public static boolean YGNodeIsStyleDimDefined(YGNode node, final YGFlexDirection axis, final float ownerSize) {
+    public static boolean YGNodeIsStyleDimDefined(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float ownerSize) {
         boolean isUndefined = YGFloatIsUndefined(node.getResolvedDimension(dim.get(axis.getValue()).getValue()).value);
         return !(node.getResolvedDimension(
                 dim.get(axis.getValue()).getValue()).unit == YGUnit.YGUnitAuto || node.getResolvedDimension(
@@ -1852,14 +1854,14 @@ public class GlobalMembers {
                 dim.get(axis.getValue()).getValue()).value < 0.0f || YGFloatIsUndefined(ownerSize))));
     }
 
-    public static boolean YGNodeIsLayoutDimDefined(YGNode node, final YGFlexDirection axis) {
+    public static boolean YGNodeIsLayoutDimDefined(@NotNull YGNode node, final @NotNull YGFlexDirection axis) {
         final float value = node.getLayout().measuredDimensions.get(dim.get(axis.getValue()).getValue());
         return !YGFloatIsUndefined(value) && value >= 0.0f;
     }
 
-    public static YGFloatOptional YGNodeBoundAxisWithinMinAndMax(YGNode node, final YGFlexDirection axis, final YGFloatOptional value, final float axisSize) {
-        YGFloatOptional min = new YGFloatOptional();
-        YGFloatOptional max = new YGFloatOptional();
+    public static @NotNull YGFloatOptional YGNodeBoundAxisWithinMinAndMax(@NotNull YGNode node, final YGFlexDirection axis, final @NotNull YGFloatOptional value, final float axisSize) {
+        @NotNull YGFloatOptional min = new YGFloatOptional();
+        @NotNull YGFloatOptional max = new YGFloatOptional();
 
         if (YGFlexDirectionIsColumn(axis)) {
 //C++ TO JAVA CONVERTER TODO TASK: The following line was determined to be a copy assignment (rather than a reference assignment) - this should be verified and a 'copyFrom' method should be created:
@@ -1892,20 +1894,20 @@ public class GlobalMembers {
         return value;
     }
 
-    public static float YGNodeBoundAxis(YGNode node, final YGFlexDirection axis, final float value, final float axisSize, final float widthSize) {
+    public static float YGNodeBoundAxis(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float value, final float axisSize, final float widthSize) {
         return YGFloatMax(YGNodeBoundAxisWithinMinAndMax(node, axis, new YGFloatOptional((value)), axisSize).unwrap(),
                 YGNodePaddingAndBorderForAxis(node, axis, widthSize));
     }
 
-    public static void YGNodeSetChildTrailingPosition(YGNode node, YGNode child, final YGFlexDirection axis) {
+    public static void YGNodeSetChildTrailingPosition(@NotNull YGNode node, @NotNull YGNode child, final @NotNull YGFlexDirection axis) {
         final float size = child.getLayout().measuredDimensions.get(dim.get(axis.getValue()).getValue());
         child.setLayoutPosition(node.getLayout().measuredDimensions.get(
                 dim.get(axis.getValue()).getValue()) - size - child.getLayout().position.get(
                 pos.get(axis.getValue()).getValue()), trailing.get(axis.getValue()).getValue());
     }
 
-    public static void YGConstrainMaxSizeForMode(YGNode node, final YGFlexDirection axis, final float ownerAxisSize, final float ownerWidth, YGMeasureMode mode, tangible.RefObject<Float> size) {
-        final YGFloatOptional maxSize = plus(
+    public static void YGConstrainMaxSizeForMode(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float ownerAxisSize, final float ownerWidth, @NotNull YGMeasureMode mode, tangible.@NotNull RefObject<Float> size) {
+        final @NotNull YGFloatOptional maxSize = plus(
                 YGResolveValue(node.getStyle().maxDimensions().getCompactValue(dim.get(axis.getValue()).getValue()),
                         ownerAxisSize), node.getMarginForAxis(axis, ownerWidth));
         switch (mode) {
@@ -1923,7 +1925,7 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGNodeComputeFlexBasisForChild(YGNode node, YGNode child, final float width, final YGMeasureMode widthMode, final float height, final float ownerWidth, final float ownerHeight, final YGMeasureMode heightMode, final YGDirection direction, YGConfig config, LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
+    public static void YGNodeComputeFlexBasisForChild(@NotNull YGNode node, @NotNull YGNode child, final float width, final YGMeasureMode widthMode, final float height, final float ownerWidth, final float ownerHeight, final YGMeasureMode heightMode, final @NotNull YGDirection direction, YGConfig config, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
         final YGFlexDirection mainAxis = YGResolveFlexDirection(node.getStyle().flexDirection(), direction);
         final boolean isMainAxisRow = YGFlexDirectionIsRow(mainAxis);
         final float mainAxisSize = isMainAxisRow ? width : height;
@@ -1934,7 +1936,7 @@ public class GlobalMembers {
         YGMeasureMode childWidthMeasureMode;
         YGMeasureMode childHeightMeasureMode;
 
-        final YGFloatOptional resolvedFlexBasis = YGResolveValue(child.resolveFlexBasisPtr(), mainAxisownerSize);
+        final @NotNull YGFloatOptional resolvedFlexBasis = YGResolveValue(child.resolveFlexBasisPtr(), mainAxisownerSize);
         final boolean isRowStyleDimDefined = YGNodeIsStyleDimDefined(child, YGFlexDirection.YGFlexDirectionRow,
                 ownerWidth);
         final boolean isColumnStyleDimDefined = YGNodeIsStyleDimDefined(child, YGFlexDirection.YGFlexDirectionColumn,
@@ -1944,13 +1946,13 @@ public class GlobalMembers {
             if (child.getLayout().computedFlexBasis.isUndefined() || (YGConfigIsExperimentalFeatureEnabled(
                     child.getConfig(),
                     YGExperimentalFeature.YGExperimentalFeatureWebFlexBasis) && child.getLayout().computedFlexBasisGeneration != generationCount)) {
-                final YGFloatOptional paddingAndBorder = new YGFloatOptional(
+                final @NotNull YGFloatOptional paddingAndBorder = new YGFloatOptional(
                         YGNodePaddingAndBorderForAxis(child, mainAxis, ownerWidth));
                 child.setLayoutComputedFlexBasis(YGFloatOptionalMax(resolvedFlexBasis, paddingAndBorder));
             }
         } else if (isMainAxisRow && isRowStyleDimDefined) {
 
-            final YGFloatOptional paddingAndBorder = new YGFloatOptional(
+            final @NotNull YGFloatOptional paddingAndBorder = new YGFloatOptional(
                     YGNodePaddingAndBorderForAxis(child, YGFlexDirection.YGFlexDirectionRow, ownerWidth));
 
             child.setLayoutComputedFlexBasis(YGFloatOptionalMax(
@@ -1958,7 +1960,7 @@ public class GlobalMembers {
                             ownerWidth), paddingAndBorder));
         } else if (!isMainAxisRow && isColumnStyleDimDefined) {
 
-            final YGFloatOptional paddingAndBorder = new YGFloatOptional(
+            final @NotNull YGFloatOptional paddingAndBorder = new YGFloatOptional(
                     YGNodePaddingAndBorderForAxis(child, YGFlexDirection.YGFlexDirectionColumn, ownerWidth));
             child.setLayoutComputedFlexBasis(YGFloatOptionalMax(
                     YGResolveValue(child.getResolvedDimensions().get(YGDimension.YGDimensionHeight.getValue()),
@@ -2042,7 +2044,7 @@ public class GlobalMembers {
             }
 
 
-            RefObject<Float> childWidthRef = new RefObject<>(childWidth);
+            @NotNull RefObject<Float> childWidthRef = new RefObject<>(childWidth);
             YGConstrainMaxSizeForMode(child, YGFlexDirection.YGFlexDirectionRow, ownerWidth, ownerWidth,
                     childWidthMeasureMode, childWidthRef);
             YGConstrainMaxSizeForMode(child, YGFlexDirection.YGFlexDirectionColumn, ownerHeight, ownerWidth,
@@ -2061,15 +2063,15 @@ public class GlobalMembers {
         child.setLayoutComputedFlexBasisGeneration(generationCount);
     }
 
-    public static void YGNodeAbsoluteLayoutChild(YGNode node, YGNode child, final float width, final YGMeasureMode widthMode, final float height, final YGDirection direction, YGConfig config, LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
+    public static void YGNodeAbsoluteLayoutChild(@NotNull YGNode node, @NotNull YGNode child, final float width, final YGMeasureMode widthMode, final float height, final @NotNull YGDirection direction, YGConfig config, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
         final YGFlexDirection mainAxis = YGResolveFlexDirection(node.getStyle().flexDirection(), direction);
-        final YGFlexDirection crossAxis = YGFlexDirectionCross(mainAxis, direction);
+        final @NotNull YGFlexDirection crossAxis = YGFlexDirectionCross(mainAxis, direction);
         final boolean isMainAxisRow = YGFlexDirectionIsRow(mainAxis);
 
         float childWidth = YGUndefined;
         float childHeight = YGUndefined;
-        YGMeasureMode childWidthMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
-        YGMeasureMode childHeightMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
+        @NotNull YGMeasureMode childWidthMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
+        @NotNull YGMeasureMode childHeightMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
 
         var marginRow = child.getMarginForAxis(YGFlexDirection.YGFlexDirectionRow, width).unwrap();
         var marginColumn = child.getMarginForAxis(YGFlexDirection.YGFlexDirectionColumn, width).unwrap();
@@ -2190,7 +2192,7 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGNodeWithMeasureFuncSetMeasuredDimensions(YGNode node, float availableWidth, float availableHeight, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight, LayoutData layoutMarkerData, final Object layoutContext, final LayoutPassReason reason) {
+    public static void YGNodeWithMeasureFuncSetMeasuredDimensions(@NotNull YGNode node, float availableWidth, float availableHeight, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final @NotNull LayoutPassReason reason) {
         YGAssertWithNode(node, node.hasMeasureFunc(), "Expected node to have custom measure function");
 
         if (widthMeasureMode == YGMeasureMode.YGMeasureModeUndefined) {
@@ -2200,8 +2202,8 @@ public class GlobalMembers {
             availableHeight = YGUndefined;
         }
 
-        final var padding = node.getLayout().padding;
-        final var border = node.getLayout().border;
+        @NotNull final var padding = node.getLayout().padding;
+        @NotNull final var border = node.getLayout().border;
         final float paddingAndBorderAxisRow = padding.get(YGEdge.YGEdgeLeft.getValue()) + padding.get(
                 YGEdge.YGEdgeRight.getValue()) + border.get(YGEdge.YGEdgeLeft.getValue()) + border.get(
                 YGEdge.YGEdgeRight.getValue());
@@ -2249,9 +2251,9 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGNodeEmptyContainerSetMeasuredDimensions(YGNode node, final float availableWidth, final float availableHeight, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight) {
-        final var padding = node.getLayout().padding;
-        final var border = node.getLayout().border;
+    public static void YGNodeEmptyContainerSetMeasuredDimensions(@NotNull YGNode node, final float availableWidth, final float availableHeight, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight) {
+        @NotNull final var padding = node.getLayout().padding;
+        @NotNull final var border = node.getLayout().border;
 
         float width = availableWidth;
         if (widthMeasureMode == YGMeasureMode.YGMeasureModeUndefined || widthMeasureMode == YGMeasureMode.YGMeasureModeAtMost) {
@@ -2273,7 +2275,7 @@ public class GlobalMembers {
                 YGDimension.YGDimensionHeight.getValue());
     }
 
-    public static boolean YGNodeFixedSizeSetMeasuredDimensions(YGNode node, final float availableWidth, final float availableHeight, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight) {
+    public static boolean YGNodeFixedSizeSetMeasuredDimensions(@NotNull YGNode node, final float availableWidth, final float availableHeight, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight) {
         if ((!YGFloatIsUndefined(
                 availableWidth) && widthMeasureMode == YGMeasureMode.YGMeasureModeAtMost && availableWidth <= 0.0f) || (!YGFloatIsUndefined(
                 availableHeight) && heightMeasureMode == YGMeasureMode.YGMeasureModeAtMost && availableHeight <= 0.0f) || (widthMeasureMode == YGMeasureMode.YGMeasureModeExactly && heightMeasureMode == YGMeasureMode.YGMeasureModeExactly)) {
@@ -2292,7 +2294,7 @@ public class GlobalMembers {
         return false;
     }
 
-    public static void YGZeroOutLayoutRecursivly(YGNode node, Object layoutContext) {
+    public static void YGZeroOutLayoutRecursivly(@NotNull YGNode node, Object layoutContext) {
         node.setLayout(null);
         node.setLayoutDimension(0, 0);
         node.setLayoutDimension(0, 1);
@@ -2301,18 +2303,18 @@ public class GlobalMembers {
         node.iterChildrenAfterCloningIfNeeded(GlobalMembers::YGZeroOutLayoutRecursivly, layoutContext);
     }
 
-    public static float YGNodeCalculateAvailableInnerDim(YGNode node, final YGDimension dimension, final float availableDim, final float paddingAndBorder, final float ownerDim) {
+    public static float YGNodeCalculateAvailableInnerDim(@NotNull YGNode node, final @NotNull YGDimension dimension, final float availableDim, final float paddingAndBorder, final float ownerDim) {
         float availableInnerDim = availableDim - paddingAndBorder;
 
 
         if (!YGFloatIsUndefined(availableInnerDim)) {
 
 
-            final YGFloatOptional minDimensionOptional = YGResolveValue(
+            final @NotNull YGFloatOptional minDimensionOptional = YGResolveValue(
                     node.getStyle().minDimensions().get(dimension.getValue()), ownerDim);
             final float minInnerDim = minDimensionOptional.isUndefined() ? 0.0f : minDimensionOptional.unwrap() - paddingAndBorder;
 
-            final YGFloatOptional maxDimensionOptional = YGResolveValue(
+            final @NotNull YGFloatOptional maxDimensionOptional = YGResolveValue(
                     node.getStyle().maxDimensions().get(dimension.getValue()), ownerDim);
 
             final float maxInnerDim = maxDimensionOptional.isUndefined() ? Float.MAX_VALUE : maxDimensionOptional.unwrap() - paddingAndBorder;
@@ -2322,15 +2324,15 @@ public class GlobalMembers {
         return availableInnerDim;
     }
 
-    public static float YGNodeComputeFlexBasisForChildren(YGNode node, final float availableInnerWidth, final float availableInnerHeight, YGMeasureMode widthMeasureMode, YGMeasureMode heightMeasureMode, YGDirection direction, YGFlexDirection mainAxis, YGConfig config, boolean performLayout, LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
+    public static float YGNodeComputeFlexBasisForChildren(@NotNull YGNode node, final float availableInnerWidth, final float availableInnerHeight, YGMeasureMode widthMeasureMode, YGMeasureMode heightMeasureMode, @NotNull YGDirection direction, @NotNull YGFlexDirection mainAxis, YGConfig config, boolean performLayout, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
         float totalOuterFlexBasis = 0.0f;
-        YGNode singleFlexChild = null;
+        @Nullable YGNode singleFlexChild = null;
         ArrayList<YGNode> children = node.getChildren();
         YGMeasureMode measureModeMainDim = YGFlexDirectionIsRow(mainAxis) ? widthMeasureMode : heightMeasureMode;
 
 
         if (measureModeMainDim == YGMeasureMode.YGMeasureModeExactly) {
-            for (var child : children) {
+            for (@NotNull var child : children) {
                 if (child.isNodeFlexible()) {
                     if (singleFlexChild != null || YGFloatsEqual(child.resolveFlexGrow(), 0.0f) || YGFloatsEqual(
                             child.resolveFlexShrink(), 0.0f)) {
@@ -2345,7 +2347,7 @@ public class GlobalMembers {
             }
         }
 
-        for (var child : children) {
+        for (@NotNull var child : children) {
             child.resolveDimension();
             if (child.getStyle().display() == YGDisplay.YGDisplayNone) {
                 YGZeroOutLayoutRecursivly(child, layoutContext);
@@ -2380,8 +2382,8 @@ public class GlobalMembers {
         return totalOuterFlexBasis;
     }
 
-    public static YGCollectFlexItemsRowValues YGCalculateCollectFlexItemsRowValues(YGNode node, final YGDirection ownerDirection, final float mainAxisownerSize, final float availableInnerWidth, final float availableInnerMainDim, final Integer startOfLineIndex, final Integer lineCount) {
-        YGCollectFlexItemsRowValues flexAlgoRowMeasurement = new YGCollectFlexItemsRowValues();
+    public static @NotNull YGCollectFlexItemsRowValues YGCalculateCollectFlexItemsRowValues(@NotNull YGNode node, final @NotNull YGDirection ownerDirection, final float mainAxisownerSize, final float availableInnerWidth, final float availableInnerMainDim, final Integer startOfLineIndex, final Integer lineCount) {
+        @NotNull YGCollectFlexItemsRowValues flexAlgoRowMeasurement = new YGCollectFlexItemsRowValues();
         flexAlgoRowMeasurement.relativeChildren.ensureCapacity(node.getChildren().size());
 
         float sizeConsumedOnCurrentLineIncludingMinConstraint = 0F;
@@ -2436,7 +2438,7 @@ public class GlobalMembers {
         return flexAlgoRowMeasurement;
     }
 
-    public static float YGDistributeFreeSpaceSecondPass(YGCollectFlexItemsRowValues collectedFlexItemsValues, YGNode node, final YGFlexDirection mainAxis, final YGFlexDirection crossAxis, final float mainAxisownerSize, final float availableInnerMainDim, final float availableInnerCrossDim, final float availableInnerWidth, final float availableInnerHeight, final boolean flexBasisOverflows, final YGMeasureMode measureModeCrossDim, final boolean performLayout, YGConfig config, LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
+    public static float YGDistributeFreeSpaceSecondPass(@NotNull YGCollectFlexItemsRowValues collectedFlexItemsValues, @NotNull YGNode node, final @NotNull YGFlexDirection mainAxis, final @NotNull YGFlexDirection crossAxis, final float mainAxisownerSize, final float availableInnerMainDim, final float availableInnerCrossDim, final float availableInnerWidth, final float availableInnerHeight, final boolean flexBasisOverflows, final YGMeasureMode measureModeCrossDim, final boolean performLayout, YGConfig config, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
         float childFlexBasis = 0F;
         float flexShrinkScaledFactor = 0F;
         float flexGrowFactor = 0F;
@@ -2444,7 +2446,7 @@ public class GlobalMembers {
         final boolean isMainAxisRow = YGFlexDirectionIsRow(mainAxis);
         final boolean isNodeFlexWrap = node.getStyle().flexWrap() != YGWrap.YGWrapNoWrap;
 
-        for (var currentRelativeChild : collectedFlexItemsValues.relativeChildren) {
+        for (@NotNull var currentRelativeChild : collectedFlexItemsValues.relativeChildren) {
             childFlexBasis = YGNodeBoundAxisWithinMinAndMax(currentRelativeChild, mainAxis,
                     currentRelativeChild.getLayout().computedFlexBasis, mainAxisownerSize).unwrap();
             float updatedMainSize = childFlexBasis;
@@ -2483,10 +2485,10 @@ public class GlobalMembers {
             final float marginMain = currentRelativeChild.getMarginForAxis(mainAxis, availableInnerWidth).unwrap();
             final float marginCross = currentRelativeChild.getMarginForAxis(crossAxis, availableInnerWidth).unwrap();
 
-            RefObject<Float> childCrossSize = new RefObject<>(0f);
-            RefObject<Float> childMainSize = new RefObject<>(updatedMainSize + marginMain);
+            @NotNull RefObject<Float> childCrossSize = new RefObject<>(0f);
+            @NotNull RefObject<Float> childMainSize = new RefObject<>(updatedMainSize + marginMain);
             YGMeasureMode childCrossMeasureMode;
-            YGMeasureMode childMainMeasureMode = YGMeasureMode.YGMeasureModeExactly;
+            @NotNull YGMeasureMode childMainMeasureMode = YGMeasureMode.YGMeasureModeExactly;
 
             final var childStyle = currentRelativeChild.getStyle();
             if (!childStyle.aspectRatio().isUndefined()) {
@@ -2529,11 +2531,11 @@ public class GlobalMembers {
                     crossAxis).unit != YGUnit.YGUnitAuto && currentRelativeChild.marginTrailingValue(
                     crossAxis).unit != YGUnit.YGUnitAuto;
 
-            final RefObject<Float> childWidth = isMainAxisRow ? childMainSize : childCrossSize;
-            final RefObject<Float> childHeight = !isMainAxisRow ? childMainSize : childCrossSize;
+            final @NotNull RefObject<Float> childWidth = isMainAxisRow ? childMainSize : childCrossSize;
+            final @NotNull RefObject<Float> childHeight = !isMainAxisRow ? childMainSize : childCrossSize;
 
-            final YGMeasureMode childWidthMeasureMode = isMainAxisRow ? childMainMeasureMode : childCrossMeasureMode;
-            final YGMeasureMode childHeightMeasureMode = !isMainAxisRow ? childMainMeasureMode : childCrossMeasureMode;
+            final @NotNull YGMeasureMode childWidthMeasureMode = isMainAxisRow ? childMainMeasureMode : childCrossMeasureMode;
+            final @NotNull YGMeasureMode childHeightMeasureMode = !isMainAxisRow ? childMainMeasureMode : childCrossMeasureMode;
 
             final boolean isLayoutPass = performLayout && !requiresStretchLayout;
 
@@ -2548,14 +2550,14 @@ public class GlobalMembers {
         return deltaFreeSpace;
     }
 
-    public static void YGDistributeFreeSpaceFirstPass(YGCollectFlexItemsRowValues collectedFlexItemsValues, final YGFlexDirection mainAxis, final float mainAxisownerSize, final float availableInnerMainDim, final float availableInnerWidth) {
+    public static void YGDistributeFreeSpaceFirstPass(@NotNull YGCollectFlexItemsRowValues collectedFlexItemsValues, final @NotNull YGFlexDirection mainAxis, final float mainAxisownerSize, final float availableInnerMainDim, final float availableInnerWidth) {
         float flexShrinkScaledFactor = 0F;
         float flexGrowFactor = 0F;
         float baseMainSize = 0F;
         float boundMainSize = 0F;
         float deltaFreeSpace = 0F;
 
-        for (var currentRelativeChild : collectedFlexItemsValues.relativeChildren) {
+        for (@NotNull var currentRelativeChild : collectedFlexItemsValues.relativeChildren) {
             float childFlexBasis = YGNodeBoundAxisWithinMinAndMax(currentRelativeChild, mainAxis,
                     currentRelativeChild.getLayout().computedFlexBasis, mainAxisownerSize).unwrap();
 
@@ -2598,7 +2600,7 @@ public class GlobalMembers {
         collectedFlexItemsValues.remainingFreeSpace -= deltaFreeSpace;
     }
 
-    public static void YGResolveFlexibleLength(YGNode node, YGCollectFlexItemsRowValues collectedFlexItemsValues, final YGFlexDirection mainAxis, final YGFlexDirection crossAxis, final float mainAxisownerSize, final float availableInnerMainDim, final float availableInnerCrossDim, final float availableInnerWidth, final float availableInnerHeight, final boolean flexBasisOverflows, final YGMeasureMode measureModeCrossDim, final boolean performLayout, YGConfig config, LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
+    public static void YGResolveFlexibleLength(@NotNull YGNode node, @NotNull YGCollectFlexItemsRowValues collectedFlexItemsValues, final @NotNull YGFlexDirection mainAxis, final @NotNull YGFlexDirection crossAxis, final float mainAxisownerSize, final float availableInnerMainDim, final float availableInnerCrossDim, final float availableInnerWidth, final float availableInnerHeight, final boolean flexBasisOverflows, final YGMeasureMode measureModeCrossDim, final boolean performLayout, YGConfig config, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount) {
         final float originalFreeSpace = collectedFlexItemsValues.remainingFreeSpace;
 
         YGDistributeFreeSpaceFirstPass(collectedFlexItemsValues, mainAxis, mainAxisownerSize, availableInnerMainDim,
@@ -2613,7 +2615,7 @@ public class GlobalMembers {
         collectedFlexItemsValues.remainingFreeSpace = originalFreeSpace - distributedFreeSpace;
     }
 
-    public static void YGJustifyMainAxis(YGNode node, YGCollectFlexItemsRowValues collectedFlexItemsValues, final Integer startOfLineIndex, final YGFlexDirection mainAxis, final YGFlexDirection crossAxis, final YGMeasureMode measureModeMainDim, final YGMeasureMode measureModeCrossDim, final float mainAxisownerSize, final float ownerWidth, final float availableInnerMainDim, final float availableInnerCrossDim, final float availableInnerWidth, final boolean performLayout, final Object layoutContext) {
+    public static void YGJustifyMainAxis(@NotNull YGNode node, @NotNull YGCollectFlexItemsRowValues collectedFlexItemsValues, final Integer startOfLineIndex, final @NotNull YGFlexDirection mainAxis, final @NotNull YGFlexDirection crossAxis, final YGMeasureMode measureModeMainDim, final YGMeasureMode measureModeCrossDim, final float mainAxisownerSize, final float ownerWidth, final float availableInnerMainDim, final float availableInnerCrossDim, final float availableInnerWidth, final boolean performLayout, final Object layoutContext) {
         final var style = node.getStyle();
         final float leadingPaddingAndBorderMain = node.getLeadingPaddingAndBorder(mainAxis, ownerWidth).unwrap();
         final float trailingPaddingAndBorderMain = node.getTrailingPaddingAndBorder(mainAxis, ownerWidth).unwrap();
@@ -2772,7 +2774,7 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGNodelayoutImpl(YGNode node, final float availableWidth, final float availableHeight, final YGDirection ownerDirection, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight, final boolean performLayout, YGConfig config, LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount, final LayoutPassReason reason) {
+    public static void YGNodelayoutImpl(@NotNull YGNode node, final float availableWidth, final float availableHeight, final @NotNull YGDirection ownerDirection, final YGMeasureMode widthMeasureMode, final YGMeasureMode heightMeasureMode, final float ownerWidth, final float ownerHeight, final boolean performLayout, YGConfig config, @NotNull LayoutData layoutMarkerData, final Object layoutContext, final Integer depth, final Integer generationCount, final @NotNull LayoutPassReason reason) {
         YGAssertWithNode(node,
                 !YGFloatIsUndefined(availableWidth) || widthMeasureMode == YGMeasureMode.YGMeasureModeUndefined,
                 "availableWidth is indefinite so widthMeasureMode must be " + "YGMeasureModeUndefined");
@@ -2791,8 +2793,8 @@ public class GlobalMembers {
         final YGFlexDirection flexColumnDirection = YGResolveFlexDirection(YGFlexDirection.YGFlexDirectionColumn,
                 direction);
 
-        final YGEdge startEdge = direction == YGDirection.YGDirectionLTR ? YGEdge.YGEdgeLeft : YGEdge.YGEdgeRight;
-        final YGEdge endEdge = direction == YGDirection.YGDirectionLTR ? YGEdge.YGEdgeRight : YGEdge.YGEdgeLeft;
+        final @NotNull YGEdge startEdge = direction == YGDirection.YGDirectionLTR ? YGEdge.YGEdgeLeft : YGEdge.YGEdgeRight;
+        final @NotNull YGEdge endEdge = direction == YGDirection.YGDirectionLTR ? YGEdge.YGEdgeRight : YGEdge.YGEdgeLeft;
 
         final float marginRowLeading = node.getLeadingMargin(flexRowDirection, ownerWidth).unwrap();
         node.setLayoutMargin(marginRowLeading, startEdge.getValue());
@@ -2825,7 +2827,7 @@ public class GlobalMembers {
             return;
         }
 
-        final Integer childCount = YGNodeGetChildCount(node);
+        final @NotNull Integer childCount = YGNodeGetChildCount(node);
         if (childCount == 0) {
             YGNodeEmptyContainerSetMeasuredDimensions(node, availableWidth - marginAxisRow,
                     availableHeight - marginAxisColumn, widthMeasureMode, heightMeasureMode, ownerWidth, ownerHeight);
@@ -2845,7 +2847,7 @@ public class GlobalMembers {
 
 
         final YGFlexDirection mainAxis = YGResolveFlexDirection(node.getStyle().flexDirection(), direction);
-        final YGFlexDirection crossAxis = YGFlexDirectionCross(mainAxis, direction);
+        final @NotNull YGFlexDirection crossAxis = YGFlexDirectionCross(mainAxis, direction);
         final boolean isMainAxisRow = YGFlexDirectionIsRow(mainAxis);
         final boolean isNodeFlexWrap = node.getStyle().flexWrap() != YGWrap.YGWrapNoWrap;
 
@@ -2887,14 +2889,14 @@ public class GlobalMembers {
         Integer endOfLineIndex = 0;
 
 
-        Integer lineCount = 0;
+        @NotNull Integer lineCount = 0;
 
 
         float totalLineCrossDim = 0F;
 
 
         float maxLineMainDim = 0F;
-        YGCollectFlexItemsRowValues collectedFlexItemsValues = new YGCollectFlexItemsRowValues();
+        @NotNull YGCollectFlexItemsRowValues collectedFlexItemsValues = new YGCollectFlexItemsRowValues();
         for (; endOfLineIndex < childCount; lineCount++, startOfLineIndex = endOfLineIndex) {
             collectedFlexItemsValues = YGCalculateCollectFlexItemsRowValues(node, ownerDirection, mainAxisownerSize,
                     availableInnerWidth, availableInnerMainDim, startOfLineIndex, lineCount);
@@ -2908,8 +2910,8 @@ public class GlobalMembers {
 
 
             if (measureModeMainDim != YGMeasureMode.YGMeasureModeExactly) {
-                final var minDimensions = node.getStyle().minDimensions();
-                final var maxDimensions = node.getStyle().maxDimensions();
+                @NotNull final var minDimensions = node.getStyle().minDimensions();
+                @NotNull final var maxDimensions = node.getStyle().maxDimensions();
                 final float minInnerWidth = YGResolveValue(minDimensions.get(YGDimension.YGDimensionWidth.getValue()),
                         ownerWidth).unwrap() - paddingAndBorderAxisRow;
                 final float maxInnerWidth = YGResolveValue(maxDimensions.get(YGDimension.YGDimensionWidth.getValue()),
@@ -3019,11 +3021,11 @@ public class GlobalMembers {
 
 
                             if (!YGNodeIsStyleDimDefined(child, crossAxis, availableInnerCrossDim)) {
-                                RefObject<Float> childMainSize = new RefObject<>(
+                                @NotNull RefObject<Float> childMainSize = new RefObject<>(
                                         child.getLayout().measuredDimensions.get(dim.get(
                                                 mainAxis.getValue()).getValue()));
                                 final var childStyle = child.getStyle();
-                                RefObject<Float> childCrossSize = new RefObject<>(
+                                @NotNull RefObject<Float> childCrossSize = new RefObject<>(
                                         !childStyle.aspectRatio().isUndefined() ? child.getMarginForAxis(
                                                         crossAxis, availableInnerWidth)
                                                 .unwrap() + (isMainAxisRow ? childMainSize.argValue / childStyle.aspectRatio()
@@ -3033,21 +3035,21 @@ public class GlobalMembers {
                                 childMainSize.argValue += child.getMarginForAxis(mainAxis, availableInnerWidth)
                                         .unwrap();
 
-                                YGMeasureMode childMainMeasureMode = YGMeasureMode.YGMeasureModeExactly;
-                                YGMeasureMode childCrossMeasureMode = YGMeasureMode.YGMeasureModeExactly;
+                                @NotNull YGMeasureMode childMainMeasureMode = YGMeasureMode.YGMeasureModeExactly;
+                                @NotNull YGMeasureMode childCrossMeasureMode = YGMeasureMode.YGMeasureModeExactly;
                                 YGConstrainMaxSizeForMode(child, mainAxis, availableInnerMainDim, availableInnerWidth,
                                         childMainMeasureMode, childMainSize);
                                 YGConstrainMaxSizeForMode(child, crossAxis, availableInnerCrossDim, availableInnerWidth,
                                         childCrossMeasureMode, childCrossSize);
 
-                                final RefObject<Float> childWidth = isMainAxisRow ? childMainSize : childCrossSize;
-                                final RefObject<Float> childHeight = !isMainAxisRow ? childMainSize : childCrossSize;
+                                final @NotNull RefObject<Float> childWidth = isMainAxisRow ? childMainSize : childCrossSize;
+                                final @NotNull RefObject<Float> childHeight = !isMainAxisRow ? childMainSize : childCrossSize;
 
                                 var alignContent = node.getStyle().alignContent();
                                 var crossAxisDoesNotGrow = alignContent != YGAlign.YGAlignStretch && isNodeFlexWrap;
-                                final YGMeasureMode childWidthMeasureMode = YGFloatIsUndefined(
+                                final @NotNull YGMeasureMode childWidthMeasureMode = YGFloatIsUndefined(
                                         childWidth.argValue) || (!isMainAxisRow && crossAxisDoesNotGrow) ? YGMeasureMode.YGMeasureModeUndefined : YGMeasureMode.YGMeasureModeExactly;
-                                final YGMeasureMode childHeightMeasureMode = YGFloatIsUndefined(
+                                final @NotNull YGMeasureMode childHeightMeasureMode = YGFloatIsUndefined(
                                         childHeight.argValue) || (isMainAxisRow && crossAxisDoesNotGrow) ? YGMeasureMode.YGMeasureModeUndefined : YGMeasureMode.YGMeasureModeExactly;
 
                                 YGLayoutNodeInternal(child, childWidth.argValue, childHeight.argValue, direction,
@@ -3128,7 +3130,7 @@ public class GlobalMembers {
                 }
             }
             Integer endIndex = 0;
-            for (Integer i = 0; i < lineCount; i++) {
+            for (@NotNull Integer i = 0; i < lineCount; i++) {
                 final Integer startIndex = endIndex;
                 Integer ii;
 
@@ -3290,8 +3292,8 @@ public class GlobalMembers {
 
 
         if (performLayout && node.getStyle().flexWrap() == YGWrap.YGWrapWrapReverse) {
-            for (Integer i = 0; i < childCount; i++) {
-                YGNode child = YGNodeGetChild(node, i);
+            for (@NotNull Integer i = 0; i < childCount; i++) {
+                @Nullable YGNode child = YGNodeGetChild(node, i);
                 if (child.getStyle().positionType() != YGPositionType.YGPositionTypeAbsolute) {
                     child.setLayoutPosition(node.getLayout().measuredDimensions.get(dim.get(
                             crossAxis.getValue()).getValue()) - child.getLayout().position.get(pos.get(
@@ -3303,7 +3305,7 @@ public class GlobalMembers {
 
         if (performLayout) {
 
-            for (var child : node.getChildren()) {
+            for (@NotNull var child : node.getChildren()) {
                 if (child.getStyle().display() == YGDisplay.YGDisplayNone || child.getStyle()
                         .positionType() != YGPositionType.YGPositionTypeAbsolute) {
                     continue;
@@ -3319,7 +3321,7 @@ public class GlobalMembers {
 
 
             if (needsMainTrailingPos || needsCrossTrailingPos) {
-                for (Integer i = 0; i < childCount; i++) {
+                for (@NotNull Integer i = 0; i < childCount; i++) {
                     YGNode child = node.getChild(i);
                     if (child.getStyle().display() == YGDisplay.YGDisplayNone) {
                         continue;
@@ -3338,7 +3340,7 @@ public class GlobalMembers {
 
     //C++ TO JAVA CONVERTER WARNING: Unsigned integer types have no direct equivalent in Java:
     //ORIGINAL LINE: static const char* YGSpacer(const unsigned long level)
-    public static String YGSpacer(final int level) {
+    public static @NotNull String YGSpacer(final int level) {
         final Integer spacerLen = spacer.length();
         if (level > spacerLen) {
             return spacer.substring(0, 0);
@@ -3347,10 +3349,10 @@ public class GlobalMembers {
         }
     }
 
-    public static String YGMeasureModeName(final YGMeasureMode mode, final boolean performLayout) {
+    public static String YGMeasureModeName(final @NotNull YGMeasureMode mode, final boolean performLayout) {
         var N = YGMeasureMode.SIZE;
-        String[] kMeasureModeNames = {"UNDEFINED", "EXACTLY", "AT_MOST"};
-        String[] kLayoutModeNames = {"LAY_UNDEFINED", "LAY_EXACTLY", "LAY_AT_MOST"};
+        String @NotNull [] kMeasureModeNames = {"UNDEFINED", "EXACTLY", "AT_MOST"};
+        String @NotNull [] kLayoutModeNames = {"LAY_UNDEFINED", "LAY_EXACTLY", "LAY_AT_MOST"};
 
         if (mode.getValue() >= N) {
             return "";
@@ -3375,7 +3377,7 @@ public class GlobalMembers {
                 lastComputedSize));
     }
 
-    public static void YGRoundToPixelGrid(YGNode node, final double pointScaleFactor, final double absoluteLeft, final double absoluteTop) {
+    public static void YGRoundToPixelGrid(@NotNull YGNode node, final double pointScaleFactor, final double absoluteLeft, final double absoluteTop) {
         if (pointScaleFactor == 0.0f) {
             return;
         }
@@ -3417,31 +3419,31 @@ public class GlobalMembers {
                         (textRounding && !hasFractionalHeight)) - YGRoundValueToPixelGrid(absoluteNodeTop,
                         pointScaleFactor, false, textRounding), YGDimension.YGDimensionHeight.getValue());
 
-        final Integer childCount = YGNodeGetChildCount(node);
-        for (Integer i = 0; i < childCount; i++) {
+        final @NotNull Integer childCount = YGNodeGetChildCount(node);
+        for (@NotNull Integer i = 0; i < childCount; i++) {
             YGRoundToPixelGrid(YGNodeGetChild(node, i), pointScaleFactor, absoluteNodeLeft, absoluteNodeTop);
         }
     }
 
-    public static void unsetUseLegacyFlagRecursively(YGNode node) {
+    public static void unsetUseLegacyFlagRecursively(@NotNull YGNode node) {
         node.getConfig().useLegacyStretchBehaviour = false;
-        for (var child : node.getChildren()) {
+        for (@NotNull var child : node.getChildren()) {
             unsetUseLegacyFlagRecursively(child);
         }
     }
 
-    public static void YGNodeCalculateLayoutWithContext(YGNode node, final float ownerWidth, final float ownerHeight, final YGDirection ownerDirection, Object layoutContext) {
+    public static void YGNodeCalculateLayoutWithContext(@NotNull YGNode node, final float ownerWidth, final float ownerHeight, final @NotNull YGDirection ownerDirection, Object layoutContext) {
 
         /* Event.LayoutPassStart */
         Event.publish(node, new LayoutPassStartEventData(layoutContext));
-        LayoutData markerData = new LayoutData();
+        @NotNull LayoutData markerData = new LayoutData();
 
 
         gCurrentGenerationCount.incrementAndGet();
         node.resolveDimension();
         float width = YGUndefined;
-        YGMeasureMode widthMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
-        final var maxDimensions = node.getStyle().maxDimensions();
+        @NotNull YGMeasureMode widthMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
+        @NotNull final var maxDimensions = node.getStyle().maxDimensions();
         if (YGNodeIsStyleDimDefined(node, YGFlexDirection.YGFlexDirectionRow, ownerWidth)) {
             width = (YGResolveValue(node.getResolvedDimension(dim.get(YGFlexDirection.YGFlexDirectionRow.getValue()).getValue()),
                     ownerWidth).unwrap() + node.getMarginForAxis(YGFlexDirection.YGFlexDirectionRow, ownerWidth).unwrap());
@@ -3457,7 +3459,7 @@ public class GlobalMembers {
         }
 
         float height = YGUndefined;
-        YGMeasureMode heightMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
+        @NotNull YGMeasureMode heightMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
         if (YGNodeIsStyleDimDefined(node, YGFlexDirection.YGFlexDirectionColumn, ownerHeight)) {
             height = (YGResolveValue(
                     node.getResolvedDimension(dim.get(YGFlexDirection.YGFlexDirectionColumn.getValue()).getValue()),
@@ -3482,14 +3484,14 @@ public class GlobalMembers {
         /* Event.LayoutPassEnd */
         Event.publish(node, new LayoutPassEndEventData(layoutContext, markerData));
         if (node.getConfig().shouldDiffLayoutWithoutLegacyStretchBehaviour && node.didUseLegacyFlag()) {
-            YGNode nodeWithoutLegacyFlag = YGNodeDeepClone(node);
+            @NotNull YGNode nodeWithoutLegacyFlag = YGNodeDeepClone(node);
             nodeWithoutLegacyFlag.resolveDimension();
 
             nodeWithoutLegacyFlag.markDirtyAndPropogateDownwards();
             gCurrentGenerationCount.incrementAndGet();
 
             unsetUseLegacyFlagRecursively(nodeWithoutLegacyFlag);
-            LayoutData layoutMarkerData = new LayoutData();
+            @NotNull LayoutData layoutMarkerData = new LayoutData();
             if (YGLayoutNodeInternal(nodeWithoutLegacyFlag, width, height, ownerDirection, widthMeasureMode,
                     heightMeasureMode, ownerWidth, ownerHeight, true, LayoutPassReason.kInitial,
                     nodeWithoutLegacyFlag.getConfig(), layoutMarkerData, layoutContext, 0,
@@ -3508,14 +3510,14 @@ public class GlobalMembers {
         }
     }
 
-    public static void YGTraverseChildrenPreOrder(final ArrayList<YGNode> children, NodeTraverseDelegate f) {
-        for (YGNode node : children) {
+    public static void YGTraverseChildrenPreOrder(final @NotNull ArrayList<YGNode> children, @NotNull NodeTraverseDelegate f) {
+        for (@NotNull YGNode node : children) {
             f.invoke(node);
             YGTraverseChildrenPreOrder(node.getChildren(), f);
         }
     }
 
-    public static void YGTraversePreOrder(final YGNode node, NodeTraverseDelegate f) {
+    public static void YGTraversePreOrder(final @Nullable YGNode node, @NotNull NodeTraverseDelegate f) {
         if (node == null) {
             return;
         }
@@ -3524,27 +3526,27 @@ public class GlobalMembers {
     }
 
     //C++ TO JAVA CONVERTER TODO TASK: The following operator cannot be converted to Java:
-    public static YGFloatOptional plus(YGFloatOptional lhs, YGFloatOptional rhs) {
+    public static @NotNull YGFloatOptional plus(@NotNull YGFloatOptional lhs, @NotNull YGFloatOptional rhs) {
         return new YGFloatOptional(lhs.unwrap() + rhs.unwrap());
     }
 
-    public static boolean greaterThan(YGFloatOptional lhs, YGFloatOptional rhs) {
+    public static boolean greaterThan(@NotNull YGFloatOptional lhs, @NotNull YGFloatOptional rhs) {
         return lhs.unwrap() > rhs.unwrap();
     }
 
-    public static boolean lessThan(YGFloatOptional lhs, YGFloatOptional rhs) {
+    public static boolean lessThan(@NotNull YGFloatOptional lhs, @NotNull YGFloatOptional rhs) {
         return lhs.unwrap() < rhs.unwrap();
     }
 
-    public static boolean greaterThanOrEqualTo(YGFloatOptional lhs, YGFloatOptional rhs) {
+    public static boolean greaterThanOrEqualTo(@NotNull YGFloatOptional lhs, @NotNull YGFloatOptional rhs) {
         return lhs.unwrap() > rhs.unwrap() || lhs.unwrap() == rhs.unwrap();
     }
 
-    public static boolean lessThanOrEqualTo(YGFloatOptional lhs, YGFloatOptional rhs) {
+    public static boolean lessThanOrEqualTo(@NotNull YGFloatOptional lhs, @NotNull YGFloatOptional rhs) {
         return lhs.unwrap() < rhs.unwrap() || lhs.unwrap() == rhs.unwrap();
     }
 
-    private boolean equalsTo(final YGStyle lhs, final YGStyle rhs) {
+    private boolean equalsTo(final @NotNull YGStyle lhs, final @NotNull YGStyle rhs) {
         boolean areNonFloatValuesEqual = lhs.direction() == rhs.direction() && lhs.flexDirection() == rhs.flexDirection() && lhs.justifyContent() == rhs.justifyContent() && lhs.alignContent() == rhs.alignContent() && lhs.alignItems() == rhs.alignItems() && lhs.alignSelf() == rhs.alignSelf() && lhs.positionType() == rhs.positionType() && lhs.flexWrap() == rhs.flexWrap() && lhs.overflow() == rhs.overflow() && lhs.display() == rhs.display() && YGValueEqual(
                 lhs.flexBasis(),
                 rhs.flexBasis()) && lhs.margin() == rhs.margin() && lhs.position() == rhs.position() && lhs.padding() == rhs.padding() && lhs.border() == rhs.border() && lhs.dimensions() == rhs.dimensions() && lhs.minDimensions() == rhs.minDimensions() && lhs.maxDimensions() == rhs.maxDimensions();
@@ -3572,7 +3574,7 @@ public class GlobalMembers {
         return areNonFloatValuesEqual;
     }
 
-    private boolean equalsTo(YGFloatOptional lhs, YGFloatOptional rhs) {
+    private boolean equalsTo(@NotNull YGFloatOptional lhs, @NotNull YGFloatOptional rhs) {
         return lhs.unwrap() == rhs.unwrap() || (lhs.isUndefined() && rhs.isUndefined());
     }
 

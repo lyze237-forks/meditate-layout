@@ -9,6 +9,8 @@ import facebook.yoga.YGValue;
 
 import static facebook.GlobalMembers.YGValueAuto;
 import static facebook.GlobalMembers.YGValueUndefined;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CompactValue //Type originates from: CompactValue.h
 {
@@ -34,9 +36,9 @@ public class CompactValue //Type originates from: CompactValue.h
 //ORIGINAL LINE: template <YGUnit Unit>
 //C++ TO JAVA CONVERTER WARNING: The original C++ template specifier was replaced with a Java generic specifier, which may not produce the same behavior:
 //ORIGINAL LINE: template <typename Unit> requires YGUnit<Unit>
-    public static CompactValue of(float value, YGUnit Unit) {
+    public static @NotNull CompactValue of(float value, YGUnit Unit) {
         if (value == 0.0f || (value < LOWER_BOUND && value > -LOWER_BOUND)) {
-            final var zero = Unit == YGUnit.YGUnitPercent ? ZERO_BITS_PERCENT : ZERO_BITS_POINT;
+            @NotNull final var zero = Unit == YGUnit.YGUnitPercent ? ZERO_BITS_PERCENT : ZERO_BITS_POINT;
             return new CompactValue(new Payload(zero));
         }
 
@@ -46,7 +48,7 @@ public class CompactValue //Type originates from: CompactValue.h
         }
 
         int unitBit = Unit == YGUnit.YGUnitPercent ? PERCENT_BIT : 0;
-        var data = new Payload((value));
+        @NotNull var data = new Payload((value));
         data.repr -= BIAS;
         data.repr |= unitBit;
         return new CompactValue(data);
@@ -56,24 +58,24 @@ public class CompactValue //Type originates from: CompactValue.h
 //ORIGINAL LINE: template <YGUnit Unit>
 //C++ TO JAVA CONVERTER WARNING: The original C++ template specifier was replaced with a Java generic specifier, which may not produce the same behavior:
 //ORIGINAL LINE: template <typename Unit> requires YGUnit<Unit>
-    public static CompactValue ofMaybe(float value, YGUnit Unit) {
+    public static @NotNull CompactValue ofMaybe(float value, YGUnit Unit) {
         return Float.isNaN(value) || Float.isInfinite(value) ? ofUndefined() : CompactValue.of(value, Unit);
     }
 
-    public static CompactValue ofZero() {
+    public static @NotNull CompactValue ofZero() {
         return new CompactValue(new Payload(ZERO_BITS_POINT));
     }
 
-    public static CompactValue ofUndefined() {
+    public static @NotNull CompactValue ofUndefined() {
         return new CompactValue();
     }
 
-    public static CompactValue ofAuto() {
+    public static @NotNull CompactValue ofAuto() {
         return new CompactValue(new Payload(AUTO_BITS));
     }
 
-    public static CompactValue createCompactValue(final YGValue x) {
-        CompactValue compactValue = null;
+    public static @Nullable CompactValue createCompactValue(final @NotNull YGValue x) {
+        @Nullable CompactValue compactValue = null;
         switch (x.unit) {
             case YGUnitUndefined:
                 compactValue = ofUndefined();
@@ -93,7 +95,7 @@ public class CompactValue //Type originates from: CompactValue.h
         return compactValue;
     }
 
-    public static boolean equalsTo(CompactValue a, CompactValue b) //Method definition originates from: CompactValue.h
+    public static boolean equalsTo(@NotNull CompactValue a, @NotNull CompactValue b) //Method definition originates from: CompactValue.h
     {
         return a.payload_.repr.equals(b.payload_.repr);
     }

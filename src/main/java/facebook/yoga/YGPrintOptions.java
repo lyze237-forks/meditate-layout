@@ -1,5 +1,8 @@
 package facebook.yoga;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public enum YGPrintOptions {
     YGPrintOptionsLayout(1),
     YGPrintOptionsStyle(2),
@@ -15,8 +18,8 @@ public enum YGPrintOptions {
         return value;
     }
 
-    public static YGPrintOptions forValue(int value) {
-        for (YGPrintOptions options : values()) {
+    public static @Nullable YGPrintOptions forValue(int value) {
+        for (@NotNull YGPrintOptions options : values()) {
             if (options.value == value) {
                 return options;
             }

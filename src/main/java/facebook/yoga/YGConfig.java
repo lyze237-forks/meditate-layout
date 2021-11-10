@@ -2,11 +2,13 @@ package facebook.yoga;
 
 import static facebook.GlobalMembers.YGNodeClone;
 import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 {
     @Override
-    public YGConfig clone() {
+    public @NotNull YGConfig clone() {
         try {
             return (YGConfig) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -27,14 +29,14 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 //struct;
 //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //Struct;
-    public ArrayList<Boolean> experimentalFeatures = new ArrayList<Boolean>();
-    public Object context = null;
+    public @NotNull ArrayList<Boolean> experimentalFeatures = new ArrayList<Boolean>();
+    public @Nullable Object context = null;
     //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //struct;
-    private cloneNodeCallback_Struct cloneNodeCallback_struct = new cloneNodeCallback_Struct();
+    private @Nullable cloneNodeCallback_Struct cloneNodeCallback_struct = new cloneNodeCallback_Struct();
     //C++ TO JAVA CONVERTER NOTE: Access declarations are not available in Java:
 //struct;
-    private logger_Struct logger_struct = new logger_Struct();
+    private @NotNull logger_Struct logger_struct = new logger_Struct();
     private boolean cloneNodeUsesContext_;
     private boolean loggerUsesContext_;
 
@@ -69,9 +71,9 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
         loggerUsesContext_ = false;
     }
 
-    public final YGNode cloneNode(YGNode node, YGNode owner, int childIndex, Object cloneContext) //Method definition originates from: YGConfig.cpp
+    public final @Nullable YGNode cloneNode(YGNode node, YGNode owner, int childIndex, Object cloneContext) //Method definition originates from: YGConfig.cpp
     {
-        YGNode clone = null;
+        @Nullable YGNode clone = null;
         if (cloneNodeCallback_struct.noContext != null) {
             clone = cloneNodeUsesContext_ ? cloneNodeCallback_struct.withContext.invoke(node, owner, childIndex,
                     cloneContext) : cloneNodeCallback_struct.noContext.invoke(node, owner, childIndex);
@@ -104,14 +106,14 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 
     @FunctionalInterface
     public interface CloneWithContextFn {
-        YGNode invoke(YGNode node, YGNode owner, int childIndex, Object cloneContext);
+        @NotNull YGNode invoke(YGNode node, YGNode owner, int childIndex, Object cloneContext);
     }
 
     //C++ TO JAVA CONVERTER TODO TASK: The following method format was not recognized, possibly due to an unrecognized macro:
     private static class cloneNodeCallback_Struct {
 
         CloneWithContextFn withContext;
-        YGCloneNodeFunc noContext;
+        @Nullable YGCloneNodeFunc noContext;
 
     }
 
@@ -119,7 +121,7 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
     private static class logger_Struct {
 
         LogWithContextFn withContext;
-        YGLogger noContext;
+        @Nullable YGLogger noContext;
 
     }
 }

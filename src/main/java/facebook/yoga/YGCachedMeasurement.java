@@ -1,6 +1,7 @@
 package facebook.yoga;
 
 import static facebook.yoga.GlobalMembers.isUndefined;
+import org.jetbrains.annotations.NotNull;
 
 public class YGCachedMeasurement {
     public float availableWidth;
@@ -20,7 +21,7 @@ public class YGCachedMeasurement {
         this.computedHeight = -1F;
     }
 
-    public boolean equalsTo(YGCachedMeasurement measurement) {
+    public boolean equalsTo(@NotNull YGCachedMeasurement measurement) {
         boolean isEqual = widthMeasureMode == measurement.widthMeasureMode && heightMeasureMode == measurement.heightMeasureMode;
 
         if (!isUndefined(availableWidth) || !isUndefined(measurement.availableWidth)) {

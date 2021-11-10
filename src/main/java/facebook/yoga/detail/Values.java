@@ -3,6 +3,7 @@ package facebook.yoga.detail;
 import facebook.yoga.YGEdge;
 import facebook.yoga.YGValue;
 import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 
 public class Values<T> //Type originates from: Yoga-internal.h
@@ -14,17 +15,17 @@ public class Values<T> //Type originates from: Yoga-internal.h
         values_ = new ArrayList<>();
     }
 
-    public Values(final YGValue defaultValue) {
+    public Values(final @NotNull YGValue defaultValue) {
         values_ = new ArrayList<>();
         values_.add(CompactValue.createCompactValue(defaultValue));
     }
 
-    public Values(final YGValue defaultValue, int size) {
+    public Values(final @NotNull YGValue defaultValue, int size) {
         values_ = new ArrayList<>(size);
         values_.add(CompactValue.createCompactValue(defaultValue));
     }
 
-    public final CompactValue get(Integer i) {
+    public final @NotNull CompactValue get(Integer i) {
         return CompactValue.createCompactValue(getValue(i).convertToYgValue());
     }
 
@@ -39,11 +40,11 @@ public class Values<T> //Type originates from: Yoga-internal.h
         values_.set(i, value);
     }
 
-    public final CompactValue getCompactValue(YGEdge edge) {
+    public final @NotNull CompactValue getCompactValue(@NotNull YGEdge edge) {
         return getCompactValue(edge.getValue());
     }
 
-    public final CompactValue getCompactValue(Integer i) {
+    public final @NotNull CompactValue getCompactValue(Integer i) {
         return CompactValue.createCompactValue(getValue(i).convertToYgValue());
     }
 
@@ -52,11 +53,11 @@ public class Values<T> //Type originates from: Yoga-internal.h
     }
 
 
-    public final void set(int i, YGValue value) {
+    public final void set(int i, @NotNull YGValue value) {
         values_.set(i, CompactValue.createCompactValue(value));
     }
 
-    public boolean equalsTo(final Values<T> other) {
+    public boolean equalsTo(final @NotNull Values<T> other) {
         for (int i = 0; i < values_.size(); ++i) {
             if (getValue(i) != other.getValue(i)) {
                 return false;

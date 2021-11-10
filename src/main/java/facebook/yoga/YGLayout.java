@@ -11,6 +11,7 @@ import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public class YGLayout {
 
@@ -18,11 +19,11 @@ public class YGLayout {
     // 98% of analyzed layouts require less than 8 entries.
     public static final int YG_MAX_CACHED_RESULT_COUNT = 8;
 
-    public ArrayList<Float> position = new ArrayList<>();
-    public ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
-    public ArrayList<Float> margin = new ArrayList<>();
-    public ArrayList<Float> border = new ArrayList<>();
-    public ArrayList<Float> padding = new ArrayList<>();
+    public @NotNull ArrayList<Float> position = new ArrayList<>();
+    public @NotNull ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
+    public @NotNull ArrayList<Float> margin = new ArrayList<>();
+    public @NotNull ArrayList<Float> border = new ArrayList<>();
+    public @NotNull ArrayList<Float> padding = new ArrayList<>();
 
     private static final int directionOffset = 0;
     private static final int didUseLegacyFlagOffset = directionOffset + bitWidthFn(YGDirection.class);
@@ -38,10 +39,10 @@ public class YGLayout {
     public YGDirection lastOwnerDirection = YGDirection.YGDirectionInherit;
 
     public int nextCachedMeasurementsIndex = 0;
-    public ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>();
-    public ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
+    public @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>();
+    public @NotNull ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
 
-    public YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
+    public @NotNull YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:
 //ORIGINAL LINE: YGDirection direction() const
@@ -49,7 +50,7 @@ public class YGLayout {
         return getEnumData(YGDirection.class, flags, directionOffset);
     }
 
-    public final void setDirection(YGDirection direction) {
+    public final void setDirection(@NotNull YGDirection direction) {
         flags = setEnumData(YGDirection.class, flags, directionOffset, direction);
     }
 
@@ -85,7 +86,7 @@ public class YGLayout {
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:
 //ORIGINAL LINE: boolean operator ==(YGLayout layout) const
-    public boolean equalsTo(YGLayout layout) //Method definition originates from: YGLayout.cpp
+    public boolean equalsTo(@NotNull YGLayout layout) //Method definition originates from: YGLayout.cpp
     {
         boolean isEqual = YGFloatArrayEqual(position, layout.position) && YGFloatArrayEqual(dimensions, layout.dimensions) && YGFloatArrayEqual(margin, layout.margin) && YGFloatArrayEqual(border, layout.border) && YGFloatArrayEqual(padding, layout.padding) && direction() == layout.direction() && hadOverflow() == layout.hadOverflow() && lastOwnerDirection == layout.lastOwnerDirection && nextCachedMeasurementsIndex == layout.nextCachedMeasurementsIndex && cachedLayout.equalsTo(layout.cachedLayout) && computedFlexBasis == layout.computedFlexBasis;
 
@@ -103,7 +104,7 @@ public class YGLayout {
         return isEqual;
     }
 
-    public boolean notEqualsTo(YGLayout layout) {
+    public boolean notEqualsTo(@NotNull YGLayout layout) {
         return !(this.equalsTo(layout));
     }
 }

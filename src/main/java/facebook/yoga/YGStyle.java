@@ -5,6 +5,7 @@ import static facebook.yoga.detail.GlobalMembers.bitWidthFn;
 import static facebook.yoga.detail.GlobalMembers.getEnumData;
 import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import facebook.yoga.detail.Values;
+import org.jetbrains.annotations.NotNull;
 
 public class YGStyle //Type originates from: YGStyle.h
 {
@@ -30,8 +31,8 @@ public class YGStyle //Type originates from: YGStyle.h
     private final Values<YGDimension> dimensions_ = new Values<YGDimension>(CompactValue.ofAuto().convertToYgValue());
     private final Values<YGDimension> minDimensions_ = new Values<YGDimension>();
     private final Values<YGDimension> maxDimensions_ = new Values<YGDimension>();
-    private final YGAlign alignContent;
-    private final YGAlign alignItems;
+    private final @NotNull YGAlign alignContent;
+    private final @NotNull YGAlign alignItems;
     private YGFloatOptional aspectRatio_ = new YGFloatOptional();
 
     public void setAspectRatio(YGFloatOptional aspectRatio_) {
@@ -68,7 +69,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGDirection.class, flags, directionOffset);
     }
 
-    public final BitfieldRef<YGDirection> directionBitfieldRef() {
+    public final @NotNull BitfieldRef<YGDirection> directionBitfieldRef() {
         return new BitfieldRef<>(this, directionOffset);
     }
 
@@ -76,7 +77,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGFlexDirection.class, flags, flexdirectionOffset);
     }
 
-    public final BitfieldRef<YGFlexDirection> flexDirectionBitfieldRef() {
+    public final @NotNull BitfieldRef<YGFlexDirection> flexDirectionBitfieldRef() {
         return new BitfieldRef<>(this, flexdirectionOffset);
     }
 
@@ -84,7 +85,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGJustify.class, flags, justifyContentOffset);
     }
 
-    public final BitfieldRef<YGJustify> justifyContentBitfieldRef() {
+    public final @NotNull BitfieldRef<YGJustify> justifyContentBitfieldRef() {
         return new BitfieldRef<>(this, justifyContentOffset);
     }
 
@@ -92,7 +93,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGAlign.class, flags, alignContentOffset);
     }
 
-    public final BitfieldRef<YGAlign> alignContentBitfieldRef() {
+    public final @NotNull BitfieldRef<YGAlign> alignContentBitfieldRef() {
         return new BitfieldRef(this, alignContentOffset);
     }
 
@@ -100,7 +101,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGAlign.class, flags, alignItemsOffset);
     }
 
-    public final BitfieldRef<YGAlign> alignItemsBitfieldRef() {
+    public final @NotNull BitfieldRef<YGAlign> alignItemsBitfieldRef() {
         return new BitfieldRef(this, alignItemsOffset);
     }
 
@@ -108,7 +109,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGAlign.class, flags, alignSelfOffset);
     }
 
-    public final BitfieldRef<YGAlign> alignSelfBitfieldRef() {
+    public final @NotNull BitfieldRef<YGAlign> alignSelfBitfieldRef() {
         return new BitfieldRef(this, alignSelfOffset);
     }
 
@@ -116,7 +117,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGPositionType.class, flags, positionTypeOffset);
     }
 
-    public final BitfieldRef<YGPositionType> positionTypeBitfieldRef() {
+    public final @NotNull BitfieldRef<YGPositionType> positionTypeBitfieldRef() {
         return new BitfieldRef(this, positionTypeOffset);
     }
 
@@ -124,7 +125,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGWrap.class, flags, flexWrapOffset);
     }
 
-    public final BitfieldRef<YGWrap> flexWrapBitfieldRef() {
+    public final @NotNull BitfieldRef<YGWrap> flexWrapBitfieldRef() {
         return new BitfieldRef<>(this, flexWrapOffset);
     }
 
@@ -132,7 +133,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGOverflow.class, flags, overflowOffset);
     }
 
-    public final BitfieldRef<YGOverflow> overflowBitfieldRef() {
+    public final @NotNull BitfieldRef<YGOverflow> overflowBitfieldRef() {
         return new BitfieldRef<>(this, overflowOffset);
     }
 
@@ -141,7 +142,7 @@ public class YGStyle //Type originates from: YGStyle.h
         return getEnumData(YGDisplay.class, flags, displayOffset);
     }
 
-    public final BitfieldRef<YGDisplay> displayBitfieldRef() {
+    public final @NotNull BitfieldRef<YGDisplay> displayBitfieldRef() {
         return new BitfieldRef<>(this, displayOffset);
     }
 
@@ -163,37 +164,37 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
 
-    public final Values<YGEdge> margin() {
+    public final @NotNull Values<YGEdge> margin() {
         return margin_;
     }
 
 
-    public final Values<YGEdge> position() {
+    public final @NotNull Values<YGEdge> position() {
         return position_;
     }
 
 
-    public final Values<YGEdge> padding() {
+    public final @NotNull Values<YGEdge> padding() {
         return padding_;
     }
 
 
-    public final Values<YGEdge> border() {
+    public final @NotNull Values<YGEdge> border() {
         return border_;
     }
 
 
-    public final Values<YGDimension> dimensions() {
+    public final @NotNull Values<YGDimension> dimensions() {
         return dimensions_;
     }
 
 
-    public final Values<YGDimension> minDimensions() {
+    public final @NotNull Values<YGDimension> minDimensions() {
         return minDimensions_;
     }
 
 
-    public final Values<YGDimension> maxDimensions() {
+    public final @NotNull Values<YGDimension> maxDimensions() {
         return maxDimensions_;
     }
 
@@ -212,11 +213,11 @@ public class YGStyle //Type originates from: YGStyle.h
             this.offset = offset;
         }
 
-        public T getValue(Class<T> enumClazz) {
+        public T getValue(@NotNull Class<T> enumClazz) {
             return getEnumData(enumClazz, style.flags, offset);
         }
 
-        public final BitfieldRef<T> setValue(T x) {
+        public final @NotNull BitfieldRef<T> setValue(@NotNull T x) {
             style.flags = setEnumData((Class<T>) x.getClass(), style.flags, offset, x);
             return this;
         }

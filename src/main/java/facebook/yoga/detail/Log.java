@@ -9,10 +9,11 @@ package facebook.yoga.detail;
 import facebook.yoga.YGConfig;
 import facebook.yoga.YGLogLevel;
 import facebook.yoga.YGNode;
+import org.jetbrains.annotations.Nullable;
 
 public class Log {
 
-    public static void log(YGNode node, YGLogLevel level, Object context, String format, Object... args) {
+    public static void log(@Nullable YGNode node, YGLogLevel level, Object context, String format, Object... args) {
         GlobalMembers.vlog(node == null ? null : node.getConfig(), node, level, context, format, args);
     }
 
