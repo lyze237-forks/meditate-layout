@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import static facebook.GlobalMembers.YGFloatArrayEqual;
 import static facebook.GlobalMembers.YGUndefined;
-import static facebook.yoga.GlobalMembers.isUndefined;
+import static facebook.yoga.event.GlobalMembers.isUndefined;
 import static facebook.yoga.detail.GlobalMembers.*;
 
 public class YGLayout {
