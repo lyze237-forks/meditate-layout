@@ -30,6 +30,8 @@ public class GlobalMembers {
         return constants[((flags & mask(bitWidthFn(e), index)) >> index)];
     }
 
+
+    @Contract(pure = true)
     public static <E extends Enum<E>> byte setEnumData(Class<E> e, byte flags, int index, E newValue) {
         return (byte) ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e), index))));
     }

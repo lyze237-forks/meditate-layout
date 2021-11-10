@@ -19,4 +19,5 @@ public class YGFloatOptional {
     public final boolean isUndefined() {
         return Float.isNaN(value_);
     }
+
 }

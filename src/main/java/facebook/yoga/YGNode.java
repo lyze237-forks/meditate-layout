@@ -19,6 +19,7 @@ import static facebook.GlobalMembers.plus;
 import static facebook.GlobalMembers.trailing;
 import facebook.yoga.detail.CompactValue;
 import static facebook.yoga.detail.GlobalMembers.getBooleanData;
+import static facebook.yoga.detail.GlobalMembers.getEnumData;
 import static facebook.yoga.detail.GlobalMembers.setBooleanData;
 import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import facebook.yoga.detail.Values;
@@ -29,6 +30,7 @@ import java.util.function.BiConsumer;
 
 public class YGNode {
 
+
     private static final int hasNewLayout_ = 0;
     private static final int isReferenceBaseline_ = 1;
     private static final int isDirty_ = 2;
@@ -37,7 +39,6 @@ public class YGNode {
     private static final int baselineUsesContext_ = 5;
     private static final int printUsesContext_ = 6;
     private static final int useWebDefaults_ = 7;
-
     private Object context_ = null;
     private byte flags = 1;
     private byte reserved_ = 0;
@@ -53,7 +54,6 @@ public class YGNode {
     private YGConfig config_ = new YGConfig(null);
     private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<YGValue>(
             Arrays.asList(YGValueUndefined, YGValueUndefined));
-
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGNode(YGNode node) {
         context_ = node.context_;
@@ -73,7 +73,6 @@ public class YGNode {
             c.setOwner(this);
         }
     }
-
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGNode(final YGNode node, YGConfig config) {
         this(node);
@@ -111,6 +110,91 @@ public class YGNode {
         } else {
             return defaultValue;
         }
+    }
+
+    public final boolean isDirty() {
+        return getBooleanData(flags, isDirty_);
+    }
+
+    //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
+    public void setDirty(boolean isDirty) {
+        if (isDirty == getBooleanData(flags, isDirty_)) {
+            return;
+        }
+        flags = setBooleanData(flags, isDirty_, isDirty);
+        if (isDirty && dirtied_ != null) {
+            dirtied_.invoke(this);
+        }
+    }
+
+    public final boolean hasBaselineFunc() {
+        return baseline_.noContext != null;
+    }
+
+    public final void setBaselineFunc(YGBaselineFunc baseLineFunc) {
+        flags = setBooleanData(flags, baselineUsesContext_, false);
+        baseline_.noContext = baseLineFunc;
+    }
+
+    public final void setBaselineFunc(BaselineWithContextFn baseLineFunc) {
+        flags = setBooleanData(flags, baselineUsesContext_, true);
+        baseline_.withContext = baseLineFunc;
+    }
+
+    public final void resetBaselineFunc() {
+        flags = setBooleanData(flags, baselineUsesContext_, false);
+        baseline_.noContext = null;
+    }
+
+    public final void setDirtiedFunc(YGDirtiedFunc dirtiedFunc) {
+        dirtied_ = dirtiedFunc;
+    }
+
+    public final void setPrintFunc(YGPrintFunc printFunc) {
+        print_.noContext = printFunc;
+        flags = setBooleanData(flags, printUsesContext_, false);
+    }
+
+    public final void setPrintFunc(PrintWithContextFn printFunc) {
+        print_.withContext = printFunc;
+        flags = setBooleanData(flags, printUsesContext_, true);
+    }
+
+    public final void resetPrintFunc() {
+        print_.noContext = null;
+        flags = setBooleanData(flags, printUsesContext_, false);
+    }
+
+    public final boolean getHasNewLayout() {
+        return getBooleanData(flags, hasNewLayout_);
+    }
+
+    public final void setHasNewLayout(boolean hasNewLayout) {
+        flags = setBooleanData(flags, hasNewLayout_, hasNewLayout);
+    }
+
+    public final YGNodeType getNodeType() {
+        return getEnumData(YGNodeType.class, flags, nodeType_);
+    }
+
+    public final void setNodeType(YGNodeType nodeType) {
+        flags = setEnumData(YGNodeType.class, flags, nodeType_, nodeType);
+    }
+
+    public final void setIsReferenceBaseline(boolean isReferenceBaseline) {
+        flags = setBooleanData(flags, isReferenceBaseline_, isReferenceBaseline);
+    }
+
+    public final boolean isReferenceBaseline() {
+        return getBooleanData(flags, isReferenceBaseline_);
+    }
+
+    public final YGNode getChild(Integer index) {
+        return (children_.get(index));
+    }
+
+    public final boolean hasMeasureFunc() {
+        return measure_.noContext != null;
     }
 
     private void useWebDefaults() {
@@ -196,10 +280,6 @@ public class YGNode {
                 layoutContext) : baseline_.noContext.invoke(this, width, height);
     }
 
-    public final void setNodeType(YGNodeType nodeType) {
-        setEnumData(YGNodeType.class, flags, nodeType_, nodeType);
-    }
-
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setMeasureFunc(measure_Struct measureFunc) {
         if (measureFunc.noContext == null) {
@@ -242,17 +322,6 @@ public class YGNode {
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void insertChild(YGNode child, Integer index) {
         children_.add(index, child);
-    }
-
-    //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
-    public void setDirty(boolean isDirty) {
-        if (isDirty == getBooleanData(flags, isDirty_)) {
-            return;
-        }
-        flags = setBooleanData(flags, isDirty_, isDirty);
-        if (isDirty && dirtied_ != null) {
-            dirtied_.invoke(this);
-        }
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:

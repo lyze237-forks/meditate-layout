@@ -23,10 +23,6 @@ public class YGStyle //Type originates from: YGStyle.h
     private static final Integer flexWrapOffset = positionTypeOffset + bitWidthFn(YGPositionType.class);
     private static final Integer overflowOffset = flexWrapOffset + bitWidthFn(YGWrap.class);
     private static final Integer displayOffset = overflowOffset + bitWidthFn(YGOverflow.class);
-    private final YGFloatOptional flex_ = new YGFloatOptional();
-    private final YGFloatOptional flexGrow_ = new YGFloatOptional();
-    private final YGFloatOptional flexShrink_ = new YGFloatOptional();
-    private final CompactValue flexBasis_ = CompactValue.ofAuto();
     private final Values<YGEdge> margin_ = new Values<YGEdge>();
     private final Values<YGEdge> position_ = new Values<YGEdge>();
     private final Values<YGEdge> padding_ = new Values<YGEdge>();
@@ -34,22 +30,46 @@ public class YGStyle //Type originates from: YGStyle.h
     private final Values<YGDimension> dimensions_ = new Values<YGDimension>(CompactValue.ofAuto().convertToYgValue());
     private final Values<YGDimension> minDimensions_ = new Values<YGDimension>();
     private final Values<YGDimension> maxDimensions_ = new Values<YGDimension>();
-    private final YGFloatOptional aspectRatio_ = new YGFloatOptional();
-    private byte flags = 0;
     private final YGAlign alignContent;
     private final YGAlign alignItems;
+    private YGFloatOptional aspectRatio_ = new YGFloatOptional();
 
+    public void setAspectRatio(YGFloatOptional aspectRatio_) {
+        this.aspectRatio_ = aspectRatio_;
+    }
+
+    private YGFloatOptional flex_ = new YGFloatOptional();
+    private YGFloatOptional flexGrow_ = new YGFloatOptional();
+    private YGFloatOptional flexShrink_ = new YGFloatOptional();
+    private CompactValue flexBasis_ = CompactValue.ofAuto();
+    private byte flags = 0;
     public YGStyle() {
         alignContent = YGAlign.YGAlignFlexStart;
         alignItems = YGAlign.YGAlignStretch;
+    }
+
+    public void setFlex(YGFloatOptional flex_) {
+        this.flex_ = flex_;
+    }
+
+    public void setFlexGrow(YGFloatOptional flexGrow_) {
+        this.flexGrow_ = flexGrow_;
+    }
+
+    public void setFlexShrink(YGFloatOptional flexShrink_) {
+        this.flexShrink_ = flexShrink_;
+    }
+
+    public void setFlexBasis(CompactValue flexBasis_) {
+        this.flexBasis_ = flexBasis_;
     }
 
     public final YGDirection direction() {
         return getEnumData(YGDirection.class, flags, directionOffset);
     }
 
-    public final BitfieldRef<YGDirection> directionBitfieldRefBitfieldRef() {
-        return new BitfieldRef(this, directionOffset);
+    public final BitfieldRef<YGDirection> directionBitfieldRef() {
+        return new BitfieldRef<>(this, directionOffset);
     }
 
     public final YGFlexDirection flexDirection() {
@@ -57,7 +77,7 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final BitfieldRef<YGFlexDirection> flexDirectionBitfieldRef() {
-        return new BitfieldRef(this, flexdirectionOffset);
+        return new BitfieldRef<>(this, flexdirectionOffset);
     }
 
     public final YGJustify justifyContent() {
@@ -65,7 +85,7 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final BitfieldRef<YGJustify> justifyContentBitfieldRef() {
-        return new BitfieldRef(this, justifyContentOffset);
+        return new BitfieldRef<>(this, justifyContentOffset);
     }
 
     public final YGAlign alignContent() {
@@ -105,26 +125,30 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final BitfieldRef<YGWrap> flexWrapBitfieldRef() {
-        return new BitfieldRef(this, flexWrapOffset);
+        return new BitfieldRef<>(this, flexWrapOffset);
     }
 
     public final YGOverflow overflow() {
         return getEnumData(YGOverflow.class, flags, overflowOffset);
     }
 
+    public final BitfieldRef<YGOverflow> overflowBitfieldRef() {
+        return new BitfieldRef<>(this, overflowOffset);
+    }
+
+
     public final YGDisplay display() {
         return getEnumData(YGDisplay.class, flags, displayOffset);
     }
 
     public final BitfieldRef<YGDisplay> displayBitfieldRef() {
-        return new BitfieldRef(this, displayOffset);
+        return new BitfieldRef<>(this, displayOffset);
     }
 
 
     public final YGFloatOptional flex() {
         return flex_;
     }
-
 
     public final YGFloatOptional flexGrow() {
         return flexGrow_;

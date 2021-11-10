@@ -45,7 +45,7 @@ public class Values<T> //Type originates from: Yoga-internal.h
     }
 
 
-    public final void set(YGValue value, int i) {
+    public final void set(int i, YGValue value) {
         values_.set(i, CompactValue.createCompactValue(value));
     }
 

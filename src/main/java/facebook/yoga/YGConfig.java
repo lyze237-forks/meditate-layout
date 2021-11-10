@@ -3,8 +3,17 @@ package facebook.yoga;
 import static facebook.GlobalMembers.YGNodeClone;
 import java.util.ArrayList;
 
-public class YGConfig //Type originates from: YGConfig.h
+public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 {
+    @Override
+    public YGConfig clone() {
+        try {
+            return (YGConfig) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean useWebDefaults = false;
     public boolean useLegacyStretchBehaviour = false;
     public boolean shouldDiffLayoutWithoutLegacyStretchBehaviour = false;
@@ -28,6 +37,7 @@ public class YGConfig //Type originates from: YGConfig.h
     private logger_Struct logger_struct = new logger_Struct();
     private boolean cloneNodeUsesContext_;
     private boolean loggerUsesContext_;
+
     public YGConfig(YGLogger logger) //Method definition originates from: YGConfig.cpp
     {
         this.cloneNodeCallback_struct = null;
@@ -89,7 +99,7 @@ public class YGConfig //Type originates from: YGConfig.h
 
     @FunctionalInterface
     public interface LogWithContextFn {
-        int invoke(YGConfig config, YGNode node, YGLogLevel level, Object context, String format, va_list args);
+        int invoke(YGConfig config, YGNode node, YGLogLevel level, Object context, String format, Object... args);
     }
 
     @FunctionalInterface

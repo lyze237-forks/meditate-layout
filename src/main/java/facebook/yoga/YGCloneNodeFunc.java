@@ -5,6 +5,7 @@ import detail.Log;
 import detail.CompactValue;
 
 @FunctionalInterface
+public
 interface YGCloneNodeFunc
 {
 	YGNode invoke(YGNode oldNode, YGNode owner, int childIndex);
