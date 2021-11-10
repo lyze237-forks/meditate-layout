@@ -23,8 +23,10 @@ public class CompactValue //Type originates from: CompactValue.h
     private static final Integer ZERO_BITS_POINT = 0x7f8f0f0f;
     private static final Integer ZERO_BITS_PERCENT = 0x7f80f0f0;
     private Payload payload_ = new Payload(0);
+    private boolean undefined;
 
     public CompactValue() {
+        undefined = true;
         this.payload_ = new CompactValue.Payload(Float.NaN);
     }
 
@@ -74,8 +76,8 @@ public class CompactValue //Type originates from: CompactValue.h
         return new CompactValue(new Payload(AUTO_BITS));
     }
 
-    public static @Nullable CompactValue createCompactValue(final @NotNull YGValue x) {
-        @Nullable CompactValue compactValue = null;
+    public static @NotNull CompactValue createCompactValue(final @NotNull YGValue x) {
+        @Nullable CompactValue compactValue = ofUndefined();
         switch (x.unit) {
             case YGUnitUndefined:
                 compactValue = ofUndefined();
@@ -122,7 +124,7 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     public final boolean isUndefined() {
-        return (!payload_.repr.equals(AUTO_BITS) && !payload_.repr.equals(ZERO_BITS_POINT) && !payload_.repr.equals(
+        return undefined || (!payload_.repr.equals(AUTO_BITS) && !payload_.repr.equals(ZERO_BITS_POINT) && !payload_.repr.equals(
                 ZERO_BITS_PERCENT) && Float.isNaN(
                 payload_.value));
     }

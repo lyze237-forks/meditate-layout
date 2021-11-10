@@ -515,7 +515,9 @@ public class GlobalMembers {
         final @NotNull Integer childCount = YGNodeGetChildCount(node);
         for (@NotNull Integer i = 0; i < childCount; i++) {
             @Nullable YGNode child = YGNodeGetChild(node, i);
-            child.setOwner(null);
+            if (child != null) {
+                child.setOwner(null);
+            }
         }
 
         node.clearChildren();
@@ -528,12 +530,13 @@ public class GlobalMembers {
         int skipped = 0;
         while (YGNodeGetChildCount(root) > skipped) {
             @Nullable YGNode child = YGNodeGetChild(root, skipped);
-            if (child.getOwner() != root) {
-
-                skipped += 1;
-            } else {
-                YGNodeRemoveChild(root, child);
-                YGNodeFreeRecursive(child);
+            if (child != null) {
+                if (child.getOwner() != root) {
+                    skipped += 1;
+                } else {
+                    YGNodeRemoveChild(root, child);
+                    YGNodeFreeRecursive(child);
+                }
             }
         }
         if (cleanup != null) {
@@ -599,8 +602,7 @@ public class GlobalMembers {
             return;
         }
         @Nullable YGNode firstChild = YGNodeGetChild(owner, 0);
-        if (firstChild.getOwner() == owner) {
-
+        if (firstChild != null && firstChild.getOwner() == owner) {
 
             for (@NotNull Integer i = 0; i < childCount; i++) {
                 @Nullable YGNode oldChild = YGNodeGetChild(owner, i);
@@ -1416,7 +1418,10 @@ public class GlobalMembers {
     }
 
     public static @NotNull YGNode YGNodeDeepClone(@NotNull YGNode oldNode) {
-        @NotNull var config = YGConfigClone(oldNode.getConfig());
+        @NotNull YGConfig config = null;
+        if (oldNode.getConfig() != null) {
+            config = YGConfigClone(oldNode.getConfig());
+        }
         @NotNull var node = new YGNode(oldNode, config);
         node.setOwner(null);
         Event.publish(node, new NodeAllocationEventData(node.getConfig()));
@@ -1493,7 +1498,7 @@ public class GlobalMembers {
 
     public static float YGNodeStyleGetFlexShrink(@NotNull YGNode node) {
         return node.getStyle().flexShrink()
-                .isUndefined() ? (node.getConfig().useWebDefaults ? kWebDefaultFlexShrink : kDefaultFlexShrink) : node.getStyle()
+                .isUndefined() ? ((node.getConfig() != null && node.getConfig().useWebDefaults) ? kWebDefaultFlexShrink : kDefaultFlexShrink) : node.getStyle()
                 .flexShrink().unwrap();
     }
 
@@ -1793,7 +1798,7 @@ public class GlobalMembers {
         final @NotNull Integer childCount = YGNodeGetChildCount(node);
         for (@NotNull Integer i = 0; i < childCount; i++) {
             @Nullable YGNode child = YGNodeGetChild(node, i);
-            if (child.getLineIndex() > 0) {
+            if (child != null && child.getLineIndex() > 0) {
                 break;
             }
             if (child.getStyle().positionType() == YGPositionType.YGPositionTypeAbsolute) {
@@ -1827,7 +1832,8 @@ public class GlobalMembers {
         final @NotNull Integer childCount = YGNodeGetChildCount(node);
         for (@NotNull Integer i = 0; i < childCount; i++) {
             @Nullable YGNode child = YGNodeGetChild(node, i);
-            if (child.getStyle().positionType() != YGPositionType.YGPositionTypeAbsolute && child.getStyle()
+            if (child != null && child.getStyle()
+                    .positionType() != YGPositionType.YGPositionTypeAbsolute && child.getStyle()
                     .alignSelf() == YGAlign.YGAlignBaseline) {
                 return true;
             }
@@ -1936,16 +1942,17 @@ public class GlobalMembers {
         YGMeasureMode childWidthMeasureMode;
         YGMeasureMode childHeightMeasureMode;
 
-        final @NotNull YGFloatOptional resolvedFlexBasis = YGResolveValue(child.resolveFlexBasisPtr(), mainAxisownerSize);
+        final @NotNull YGFloatOptional resolvedFlexBasis = YGResolveValue(child.resolveFlexBasisPtr(),
+                mainAxisownerSize);
         final boolean isRowStyleDimDefined = YGNodeIsStyleDimDefined(child, YGFlexDirection.YGFlexDirectionRow,
                 ownerWidth);
         final boolean isColumnStyleDimDefined = YGNodeIsStyleDimDefined(child, YGFlexDirection.YGFlexDirectionColumn,
                 ownerHeight);
 
         if (!resolvedFlexBasis.isUndefined() && !YGFloatIsUndefined(mainAxisSize)) {
-            if (child.getLayout().computedFlexBasis.isUndefined() || (YGConfigIsExperimentalFeatureEnabled(
+            if (child.getConfig() != null && (child.getLayout().computedFlexBasis.isUndefined() || (YGConfigIsExperimentalFeatureEnabled(
                     child.getConfig(),
-                    YGExperimentalFeature.YGExperimentalFeatureWebFlexBasis) && child.getLayout().computedFlexBasisGeneration != generationCount)) {
+                    YGExperimentalFeature.YGExperimentalFeatureWebFlexBasis) && child.getLayout().computedFlexBasisGeneration != generationCount))) {
                 final @NotNull YGFloatOptional paddingAndBorder = new YGFloatOptional(
                         YGNodePaddingAndBorderForAxis(child, mainAxis, ownerWidth));
                 child.setLayoutComputedFlexBasis(YGFloatOptionalMax(resolvedFlexBasis, paddingAndBorder));
@@ -3426,7 +3433,9 @@ public class GlobalMembers {
     }
 
     public static void unsetUseLegacyFlagRecursively(@NotNull YGNode node) {
-        node.getConfig().useLegacyStretchBehaviour = false;
+        if (node.getConfig() != null) {
+            node.getConfig().useLegacyStretchBehaviour = false;
+        }
         for (@NotNull var child : node.getChildren()) {
             unsetUseLegacyFlagRecursively(child);
         }
@@ -3438,15 +3447,16 @@ public class GlobalMembers {
         Event.publish(node, new LayoutPassStartEventData(layoutContext));
         @NotNull LayoutData markerData = new LayoutData();
 
-
         gCurrentGenerationCount.incrementAndGet();
         node.resolveDimension();
         float width = YGUndefined;
         @NotNull YGMeasureMode widthMeasureMode = YGMeasureMode.YGMeasureModeUndefined;
         @NotNull final var maxDimensions = node.getStyle().maxDimensions();
         if (YGNodeIsStyleDimDefined(node, YGFlexDirection.YGFlexDirectionRow, ownerWidth)) {
-            width = (YGResolveValue(node.getResolvedDimension(dim.get(YGFlexDirection.YGFlexDirectionRow.getValue()).getValue()),
-                    ownerWidth).unwrap() + node.getMarginForAxis(YGFlexDirection.YGFlexDirectionRow, ownerWidth).unwrap());
+            width = (YGResolveValue(
+                    node.getResolvedDimension(dim.get(YGFlexDirection.YGFlexDirectionRow.getValue()).getValue()),
+                    ownerWidth).unwrap() + node.getMarginForAxis(YGFlexDirection.YGFlexDirectionRow, ownerWidth)
+                    .unwrap());
             widthMeasureMode = YGMeasureMode.YGMeasureModeExactly;
         } else if (!YGResolveValue(maxDimensions.get(YGDimension.YGDimensionWidth.getValue()),
                 ownerWidth).isUndefined()) {
@@ -3463,7 +3473,8 @@ public class GlobalMembers {
         if (YGNodeIsStyleDimDefined(node, YGFlexDirection.YGFlexDirectionColumn, ownerHeight)) {
             height = (YGResolveValue(
                     node.getResolvedDimension(dim.get(YGFlexDirection.YGFlexDirectionColumn.getValue()).getValue()),
-                    ownerHeight).unwrap() + node.getMarginForAxis(YGFlexDirection.YGFlexDirectionColumn, ownerWidth).unwrap());
+                    ownerHeight).unwrap() + node.getMarginForAxis(YGFlexDirection.YGFlexDirectionColumn, ownerWidth)
+                    .unwrap());
             heightMeasureMode = YGMeasureMode.YGMeasureModeExactly;
         } else if (!YGResolveValue(maxDimensions.get(YGDimension.YGDimensionHeight.getValue()),
                 ownerHeight).isUndefined()) {
@@ -3478,12 +3489,14 @@ public class GlobalMembers {
                 ownerHeight, true, LayoutPassReason.kInitial, node.getConfig(), markerData, layoutContext, 0,
                 gCurrentGenerationCount.get())) {
             node.setPosition(node.getLayout().direction(), ownerWidth, ownerHeight, ownerWidth);
-            YGRoundToPixelGrid(node, node.getConfig().pointScaleFactor, 0.0f, 0.0f);
+            if (node.getConfig() != null) {
+                YGRoundToPixelGrid(node, node.getConfig().pointScaleFactor, 0.0f, 0.0f);
+            }
         }
 
         /* Event.LayoutPassEnd */
         Event.publish(node, new LayoutPassEndEventData(layoutContext, markerData));
-        if (node.getConfig().shouldDiffLayoutWithoutLegacyStretchBehaviour && node.didUseLegacyFlag()) {
+        if (node.getConfig() != null && node.getConfig().shouldDiffLayoutWithoutLegacyStretchBehaviour && node.didUseLegacyFlag()) {
             @NotNull YGNode nodeWithoutLegacyFlag = YGNodeDeepClone(node);
             nodeWithoutLegacyFlag.resolveDimension();
 

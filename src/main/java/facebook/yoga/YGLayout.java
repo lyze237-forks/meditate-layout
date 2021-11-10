@@ -10,6 +10,7 @@ import static facebook.yoga.detail.GlobalMembers.setBooleanData;
 import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,31 +19,35 @@ public class YGLayout {
     // This value was chosen based on empirical data:
     // 98% of analyzed layouts require less than 8 entries.
     public static final int YG_MAX_CACHED_RESULT_COUNT = 8;
-
-    public @NotNull ArrayList<Float> position = new ArrayList<>();
-    public @NotNull ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
-    public @NotNull ArrayList<Float> margin = new ArrayList<>();
-    public @NotNull ArrayList<Float> border = new ArrayList<>();
-    public @NotNull ArrayList<Float> padding = new ArrayList<>();
-
     private static final int directionOffset = 0;
     private static final int didUseLegacyFlagOffset = directionOffset + bitWidthFn(YGDirection.class);
     private static final int doesLegacyStretchFlagAffectsLayoutOffset = didUseLegacyFlagOffset + 1;
     private static final int hadOverflowOffset = doesLegacyStretchFlagAffectsLayoutOffset + 1;
-    private byte flags = 0;
-
+    public @NotNull ArrayList<Float> position = createEmptyFloatArray();
+    public @NotNull ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
+    public @NotNull ArrayList<Float> margin = createEmptyFloatArray();
+    public @NotNull ArrayList<Float> border = createEmptyFloatArray();
+    public @NotNull ArrayList<Float> padding = createEmptyFloatArray();
     public int computedFlexBasisGeneration = 0;
     public YGFloatOptional computedFlexBasis = new YGFloatOptional();
-
-
     public int generationCount = 0;
     public YGDirection lastOwnerDirection = YGDirection.YGDirectionInherit;
-
     public int nextCachedMeasurementsIndex = 0;
-    public @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>();
+    public @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>(YG_MAX_CACHED_RESULT_COUNT);
     public @NotNull ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
-
     public @NotNull YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
+    private byte flags = 0;
+
+    public YGLayout() {
+        for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT; i++) {
+            cachedMeasurements.add(new YGCachedMeasurement());
+        }
+    }
+
+    @NotNull
+    private ArrayList<Float> createEmptyFloatArray() {
+        return new ArrayList<Float>(List.of(0f, 0f, 0f, 0f));
+    }
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:
 //ORIGINAL LINE: YGDirection direction() const
@@ -88,7 +93,11 @@ public class YGLayout {
 //ORIGINAL LINE: boolean operator ==(YGLayout layout) const
     public boolean equalsTo(@NotNull YGLayout layout) //Method definition originates from: YGLayout.cpp
     {
-        boolean isEqual = YGFloatArrayEqual(position, layout.position) && YGFloatArrayEqual(dimensions, layout.dimensions) && YGFloatArrayEqual(margin, layout.margin) && YGFloatArrayEqual(border, layout.border) && YGFloatArrayEqual(padding, layout.padding) && direction() == layout.direction() && hadOverflow() == layout.hadOverflow() && lastOwnerDirection == layout.lastOwnerDirection && nextCachedMeasurementsIndex == layout.nextCachedMeasurementsIndex && cachedLayout.equalsTo(layout.cachedLayout) && computedFlexBasis == layout.computedFlexBasis;
+        boolean isEqual = YGFloatArrayEqual(position, layout.position) && YGFloatArrayEqual(dimensions,
+                layout.dimensions) && YGFloatArrayEqual(margin, layout.margin) && YGFloatArrayEqual(border,
+                layout.border) && YGFloatArrayEqual(padding,
+                layout.padding) && direction() == layout.direction() && hadOverflow() == layout.hadOverflow() && lastOwnerDirection == layout.lastOwnerDirection && nextCachedMeasurementsIndex == layout.nextCachedMeasurementsIndex && cachedLayout.equalsTo(
+                layout.cachedLayout) && computedFlexBasis == layout.computedFlexBasis;
 
         for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT && isEqual; ++i) { //TODO: Verify if this is correct
             isEqual = cachedMeasurements.get(i).equalsTo(layout.cachedMeasurements.get(i));

@@ -71,7 +71,7 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
         loggerUsesContext_ = false;
     }
 
-    public final @Nullable YGNode cloneNode(YGNode node, YGNode owner, int childIndex, Object cloneContext) //Method definition originates from: YGConfig.cpp
+    public final @NotNull YGNode cloneNode(YGNode node, YGNode owner, int childIndex, Object cloneContext) //Method definition originates from: YGConfig.cpp
     {
         @Nullable YGNode clone = null;
         if (cloneNodeCallback_struct.noContext != null) {

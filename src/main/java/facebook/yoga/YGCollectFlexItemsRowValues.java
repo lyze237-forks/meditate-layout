@@ -5,11 +5,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class YGCollectFlexItemsRowValues //Type originates from: Utils.h
 {
-  public Integer itemsOnLine;
+  public int itemsOnLine;
   public float sizeConsumedOnCurrentLine;
   public float totalFlexGrowFactors;
   public float totalFlexShrinkScaledFactors;
-  public Integer endOfLineIndex;
+  public int endOfLineIndex;
   public @NotNull ArrayList<YGNode> relativeChildren = new ArrayList<>();
   public float remainingFreeSpace;
   public float mainDim;

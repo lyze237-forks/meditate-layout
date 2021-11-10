@@ -140,22 +140,31 @@ public class YGNode {
     }
 
     public final boolean hasBaselineFunc() {
-        return baseline_.noContext != null;
+        if (baseline_ != null) {
+            return baseline_.noContext != null;
+        }
+        return false;
     }
 
     public final void setBaselineFunc(YGBaselineFunc baseLineFunc) {
         flags = setBooleanData(flags, baselineUsesContext_, false);
-        baseline_.noContext = baseLineFunc;
+        if (baseline_ != null) {
+            baseline_.noContext = baseLineFunc;
+        }
     }
 
     public final void setBaselineFunc(BaselineWithContextFn baseLineFunc) {
         flags = setBooleanData(flags, baselineUsesContext_, true);
-        baseline_.withContext = baseLineFunc;
+        if (baseline_ != null) {
+            baseline_.withContext = baseLineFunc;
+        }
     }
 
     public final void resetBaselineFunc() {
         flags = setBooleanData(flags, baselineUsesContext_, false);
-        baseline_.noContext = null;
+        if (baseline_ != null) {
+            baseline_.noContext = null;
+        }
     }
 
     public final void setDirtiedFunc(YGDirtiedFunc dirtiedFunc) {
@@ -163,17 +172,23 @@ public class YGNode {
     }
 
     public final void setPrintFunc(YGPrintFunc printFunc) {
-        print_.noContext = printFunc;
+        if (print_ != null) {
+            print_.noContext = printFunc;
+        }
         flags = setBooleanData(flags, printUsesContext_, false);
     }
 
     public final void setPrintFunc(PrintWithContextFn printFunc) {
-        print_.withContext = printFunc;
+        if (print_ != null) {
+            print_.withContext = printFunc;
+        }
         flags = setBooleanData(flags, printUsesContext_, true);
     }
 
     public final void resetPrintFunc() {
-        print_.noContext = null;
+        if (print_ != null) {
+            print_.noContext = null;
+        }
         flags = setBooleanData(flags, printUsesContext_, false);
     }
 
@@ -206,7 +221,10 @@ public class YGNode {
     }
 
     public final boolean hasMeasureFunc() {
-        return measure_.noContext != null;
+        if (measure_ != null) {
+            return measure_.noContext != null;
+        }
+        return false;
     }
 
     private void useWebDefaults() {
