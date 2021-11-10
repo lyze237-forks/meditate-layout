@@ -1,9 +1,15 @@
 package facebook;
 
+import static facebook.yoga.GlobalMembers.isUndefined;
 import facebook.yoga.YGAlign;
+import facebook.yoga.YGBaselineFunc;
+import facebook.yoga.YGCachedMeasurement;
+import facebook.yoga.YGCloneNodeFunc;
+import facebook.yoga.YGCollectFlexItemsRowValues;
 import facebook.yoga.YGConfig;
 import facebook.yoga.YGDimension;
 import facebook.yoga.YGDirection;
+import facebook.yoga.YGDirtiedFunc;
 import facebook.yoga.YGDisplay;
 import facebook.yoga.YGEdge;
 import facebook.yoga.YGExperimentalFeature;
@@ -12,23 +18,30 @@ import facebook.yoga.YGFloatOptional;
 import facebook.yoga.YGJustify;
 import facebook.yoga.YGLayout;
 import facebook.yoga.YGLogLevel;
+import facebook.yoga.YGLogger;
+import facebook.yoga.YGMeasureFunc;
 import facebook.yoga.YGMeasureMode;
 import facebook.yoga.YGNode;
+import facebook.yoga.YGNodeCleanupFunc;
 import facebook.yoga.YGNodeType;
 import facebook.yoga.YGOverflow;
 import facebook.yoga.YGPositionType;
+import facebook.yoga.YGPrintFunc;
 import facebook.yoga.YGPrintOptions;
+import facebook.yoga.YGSize;
 import facebook.yoga.YGUnit;
 import facebook.yoga.YGValue;
 import facebook.yoga.YGWrap;
+import facebook.yoga.detail.CompactValue;
 import facebook.yoga.detail.Log;
+import facebook.yoga.event.Event;
 import facebook.yoga.event.LayoutData;
 import facebook.yoga.event.LayoutPassReason;
+import facebook.yoga.event.LayoutType;
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static facebook.yoga.GlobalMembers.isUndefined;
 
 public class GlobalMembers
 {
@@ -555,7 +568,7 @@ public class GlobalMembers
 	 {
 	   YGNode node = new YGNode(null, (config));
 	   YGAssertWithConfig(config, node != null, "Could not allocate memory for node");
-	   Event.<Event.NodeAllocation>publish(node, {config});
+	   /* Event.NodeAllocation */ Event.publish(node, {config});
 
 	   return node;
 	 }
@@ -564,7 +577,7 @@ public class GlobalMembers
 	 {
 	   YGNode node = new YGNode(oldNode);
 	   YGAssertWithConfig(oldNode.getConfig(), node != null, "Could not allocate memory for node");
-	   Event.<Event.NodeAllocation>publish(node, {node.getConfig()});
+	   /* Event.NodeAllocation */ Event.publish(node, {node.getConfig()});
 	   node.setOwner(null);
 	   return node;
 	 }
@@ -585,7 +598,7 @@ public class GlobalMembers
 	   }
 
 	   node.clearChildren();
-	   Event.<Event.NodeDeallocation>publish(node, {node.getConfig()});
+	   /* Event.NodeDeallocation */ Event.publish(node, {node.getConfig()});
 	   node = null;
 	 }
 
@@ -1544,7 +1557,7 @@ public class GlobalMembers
 	  var config = YGConfigClone(*oldNode.getConfig());
 	  var node = new YGNode((oldNode, config));
 	  node.setOwner(null);
-	  Event.<Event.NodeAllocation>publish(node, {node.getConfig()});
+	  /* Event.NodeAllocation */ Event.publish(node, {node.getConfig()});
 
 	  ArrayList<YGNode> vec = YGVector();
 	  vec.ensureCapacity(oldNode.getChildren().size());
@@ -1944,7 +1957,7 @@ interface propDelegate
 	  {
 		layoutType = cachedResults != null ? LayoutType.kCachedMeasure : LayoutType.kMeasure;
 	  }
-	  Event.<Event.NodeLayout>publish(node, {layoutType, layoutContext});
+	  /* Event.NodeLayout */ Event.publish(node, {layoutType, layoutContext});
 
 	  return (needToVisitNode || cachedResults == null);
 	}
@@ -1974,11 +1987,11 @@ interface propDelegate
 	  if (node.hasBaselineFunc())
 	  {
 
-		Event.<Event.NodeBaselineStart>publish(node);
+		/* Event.NodeBaselineStart */ Event.publish(node);
 
 		final float baseline = node.baseline(node.getLayout().measuredDimensions[(int)YGDimension.YGDimensionWidth], node.getLayout().measuredDimensions[(int)YGDimension.YGDimensionHeight], layoutContext);
 
-		Event.<Event.NodeBaselineEnd>publish(node);
+		/* Event.NodeBaselineEnd */ Event.publish(node);
 
 		YGAssertWithNode(node, !YGFloatIsUndefined(baseline), "Expect custom baseline function to not return NaN");
 		return baseline;
@@ -2407,7 +2420,7 @@ interface propDelegate
 	  }
 	  else
 	  {
-		Event.<Event.MeasureCallbackStart>publish(node);
+		/* Event.MeasureCallbackStart */ Event.publish(node);
 
 
 		final YGSize measuredSize = node.measure(innerWidth, widthMeasureMode, innerHeight, heightMeasureMode, layoutContext);
@@ -2415,7 +2428,7 @@ interface propDelegate
 		layoutMarkerData.measureCallbacks += 1;
 		layoutMarkerData.measureCallbackReasonsCount[(Integer)reason] += 1;
 
-		Event.<Event.MeasureCallbackEnd>publish(node, {layoutContext, innerWidth, widthMeasureMode, innerHeight, heightMeasureMode, measuredSize.width, measuredSize.height, reason});
+		/* Event.MeasureCallbackEnd */ Event.publish(node, {layoutContext, innerWidth, widthMeasureMode, innerHeight, heightMeasureMode, measuredSize.width, measuredSize.height, reason});
 
 		node.setLayoutMeasuredDimension(YGNodeBoundAxis(node, YGFlexDirection.YGFlexDirectionRow, (widthMeasureMode == YGMeasureMode.YGMeasureModeUndefined || widthMeasureMode == YGMeasureMode.YGMeasureModeAtMost) ? measuredSize.width + paddingAndBorderAxisRow : availableWidth, ownerWidth, ownerWidth), YGDimension.YGDimensionWidth);
 
@@ -3643,7 +3656,7 @@ interface propDelegate
 	public static void YGNodeCalculateLayoutWithContext(YGNode node, final float ownerWidth, final float ownerHeight, final YGDirection ownerDirection, Object layoutContext)
 	{
 
-	  Event.<Event.LayoutPassStart>publish(node, {layoutContext});
+	  /* Event.LayoutPassStart */ Event.publish(node, {layoutContext});
 	  LayoutData markerData = new LayoutData();
 
 
@@ -3693,7 +3706,7 @@ interface propDelegate
 		YGRoundToPixelGrid(node, node.getConfig().pointScaleFactor, 0.0f, 0.0f);
 	  }
 
-	  Event.<Event.LayoutPassEnd>publish(node, {layoutContext, markerData});
+	  /* Event.LayoutPassEnd */ Event.publish(node, {layoutContext, markerData});
 	  if (node.getConfig().shouldDiffLayoutWithoutLegacyStretchBehaviour && node.didUseLegacyFlag())
 	  {
 		YGNode nodeWithoutLegacyFlag = YGNodeDeepClone(node);
