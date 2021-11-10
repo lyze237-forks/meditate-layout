@@ -2,7 +2,7 @@ package facebook.yoga.event;
 
 import java.util.*;
 
-public class LayoutData //Type originates from: event.h
+public class LayoutData extends CallableEvent //Type originates from: event.h
 {
   public int layouts;
   public int measures;
