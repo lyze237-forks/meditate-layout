@@ -81,6 +81,12 @@ public class YGNode {
             useWebDefaults();
         }
     }
+    public YGNode(YGConfig config) {
+        config_ = config;
+        if (config.useWebDefaults) {
+            useWebDefaults();
+        }
+    }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public static CompactValue computeEdgeValueForRow(final Values<YGEdge> edges, YGEdge rowEdge, YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp

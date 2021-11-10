@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 public class Event //Type originates from: event.h
 {
 
-    private static HashMap<Class<?>, Collection<Consumer<CallableEvent>>> listeners;
+    private static final HashMap<Class<?>, Collection<Consumer<CallableEvent>>> listeners = new HashMap<>();
 
     public static void reset() //Method definition originates from: event.cpp
     {

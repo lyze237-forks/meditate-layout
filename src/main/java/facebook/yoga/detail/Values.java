@@ -25,7 +25,14 @@ public class Values<T> //Type originates from: Yoga-internal.h
     }
 
     public final CompactValue get(Integer i) {
-        return CompactValue.createCompactValue(values_.get(i).convertToYgValue());
+        return CompactValue.createCompactValue(getValue(i).convertToYgValue());
+    }
+
+    private CompactValue getValue(Integer i) {
+        while (values_.size() < (i + 1)) {
+            values_.add(CompactValue.ofUndefined());
+        }
+        return values_.get(i);
     }
 
     public final void set(Integer i, CompactValue value) {
@@ -37,11 +44,11 @@ public class Values<T> //Type originates from: Yoga-internal.h
     }
 
     public final CompactValue getCompactValue(Integer i) {
-        return CompactValue.createCompactValue(values_.get(i).convertToYgValue());
+        return CompactValue.createCompactValue(getValue(i).convertToYgValue());
     }
 
     public final YGValue get(int i) {
-        return values_.get(i).convertToYgValue();
+        return getValue(i).convertToYgValue();
     }
 
 
@@ -51,7 +58,7 @@ public class Values<T> //Type originates from: Yoga-internal.h
 
     public boolean equalsTo(final Values<T> other) {
         for (int i = 0; i < values_.size(); ++i) {
-            if (values_.get(i) != other.values_.get(i)) {
+            if (getValue(i) != other.getValue(i)) {
                 return false;
             }
         }

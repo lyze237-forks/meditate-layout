@@ -486,7 +486,7 @@ public class GlobalMembers {
 
     public static YGNode YGNodeNewWithConfig(YGConfig config) //Method definition originates from: Yoga.cpp
     {
-        YGNode node = new YGNode(null, (config));
+        YGNode node = new YGNode((config));
         YGAssertWithConfig(config, node != null, "Could not allocate memory for node");
         Event.publish(node, new NodeAllocationEventData(config));
 

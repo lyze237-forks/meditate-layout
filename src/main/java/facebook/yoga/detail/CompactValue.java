@@ -136,7 +136,7 @@ public class CompactValue //Type originates from: CompactValue.h
     private static class Payload //Type originates from: CompactValue.h
     {
         public float value;
-        public Integer repr;
+        public Integer repr = 0;
 
         public Payload(Integer r) {
             this.repr = r;
