@@ -30,7 +30,6 @@ import java.util.function.BiConsumer;
 
 public class YGNode {
 
-
     private static final int hasNewLayout_ = 0;
     private static final int isReferenceBaseline_ = 1;
     private static final int isDirty_ = 2;
@@ -73,6 +72,7 @@ public class YGNode {
             c.setOwner(this);
         }
     }
+
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public YGNode(final YGNode node, YGConfig config) {
         this(node);
@@ -110,6 +110,10 @@ public class YGNode {
         } else {
             return defaultValue;
         }
+    }
+
+    public final YGValue getResolvedDimension(int index) {
+        return resolvedDimensions_.get(index);
     }
 
     public final boolean isDirty() {

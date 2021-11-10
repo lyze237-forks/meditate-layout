@@ -7,4 +7,9 @@ public class NodeLayoutEventData extends CallableEvent  //Type originates from: 
 {
   public LayoutType layoutType;
   public Object layoutContext;
+
+  public NodeLayoutEventData(LayoutType layoutType, Object layoutContext) {
+    this.layoutType = layoutType;
+    this.layoutContext = layoutContext;
+  }
 }

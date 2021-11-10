@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 
 public class Event //Type originates from: event.h
 {
+
     private static HashMap<Class<?>, Collection<Consumer<CallableEvent>>> listeners;
 
     public static void reset() //Method definition originates from: event.cpp

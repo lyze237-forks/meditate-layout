@@ -16,7 +16,7 @@ public class YGLayout {
 
     // This value was chosen based on empirical data:
     // 98% of analyzed layouts require less than 8 entries.
-    private static final int YG_MAX_CACHED_RESULT_COUNT = 8;
+    public static final int YG_MAX_CACHED_RESULT_COUNT = 8;
 
     public ArrayList<Float> position = new ArrayList<>();
     public ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
