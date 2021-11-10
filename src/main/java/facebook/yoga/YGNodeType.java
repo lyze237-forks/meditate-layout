@@ -1,19 +1,16 @@
 package facebook.yoga;
 
-public enum YGNodeType //Type originates from: YGEnums.h
-{
-	YGNodeTypeDefault,
-	YGNodeTypeText;
+public enum YGNodeType {
+    YGNodeTypeDefault,
+    YGNodeTypeText;
 
-	public static final int SIZE = java.lang.Integer.SIZE;
+    public static final int SIZE = java.lang.Integer.SIZE;
 
-	public int getValue()
-	{
-		return this.ordinal();
-	}
+    public int getValue() {
+        return this.ordinal();
+    }
 
-	public static YGNodeType forValue(int value)
-	{
-		return values()[value];
-	}
+    public static YGNodeType forValue(int value) {
+        return values()[value];
+    }
 }

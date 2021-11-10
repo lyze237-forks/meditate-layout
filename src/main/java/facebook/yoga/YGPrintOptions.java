@@ -1,43 +1,27 @@
 package facebook.yoga;
 
-public enum YGPrintOptions //Type originates from: YGEnums.h
-{
-	YGPrintOptionsLayout(1),
-	YGPrintOptionsStyle(2),
-	YGPrintOptionsChildren(4);
+public enum YGPrintOptions {
+    YGPrintOptionsLayout(1),
+    YGPrintOptionsStyle(2),
+    YGPrintOptionsChildren(4);
 
-	public static final int SIZE = java.lang.Integer.SIZE;
+    private final int value;
 
-	private int intValue;
-	private static java.util.HashMap<Integer, YGPrintOptions> mappings;
-	private static java.util.HashMap<Integer, YGPrintOptions> getMappings()
-	{
-		if (mappings == null)
-		{
-			synchronized (YGPrintOptions.class)
-			{
-				if (mappings == null)
-				{
-					mappings = new java.util.HashMap<Integer, YGPrintOptions>();
-				}
-			}
-		}
-		return mappings;
-	}
+    YGPrintOptions(int value) {
+        this.value = value;
+    }
 
-	private YGPrintOptions(int value)
-	{
-		intValue = value;
-		getMappings().put(value, this);
-	}
+    public int getValue() {
+        return value;
+    }
 
-	public int getValue()
-	{
-		return intValue;
-	}
+    public static YGPrintOptions forValue(int value) {
+        for (YGPrintOptions options : values()) {
+            if (options.value == value) {
+                return options;
+            }
+        }
 
-	public static YGPrintOptions forValue(int value)
-	{
-		return getMappings().get(value);
-	}
+        return null;
+    }
 }
