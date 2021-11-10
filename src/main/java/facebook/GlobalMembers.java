@@ -525,7 +525,7 @@ public class GlobalMembers {
 
     public static void YGNodeFreeRecursiveWithCleanupFunc(@NotNull YGNode root, @Nullable YGNodeCleanupFunc cleanup) //Method definition originates from: Yoga.cpp
     {
-        @NotNull Integer skipped = 0;
+        int skipped = 0;
         while (YGNodeGetChildCount(root) > skipped) {
             @Nullable YGNode child = YGNodeGetChild(root, skipped);
             if (child.getOwner() != root) {
@@ -1630,7 +1630,7 @@ public class GlobalMembers {
                 cachedResults = layout.cachedLayout;
             } else {
 
-                for (@NotNull Integer i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
+                for (int i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
                     if (YGNodeCanUseCachedMeasurement(widthMeasureMode, availableWidth, heightMeasureMode,
                             availableHeight, layout.cachedMeasurements.get(i).widthMeasureMode,
                             layout.cachedMeasurements.get(i).availableWidth,
@@ -1650,7 +1650,7 @@ public class GlobalMembers {
                 cachedResults = layout.cachedLayout;
             }
         } else {
-            for (@NotNull Integer i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
+            for (int i = 0; i < layout.nextCachedMeasurementsIndex; i++) {
                 if (YGFloatsEqual(layout.cachedMeasurements.get(i).availableWidth, availableWidth) && YGFloatsEqual(
                         layout.cachedMeasurements.get(i).availableHeight,
                         availableHeight) && layout.cachedMeasurements.get(
@@ -3130,7 +3130,7 @@ public class GlobalMembers {
                 }
             }
             Integer endIndex = 0;
-            for (@NotNull Integer i = 0; i < lineCount; i++) {
+            for (int i = 0; i < lineCount; i++) {
                 final Integer startIndex = endIndex;
                 Integer ii;
 
@@ -3341,7 +3341,7 @@ public class GlobalMembers {
     //C++ TO JAVA CONVERTER WARNING: Unsigned integer types have no direct equivalent in Java:
     //ORIGINAL LINE: static const char* YGSpacer(const unsigned long level)
     public static @NotNull String YGSpacer(final int level) {
-        final Integer spacerLen = spacer.length();
+        final int spacerLen = spacer.length();
         if (level > spacerLen) {
             return spacer.substring(0, 0);
         } else {
