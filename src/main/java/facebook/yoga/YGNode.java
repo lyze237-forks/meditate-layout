@@ -3,6 +3,9 @@ package facebook.yoga;
 import facebook.yoga.detail.CompactValue;
 import java.util.Iterator;
 
+import static facebook.yoga.detail.GlobalMembers.getBooleanData;
+import static facebook.yoga.detail.GlobalMembers.setBooleanData;
+
 public class YGNode
 {
 //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:

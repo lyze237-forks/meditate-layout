@@ -93,7 +93,7 @@ public class CompactValue //Type originates from: CompactValue.h
         return compactValue;
     }
 
-    private boolean equalsTo(CompactValue a, CompactValue b) //Method definition originates from: CompactValue.h
+    public static boolean equalsTo(CompactValue a, CompactValue b) //Method definition originates from: CompactValue.h
     {
         return a.payload_.repr.equals(b.payload_.repr);
     }

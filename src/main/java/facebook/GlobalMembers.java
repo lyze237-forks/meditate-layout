@@ -22,6 +22,9 @@ import facebook.yoga.YGValue;
 import facebook.yoga.YGWrap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import static facebook.yoga.GlobalMembers.isUndefined;
 
 public class GlobalMembers
 {
@@ -32,7 +35,7 @@ public class GlobalMembers
 		return false;
 	  }
 
-	  if (a.unit == YGUnit.YGUnitUndefined || (yoga.GlobalMembers.isUndefined(a.value) && yoga.GlobalMembers.isUndefined(b.value)))
+	  if (a.unit == YGUnit.YGUnitUndefined || (isUndefined(a.value) && isUndefined(b.value)))
 	  {
 		return true;
 	  }
@@ -49,29 +52,29 @@ public class GlobalMembers
 
 	public static boolean YGFloatsEqual(final float a, final float b) //Method definition originates from: Utils.cpp
 	{
-	  if (!yoga.GlobalMembers.isUndefined(a) && !yoga.GlobalMembers.isUndefined(b))
+	  if (!isUndefined(a) && !isUndefined(b))
 	  {
 		return Math.abs(a - b) < 0.0001f;
 	  }
-	  return yoga.GlobalMembers.isUndefined(a) && yoga.GlobalMembers.isUndefined(b);
+	  return isUndefined(a) && isUndefined(b);
 	}
 
 	public static boolean YGDoubleEqual(final double a, final double b) //Method definition originates from: Utils.cpp
 	{
-	  if (!yoga.GlobalMembers.isUndefined(a) && !yoga.GlobalMembers.isUndefined(b))
+	  if (!isUndefined(a) && !isUndefined(b))
 	  {
 		return Math.abs(a - b) < 0.0001;
 	  }
-	  return yoga.GlobalMembers.isUndefined(a) && yoga.GlobalMembers.isUndefined(b);
+	  return isUndefined(a) && isUndefined(b);
 	}
 
 	public static float YGFloatMax(final float a, final float b) //Method definition originates from: Utils.cpp
 	{
-	  if (!yoga.GlobalMembers.isUndefined(a) && !yoga.GlobalMembers.isUndefined(b))
+	  if (!isUndefined(a) && !isUndefined(b))
 	  {
 		return fmaxf(a, b);
 	  }
-	  return yoga.GlobalMembers.isUndefined(a) ? b : a;
+	  return isUndefined(a) ? b : a;
 	}
 
 	public static YGFloatOptional YGFloatOptionalMax(YGFloatOptional op1, YGFloatOptional op2) //Method definition originates from: Utils.cpp
@@ -89,12 +92,12 @@ public class GlobalMembers
 
 	public static float YGFloatMin(final float a, final float b) //Method definition originates from: Utils.cpp
 	{
-	  if (!yoga.GlobalMembers.isUndefined(a) && !yoga.GlobalMembers.isUndefined(b))
+	  if (!isUndefined(a) && !isUndefined(b))
 	  {
 		return fminf(a, b);
 	  }
 
-	  return yoga.GlobalMembers.isUndefined(a) ? b : a;
+	  return isUndefined(a) ? b : a;
 	}
 
 
@@ -117,7 +120,7 @@ public class GlobalMembers
 
 	public static float YGFloatSanitize(final float val) //Method definition originates from: Utils.cpp
 	{
-	  return yoga.GlobalMembers.isUndefined(val) ? 0F : val;
+	  return isUndefined(val) ? 0F : val;
 	}
 
 	public static YGFlexDirection YGFlexDirectionCross(final YGFlexDirection flexDirection, final YGDirection direction) //Method definition originates from: Utils.cpp
@@ -1621,12 +1624,12 @@ public class GlobalMembers
 	  YGNodeSetChildrenInternal(owner, children);
 	}
 
-	public static float YGNodeStyleGetFlexGrow(const YGNode node)
+	public static float YGNodeStyleGetFlexGrow(YGNode node)
 	{
 	  return node.getStyle().flexGrow().isUndefined() ? kDefaultFlexGrow : node.getStyle().flexGrow().unwrap();
 	}
 
-	public static float YGNodeStyleGetFlexShrink(const YGNode node)
+	public static float YGNodeStyleGetFlexShrink(YGNode node)
 	{
 	  return node.getStyle().flexShrink().isUndefined() ? (node.getConfig().useWebDefaults ? kWebDefaultFlexShrink : kDefaultFlexShrink) : node.getStyle().flexShrink().unwrap();
 	}
@@ -1682,54 +1685,54 @@ interface propDelegate
   });
 	}
 
-	public static YGDirection YGNodeStyleGetDirection(const YGNode node)
+	public static YGDirection YGNodeStyleGetDirection(YGNode node)
 	{
 	  return node.getStyle().direction();
 	}
-	public static YGFlexDirection YGNodeStyleGetFlexDirection(const YGNode node)
+	public static YGFlexDirection YGNodeStyleGetFlexDirection(YGNode node)
 	{
 	  return node.getStyle().flexDirection();
 	}
-	public static YGJustify YGNodeStyleGetJustifyContent(const YGNode node)
+	public static YGJustify YGNodeStyleGetJustifyContent(YGNode node)
 	{
 	  return node.getStyle().justifyContent();
 	}
-	public static YGAlign YGNodeStyleGetAlignContent(const YGNode node)
+	public static YGAlign YGNodeStyleGetAlignContent(YGNode node)
 	{
 	  return node.getStyle().alignContent();
 	}
-	public static YGAlign YGNodeStyleGetAlignItems(const YGNode node)
+	public static YGAlign YGNodeStyleGetAlignItems(YGNode node)
 	{
 	  return node.getStyle().alignItems();
 	}
-	public static YGAlign YGNodeStyleGetAlignSelf(const YGNode node)
+	public static YGAlign YGNodeStyleGetAlignSelf(YGNode node)
 	{
 	  return node.getStyle().alignSelf();
 	}
-	public static YGPositionType YGNodeStyleGetPositionType(const YGNode node)
+	public static YGPositionType YGNodeStyleGetPositionType(YGNode node)
 	{
 	  return node.getStyle().positionType();
 	}
-	public static YGWrap YGNodeStyleGetFlexWrap(const YGNode node)
+	public static YGWrap YGNodeStyleGetFlexWrap(YGNode node)
 	{
 	  return node.getStyle().flexWrap();
 	}
-	public static YGOverflow YGNodeStyleGetOverflow(const YGNode node)
+	public static YGOverflow YGNodeStyleGetOverflow(YGNode node)
 	{
 	  return node.getStyle().overflow();
 	}
-	public static YGDisplay YGNodeStyleGetDisplay(const YGNode node)
+	public static YGDisplay YGNodeStyleGetDisplay(YGNode node)
 	{
 	  return node.getStyle().display();
 	}
 
 
-	public static float YGNodeStyleGetFlex(const YGNode node)
+	public static float YGNodeStyleGetFlex(YGNode node)
 	{
 	  return node.getStyle().flex().isUndefined() ? YGUndefined : node.getStyle().flex().unwrap();
 	}
 
-	public static YGValue YGNodeStyleGetFlexBasis(const YGNode node)
+	public static YGValue YGNodeStyleGetFlexBasis(YGNode node)
 	{
 	  YGValue flexBasis = node.getStyle().flexBasis();
 	  if (flexBasis.unit == YGUnit.YGUnitUndefined || flexBasis.unit == YGUnit.YGUnitAuto)
@@ -1742,7 +1745,7 @@ interface propDelegate
 	  return new YGValue(flexBasis);
 	}
 
-	public static float YGNodeStyleGetBorder(const YGNode node, final YGEdge edge)
+	public static float YGNodeStyleGetBorder(YGNode node, final YGEdge edge)
 	{
 	  var border = node.getStyle().border()[(int)edge];
 	  if (border.isUndefined() || border.isAuto())
@@ -1758,24 +1761,24 @@ interface propDelegate
 
 
 
-	public static float YGNodeStyleGetAspectRatio(const YGNode node)
+	public static float YGNodeStyleGetAspectRatio(YGNode node)
 	{
 	  final YGFloatOptional op = node.getStyle().aspectRatio();
 	  return op.isUndefined() ? YGUndefined : op.unwrap();
 	}
-	public static YGValue YGNodeStyleGetMinWidth(const YGNode node)
+	public static YGValue YGNodeStyleGetMinWidth(YGNode node)
 	{
 	  return node.getStyle().minDimensions()[(int)YGDimension.YGDimensionWidth];
 	}
-	public static YGValue YGNodeStyleGetMinHeight(const YGNode node)
+	public static YGValue YGNodeStyleGetMinHeight(YGNode node)
 	{
 	  return node.getStyle().minDimensions()[(int)YGDimension.YGDimensionHeight];
 	}
-	public static YGValue YGNodeStyleGetMaxWidth(const YGNode node)
+	public static YGValue YGNodeStyleGetMaxWidth(YGNode node)
 	{
 	  return node.getStyle().maxDimensions()[(int)YGDimension.YGDimensionWidth];
 	}
-	public static YGValue YGNodeStyleGetMaxHeight(const YGNode node)
+	public static YGValue YGNodeStyleGetMaxHeight(YGNode node)
 	{
 	  return node.getStyle().maxDimensions()[(int)YGDimension.YGDimensionHeight];
 	}
@@ -1942,26 +1945,12 @@ interface propDelegate
 	  return (needToVisitNode || cachedResults == null);
 	}
 
-	public static final ArrayList<YGEdge> leading =
-	{
-		(YGEdge.YGEdgeTop, YGEdge.YGEdgeBottom, YGEdge.YGEdgeLeft, YGEdge.YGEdgeRight)
-	};
+	public static final ArrayList<YGEdge> leading = new ArrayList<>(List.of(YGEdge.YGEdgeTop, YGEdge.YGEdgeBottom, YGEdge.YGEdgeLeft, YGEdge.YGEdgeRight));
+	public static final ArrayList<YGEdge> trailing = new ArrayList<>(List.of(YGEdge.YGEdgeBottom, YGEdge.YGEdgeTop, YGEdge.YGEdgeRight, YGEdge.YGEdgeLeft));
+	public static final ArrayList<YGEdge> pos = new ArrayList<>(List.of(YGEdge.YGEdgeTop, YGEdge.YGEdgeBottom, YGEdge.YGEdgeLeft, YGEdge.YGEdgeRight));
+	public static final ArrayList<YGDimension> dim = new ArrayList<>(List.of(YGDimension.YGDimensionHeight, YGDimension.YGDimensionHeight, YGDimension.YGDimensionWidth, YGDimension.YGDimensionWidth));
 
-	public static final ArrayList<YGEdge> trailing =
-	{
-		(YGEdge.YGEdgeBottom, YGEdge.YGEdgeTop, YGEdge.YGEdgeRight, YGEdge.YGEdgeLeft)
-	};
-	public static final ArrayList<YGEdge> pos =
-	{
-		(YGEdge.YGEdgeTop, YGEdge.YGEdgeBottom, YGEdge.YGEdgeLeft, YGEdge.YGEdgeRight)
-	};
-
-	public static final ArrayList<YGDimension> dim =
-	{
-		(YGDimension.YGDimensionHeight, YGDimension.YGDimensionHeight, YGDimension.YGDimensionWidth, YGDimension.YGDimensionWidth)
-	};
-
-	public static float YGNodePaddingAndBorderForAxis(const YGNode node, final YGFlexDirection axis, final float widthSize)
+	public static float YGNodePaddingAndBorderForAxis(YGNode node, final YGFlexDirection axis, final float widthSize)
 	{
 	  return (node.getLeadingPaddingAndBorder(axis, widthSize) + node.getTrailingPaddingAndBorder(axis, widthSize)).unwrap();
 	}
@@ -2065,7 +2054,7 @@ interface propDelegate
 	  return !YGFloatIsUndefined(value) && value >= 0.0f;
 	}
 
-	public static YGFloatOptional YGNodeBoundAxisWithinMinAndMax(const YGNode node, final YGFlexDirection axis, final YGFloatOptional value, final float axisSize)
+	public static YGFloatOptional YGNodeBoundAxisWithinMinAndMax(YGNode node, final YGFlexDirection axis, final YGFloatOptional value, final float axisSize)
 	{
 	  YGFloatOptional min = new YGFloatOptional();
 	  YGFloatOptional max = new YGFloatOptional();
@@ -2115,7 +2104,7 @@ interface propDelegate
 	  child.setLayoutPosition(node.getLayout().measuredDimensions[dim[(int)axis]] - size - child.getLayout().position[pos[(int)axis]], trailing[(int)axis]);
 	}
 
-	public static void YGConstrainMaxSizeForMode(const YGNode node, final YGFlexDirection axis, final float ownerAxisSize, final float ownerWidth, YGMeasureMode mode, tangible.RefObject<Float> size)
+	public static void YGConstrainMaxSizeForMode(YGNode node, final YGFlexDirection axis, final float ownerAxisSize, final float ownerWidth, YGMeasureMode mode, tangible.RefObject<Float> size)
 	{
 	  final YGFloatOptional maxSize = YGResolveValue(node.getStyle().maxDimensions()[dim[(int)axis]], ownerAxisSize) + YGFloatOptional(node.getMarginForAxis(axis, ownerWidth));
 	  switch (mode)
@@ -2475,7 +2464,7 @@ interface propDelegate
 	  node.iterChildrenAfterCloningIfNeeded(YGZeroOutLayoutRecursivly, layoutContext);
 	}
 
-	public static float YGNodeCalculateAvailableInnerDim(const YGNode node, final YGDimension dimension, final float availableDim, final float paddingAndBorder, final float ownerDim)
+	public static float YGNodeCalculateAvailableInnerDim(YGNode node, final YGDimension dimension, final float availableDim, final float paddingAndBorder, final float ownerDim)
 	{
 	  float availableInnerDim = availableDim - paddingAndBorder;
 
@@ -3724,12 +3713,6 @@ interface propDelegate
 		YGNodeFreeRecursive(nodeWithoutLegacyFlag);
 	  }
 	}
-@FunctionalInterface
-interface voidDelegate
-{
-	std::function<invoke(YGNode node)>& f;
-}
-
 
 	public static void YGTraverseChildrenPreOrder(final ArrayList<YGNode> children, voidDelegate void)
 	{
@@ -3742,7 +3725,7 @@ interface voidDelegate
 @FunctionalInterface
 interface voidDelegate
 {
-	std::function <invoke(YGNode node)>&& f;
+	void invoke(YGNode node);
 }
 
 

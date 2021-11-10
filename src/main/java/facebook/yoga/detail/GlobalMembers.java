@@ -46,6 +46,6 @@ public class GlobalMembers {
     }
 
     private boolean notEqualsTo(CompactValue a, CompactValue b) {
-        return !a.equalsTo(b);
+        return !CompactValue.equalsTo(a, b);
     }
 }
