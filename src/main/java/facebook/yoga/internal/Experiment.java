@@ -1,18 +1,15 @@
 package facebook.yoga.internal;
 
-public enum Experiment //Type originates from: experiments.h
-{
-  kDoubleMeasureCallbacks;
+public enum Experiment {
+    kDoubleMeasureCallbacks;
 
-	public static final int SIZE = java.lang.Integer.SIZE;
+    public static final int SIZE = java.lang.Integer.SIZE;
 
-	public int getValue()
-	{
-		return this.ordinal();
-	}
+    public int getValue() {
+        return this.ordinal();
+    }
 
-	public static Experiment forValue(int value)
-	{
-		return values()[value];
-	}
+    public static Experiment forValue(int value) {
+        return values()[value];
+    }
 }

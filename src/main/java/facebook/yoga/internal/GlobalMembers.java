@@ -1,40 +1,34 @@
 package facebook.yoga.internal;
 
-public class GlobalMembers
-{
-//C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
-//	void enable(Experiment UnnamedParameter);
-//C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
-//	void disable(Experiment UnnamedParameter);
-//C++ TO JAVA CONVERTER TODO TASK: The implementation of the following method could not be found:
-//	boolean toggle(Experiment UnnamedParameter);
+import java.util.EnumSet;
+import java.util.Set;
 
+public class GlobalMembers {
 
-	public static void enable(Experiment experiment)
-	{
-	  detail.GlobalMembers.enabledExperiments.set((Integer)experiment);
-	}
+    private static final Set<Experiment> enabledExperiments = EnumSet.noneOf(Experiment.class);
 
-	public static void disable(Experiment experiment)
-	{
-	  detail.GlobalMembers.enabledExperiments.reset((Integer)experiment);
-	}
+    public static void enable(Experiment experiment) {
+        enabledExperiments.add(experiment);
+    }
 
-	public static boolean toggle(Experiment experiment)
-	{
-	  var bit = (Integer)experiment;
-	  var previousState = detail.GlobalMembers.enabledExperiments.test(bit);
-	  detail.GlobalMembers.enabledExperiments.flip(bit);
-	  return previousState != null;
-	}
+    public static void disable(Experiment experiment) {
+        enabledExperiments.remove(experiment);
+    }
 
-	public static boolean isEnabled(Experiment experiment)
-	{
-	  return detail.enabledExperiments.test((Integer)experiment);
-	}
+    public static boolean toggle(Experiment experiment) {
+        if (enabledExperiments.contains(experiment)) {
+            return enabledExperiments.remove(experiment);
+        } else {
+            enabledExperiments.add(experiment);
+            return false;
+        }
+    }
 
-	public static void disableAllExperiments()
-	{
-	  detail.enabledExperiments = 0;
-	}
+    public static boolean isEnabled(Experiment experiment) {
+        return enabledExperiments.contains(experiment);
+    }
+
+    public static void disableAllExperiments() {
+        enabledExperiments.clear();
+    }
 }
