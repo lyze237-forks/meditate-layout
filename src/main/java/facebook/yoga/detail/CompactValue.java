@@ -4,8 +4,6 @@ package facebook.yoga.detail;
 //static_assert(std::numeric_limits<float>::is_iec559, "facebook::yoga::detail::CompactValue only works with IEEE754 floats");
 
 
-import static facebook.GlobalMembers.YGValueAuto;
-import static facebook.GlobalMembers.YGValueUndefined;
 import facebook.yoga.YGUnit;
 import facebook.yoga.YGValue;
 import org.jetbrains.annotations.NotNull;
@@ -81,8 +79,8 @@ public class CompactValue //Type originates from: CompactValue.h
             case YGUnitPercent:
                 compactValue = CompactValue.of(x.value, YGUnit.YGUnitPercent);
                 break;
+
         }
-        compactValue.payload_ = new CompactValue.Payload(0, YGUnit.YGUnitUndefined);
 
         return compactValue;
     }
@@ -94,7 +92,8 @@ public class CompactValue //Type originates from: CompactValue.h
 
     //C++ TO JAVA CONVERTER TODO TASK: The following operator cannot be converted to Java:
     public YGValue convertToYgValue() {
-        if (isAuto()) {
+        return new YGValue(payload_.value, payload_.unit);
+        /*if (isAuto()) {
             return YGValueAuto;
         } else if (isPoint()) {
             return new YGValue(payload_.value, YGUnit.YGUnitPoint);
@@ -105,8 +104,8 @@ public class CompactValue //Type originates from: CompactValue.h
         if (Float.isNaN(payload_.value) || payload_.unit.equals(YGUnit.YGUnitUndefined)) {
             return YGValueUndefined;
         }
-
         throw new UnsupportedOperationException("Unknown value");
+*/
     }
 
     public final boolean isUndefined() {
