@@ -1848,16 +1848,17 @@ public class GlobalMembers {
     }
 
     public static boolean YGNodeIsStyleDimDefined(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float ownerSize) {
-        boolean isUndefined = YGFloatIsUndefined(node.getResolvedDimension(dim.get(axis.getValue()).getValue()).value);
-        return !(node.getResolvedDimension(
-                dim.get(axis.getValue()).getValue()).unit == YGUnit.YGUnitAuto || node.getResolvedDimension(
-                dim.get(axis.getValue()).getValue()).unit == YGUnit.YGUnitUndefined || (node.getResolvedDimension(
-                dim.get(axis.getValue())
-                        .getValue()).unit == YGUnit.YGUnitPoint && !isUndefined && node.getResolvedDimension(
-                dim.get(axis.getValue()).getValue()).value < 0.0f) || (node.getResolvedDimension(
-                dim.get(axis.getValue())
-                        .getValue()).unit == YGUnit.YGUnitPercent && !isUndefined && (node.getResolvedDimension(
-                dim.get(axis.getValue()).getValue()).value < 0.0f || YGFloatIsUndefined(ownerSize))));
+        YGValue resolvedDimension = node.getResolvedDimension(dim.get(axis.getValue()).getValue());
+        boolean isUndefined = YGFloatIsUndefined(resolvedDimension.value);
+        boolean isAutoUnit = resolvedDimension.unit == YGUnit.YGUnitAuto;
+        boolean isUndefinedUnit = resolvedDimension.unit == YGUnit.YGUnitUndefined;
+        boolean isPointUnit = resolvedDimension.unit == YGUnit.YGUnitPoint;
+        boolean isDefined = !isUndefined;
+        boolean isResolvedValueLessThanZero = resolvedDimension.value < 0.0f;
+        boolean isResolvedPointValueNegative = isPointUnit && isDefined && isResolvedValueLessThanZero;
+        boolean isPercentUnit = resolvedDimension.unit == YGUnit.YGUnitPercent;
+        boolean isOwnerSizeUndefined = YGFloatIsUndefined(ownerSize);
+        return !(isAutoUnit || isUndefinedUnit || isResolvedPointValueNegative || (isPercentUnit && isDefined && (isResolvedValueLessThanZero || isOwnerSizeUndefined)));
     }
 
     public static boolean YGNodeIsLayoutDimDefined(@NotNull YGNode node, final @NotNull YGFlexDirection axis) {

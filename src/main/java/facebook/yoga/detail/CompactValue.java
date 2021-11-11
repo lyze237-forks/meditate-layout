@@ -16,17 +16,12 @@ public class CompactValue //Type originates from: CompactValue.h
     public static final float LOWER_BOUND = 1.08420217e-19f;
     public static final float UPPER_BOUND_POINT = 36893485948395847680.0f;
     public static final float UPPER_BOUND_PERCENT = 18446742974197923840.0f;
-    private static final Integer BIAS = 0x20000000;
-    private static final Integer PERCENT_BIT = 0x40000000;
-    private static final Integer AUTO_BITS = 0x7faaaaaa;
-    private static final Integer ZERO_BITS_POINT = 0x7f8f0f0f;
-    private static final Integer ZERO_BITS_PERCENT = 0x7f80f0f0;
-    private Payload payload_ = new Payload(0);
+    private Payload payload_;
     private boolean undefined;
 
     public CompactValue() {
         undefined = true;
-        this.payload_ = new CompactValue.Payload(Float.NaN);
+        this.payload_ = new CompactValue.Payload(Float.NaN, YGUnit.YGUnitUndefined);
     }
 
     private CompactValue(Payload data) {
@@ -38,9 +33,8 @@ public class CompactValue //Type originates from: CompactValue.h
 //C++ TO JAVA CONVERTER WARNING: The original C++ template specifier was replaced with a Java generic specifier, which may not produce the same behavior:
 //ORIGINAL LINE: template <typename Unit> requires YGUnit<Unit>
     public static @NotNull CompactValue of(float value, YGUnit Unit) {
-        if (value == 0.0f || (value < LOWER_BOUND && value > -LOWER_BOUND)) {
-            @NotNull final var zero = Unit == YGUnit.YGUnitPercent ? ZERO_BITS_PERCENT : ZERO_BITS_POINT;
-            return new CompactValue(new Payload(zero));
+        if ((value < LOWER_BOUND && value > -LOWER_BOUND)) {
+            return new CompactValue(new Payload(0f, Unit));
         }
 
         final var upperBound = Unit == YGUnit.YGUnitPercent ? UPPER_BOUND_PERCENT : UPPER_BOUND_POINT;
@@ -48,10 +42,7 @@ public class CompactValue //Type originates from: CompactValue.h
             value = Math.copySign(upperBound, value);
         }
 
-        int unitBit = Unit == YGUnit.YGUnitPercent ? PERCENT_BIT : 0;
-        @NotNull var data = new Payload((value));
-        data.repr -= BIAS;
-        data.repr |= unitBit;
+        @NotNull var data = new Payload((value), Unit);
         return new CompactValue(data);
     }
 
@@ -64,7 +55,7 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     public static @NotNull CompactValue ofZero() {
-        return new CompactValue(new Payload(ZERO_BITS_POINT));
+        return new CompactValue(new Payload(0f, YGUnit.YGUnitPoint));
     }
 
     public static @NotNull CompactValue ofUndefined() {
@@ -72,7 +63,7 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     public static @NotNull CompactValue ofAuto() {
-        return new CompactValue(new Payload(AUTO_BITS));
+        return new CompactValue(new Payload(0f, YGUnit.YGUnitAuto));
     }
 
     public static @NotNull CompactValue createCompactValue(final @NotNull YGValue x) {
@@ -91,63 +82,62 @@ public class CompactValue //Type originates from: CompactValue.h
                 compactValue = CompactValue.of(x.value, YGUnit.YGUnitPercent);
                 break;
         }
-        compactValue.payload_ = new CompactValue.Payload(0);
+        compactValue.payload_ = new CompactValue.Payload(0, YGUnit.YGUnitUndefined);
 
         return compactValue;
     }
 
     public static boolean equalsTo(@NotNull CompactValue a, @NotNull CompactValue b) //Method definition originates from: CompactValue.h
     {
-        return a.payload_.repr.equals(b.payload_.repr);
+        return a.payload_.unit.equals(b.payload_.unit);
     }
 
     //C++ TO JAVA CONVERTER TODO TASK: The following operator cannot be converted to Java:
     public YGValue convertToYgValue() {
-        if (payload_.repr.equals(AUTO_BITS)) {
+        if (isAuto()) {
             return YGValueAuto;
-        } else if (payload_.repr.equals(ZERO_BITS_POINT)) {
-            return new YGValue(0.0f, YGUnit.YGUnitPoint);
-        } else if (payload_.repr.equals(ZERO_BITS_PERCENT)) {
-            return new YGValue(0.0f, YGUnit.YGUnitPercent);
+        } else if (isPoint()) {
+            return new YGValue(payload_.value, YGUnit.YGUnitPoint);
+        } else if (isPercent()) {
+            return new YGValue(payload_.value, YGUnit.YGUnitPercent);
         }
 
-        if (Float.isNaN(payload_.value)) {
+        if (Float.isNaN(payload_.value) || payload_.unit.equals(YGUnit.YGUnitUndefined)) {
             return YGValueUndefined;
         }
 
-        var data = payload_;
-        data.repr &= ~PERCENT_BIT;
-        data.repr += BIAS;
-
-        return new YGValue(data.value, (payload_.repr & 0x40000000) != 0 ? YGUnit.YGUnitPercent : YGUnit.YGUnitPoint);
+        throw new UnsupportedOperationException("Unknown value");
     }
 
     public final boolean isUndefined() {
-        return undefined || (!payload_.repr.equals(AUTO_BITS) && !payload_.repr.equals(
-                ZERO_BITS_POINT) && !payload_.repr.equals(
-                ZERO_BITS_PERCENT) && Float.isNaN(
-                payload_.value));
+        return undefined || (!isAuto() && !isPoint() && !isPercent() && Float.isNaN(payload_.value));
+    }
+
+    private boolean isPercent() {
+        return payload_.unit.equals(YGUnit.YGUnitPercent);
+    }
+
+    private boolean isPoint() {
+        return payload_.unit.equals(YGUnit.YGUnitPoint);
     }
 
     public final boolean isAuto() {
-        return payload_.repr.equals(AUTO_BITS);
+        return payload_.unit.equals(YGUnit.YGUnitAuto);
     }
 
-    private Integer repr() {
-        return (payload_.repr);
+    private YGUnit repr() {
+        return (payload_.unit);
     }
 
     private static class Payload //Type originates from: CompactValue.h
     {
         public float value;
-        public Integer repr = 0;
+        public YGUnit unit;
 
-        public Payload(Integer r) {
-            this.repr = r;
+        public Payload(float value, YGUnit unit) {
+            this.value = value;
+            this.unit = unit;
         }
 
-        public Payload(float v) {
-            this.value = v;
-        }
     }
 }
