@@ -50,7 +50,7 @@ public class YGNode {
     private print_Struct print_ = new print_Struct();
     private @Nullable YGDirtiedFunc dirtied_ = null;
     private YGStyle style_ = new YGStyle();
-    private YGLayout layout_ = new YGLayout();
+    private @Nullable YGLayout layout_ = new YGLayout();
     private int lineIndex_ = 0;
     private @Nullable YGNode owner_ = null;
     private ArrayList<YGNode> children_ = new ArrayList<>();
@@ -395,7 +395,9 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setLayoutComputedFlexBasis(final YGFloatOptional computedFlexBasis) {
-        layout_.computedFlexBasis = computedFlexBasis;
+        if (layout_ != null) {
+            layout_.computedFlexBasis = computedFlexBasis;
+        }
     }
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
