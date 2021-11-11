@@ -43,9 +43,9 @@ public class YGNode {
     private @Nullable Object context_ = null;
     private byte flags = 1;
     private byte reserved_ = 0;
-    private @Nullable measure_Struct measure_ = null;
-    private @Nullable baseline_Struct baseline_ = null;
-    private @Nullable print_Struct print_ = null;
+    private measure_Struct measure_ = new measure_Struct();
+    private baseline_Struct baseline_ = new baseline_Struct();
+    private print_Struct print_ = new print_Struct();
     private @Nullable YGDirtiedFunc dirtied_ = null;
     private YGStyle style_ = new YGStyle();
     private YGLayout layout_ = new YGLayout();
