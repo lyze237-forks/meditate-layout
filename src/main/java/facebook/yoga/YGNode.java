@@ -677,7 +677,8 @@ public class YGNode {
             YGNode child = children_.get(i);
             YGNode otherNodeChildren = node.children_.get(i);
             isLayoutTreeEqual = child.isLayoutTreeEqualToNode(otherNodeChildren);
-            break;
+            if (!isLayoutTreeEqual)
+                break;
         }
         return isLayoutTreeEqual;
     }
