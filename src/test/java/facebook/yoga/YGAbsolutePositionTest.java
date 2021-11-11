@@ -45,7 +45,7 @@ import static facebook.yoga.YGWrap.YGWrapWrapReverse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class YGAbsolutePositionTest {
+public class YGAbsolutePositionTest extends YogaTest {
 
     @Test
     public void absolute_layout_width_height_start_top() {
@@ -1087,9 +1087,5 @@ public class YGAbsolutePositionTest {
         YGNodeFreeRecursive(root);
 
         YGConfigFree(config);
-    }
-
-    public void ASSERT_FLOAT_EQ(float expected, float value) {
-        Assertions.assertEquals(expected, value);
     }
 }
