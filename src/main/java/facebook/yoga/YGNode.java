@@ -25,6 +25,8 @@ import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import facebook.yoga.detail.Values;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +43,7 @@ public class YGNode {
     private static final int printUsesContext_ = 6;
     private static final int useWebDefaults_ = 7;
     private @Nullable Object context_ = null;
-    private int flags = 1;
+    private Map<Object, Object> flags = new HashMap<>();
     private byte reserved_ = 0;
     private measure_Struct measure_ = new measure_Struct();
     private baseline_Struct baseline_ = new baseline_Struct();
@@ -135,7 +137,7 @@ public class YGNode {
         if (isDirty == getBooleanData(flags, isDirty_)) {
             return;
         }
-        flags = setBooleanData(flags, isDirty_, isDirty);
+        setBooleanData(flags, isDirty_, isDirty);
         if (isDirty && dirtied_ != null) {
             dirtied_.invoke(this);
         }
@@ -149,21 +151,21 @@ public class YGNode {
     }
 
     public final void setBaselineFunc(YGBaselineFunc baseLineFunc) {
-        flags = setBooleanData(flags, baselineUsesContext_, false);
+        setBooleanData(flags, baselineUsesContext_, false);
         if (baseline_ != null) {
             baseline_.noContext = baseLineFunc;
         }
     }
 
     public final void setBaselineFunc(BaselineWithContextFn baseLineFunc) {
-        flags = setBooleanData(flags, baselineUsesContext_, true);
+        setBooleanData(flags, baselineUsesContext_, true);
         if (baseline_ != null) {
             baseline_.withContext = baseLineFunc;
         }
     }
 
     public final void resetBaselineFunc() {
-        flags = setBooleanData(flags, baselineUsesContext_, false);
+        setBooleanData(flags, baselineUsesContext_, false);
         if (baseline_ != null) {
             baseline_.noContext = null;
         }
@@ -177,21 +179,21 @@ public class YGNode {
         if (print_ != null) {
             print_.noContext = printFunc;
         }
-        flags = setBooleanData(flags, printUsesContext_, false);
+        setBooleanData(flags, printUsesContext_, false);
     }
 
     public final void setPrintFunc(PrintWithContextFn printFunc) {
         if (print_ != null) {
             print_.withContext = printFunc;
         }
-        flags = setBooleanData(flags, printUsesContext_, true);
+        setBooleanData(flags, printUsesContext_, true);
     }
 
     public final void resetPrintFunc() {
         if (print_ != null) {
             print_.noContext = null;
         }
-        flags = setBooleanData(flags, printUsesContext_, false);
+        setBooleanData(flags, printUsesContext_, false);
     }
 
     public final boolean getHasNewLayout() {
@@ -199,7 +201,7 @@ public class YGNode {
     }
 
     public final void setHasNewLayout(boolean hasNewLayout) {
-        flags = setBooleanData(flags, hasNewLayout_, hasNewLayout);
+        setBooleanData(flags, hasNewLayout_, hasNewLayout);
     }
 
     public final YGNodeType getNodeType() {
@@ -207,11 +209,11 @@ public class YGNode {
     }
 
     public final void setNodeType(@NotNull YGNodeType nodeType) {
-        flags = setEnumData(YGNodeType.class, flags, nodeType_, nodeType);
+        setEnumData(YGNodeType.class, flags, nodeType_, nodeType);
     }
 
     public final void setIsReferenceBaseline(boolean isReferenceBaseline) {
-        flags = setBooleanData(flags, isReferenceBaseline_, isReferenceBaseline);
+        setBooleanData(flags, isReferenceBaseline_, isReferenceBaseline);
     }
 
     public final boolean isReferenceBaseline() {
@@ -230,7 +232,7 @@ public class YGNode {
     }
 
     private void useWebDefaults() {
-        flags = setBooleanData(flags, useWebDefaults_, true);
+        setBooleanData(flags, useWebDefaults_, true);
         style_.flexDirectionBitfieldRef().setValue(YGFlexDirection.YGFlexDirectionRow);
         style_.alignContentBitfieldRef().setValue(YGAlign.YGAlignStretch);
     }
@@ -327,7 +329,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setMeasureFunc(YGMeasureFunc measureFunc) {
-        flags = setBooleanData(flags, measureUsesContext_, false);
+        setBooleanData(flags, measureUsesContext_, false);
         //C++ TO JAVA CONVERTER TODO TASK: There is no Java equivalent to 'decltype':
         measure_.noContext = measureFunc;
         setMeasureFunc(measure_);
@@ -335,7 +337,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void setMeasureFunc(MeasureWithContextFn measureFunc) {
-        flags = setBooleanData(flags, measureUsesContext_, true);
+        setBooleanData(flags, measureUsesContext_, true);
         //C++ TO JAVA CONVERTER TODO TASK: There is no Java equivalent to 'decltype':
         measure_.withContext = measureFunc;
         setMeasureFunc(measure_);
@@ -551,7 +553,7 @@ public class YGNode {
 
     //C++ TO JAVA CONVERTER WARNING: The original C++ declaration of the following method implementation was not found:
     public void markDirtyAndPropogateDownwards() {
-        flags = setBooleanData(flags, isDirty_, true);
+        setBooleanData(flags, isDirty_, true);
         children_.forEach((YGNode childNode) ->
         {
             childNode.markDirtyAndPropogateDownwards();
@@ -705,11 +707,11 @@ public class YGNode {
         this.context_ = context_;
     }
 
-    public int getFlags() {
+    public Map<Object, Object> getFlags() {
         return flags;
     }
 
-    public void setFlags(byte flags) {
+    public void setFlags(Map<Object, Object> flags) {
         this.flags = flags;
     }
 

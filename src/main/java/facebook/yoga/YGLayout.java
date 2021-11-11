@@ -10,7 +10,9 @@ import static facebook.yoga.detail.GlobalMembers.setBooleanData;
 import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +38,7 @@ public class YGLayout {
     public @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>(YG_MAX_CACHED_RESULT_COUNT);
     public @NotNull ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
     public @NotNull YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
-    private int flags = 0;
+    private Map<Object, Object> flags = new HashMap<>();
 
     public YGLayout() {
         for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT; i++) {
@@ -56,7 +58,7 @@ public class YGLayout {
     }
 
     public final void setDirection(@NotNull YGDirection direction) {
-        flags = setEnumData(YGDirection.class, flags, directionOffset, direction);
+        setEnumData(YGDirection.class, flags, directionOffset, direction);
     }
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:
@@ -66,7 +68,7 @@ public class YGLayout {
     }
 
     public final void setDidUseLegacyFlag(boolean val) {
-        flags = setBooleanData(flags, didUseLegacyFlagOffset, val);
+        setBooleanData(flags, didUseLegacyFlagOffset, val);
     }
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:
@@ -76,7 +78,7 @@ public class YGLayout {
     }
 
     public final void setDoesLegacyStretchFlagAffectsLayout(boolean val) {
-        flags = setBooleanData(flags, doesLegacyStretchFlagAffectsLayoutOffset, val);
+        setBooleanData(flags, doesLegacyStretchFlagAffectsLayoutOffset, val);
     }
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:
@@ -86,7 +88,7 @@ public class YGLayout {
     }
 
     public final void setHadOverflow(boolean hadOverflow) {
-        flags = setBooleanData(flags, hadOverflowOffset, hadOverflow);
+        setBooleanData(flags, hadOverflowOffset, hadOverflow);
     }
 
     //C++ TO JAVA CONVERTER WARNING: 'const' methods are not available in Java:

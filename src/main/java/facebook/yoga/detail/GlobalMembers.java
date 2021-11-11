@@ -4,7 +4,8 @@ import static facebook.GlobalMembers.YGConfigGetDefault;
 import facebook.yoga.YGConfig;
 import facebook.yoga.YGLogLevel;
 import facebook.yoga.YGNode;
-import org.jetbrains.annotations.Contract;
+import java.util.Arrays;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,29 +27,23 @@ public class GlobalMembers {
         return (log2ceilFn(e.getEnumConstants().length - 1));
     }
 
-    public static <E extends Enum<E>> E getEnumData(@NotNull Class<E> e, int flags, Integer index) { //TODO: Change to ByRef
-        E[] constants = e.getEnumConstants();
-        return constants[((flags & mask(bitWidthFn(e), index)) >> index)];
+    public static <E extends Enum<E>> E getEnumData(@NotNull Class<E> e, Map<Object, Object> flags, Integer index) {
+        return (E) flags.getOrDefault(e, Arrays.stream(e.getEnumConstants()).findFirst().get());
     }
 
 
-    @Contract(pure = true)
-    public static <E extends Enum<E>> int setEnumData(@NotNull Class<E> e, int flags, int index, @NotNull E newValue) {
-        return ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e),
-                index))));
+    public static <E extends Enum<E>> int setEnumData(@NotNull Class<E> e, Map<Object, Object> flags, int index, @NotNull E newValue) {
+        flags.put(e, newValue);
+        return 0;
     }
 
-    public static boolean getBooleanData(int flags, Integer index) {
-        return ((flags >> index) & 1) != 0;
+    public static boolean getBooleanData(Map<Object, Object> flags, Integer index) {
+        return (boolean) flags.getOrDefault(index, false);
     }
 
-    @Contract(pure = true)
-    public static int setBooleanData(int flags, int index, boolean value) {
-        if (value) {
-            return (flags | 1 << index);
-        } else {
-            return (flags & ~(1 << index));
-        }
+    public static int setBooleanData(Map<Object, Object> flags, int index, boolean value) {
+        flags.put(index, value);
+        return 0;
     }
 
     private boolean notEqualsTo(@NotNull CompactValue a, @NotNull CompactValue b) {

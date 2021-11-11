@@ -5,6 +5,8 @@ import static facebook.yoga.detail.GlobalMembers.bitWidthFn;
 import static facebook.yoga.detail.GlobalMembers.getEnumData;
 import static facebook.yoga.detail.GlobalMembers.setEnumData;
 import facebook.yoga.detail.Values;
+import java.util.HashMap;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 public class YGStyle //Type originates from: YGStyle.h
@@ -38,7 +40,7 @@ public class YGStyle //Type originates from: YGStyle.h
     private YGFloatOptional flexGrow_ = new YGFloatOptional();
     private YGFloatOptional flexShrink_ = new YGFloatOptional();
     private CompactValue flexBasis_ = CompactValue.ofAuto();
-    private int flags = 1;
+    private Map<Object, Object> flags = new HashMap<>();
     public YGStyle() {
         alignContent = YGAlign.YGAlignFlexStart;
         alignItems = YGAlign.YGAlignStretch;
@@ -217,7 +219,7 @@ public class YGStyle //Type originates from: YGStyle.h
         }
 
         public final @NotNull BitfieldRef<T> setValue(@NotNull T x) {
-            style.flags = setEnumData((Class<T>) x.getClass(), style.flags, offset, x);
+            setEnumData((Class<T>) x.getClass(), style.flags, offset, x);
             return this;
         }
     }
