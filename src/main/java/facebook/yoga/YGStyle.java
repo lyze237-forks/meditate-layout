@@ -38,7 +38,7 @@ public class YGStyle //Type originates from: YGStyle.h
     private YGFloatOptional flexGrow_ = new YGFloatOptional();
     private YGFloatOptional flexShrink_ = new YGFloatOptional();
     private CompactValue flexBasis_ = CompactValue.ofAuto();
-    private byte flags = 0;
+    private int flags = 1;
     public YGStyle() {
         alignContent = YGAlign.YGAlignFlexStart;
         alignItems = YGAlign.YGAlignStretch;

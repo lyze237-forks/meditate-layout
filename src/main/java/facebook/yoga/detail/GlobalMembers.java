@@ -33,21 +33,21 @@ public class GlobalMembers {
 
 
     @Contract(pure = true)
-    public static <E extends Enum<E>> byte setEnumData(@NotNull Class<E> e, byte flags, int index, @NotNull E newValue) {
-        return (byte) ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e),
+    public static <E extends Enum<E>> int setEnumData(@NotNull Class<E> e, int flags, int index, @NotNull E newValue) {
+        return ((flags & ~mask(bitWidthFn(e), index)) | ((newValue.ordinal() << index) & (mask(bitWidthFn(e),
                 index))));
     }
 
-    public static boolean getBooleanData(byte flags, Integer index) {
+    public static boolean getBooleanData(int flags, Integer index) {
         return ((flags >> index) & 1) != 0;
     }
 
     @Contract(pure = true)
-    public static byte setBooleanData(byte flags, int index, boolean value) {
+    public static int setBooleanData(int flags, int index, boolean value) {
         if (value) {
-            return (byte) (flags | 1 << index);
+            return (flags | 1 << index);
         } else {
-            return (byte) (flags & ~(1 << index));
+            return (flags & ~(1 << index));
         }
     }
 

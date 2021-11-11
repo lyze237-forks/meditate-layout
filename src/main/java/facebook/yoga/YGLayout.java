@@ -36,7 +36,7 @@ public class YGLayout {
     public @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>(YG_MAX_CACHED_RESULT_COUNT);
     public @NotNull ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
     public @NotNull YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
-    private byte flags = 0;
+    private int flags = 0;
 
     public YGLayout() {
         for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT; i++) {

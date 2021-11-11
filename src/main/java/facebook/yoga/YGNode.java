@@ -41,7 +41,7 @@ public class YGNode {
     private static final int printUsesContext_ = 6;
     private static final int useWebDefaults_ = 7;
     private @Nullable Object context_ = null;
-    private byte flags = 1;
+    private int flags = 1;
     private byte reserved_ = 0;
     private measure_Struct measure_ = new measure_Struct();
     private baseline_Struct baseline_ = new baseline_Struct();
@@ -704,7 +704,7 @@ public class YGNode {
         this.context_ = context_;
     }
 
-    public byte getFlags() {
+    public int getFlags() {
         return flags;
     }
 
