@@ -939,7 +939,7 @@ public class GlobalMembers {
     public static void YGNodeStyleSetFlexShrink(@NotNull YGNode node, final float flexShrink) //Method definition originates from: Yoga.cpp
     {
         updateStyle(node, flexShrink, (ygStyle, val) -> val != ygStyle.flexShrink().unwrap(), (ygStyle, val) -> {
-            ygStyle.setFlexGrow(new YGFloatOptional(val));
+            ygStyle.setFlexShrink(new YGFloatOptional(val));
         });
     }
 

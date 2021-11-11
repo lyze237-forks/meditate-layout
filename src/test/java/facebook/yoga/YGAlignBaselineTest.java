@@ -192,7 +192,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_column_as_erence() {
+    public void align_baseline_parent_using_child_in_column_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -231,7 +231,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_with_padding_in_column_as_erence() {
+    public void align_baseline_parent_using_child_with_padding_in_column_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -274,7 +274,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_with_padding_using_child_in_column_as_erence() {
+    public void align_baseline_parent_with_padding_using_child_in_column_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -317,7 +317,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_with_margin_using_child_in_column_as_erence() {
+    public void align_baseline_parent_with_margin_using_child_in_column_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -360,7 +360,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_with_margin_in_column_as_erence() {
+    public void align_baseline_parent_using_child_with_margin_in_column_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -403,7 +403,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_row_as_erence() {
+    public void align_baseline_parent_using_child_in_row_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -442,7 +442,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_with_padding_in_row_as_erence() {
+    public void align_baseline_parent_using_child_with_padding_in_row_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -485,7 +485,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_with_margin_in_row_as_erence() {
+    public void align_baseline_parent_using_child_with_margin_in_row_as_reference() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -528,7 +528,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_column_as_erence_with_no_baseline_func() {
+    public void align_baseline_parent_using_child_in_column_as_reference_with_no_baseline_func() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -566,7 +566,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_row_as_erence_with_no_baseline_func() {
+    public void align_baseline_parent_using_child_in_row_as_reference_with_no_baseline_func() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = createYGNode(config, YGFlexDirectionRow, 1000, 1000, true);
@@ -604,7 +604,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_column_as_erence_with_height_not_specified() {
+    public void align_baseline_parent_using_child_in_column_as_reference_with_height_not_specified() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = YGNodeNewWithConfig(config);
@@ -651,7 +651,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_row_as_erence_with_height_not_specified() {
+    public void align_baseline_parent_using_child_in_row_as_reference_with_height_not_specified() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = YGNodeNewWithConfig(config);
@@ -698,7 +698,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_column_as_erence_with_no_baseline_func_and_height_not_specified() {
+    public void align_baseline_parent_using_child_in_column_as_reference_with_no_baseline_func_and_height_not_specified() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = YGNodeNewWithConfig(config);
@@ -744,7 +744,7 @@ public class YGAlignBaselineTest extends YogaTest {
     }
 
     @Test
-    public void align_baseline_parent_using_child_in_row_as_erence_with_no_baseline_func_and_height_not_specified() {
+    public void align_baseline_parent_using_child_in_row_as_reference_with_no_baseline_func_and_height_not_specified() {
         YGConfig config = YGConfigNew();
 
         final YGNode root = YGNodeNewWithConfig(config);

@@ -33,17 +33,15 @@ public class YGStyle //Type originates from: YGStyle.h
     private final Values<YGDimension> dimensions_ = new Values<YGDimension>(CompactValue.ofAuto().convertToYgValue());
     private final Values<YGDimension> minDimensions_ = new Values<YGDimension>();
     private final Values<YGDimension> maxDimensions_ = new Values<YGDimension>();
-    private final @NotNull YGAlign alignContent;
-    private final @NotNull YGAlign alignItems;
     private YGFloatOptional aspectRatio_ = new YGFloatOptional();
     private YGFloatOptional flex_ = new YGFloatOptional();
     private YGFloatOptional flexGrow_ = new YGFloatOptional();
     private YGFloatOptional flexShrink_ = new YGFloatOptional();
     private CompactValue flexBasis_ = CompactValue.ofAuto();
-    private Map<Object, Object> flags = new HashMap<>();
+    private Map<Object, Object> flags = new HashMap<>(Map.of());
     public YGStyle() {
-        alignContent = YGAlign.YGAlignFlexStart;
-        alignItems = YGAlign.YGAlignStretch;
+        setEnumData(YGAlign.class, flags, alignContentOffset, YGAlign.YGAlignFlexStart);
+        setEnumData(YGAlign.class, flags, alignItemsOffset, YGAlign.YGAlignStretch);
     }
 
     public void setAspectRatio(YGFloatOptional aspectRatio_) {

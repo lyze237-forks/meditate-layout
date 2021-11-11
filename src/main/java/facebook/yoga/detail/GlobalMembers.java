@@ -28,12 +28,12 @@ public class GlobalMembers {
     }
 
     public static <E extends Enum<E>> E getEnumData(@NotNull Class<E> e, Map<Object, Object> flags, Integer index) {
-        return (E) flags.getOrDefault(e, Arrays.stream(e.getEnumConstants()).findFirst().get());
+        return (E) flags.getOrDefault(new StyleEnumFlagsKey(e, index), Arrays.stream(e.getEnumConstants()).findFirst().get());
     }
 
 
     public static <E extends Enum<E>> int setEnumData(@NotNull Class<E> e, Map<Object, Object> flags, int index, @NotNull E newValue) {
-        flags.put(e, newValue);
+        flags.put(new StyleEnumFlagsKey(e, index), newValue);
         return 0;
     }
 
