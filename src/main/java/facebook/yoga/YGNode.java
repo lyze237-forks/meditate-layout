@@ -50,7 +50,7 @@ public class YGNode {
     private print_Struct print_ = new print_Struct();
     private @Nullable YGDirtiedFunc dirtied_ = null;
     private YGStyle style_ = new YGStyle();
-    private @Nullable YGLayout layout_ = new YGLayout();
+    private YGLayout layout_ = new YGLayout();
     private int lineIndex_ = 0;
     private @Nullable YGNode owner_ = null;
     private ArrayList<YGNode> children_ = new ArrayList<>();
@@ -770,6 +770,7 @@ public class YGNode {
     }
 
     public void setLayout(YGLayout layout_) {
+        if (layout_ == null) layout_ = new YGLayout();
         this.layout_ = layout_;
     }
 
