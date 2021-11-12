@@ -34,8 +34,7 @@ import io.github.orioncraftmc.meditate.internal.interfaces.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 import tangible.RefObject;
 
 public class GlobalMembers {
@@ -181,10 +180,7 @@ public class GlobalMembers {
         return value.isAuto() ? new YGFloatOptional(0) : YGResolveValue(value, ownerSize);
     }
 
-    public static void throwLogicalErrorWithMessage(String message) //Method definition originates from: Utils.cpp
-    {
-        throw new RuntimeException(message);
-    }
+    //Method definition originates from: Utils.cpp
 
     public static @NotNull String YGAlignToString(final @NotNull YGAlign value) //Method definition originates from: YGEnums.cpp
     {
@@ -1185,34 +1181,36 @@ public class GlobalMembers {
         }
     }
 
+    @Contract("false, _ -> fail")
     public static void YGAssert(final boolean condition, String message) //Method definition originates from: Yoga.cpp
     {
         if (!condition) {
             Log.log((YGNode) null, YGLogLevelFatal, null, "%s\n", message);
-            throwLogicalErrorWithMessage(message);
+            throw new RuntimeException(message);
         }
     }
 
+    @Contract("_, false, _ -> fail")
     public static void YGAssertWithNode(YGNode node, final boolean condition, String message) //Method definition originates from: Yoga.cpp
     {
         if (!condition) {
             Log.log(node, YGLogLevelFatal, null, "%s\n", message);
-            throwLogicalErrorWithMessage(message);
+            throw new RuntimeException(message);
         }
     }
 
+    @Contract("_, false, _ -> fail")
     public static void YGAssertWithConfig(YGConfig config, final boolean condition, String message) //Method definition originates from: Yoga.cpp
     {
         if (!condition) {
             Log.log(config, YGLogLevelFatal, null, "%s\n", message);
-            throwLogicalErrorWithMessage(message);
+            throw new RuntimeException(message);
         }
     }
 
     public static void YGConfigSetPointScaleFactor(@NotNull YGConfig config, final float pixelsInPoint) //Method definition originates from: Yoga.cpp
     {
         YGAssertWithConfig(config, pixelsInPoint >= 0.0f, "Scale factor should not be less than zero");
-
 
         if (pixelsInPoint == 0.0f) {
 
