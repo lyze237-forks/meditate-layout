@@ -25,7 +25,7 @@ public enum LayoutPassReason //Type originates from: event.h
         if (mappings == null) {
             synchronized (LayoutPassReason.class) {
                 if (mappings == null) {
-                    mappings = new java.util.HashMap<Integer, LayoutPassReason>();
+                    mappings = new java.util.HashMap<>();
                 }
             }
         }

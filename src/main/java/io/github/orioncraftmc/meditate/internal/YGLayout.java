@@ -39,7 +39,7 @@ public class YGLayout {
 
     @NotNull
     private ArrayList<Float> createEmptyFloatArray() {
-        return new ArrayList<Float>(List.of(0f, 0f, 0f, 0f));
+        return new ArrayList<>(List.of(0f, 0f, 0f, 0f));
     }
 
     public final YGDirection direction() {

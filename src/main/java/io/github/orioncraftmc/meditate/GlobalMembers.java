@@ -610,7 +610,7 @@ public class GlobalMembers {
 
     public static void YGNodeSetChildren(YGNode owner, YGNode[] c, final Integer count) //Method definition originates from: Yoga.cpp
     {
-        @NotNull ArrayList<YGNode> children = new ArrayList<YGNode>(Arrays.asList(c));
+        @NotNull ArrayList<YGNode> children = new ArrayList<>(Arrays.asList(c));
         YGNodeSetChildrenInternal(owner, children);
     }
 

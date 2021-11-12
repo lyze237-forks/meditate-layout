@@ -24,7 +24,7 @@ public enum LayoutType //Type originates from: event.h
         if (mappings == null) {
             synchronized (LayoutType.class) {
                 if (mappings == null) {
-                    mappings = new java.util.HashMap<Integer, LayoutType>();
+                    mappings = new java.util.HashMap<>();
                 }
             }
         }

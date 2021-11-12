@@ -37,7 +37,7 @@ public class YGNode {
     private @Nullable YGNode owner_ = null;
     private ArrayList<YGNode> children_ = new ArrayList<>();
     private @Nullable YGConfig config_ = new YGConfig(null);
-    private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<YGValue>(
+    private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<>(
             Arrays.asList(YGValueUndefined, YGValueUndefined));
 
     public YGNode(@NotNull YGNode node) {
