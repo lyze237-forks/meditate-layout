@@ -1,6 +1,7 @@
 package facebook.yoga;
 
 import static facebook.GlobalMembers.YGNodeClone;
+import facebook.yoga.internal.Experiment;
 import java.util.ArrayList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +36,9 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
         this.cloneNodeCallback_struct = null;
         logger_struct.noContext = logger;
         loggerUsesContext_ = false;
+        for (int i = 0; i < Experiment.values().length; i++) {
+            experimentalFeatures.add(false);
+        }
     }
 
     @Override
