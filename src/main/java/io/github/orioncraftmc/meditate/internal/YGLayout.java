@@ -1,7 +1,7 @@
 package io.github.orioncraftmc.meditate.internal;
 
-import static io.github.orioncraftmc.meditate.GlobalMembers.YGFloatArrayEqual;
-import static io.github.orioncraftmc.meditate.GlobalMembers.YGUndefined;
+import static io.github.orioncraftmc.meditate.internal.GlobalMembers.YGFloatArrayEqual;
+import static io.github.orioncraftmc.meditate.internal.GlobalMembers.YGUndefined;
 import static io.github.orioncraftmc.meditate.internal.detail.GlobalMembers.*;
 import io.github.orioncraftmc.meditate.internal.enums.YGDirection;
 import java.util.*;

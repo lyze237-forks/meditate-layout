@@ -1,6 +1,6 @@
 package io.github.orioncraftmc.meditate.internal.detail;
 
-import static io.github.orioncraftmc.meditate.GlobalMembers.YGConfigGetDefault;
+import static io.github.orioncraftmc.meditate.internal.GlobalMembers.YGConfigGetDefault;
 import io.github.orioncraftmc.meditate.internal.YGConfig;
 import io.github.orioncraftmc.meditate.internal.YGNode;
 import io.github.orioncraftmc.meditate.internal.enums.YGLogLevel;

@@ -1,6 +1,6 @@
 package io.github.orioncraftmc.meditate.internal;
 
-import static io.github.orioncraftmc.meditate.GlobalMembers.YGNodeClone;
+import static io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeClone;
 import io.github.orioncraftmc.meditate.internal.enums.YGExperiment;
 import io.github.orioncraftmc.meditate.internal.enums.YGLogLevel;
 import io.github.orioncraftmc.meditate.internal.interfaces.YGCloneNodeFunc;

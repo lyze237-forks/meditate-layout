@@ -7,7 +7,7 @@
 
 package com.facebook.yoga;
 
-import static io.github.orioncraftmc.meditate.GlobalMembers.*;
+import io.github.orioncraftmc.meditate.internal.GlobalMembers;
 import io.github.orioncraftmc.meditate.internal.YGConfig;
 import io.github.orioncraftmc.meditate.internal.enums.YGExperimentalFeature;
 
@@ -21,24 +21,24 @@ public class YogaConfigWrapper extends YogaConfig {
   }
 
   YogaConfigWrapper() {
-    this(YGConfigNew());
+    this(GlobalMembers.YGConfigNew());
   }
 
   public void setExperimentalFeatureEnabled(YogaExperimentalFeature feature, boolean enabled) {
-    YGConfigSetExperimentalFeatureEnabled(mNativePointer,
+    GlobalMembers.YGConfigSetExperimentalFeatureEnabled(mNativePointer,
             YGExperimentalFeature.forValue(feature.intValue()), enabled);
   }
 
   public void setUseWebDefaults(boolean useWebDefaults) {
-    YGConfigSetUseWebDefaults(mNativePointer, useWebDefaults);
+    GlobalMembers.YGConfigSetUseWebDefaults(mNativePointer, useWebDefaults);
   }
 
   public void setPrintTreeFlag(boolean enable) {
-    YGConfigSetPrintTreeFlag(mNativePointer, enable);
+    GlobalMembers.YGConfigSetPrintTreeFlag(mNativePointer, enable);
   }
 
   public void setPointScaleFactor(float pixelsInPoint) {
-    YGConfigSetPointScaleFactor(mNativePointer, pixelsInPoint);
+    GlobalMembers.YGConfigSetPointScaleFactor(mNativePointer, pixelsInPoint);
   }
 
   /**
@@ -47,7 +47,7 @@ public class YogaConfigWrapper extends YogaConfig {
    * Because this was such a long-standing bug we must allow legacy users to switch back to this behaviour.
    */
   public void setUseLegacyStretchBehaviour(boolean useLegacyStretchBehaviour) {
-    YGConfigSetUseLegacyStretchBehaviour(mNativePointer, useLegacyStretchBehaviour);
+    GlobalMembers.YGConfigSetUseLegacyStretchBehaviour(mNativePointer, useLegacyStretchBehaviour);
   }
 
   /**
@@ -57,13 +57,13 @@ public class YogaConfigWrapper extends YogaConfig {
    */
   public void setShouldDiffLayoutWithoutLegacyStretchBehaviour(
       boolean shouldDiffLayoutWithoutLegacyStretchBehaviour) {
-      YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(
+      GlobalMembers.YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(
           mNativePointer, shouldDiffLayoutWithoutLegacyStretchBehaviour);
   }
 
   public void setLogger(YogaLogger logger) {
     mLogger = logger;
-    YGConfigSetLogger(mNativePointer, logger);
+    GlobalMembers.YGConfigSetLogger(mNativePointer, logger);
   }
 
   public YogaLogger getLogger() {
