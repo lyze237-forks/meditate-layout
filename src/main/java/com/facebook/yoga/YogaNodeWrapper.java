@@ -7,6 +7,9 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.*;
+import com.facebook.yoga.interfaces.YogaBaselineFunction;
+import com.facebook.yoga.interfaces.YogaMeasureFunction;
 import io.github.orioncraftmc.meditate.internal.*;
 import io.github.orioncraftmc.meditate.internal.enums.*;
 import java.util.ArrayList;

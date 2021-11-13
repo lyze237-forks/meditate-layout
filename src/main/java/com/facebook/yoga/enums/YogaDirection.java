@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.enums;
 
-public enum YogaPrintOptions {
-  LAYOUT(1),
-  STYLE(2),
-  CHILDREN(4);
+public enum YogaDirection {
+  INHERIT(0),
+  LTR(1),
+  RTL(2);
 
   private final int mIntValue;
 
-  YogaPrintOptions(int intValue) {
+  YogaDirection(int intValue) {
     mIntValue = intValue;
   }
 
@@ -22,11 +22,11 @@ public enum YogaPrintOptions {
     return mIntValue;
   }
 
-  public static YogaPrintOptions fromInt(int value) {
+  public static YogaDirection fromInt(int value) {
     switch (value) {
-      case 1: return LAYOUT;
-      case 2: return STYLE;
-      case 4: return CHILDREN;
+      case 0: return INHERIT;
+      case 1: return LTR;
+      case 2: return RTL;
       default: throw new IllegalArgumentException("Unknown enum value: " + value);
     }
   }

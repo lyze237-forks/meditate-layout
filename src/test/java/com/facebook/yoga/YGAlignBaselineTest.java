@@ -7,6 +7,9 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.YogaAlign;
+import com.facebook.yoga.enums.YogaFlexDirection;
+import com.facebook.yoga.interfaces.YogaBaselineFunction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 

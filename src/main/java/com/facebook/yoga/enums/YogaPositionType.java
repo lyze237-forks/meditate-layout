@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.enums;
 
-public enum YogaWrap {
-  NO_WRAP(0),
-  WRAP(1),
-  WRAP_REVERSE(2);
+public enum YogaPositionType {
+  STATIC(0),
+  RELATIVE(1),
+  ABSOLUTE(2);
 
   private final int mIntValue;
 
-  YogaWrap(int intValue) {
+  YogaPositionType(int intValue) {
     mIntValue = intValue;
   }
 
@@ -22,11 +22,11 @@ public enum YogaWrap {
     return mIntValue;
   }
 
-  public static YogaWrap fromInt(int value) {
+  public static YogaPositionType fromInt(int value) {
     switch (value) {
-      case 0: return NO_WRAP;
-      case 1: return WRAP;
-      case 2: return WRAP_REVERSE;
+      case 0: return STATIC;
+      case 1: return RELATIVE;
+      case 2: return ABSOLUTE;
       default: throw new IllegalArgumentException("Unknown enum value: " + value);
     }
   }

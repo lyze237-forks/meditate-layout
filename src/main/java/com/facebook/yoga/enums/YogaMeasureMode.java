@@ -5,17 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.enums;
 
-public enum YogaLayoutType {
-  LAYOUT(0),
-  MEASURE(1),
-  CACHED_LAYOUT(2),
-  CACHED_MEASURE(3);
+public enum YogaMeasureMode {
+  UNDEFINED(0),
+  EXACTLY(1),
+  AT_MOST(2);
 
   private final int mIntValue;
 
-  YogaLayoutType(int intValue) {
+  YogaMeasureMode(int intValue) {
     mIntValue = intValue;
   }
 
@@ -23,12 +22,11 @@ public enum YogaLayoutType {
     return mIntValue;
   }
 
-  public static YogaLayoutType fromInt(int value) {
+  public static YogaMeasureMode fromInt(int value) {
     switch (value) {
-      case 0: return LAYOUT;
-      case 1: return MEASURE;
-      case 2: return CACHED_LAYOUT;
-      case 3: return CACHED_MEASURE;
+      case 0: return UNDEFINED;
+      case 1: return EXACTLY;
+      case 2: return AT_MOST;
       default: throw new IllegalArgumentException("Unknown enum value: " + value);
     }
   }

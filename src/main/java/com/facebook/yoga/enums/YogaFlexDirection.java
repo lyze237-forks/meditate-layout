@@ -5,16 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.enums;
 
-public enum YogaOverflow {
-  VISIBLE(0),
-  HIDDEN(1),
-  SCROLL(2);
+public enum YogaFlexDirection {
+  COLUMN(0),
+  COLUMN_REVERSE(1),
+  ROW(2),
+  ROW_REVERSE(3);
 
   private final int mIntValue;
 
-  YogaOverflow(int intValue) {
+  YogaFlexDirection(int intValue) {
     mIntValue = intValue;
   }
 
@@ -22,11 +23,12 @@ public enum YogaOverflow {
     return mIntValue;
   }
 
-  public static YogaOverflow fromInt(int value) {
+  public static YogaFlexDirection fromInt(int value) {
     switch (value) {
-      case 0: return VISIBLE;
-      case 1: return HIDDEN;
-      case 2: return SCROLL;
+      case 0: return COLUMN;
+      case 1: return COLUMN_REVERSE;
+      case 2: return ROW;
+      case 3: return ROW_REVERSE;
       default: throw new IllegalArgumentException("Unknown enum value: " + value);
     }
   }

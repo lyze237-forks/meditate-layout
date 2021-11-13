@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.interfaces;
 
 
+import com.facebook.yoga.enums.YogaLogLevel;
 import io.github.orioncraftmc.meditate.internal.YGConfig;
 import io.github.orioncraftmc.meditate.internal.YGNode;
 import io.github.orioncraftmc.meditate.internal.enums.YGLogLevel;

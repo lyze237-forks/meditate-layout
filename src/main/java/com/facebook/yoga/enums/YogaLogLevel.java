@@ -5,15 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.enums;
 
-public enum YogaDimension {
-  WIDTH(0),
-  HEIGHT(1);
+
+
+public enum YogaLogLevel {
+  ERROR(0),
+  WARN(1),
+  INFO(2),
+  DEBUG(3),
+  VERBOSE(4),
+  FATAL(5);
 
   private final int mIntValue;
 
-  YogaDimension(int intValue) {
+  YogaLogLevel(int intValue) {
     mIntValue = intValue;
   }
 
@@ -21,10 +27,15 @@ public enum YogaDimension {
     return mIntValue;
   }
 
-  public static YogaDimension fromInt(int value) {
+  
+  public static YogaLogLevel fromInt(int value) {
     switch (value) {
-      case 0: return WIDTH;
-      case 1: return HEIGHT;
+      case 0: return ERROR;
+      case 1: return WARN;
+      case 2: return INFO;
+      case 3: return DEBUG;
+      case 4: return VERBOSE;
+      case 5: return FATAL;
       default: throw new IllegalArgumentException("Unknown enum value: " + value);
     }
   }

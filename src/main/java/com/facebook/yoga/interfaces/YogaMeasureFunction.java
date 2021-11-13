@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.interfaces;
 
+import com.facebook.yoga.YogaNode;
+import com.facebook.yoga.enums.YogaMeasureMode;
 import io.github.orioncraftmc.meditate.internal.YGSize;
 
 public interface YogaMeasureFunction {

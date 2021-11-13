@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.facebook.yoga;
+package com.facebook.yoga.interfaces;
+
+import com.facebook.yoga.YogaValue;
+import com.facebook.yoga.enums.*;
 
 public interface YogaProps {
 

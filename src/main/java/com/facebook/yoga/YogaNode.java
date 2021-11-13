@@ -7,6 +7,8 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.*;
+import com.facebook.yoga.interfaces.*;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class YogaNode implements YogaProps {

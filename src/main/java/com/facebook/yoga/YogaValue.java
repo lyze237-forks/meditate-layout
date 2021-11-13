@@ -7,6 +7,8 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.YogaUnit;
+
 public class YogaValue {
   static final YogaValue UNDEFINED = new YogaValue(YogaConstants.UNDEFINED, YogaUnit.UNDEFINED);
   static final YogaValue ZERO = new YogaValue(0, YogaUnit.POINT);

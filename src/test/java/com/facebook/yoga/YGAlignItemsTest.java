@@ -8,6 +8,7 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 

@@ -7,6 +7,8 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.YogaExperimentalFeature;
+import com.facebook.yoga.interfaces.YogaLogger;
 import io.github.orioncraftmc.meditate.internal.GlobalMembers;
 import io.github.orioncraftmc.meditate.internal.YGConfig;
 import io.github.orioncraftmc.meditate.internal.enums.YGExperimentalFeature;

@@ -1,4 +1,4 @@
-package tangible;
+package io.github.orioncraftmc.meditate.internal.detail;
 
 //----------------------------------------------------------------------------------------
 //	Copyright © 2006 - 2021 Tangible Software Solutions, Inc.

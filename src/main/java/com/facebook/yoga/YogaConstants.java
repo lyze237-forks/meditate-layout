@@ -7,6 +7,8 @@
 
 package com.facebook.yoga;
 
+import com.facebook.yoga.enums.YogaUnit;
+
 public class YogaConstants {
 
   public static final float UNDEFINED = Float.NaN;
