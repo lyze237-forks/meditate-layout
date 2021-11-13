@@ -1,9 +1,10 @@
 plugins {
     java
+    `maven-publish`
 }
 
 group = "io.github.orioncraftmc"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -18,4 +19,21 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+publishing {
+    repositories {
+        val lightCraftRepoDir = project.findProperty("lightcraft.repo.location")
+        if (lightCraftRepoDir != null) {
+            maven {
+                name = "LightCraftRepo"
+                url = File(lightCraftRepoDir.toString()).toURI()
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }

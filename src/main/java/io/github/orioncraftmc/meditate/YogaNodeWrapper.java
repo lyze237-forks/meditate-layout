@@ -7,7 +7,6 @@
 
 package io.github.orioncraftmc.meditate;
 
-import com.facebook.yoga.enums.*;
 import io.github.orioncraftmc.meditate.enums.*;
 import io.github.orioncraftmc.meditate.interfaces.YogaBaselineFunction;
 import io.github.orioncraftmc.meditate.interfaces.YogaMeasureFunction;
@@ -49,8 +48,6 @@ public class YogaNodeWrapper extends YogaNode implements Cloneable {
     private Object mData;
 
     private int mLayoutDirection = 0;
-
-    private boolean mHasNewLayout = true;
 
     private YogaNodeWrapper(YGNode nativePointer) {
         mNativePointer = nativePointer;

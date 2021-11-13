@@ -2,7 +2,7 @@
   <simple_options>
     <assign_array_defaults>true</assign_array_defaults>
     <assume_using_namespace_std_for_snippets>true</assume_using_namespace_std_for_snippets>
-    <base_output_folder_structure_on_package_structure>true</base_output_folder_structure_on_package_structure>
+    <base_output_folder_structure_on_package_structure>false</base_output_folder_structure_on_package_structure>
     <bit_mask_unsigned_references>false</bit_mask_unsigned_references>
     <convert_bool_typedef_to_boolean>true</convert_bool_typedef_to_boolean>
     <convert_char_and_wchar_t_arrays_to_strings>true</convert_char_and_wchar_t_arrays_to_strings>

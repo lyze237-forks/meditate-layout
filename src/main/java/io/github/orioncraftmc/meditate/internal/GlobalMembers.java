@@ -33,7 +33,6 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.*;
 import org.jetbrains.annotations.*;
-import tangible.RefObject;
 
 public class GlobalMembers {
     public static final float YGUndefined = Float.NaN;
@@ -1694,7 +1693,7 @@ public class GlobalMembers {
                 pos.get(axis.getValue()).getValue()), trailing.get(axis.getValue()).getValue());
     }
 
-    public static void YGConstrainMaxSizeForMode(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float ownerAxisSize, final float ownerWidth, @NotNull YGMeasureMode mode, tangible.@NotNull RefObject<Float> size) {
+    public static void YGConstrainMaxSizeForMode(@NotNull YGNode node, final @NotNull YGFlexDirection axis, final float ownerAxisSize, final float ownerWidth, @NotNull YGMeasureMode mode, @NotNull RefObject<Float> size) {
         final @NotNull YGFloatOptional maxSize = plus(
                 YGResolveValue(node.getStyle().maxDimensions().getCompactValue(dim.get(axis.getValue()).getValue()),
                         ownerAxisSize), node.getMarginForAxis(axis, ownerWidth));

@@ -8,7 +8,6 @@
 package io.github.orioncraftmc.meditate.interfaces;
 
 import io.github.orioncraftmc.meditate.YogaValue;
-import com.facebook.yoga.enums.*;
 import io.github.orioncraftmc.meditate.enums.*;
 
 public interface YogaProps {
