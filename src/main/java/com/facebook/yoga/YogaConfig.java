@@ -7,6 +7,8 @@
 
 package com.facebook.yoga;
 
+import io.github.orioncraftmc.meditate.internal.YGConfig;
+
 public abstract class YogaConfig {
 
   public static int SPACING_TYPE = 1;
@@ -37,5 +39,5 @@ public abstract class YogaConfig {
 
   public abstract YogaLogger getLogger();
 
-  abstract long getNativePointer();
+  abstract YGConfig getNativePointer();
 }

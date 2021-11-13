@@ -8,12 +8,21 @@
 package com.facebook.yoga;
 
 
+import io.github.orioncraftmc.meditate.internal.YGConfig;
+import io.github.orioncraftmc.meditate.internal.YGNode;
+import io.github.orioncraftmc.meditate.internal.enums.YGLogLevel;
+import io.github.orioncraftmc.meditate.internal.interfaces.YGLogger;
+
 /**
  * Interface for receiving logs from native layer. Use by setting YogaNode.setLogger(myLogger);
  * See YogaLogLevel for the different log levels.
  */
-@DoNotStrip
-public interface YogaLogger {
-  @DoNotStrip
-  void log(YogaLogLevel level, String message);
+public interface YogaLogger extends YGLogger {
+    void log(YogaLogLevel level, String message);
+
+    @Override
+    default int invoke(YGConfig config, YGNode node, YGLogLevel level, String format, Object... args) {
+        log(YogaLogLevel.fromInt(level.getValue()), String.format(format, args));
+        return 0;
+    }
 }

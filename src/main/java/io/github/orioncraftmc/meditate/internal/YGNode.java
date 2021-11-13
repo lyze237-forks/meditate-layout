@@ -641,7 +641,7 @@ public class YGNode {
         this.reserved_ = reserved_;
     }
 
-    public @Nullable measure_Struct getMeasure() {
+    public @NotNull measure_Struct getMeasure() {
         return measure_;
     }
 
@@ -649,7 +649,7 @@ public class YGNode {
         this.measure_ = measure_;
     }
 
-    public @Nullable baseline_Struct getBaseline() {
+    public @NotNull baseline_Struct getBaseline() {
         return baseline_;
     }
 
@@ -657,7 +657,7 @@ public class YGNode {
         this.baseline_ = baseline_;
     }
 
-    public @Nullable print_Struct getPrint() {
+    public @NotNull print_Struct getPrint() {
         return print_;
     }
 
@@ -665,7 +665,7 @@ public class YGNode {
         this.print_ = print_;
     }
 
-    public @Nullable YGDirtiedFunc getDirtied() {
+    public @NotNull YGDirtiedFunc getDirtied() {
         return dirtied_;
     }
 
@@ -730,21 +730,21 @@ public class YGNode {
         this.resolvedDimensions_ = resolvedDimensions_;
     }
 
-    private static class measure_Struct {
+    public static class measure_Struct {
 
         public @Nullable YGMeasureFunc noContext = null;
         public MeasureWithContextFn withContext;
 
     }
 
-    private static class baseline_Struct {
+    public static class baseline_Struct {
 
         public @Nullable YGBaselineFunc noContext = null;
         public BaselineWithContextFn withContext;
 
     }
 
-    private static class print_Struct {
+    public static class print_Struct {
 
         public @Nullable YGPrintFunc noContext = null;
         public PrintWithContextFn withContext;

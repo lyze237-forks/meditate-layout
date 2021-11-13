@@ -8,7 +8,7 @@
 package com.facebook.yoga;
 
 
-@DoNotStrip
+
 public enum YogaLogLevel {
   ERROR(0),
   WARN(1),
@@ -27,7 +27,7 @@ public enum YogaLogLevel {
     return mIntValue;
   }
 
-  @DoNotStrip
+  
   public static YogaLogLevel fromInt(int value) {
     switch (value) {
       case 0: return ERROR;

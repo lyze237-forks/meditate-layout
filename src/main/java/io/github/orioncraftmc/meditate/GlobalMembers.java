@@ -464,7 +464,6 @@ public class GlobalMembers {
             return;
         }
 
-
         @Nullable var childOwner = excludedChild.getOwner();
         if (owner.removeChild(excludedChild)) {
             if (owner == childOwner) {

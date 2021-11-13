@@ -7,14 +7,17 @@
 
 package com.facebook.yoga;
 
+import io.github.orioncraftmc.meditate.internal.YGSize;
+
 public interface YogaMeasureFunction {
-  /**
-   * Return a value created by YogaMeasureOutput.make(width, height);
-   */
-  long measure(
-      YogaNode node,
-      float width,
-      YogaMeasureMode widthMode,
-      float height,
-      YogaMeasureMode heightMode);
+    /**
+     * Return a value created by YogaMeasureOutput.make(width, height);
+     */
+    YGSize measure(
+            YogaNode node,
+            float width,
+            YogaMeasureMode widthMode,
+            float height,
+            YogaMeasureMode heightMode);
+
 }

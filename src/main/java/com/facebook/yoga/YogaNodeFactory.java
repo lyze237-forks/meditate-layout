@@ -9,10 +9,10 @@ package com.facebook.yoga;
 
 public abstract class YogaNodeFactory {
   public static YogaNode create() {
-    return new YogaNodeJNIFinalizer();
+    return new YogaNodeWrapper();
   }
 
   public static YogaNode create(YogaConfig config) {
-    return new YogaNodeJNIFinalizer(config);
+    return new YogaNodeWrapper(config);
   }
 }

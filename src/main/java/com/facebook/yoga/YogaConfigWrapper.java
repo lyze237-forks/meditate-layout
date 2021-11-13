@@ -7,40 +7,38 @@
 
 package com.facebook.yoga;
 
-public abstract class YogaConfigJNIBase extends YogaConfig {
+import static io.github.orioncraftmc.meditate.GlobalMembers.*;
+import io.github.orioncraftmc.meditate.internal.YGConfig;
+import io.github.orioncraftmc.meditate.internal.enums.YGExperimentalFeature;
 
-  long mNativePointer;
+public class YogaConfigWrapper extends YogaConfig {
+
+  YGConfig mNativePointer;
   private YogaLogger mLogger;
 
-  private YogaConfigJNIBase(long nativePointer) {
-    if (nativePointer == 0) {
-      throw new IllegalStateException("Failed to allocate native memory");
-    }
+  private YogaConfigWrapper(YGConfig nativePointer) {
     mNativePointer = nativePointer;
   }
 
-  YogaConfigJNIBase() {
-    this(YogaNative.jni_YGConfigNewJNI());
-  }
-
-  YogaConfigJNIBase(boolean useVanillaJNI) {
-    this(YogaNative.jni_YGConfigNewJNI());
+  YogaConfigWrapper() {
+    this(YGConfigNew());
   }
 
   public void setExperimentalFeatureEnabled(YogaExperimentalFeature feature, boolean enabled) {
-    YogaNative.jni_YGConfigSetExperimentalFeatureEnabledJNI(mNativePointer, feature.intValue(), enabled);
+    YGConfigSetExperimentalFeatureEnabled(mNativePointer,
+            YGExperimentalFeature.forValue(feature.intValue()), enabled);
   }
 
   public void setUseWebDefaults(boolean useWebDefaults) {
-    YogaNative.jni_YGConfigSetUseWebDefaultsJNI(mNativePointer, useWebDefaults);
+    YGConfigSetUseWebDefaults(mNativePointer, useWebDefaults);
   }
 
   public void setPrintTreeFlag(boolean enable) {
-    YogaNative.jni_YGConfigSetPrintTreeFlagJNI(mNativePointer, enable);
+    YGConfigSetPrintTreeFlag(mNativePointer, enable);
   }
 
   public void setPointScaleFactor(float pixelsInPoint) {
-    YogaNative.jni_YGConfigSetPointScaleFactorJNI(mNativePointer, pixelsInPoint);
+    YGConfigSetPointScaleFactor(mNativePointer, pixelsInPoint);
   }
 
   /**
@@ -49,7 +47,7 @@ public abstract class YogaConfigJNIBase extends YogaConfig {
    * Because this was such a long-standing bug we must allow legacy users to switch back to this behaviour.
    */
   public void setUseLegacyStretchBehaviour(boolean useLegacyStretchBehaviour) {
-    YogaNative.jni_YGConfigSetUseLegacyStretchBehaviourJNI(mNativePointer, useLegacyStretchBehaviour);
+    YGConfigSetUseLegacyStretchBehaviour(mNativePointer, useLegacyStretchBehaviour);
   }
 
   /**
@@ -59,20 +57,20 @@ public abstract class YogaConfigJNIBase extends YogaConfig {
    */
   public void setShouldDiffLayoutWithoutLegacyStretchBehaviour(
       boolean shouldDiffLayoutWithoutLegacyStretchBehaviour) {
-      YogaNative.jni_YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviourJNI(
+      YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(
           mNativePointer, shouldDiffLayoutWithoutLegacyStretchBehaviour);
   }
 
   public void setLogger(YogaLogger logger) {
     mLogger = logger;
-    YogaNative.jni_YGConfigSetLoggerJNI(mNativePointer, logger);
+    YGConfigSetLogger(mNativePointer, logger);
   }
 
   public YogaLogger getLogger() {
     return mLogger;
   }
 
-  long getNativePointer() {
+  YGConfig getNativePointer() {
     return mNativePointer;
   }
 }
