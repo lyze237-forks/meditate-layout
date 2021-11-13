@@ -11,7 +11,7 @@ public class LayoutData extends CallableEvent //Type originates from: event.h
     public int cachedLayouts;
     public int cachedMeasures;
     public int measureCallbacks;
-    public @NotNull ArrayList<Integer> measureCallbackReasonsCount = new ArrayList<>();
+    public final @NotNull ArrayList<Integer> measureCallbackReasonsCount = new ArrayList<>();
 
     public LayoutData() {
         for (int i = 0; i < LayoutPassReason.COUNT.getValue(); i++) {

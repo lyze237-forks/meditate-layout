@@ -17,7 +17,7 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
     public boolean shouldDiffLayoutWithoutLegacyStretchBehaviour = false;
     public boolean printTree = false;
     public float pointScaleFactor = 1.0f;
-    public @NotNull ArrayList<Boolean> experimentalFeatures = new ArrayList<>();
+    public final @NotNull ArrayList<Boolean> experimentalFeatures = new ArrayList<>();
     public @Nullable Object context = null;
     private cloneNodeCallback_Struct cloneNodeCallback_struct = new cloneNodeCallback_Struct();
     private boolean cloneNodeUsesContext_;

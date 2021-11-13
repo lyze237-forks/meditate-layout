@@ -489,10 +489,7 @@ public class YGNode {
 
     public void markDirtyAndPropogateDownwards() {
         setBooleanData(flags, isDirty_, true);
-        children_.forEach((YGNode childNode) ->
-        {
-            childNode.markDirtyAndPropogateDownwards();
-        });
+        children_.forEach(YGNode::markDirtyAndPropogateDownwards);
     }
 
     public float resolveFlexGrow() {

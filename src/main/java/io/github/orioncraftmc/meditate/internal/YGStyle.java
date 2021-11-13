@@ -95,7 +95,7 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final @NotNull BitfieldRef<YGAlign> alignContentBitfieldRef() {
-        return new BitfieldRef(this, alignContentOffset);
+        return new BitfieldRef<>(this, alignContentOffset);
     }
 
     public final YGAlign alignItems() {
@@ -103,7 +103,7 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final @NotNull BitfieldRef<YGAlign> alignItemsBitfieldRef() {
-        return new BitfieldRef(this, alignItemsOffset);
+        return new BitfieldRef<>(this, alignItemsOffset);
     }
 
     public final YGAlign alignSelf() {
@@ -111,7 +111,7 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final @NotNull BitfieldRef<YGAlign> alignSelfBitfieldRef() {
-        return new BitfieldRef(this, alignSelfOffset);
+        return new BitfieldRef<>(this, alignSelfOffset);
     }
 
     public final YGPositionType positionType() {
@@ -119,7 +119,7 @@ public class YGStyle //Type originates from: YGStyle.h
     }
 
     public final @NotNull BitfieldRef<YGPositionType> positionTypeBitfieldRef() {
-        return new BitfieldRef(this, positionTypeOffset);
+        return new BitfieldRef<>(this, positionTypeOffset);
     }
 
     public final YGWrap flexWrap() {
@@ -206,8 +206,8 @@ public class YGStyle //Type originates from: YGStyle.h
 
     public static class BitfieldRef<T extends Enum<T>> //Type originates from: YGStyle.h
     {
-        public YGStyle style;
-        public Integer offset;
+        public final YGStyle style;
+        public final Integer offset;
 
         public BitfieldRef(YGStyle style, Integer offset) {
             this.style = style;

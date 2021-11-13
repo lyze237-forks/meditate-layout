@@ -2,14 +2,7 @@ package io.github.orioncraftmc.meditate.internal.detail;
 
 import java.util.Objects;
 
-public class StyleEnumFlagsKey {
-    private final Class<?> enumClazz;
-    private final int index;
-
-    public StyleEnumFlagsKey(Class<?> enumClazz, int index) {
-        this.enumClazz = enumClazz;
-        this.index = index;
-    }
+public record StyleEnumFlagsKey(Class<?> enumClazz, int index) {
 
     @Override
     public boolean equals(Object o) {

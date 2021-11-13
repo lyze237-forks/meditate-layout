@@ -10,7 +10,7 @@ public class YGCollectFlexItemsRowValues //Type originates from: Utils.h
     public float totalFlexGrowFactors;
     public float totalFlexShrinkScaledFactors;
     public int endOfLineIndex;
-    public @NotNull ArrayList<YGNode> relativeChildren = new ArrayList<>();
+    public final @NotNull ArrayList<YGNode> relativeChildren = new ArrayList<>();
     public float remainingFreeSpace;
     public float mainDim;
     public float crossDim;

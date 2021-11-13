@@ -56,22 +56,12 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     public static @NotNull CompactValue createCompactValue(final @NotNull YGValue x) {
-        @Nullable CompactValue compactValue = ofUndefined();
-        switch (x.unit) {
-            case YGUnitUndefined:
-                compactValue = ofUndefined();
-                break;
-            case YGUnitAuto:
-                compactValue = ofAuto();
-                break;
-            case YGUnitPoint:
-                compactValue = CompactValue.of(x.value, YGUnit.YGUnitPoint);
-                break;
-            case YGUnitPercent:
-                compactValue = CompactValue.of(x.value, YGUnit.YGUnitPercent);
-                break;
-
-        }
+        @Nullable CompactValue compactValue = switch (x.unit) {
+            case YGUnitUndefined -> ofUndefined();
+            case YGUnitAuto -> ofAuto();
+            case YGUnitPoint -> CompactValue.of(x.value, YGUnit.YGUnitPoint);
+            case YGUnitPercent -> CompactValue.of(x.value, YGUnit.YGUnitPercent);
+        };
 
         return compactValue;
     }
@@ -83,19 +73,6 @@ public class CompactValue //Type originates from: CompactValue.h
 
     public YGValue convertToYgValue() {
         return new YGValue(payload_.value, payload_.unit);
-        /*if (isAuto()) {
-            return YGValueAuto;
-        } else if (isPoint()) {
-            return new YGValue(payload_.value, YGUnit.YGUnitPoint);
-        } else if (isPercent()) {
-            return new YGValue(payload_.value, YGUnit.YGUnitPercent);
-        }
-
-        if (Float.isNaN(payload_.value) || payload_.unit.equals(YGUnit.YGUnitUndefined)) {
-            return YGValueUndefined;
-        }
-        throw new UnsupportedOperationException("Unknown value");
-*/
     }
 
     public final boolean isUndefined() {
@@ -120,8 +97,8 @@ public class CompactValue //Type originates from: CompactValue.h
 
     private static class Payload //Type originates from: CompactValue.h
     {
-        public float value;
-        public YGUnit unit;
+        public final float value;
+        public final YGUnit unit;
 
         public Payload(float value, YGUnit unit) {
             this.value = value;

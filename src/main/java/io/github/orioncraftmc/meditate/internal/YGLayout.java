@@ -17,19 +17,19 @@ public class YGLayout {
     private static final int doesLegacyStretchFlagAffectsLayoutOffset = didUseLegacyFlagOffset + 1;
     private static final int hadOverflowOffset = doesLegacyStretchFlagAffectsLayoutOffset + 1;
     private final Map<Object, Object> flags = new HashMap<>();
-    public @NotNull ArrayList<Float> position = createEmptyFloatArray();
-    public @NotNull ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
-    public @NotNull ArrayList<Float> margin = createEmptyFloatArray();
-    public @NotNull ArrayList<Float> border = createEmptyFloatArray();
-    public @NotNull ArrayList<Float> padding = createEmptyFloatArray();
+    public final @NotNull ArrayList<Float> position = createEmptyFloatArray();
+    public final @NotNull ArrayList<Float> dimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
+    public final @NotNull ArrayList<Float> margin = createEmptyFloatArray();
+    public final @NotNull ArrayList<Float> border = createEmptyFloatArray();
+    public final @NotNull ArrayList<Float> padding = createEmptyFloatArray();
     public int computedFlexBasisGeneration = 0;
     public YGFloatOptional computedFlexBasis = new YGFloatOptional();
     public int generationCount = 0;
     public YGDirection lastOwnerDirection = YGDirection.YGDirectionInherit;
     public int nextCachedMeasurementsIndex = 0;
-    public @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>(YG_MAX_CACHED_RESULT_COUNT);
-    public @NotNull ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
-    public @NotNull YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
+    public final @NotNull ArrayList<YGCachedMeasurement> cachedMeasurements = new ArrayList<>(YG_MAX_CACHED_RESULT_COUNT);
+    public final @NotNull ArrayList<Float> measuredDimensions = new ArrayList<>(Arrays.asList(YGUndefined, YGUndefined));
+    public final @NotNull YGCachedMeasurement cachedLayout = new YGCachedMeasurement();
 
     public YGLayout() {
         for (int i = 0; i < YG_MAX_CACHED_RESULT_COUNT; i++) {
