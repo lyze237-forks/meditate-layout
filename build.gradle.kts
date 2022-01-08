@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "io.github.orioncraftmc"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -15,6 +15,10 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+java {
+    withSourcesJar()
 }
 
 tasks.getByName<Test>("test") {
