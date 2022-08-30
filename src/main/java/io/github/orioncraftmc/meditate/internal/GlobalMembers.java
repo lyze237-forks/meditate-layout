@@ -39,15 +39,50 @@ public class GlobalMembers {
     public static final YGValue YGValueAuto = new YGValue(YGUndefined, YGUnitAuto);
     public static final YGValue YGValueUndefined = new YGValue(YGUndefined, YGUnit.YGUnitUndefined);
     public static final YGValue YGValueZero = new YGValue(0, YGUnit.YGUnitPoint);
-    public static final ArrayList<YGEdge> leading = new ArrayList<>(
-            List.of(YGEdgeTop, YGEdgeBottom, YGEdgeLeft, YGEdgeRight));
-    public static final ArrayList<YGEdge> trailing = new ArrayList<>(
-            List.of(YGEdgeBottom, YGEdgeTop, YGEdgeRight, YGEdgeLeft));
-    public static final ArrayList<YGEdge> pos = new ArrayList<>(
-            List.of(YGEdgeTop, YGEdgeBottom, YGEdgeLeft, YGEdgeRight));
-    public static final ArrayList<YGDimension> dim = new ArrayList<>(
-            List.of(YGDimensionHeight, YGDimensionHeight, YGDimensionWidth,
-                    YGDimensionWidth));
+    public static final ArrayList<YGEdge> leading;
+
+    static {
+        List<YGEdge> ygEdges = new ArrayList<>();
+        ygEdges.add(YGEdgeTop);
+        ygEdges.add(YGEdgeBottom);
+        ygEdges.add(YGEdgeLeft);
+        ygEdges.add(YGEdgeRight);
+        leading = new ArrayList<>(ygEdges);
+    }
+
+    public static final ArrayList<YGEdge> trailing;
+
+    static {
+        List<YGEdge> ygEdges = new ArrayList<>();
+        ygEdges.add(YGEdgeBottom);
+        ygEdges.add(YGEdgeTop);
+        ygEdges.add(YGEdgeRight);
+        ygEdges.add(YGEdgeLeft);
+        trailing = new ArrayList<>(ygEdges);
+    }
+
+    public static final ArrayList<YGEdge> pos;
+
+    static {
+        List<YGEdge> ygEdges = new ArrayList<>();
+        ygEdges.add(YGEdgeTop);
+        ygEdges.add(YGEdgeBottom);
+        ygEdges.add(YGEdgeLeft);
+        ygEdges.add(YGEdgeRight);
+        pos = new ArrayList<>(ygEdges);
+    }
+
+    public static final ArrayList<YGDimension> dim;
+
+    static {
+        List<YGDimension> ygDimensions = new ArrayList<>();
+        ygDimensions.add(YGDimensionHeight);
+        ygDimensions.add(YGDimensionHeight);
+        ygDimensions.add(YGDimensionWidth);
+        ygDimensions.add(YGDimensionWidth);
+        dim = new ArrayList<>(ygDimensions);
+    }
+
     public static final String spacer = "                                                            ";
     public static final float kDefaultFlexGrow = 0.0f;
     public static final float kDefaultFlexShrink = 0.0f;
@@ -1129,7 +1164,11 @@ public class GlobalMembers {
 
     public static void YGConfigSetLogger(@NotNull YGConfig config, @Nullable YGLogger logger) //Method definition originates from: Yoga.cpp
     {
-        config.setLogger(Objects.requireNonNullElseGet(logger, () -> GlobalMembers::YGDefaultLog));
+        if (logger == null) {
+            config.setLogger((config1, node, level, format, args) -> YGDefaultLog(config1, node, level, format, args));
+        } else {
+            config.setLogger(logger);
+        }
     }
 
     @Contract("false, _ -> fail")
