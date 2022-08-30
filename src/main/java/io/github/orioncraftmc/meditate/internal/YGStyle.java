@@ -34,7 +34,12 @@ public class YGStyle //Type originates from: YGStyle.h
     private final Values<YGDimension> dimensions_ = new Values<>(CompactValue.ofAuto().convertToYgValue());
     private final Values<YGDimension> minDimensions_ = new Values<>();
     private final Values<YGDimension> maxDimensions_ = new Values<>();
-    private final Map<Object, Object> flags = new HashMap<>(Map.of());
+    private final Map<Object, Object> flags;
+
+    {
+        flags = new HashMap<>();
+    }
+
     private YGFloatOptional aspectRatio_ = new YGFloatOptional();
     private YGFloatOptional flex_ = new YGFloatOptional();
     private YGFloatOptional flexGrow_ = new YGFloatOptional();
