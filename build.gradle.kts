@@ -1,5 +1,5 @@
 plugins {
-    java
+    `java-library`
     `maven-publish`
 }
 
@@ -19,6 +19,8 @@ dependencies {
 
 java {
     withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.getByName<Test>("test") {

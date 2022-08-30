@@ -53,7 +53,7 @@ public class YGNode {
         children_ = node.children_; //TODO: Make full copy
         config_ = node.config_;
         resolvedDimensions_ = node.resolvedDimensions_;
-        for (@NotNull var c : children_) {
+        for (YGNode c : children_) {
             c.setOwner(this);
         }
     }
@@ -224,28 +224,28 @@ public class YGNode {
     }
 
     public @NotNull YGFloatOptional getLeadingPosition(final @NotNull YGFlexDirection axis, final float axisSize) {
-        var leadingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
+        CompactValue leadingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValue(leadingPosition, axisSize);
     }
 
     public @NotNull YGFloatOptional getTrailingPosition(final @NotNull YGFlexDirection axis, final float axisSize) {
-        var trailingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
+        CompactValue trailingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValue(trailingPosition, axisSize);
     }
 
     public boolean isLeadingPositionDefined(final @NotNull YGFlexDirection axis) {
-        var leadingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
+        CompactValue leadingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofUndefined()) : computeEdgeValueForColumn(style_.position(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofUndefined());
         return !leadingPosition.isUndefined();
     }
 
     public boolean isTrailingPosDefined(final @NotNull YGFlexDirection axis) {
-        var trailingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
+        CompactValue trailingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofUndefined()) : computeEdgeValueForColumn(
                 style_.position(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofUndefined());
@@ -253,14 +253,14 @@ public class YGNode {
     }
 
     public @NotNull YGFloatOptional getLeadingMargin(final @NotNull YGFlexDirection axis, final float widthSize) {
-        var leadingMargin = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeStart,
+        CompactValue leadingMargin = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValueMargin(leadingMargin, widthSize);
     }
 
     public @NotNull YGFloatOptional getTrailingMargin(final @NotNull YGFlexDirection axis, final float widthSize) {
-        var trailingMargin = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeEnd,
+        CompactValue trailingMargin = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValueMargin(trailingMargin, widthSize);
@@ -433,7 +433,7 @@ public class YGNode {
     public void resolveDimension() {
         final YGStyle style = getStyle();
         YGDimension @NotNull [] dimensions = new YGDimension[]{YGDimension.YGDimensionWidth, YGDimension.YGDimensionHeight};
-        for (@NotNull var dim : dimensions) {
+        for (YGDimension dim : dimensions) {
             if (!style.maxDimensions().getCompactValue(dim.getValue()).isUndefined() && GlobalMembers.YGValueEqual(
                     style.maxDimensions().getCompactValue(dim.getValue()),
                     style.minDimensions().getCompactValue(dim.getValue()))) {
@@ -538,14 +538,14 @@ public class YGNode {
     }
 
     public YGFloatOptional getLeadingPadding(final @NotNull YGFlexDirection axis, final float widthSize) {
-        var leadingPadding = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeStart,
+        CompactValue leadingPadding = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGFloatOptionalMax(GlobalMembers.YGResolveValue(leadingPadding, widthSize), new YGFloatOptional(0.0f));
     }
 
     public YGFloatOptional getTrailingPadding(final @NotNull YGFlexDirection axis, final float widthSize) {
-        var trailingPadding = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeEnd,
+        CompactValue trailingPadding = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGFloatOptionalMax(GlobalMembers.YGResolveValue(trailingPadding, widthSize), new YGFloatOptional(0.0f));
@@ -564,7 +564,7 @@ public class YGNode {
         if (didUseLegacyFlag) {
             return true;
         }
-        for (@NotNull var child : children_) {
+        for (YGNode child : children_) {
             if (child.layout_.didUseLegacyFlag()) {
                 didUseLegacyFlag = true;
                 break;
@@ -609,7 +609,7 @@ public class YGNode {
 
         clearChildren();
 
-        var webDefaults = getBooleanData(flags, useWebDefaults_);
+        boolean webDefaults = getBooleanData(flags, useWebDefaults_);
         this.config_ = new YGConfig(null);
         if (webDefaults) {
             useWebDefaults();
