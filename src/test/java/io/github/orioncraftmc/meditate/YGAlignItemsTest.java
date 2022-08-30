@@ -8,7 +8,6 @@
 
 package io.github.orioncraftmc.meditate;
 
-import com.facebook.yoga.enums.*;
 import io.github.orioncraftmc.meditate.enums.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;

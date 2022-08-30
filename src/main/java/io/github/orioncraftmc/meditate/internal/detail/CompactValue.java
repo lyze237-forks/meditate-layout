@@ -56,12 +56,23 @@ public class CompactValue //Type originates from: CompactValue.h
     }
 
     public static @NotNull CompactValue createCompactValue(final @NotNull YGValue x) {
-        @Nullable CompactValue compactValue = switch (x.unit) {
-            case YGUnitUndefined -> ofUndefined();
-            case YGUnitAuto -> ofAuto();
-            case YGUnitPoint -> CompactValue.of(x.value, YGUnit.YGUnitPoint);
-            case YGUnitPercent -> CompactValue.of(x.value, YGUnit.YGUnitPercent);
-        };
+        CompactValue compactValue;
+        switch (x.unit) {
+            case YGUnitUndefined:
+                compactValue = ofUndefined();
+                break;
+            case YGUnitAuto:
+                compactValue = ofAuto();
+                break;
+            case YGUnitPoint:
+                compactValue = CompactValue.of(x.value, YGUnit.YGUnitPoint);
+                break;
+            case YGUnitPercent:
+                compactValue = CompactValue.of(x.value, YGUnit.YGUnitPercent);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
 
         return compactValue;
     }
