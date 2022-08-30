@@ -30,12 +30,12 @@ public class CompactValue //Type originates from: CompactValue.h
             return new CompactValue(new Payload(0f, Unit));
         }
 
-        final var upperBound = Unit == YGUnit.YGUnitPercent ? UPPER_BOUND_PERCENT : UPPER_BOUND_POINT;
+        final float upperBound = Unit == YGUnit.YGUnitPercent ? UPPER_BOUND_PERCENT : UPPER_BOUND_POINT;
         if (value > upperBound || value < -upperBound) {
             value = Math.copySign(upperBound, value);
         }
 
-        @NotNull var data = new Payload((value), Unit);
+        CompactValue.Payload data = new Payload((value), Unit);
         return new CompactValue(data);
     }
 
