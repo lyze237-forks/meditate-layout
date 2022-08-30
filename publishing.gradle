@@ -1,0 +1,26 @@
+javadoc {
+    failOnError = false
+}
+
+java {
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        MeditateLayout(MavenPublication) {
+            pom {
+                name = "meditate'layout"
+                description = "Meditate Layout is a full Java port of Yoga Layout by Facebook"
+                url = "https://github.com/lyze237-forks/meditate-layout"
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "https://raw.githubusercontent.com/lyze237-forks/meditate-layout/main/LICENSE"
+                    }
+                }
+            }
+            from components.java
+        }
+    }
+}

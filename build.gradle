@@ -1,0 +1,75 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+apply from: 'utils.gradle'
+group 'io.github.orioncraftmc'
+version '1.0.' + getGitHash()
+apply from: 'publishing.gradle'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly "org.jetbrains:annotations:$jetbrainsAnnotationsVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+java {
+    sourceCompatibility = 8
+    targetCompatibility = 8
+}
+
+compileTestJava {
+    sourceCompatibility = 8
+    targetCompatibility = 8
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        exceptionFormat = "full"
+        showStackTraces = true
+        showExceptions = true
+        showCauses = true
+        displayGranularity = 0
+        events = [
+                "standardOut",
+                "standardError",
+                "started",
+                "passed",
+                "skipped",
+                "failed"
+        ]
+        showStandardStreams = true
+    }
+
+    reports {
+        junitXml.configure {
+            enabled(true)
+        }
+    }
+}
+
+compileJava {
+    options.incremental = true
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
