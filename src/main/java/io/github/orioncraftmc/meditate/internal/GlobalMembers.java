@@ -151,11 +151,14 @@ public class GlobalMembers {
     }
 
     public static @NotNull YGFloatOptional YGResolveValue(final @NotNull YGValue value, final float ownerSize) {
-        return switch (value.unit) {
-            case YGUnitPoint -> new YGFloatOptional(value.value);
-            case YGUnitPercent -> new YGFloatOptional(value.value * ownerSize * 0.01f);
-            default -> new YGFloatOptional();
-        };
+        switch (value.unit) {
+            case YGUnitPoint:
+                return new YGFloatOptional(value.value);
+            case YGUnitPercent:
+                return new YGFloatOptional(value.value * ownerSize * 0.01f);
+            default:
+                return new YGFloatOptional();
+        }
     }
 
     public static @NotNull YGFloatOptional YGResolveValue(@NotNull CompactValue value, float ownerSize) {
@@ -184,16 +187,26 @@ public class GlobalMembers {
 
     public static @NotNull String YGAlignToString(final @NotNull YGAlign value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGAlignAuto -> "auto";
-            case YGAlignFlexStart -> "flex-start";
-            case YGAlignCenter -> "center";
-            case YGAlignFlexEnd -> "flex-end";
-            case YGAlignStretch -> "stretch";
-            case YGAlignBaseline -> "baseline";
-            case YGAlignSpaceBetween -> "space-between";
-            case YGAlignSpaceAround -> "space-around";
-        };
+        switch (value) {
+            case YGAlignAuto:
+                return "auto";
+            case YGAlignFlexStart:
+                return "flex-start";
+            case YGAlignCenter:
+                return "center";
+            case YGAlignFlexEnd:
+                return "flex-end";
+            case YGAlignStretch:
+                return "stretch";
+            case YGAlignBaseline:
+                return "baseline";
+            case YGAlignSpaceBetween:
+                return "space-between";
+            case YGAlignSpaceAround:
+                return "space-around";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String LayoutPassReasonToString(final LayoutPassReason value) {
@@ -220,42 +233,66 @@ public class GlobalMembers {
     //					   ;
     public static @NotNull String YGDimensionToString(final @NotNull YGDimension value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGDimensionWidth -> "width";
-            case YGDimensionHeight -> "height";
-        };
+        switch (value) {
+            case YGDimensionWidth:
+                return "width";
+            case YGDimensionHeight:
+                return "height";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGDirectionToString(final @NotNull YGDirection value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGDirectionInherit -> "inherit";
-            case YGDirectionLTR -> "ltr";
-            case YGDirectionRTL -> "rtl";
-        };
+        switch (value) {
+            case YGDirectionInherit:
+                return "inherit";
+            case YGDirectionLTR:
+                return "ltr";
+            case YGDirectionRTL:
+                return "rtl";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGDisplayToString(final @NotNull YGDisplay value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGDisplayFlex -> "flex";
-            case YGDisplayNone -> "none";
-        };
+        switch (value) {
+            case YGDisplayFlex:
+                return "flex";
+            case YGDisplayNone:
+                return "none";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGEdgeToString(final @NotNull YGEdge value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGEdgeLeft -> "left";
-            case YGEdgeTop -> "top";
-            case YGEdgeRight -> "right";
-            case YGEdgeBottom -> "bottom";
-            case YGEdgeStart -> "start";
-            case YGEdgeEnd -> "end";
-            case YGEdgeHorizontal -> "horizontal";
-            case YGEdgeVertical -> "vertical";
-            case YGEdgeAll -> "all";
-        };
+        switch (value) {
+            case YGEdgeLeft:
+                return "left";
+            case YGEdgeTop:
+                return "top";
+            case YGEdgeRight:
+                return "right";
+            case YGEdgeBottom:
+                return "bottom";
+            case YGEdgeStart:
+                return "start";
+            case YGEdgeEnd:
+                return "end";
+            case YGEdgeHorizontal:
+                return "horizontal";
+            case YGEdgeVertical:
+                return "vertical";
+            case YGEdgeAll:
+                return "all";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGExperimentalFeatureToString(final @NotNull YGExperimentalFeature value) //Method definition originates from: YGEnums.cpp
@@ -268,99 +305,156 @@ public class GlobalMembers {
 
     public static @NotNull String YGFlexDirectionToString(final @NotNull YGFlexDirection value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGFlexDirectionColumn -> "column";
-            case YGFlexDirectionColumnReverse -> "column-reverse";
-            case YGFlexDirectionRow -> "row";
-            case YGFlexDirectionRowReverse -> "row-reverse";
-        };
+        switch (value) {
+            case YGFlexDirectionColumn:
+                return "column";
+            case YGFlexDirectionColumnReverse:
+                return "column-reverse";
+            case YGFlexDirectionRow:
+                return "row";
+            case YGFlexDirectionRowReverse:
+                return "row-reverse";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGJustifyToString(final @NotNull YGJustify value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGJustifyFlexStart -> "flex-start";
-            case YGJustifyCenter -> "center";
-            case YGJustifyFlexEnd -> "flex-end";
-            case YGJustifySpaceBetween -> "space-between";
-            case YGJustifySpaceAround -> "space-around";
-            case YGJustifySpaceEvenly -> "space-evenly";
-        };
+        switch (value) {
+            case YGJustifyFlexStart:
+                return "flex-start";
+            case YGJustifyCenter:
+                return "center";
+            case YGJustifyFlexEnd:
+                return "flex-end";
+            case YGJustifySpaceBetween:
+                return "space-between";
+            case YGJustifySpaceAround:
+                return "space-around";
+            case YGJustifySpaceEvenly:
+                return "space-evenly";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGLogLevelToString(final @NotNull YGLogLevel value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGLogLevelError -> "error";
-            case YGLogLevelWarn -> "warn";
-            case YGLogLevelInfo -> "info";
-            case YGLogLevelDebug -> "debug";
-            case YGLogLevelVerbose -> "verbose";
-            case YGLogLevelFatal -> "fatal";
-        };
+        switch (value) {
+            case YGLogLevelError:
+                return "error";
+            case YGLogLevelWarn:
+                return "warn";
+            case YGLogLevelInfo:
+                return "info";
+            case YGLogLevelDebug:
+                return "debug";
+            case YGLogLevelVerbose:
+                return "verbose";
+            case YGLogLevelFatal:
+                return "fatal";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGMeasureModeToString(final @NotNull YGMeasureMode value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGMeasureModeUndefined -> "undefined";
-            case YGMeasureModeExactly -> "exactly";
-            case YGMeasureModeAtMost -> "at-most";
-        };
+        switch (value) {
+            case YGMeasureModeUndefined:
+                return "undefined";
+            case YGMeasureModeExactly:
+                return "exactly";
+            case YGMeasureModeAtMost:
+                return "at-most";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGNodeTypeToString(final @NotNull YGNodeType value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGNodeTypeDefault -> "default";
-            case YGNodeTypeText -> "text";
-        };
+        switch (value) {
+            case YGNodeTypeDefault:
+                return "default";
+            case YGNodeTypeText:
+                return "text";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGOverflowToString(final @NotNull YGOverflow value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGOverflowVisible -> "visible";
-            case YGOverflowHidden -> "hidden";
-            case YGOverflowScroll -> "scroll";
-        };
+        switch (value) {
+            case YGOverflowVisible:
+                return "visible";
+            case YGOverflowHidden:
+                return "hidden";
+            case YGOverflowScroll:
+                return "scroll";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGPositionTypeToString(final @NotNull YGPositionType value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGPositionTypeStatic -> "static";
-            case YGPositionTypeRelative -> "relative";
-            case YGPositionTypeAbsolute -> "absolute";
-        };
+        switch (value) {
+            case YGPositionTypeStatic:
+                return "static";
+            case YGPositionTypeRelative:
+                return "relative";
+            case YGPositionTypeAbsolute:
+                return "absolute";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGPrintOptionsToString(final @NotNull YGPrintOptions value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGPrintOptionsLayout -> "layout";
-            case YGPrintOptionsStyle -> "style";
-            case YGPrintOptionsChildren -> "children";
-        };
+        switch (value) {
+            case YGPrintOptionsLayout:
+                return "layout";
+            case YGPrintOptionsStyle:
+                return "style";
+            case YGPrintOptionsChildren:
+                return "children";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGUnitToString(final @NotNull YGUnit value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGUnitUndefined -> "undefined";
-            case YGUnitPoint -> "point";
-            case YGUnitPercent -> "percent";
-            case YGUnitAuto -> "auto";
-        };
+        switch (value) {
+            case YGUnitUndefined:
+                return "undefined";
+            case YGUnitPoint:
+                return "point";
+            case YGUnitPercent:
+                return "percent";
+            case YGUnitAuto:
+                return "auto";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull String YGWrapToString(final @NotNull YGWrap value) //Method definition originates from: YGEnums.cpp
     {
-        return switch (value) {
-            case YGWrapNoWrap -> "no-wrap";
-            case YGWrapWrap -> "wrap";
-            case YGWrapWrapReverse -> "wrap-reverse";
-        };
+        switch (value) {
+            case YGWrapNoWrap:
+                return "no-wrap";
+            case YGWrapWrap:
+                return "wrap";
+            case YGWrapWrapReverse:
+                return "wrap-reverse";
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public static @NotNull YGNode YGNodeNew() //Method definition originates from: Yoga.cpp
