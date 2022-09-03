@@ -15,13 +15,17 @@ public class FlexBox extends WidgetGroup {
 
     private final Array<YogaActor> nodes = new Array<>();
 
+    private boolean prefSizeInvalid;
     private float prefWidth, prefHeight;
+    private float lastPrefWidth, lastPrefHeight;
+    
     public FlexBox() {
         this.config = YogaConfigFactory.create();
         this.config.setUseWebDefaults(true);
 
         this.root = YogaNodeFactory.create();
     }
+    
     public FlexBox(YogaConfig config) {
         this.config = config;
         this.root = YogaNodeFactory.create();
@@ -30,26 +34,23 @@ public class FlexBox extends WidgetGroup {
     @Override
     public void layout() {
         super.layout();
-
+    
+        //update the bounds of the FlexBox
+        if (prefSizeInvalid) calcPrefSize();
+        if (prefWidth != lastPrefWidth || prefHeight != lastPrefHeight) {
+            lastPrefWidth = prefWidth;
+            lastPrefHeight = prefHeight;
+            invalidateHierarchy();
+        }
+        setBounds(0, 0, getWidth(), getHeight());
+    
+        //update the bounds of the children
         root.calculateLayout(getWidth(), getHeight());
-
-        float maxWidth = 0, maxHeight = 0;
         for (YogaActor yogaActor : nodes) {
             YogaNode node = yogaActor.getNode();
             Actor actor = yogaActor.getActor();
-
-            System.out.println(node.getLayoutX() + " / " + node.getLayoutY() + " / " + node.getLayoutWidth() + " / " + node.getLayoutHeight());
-
             actor.setBounds(node.getLayoutX(), node.getLayoutY(), node.getLayoutWidth(), node.getLayoutHeight());
-
-            maxWidth = Math.max(maxWidth, node.getLayoutX() + node.getLayoutWidth());
-            maxHeight = Math.max(maxHeight, node.getLayoutY() + node.getLayoutHeight());
         }
-        prefWidth = maxWidth;
-        prefHeight = maxHeight;
-
-        System.out.println("Size: " + getWidth() + " / " + getHeight());
-        setSize(maxWidth, maxHeight);
     }
 
     public YogaNode add(Actor actor) {
@@ -134,14 +135,42 @@ public class FlexBox extends WidgetGroup {
     public YogaNode getRoot() {
         return root;
     }
-
+    
     @Override
     public float getPrefWidth() {
+        if (prefSizeInvalid) calcPrefSize();
         return prefWidth;
     }
-
+    
     @Override
     public float getPrefHeight() {
+        if (prefSizeInvalid) calcPrefSize();
         return prefHeight;
+    }
+    
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        prefSizeInvalid = true;
+    }
+    
+    private void calcPrefSize() {
+        prefSizeInvalid = false;
+        
+        root.calculateLayout(0, getHeight());
+        float maxWidth = 0;
+        for (YogaActor yogaActor : nodes) {
+            YogaNode node = yogaActor.getNode();
+            maxWidth = Math.max(maxWidth, node.getLayoutX() + node.getLayoutWidth());
+        }
+        prefWidth = maxWidth;
+        
+        root.calculateLayout(getWidth(), 0);
+        float maxHeight = 0;
+        for (YogaActor yogaActor : nodes) {
+            YogaNode node = yogaActor.getNode();
+            maxHeight = Math.max(maxHeight, node.getLayoutY() + node.getLayoutHeight());
+        }
+        prefHeight = maxHeight;
     }
 }
