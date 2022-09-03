@@ -18,6 +18,10 @@ group 'io.github.orioncraftmc'
 version '1.0.' + getGitHash()
 apply from: 'publishing.gradle'
 
+ext {
+    gdxVersion = '1.9.11'
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -29,6 +33,7 @@ dependencies {
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    api "com.badlogicgames.gdx:gdx:$gdxVersion"
 }
 
 java {
