@@ -49,7 +49,7 @@ public class FlexBox extends WidgetGroup {
         for (YogaActor yogaActor : nodes) {
             YogaNode node = yogaActor.getNode();
             Actor actor = yogaActor.getActor();
-            actor.setBounds(node.getLayoutX(), node.getLayoutY(), node.getLayoutWidth(), node.getLayoutHeight());
+            actor.setBounds(node.getLayoutX(), getHeight() - node.getLayoutY() - node.getLayoutHeight(), node.getLayoutWidth(), node.getLayoutHeight());
         }
     }
 
