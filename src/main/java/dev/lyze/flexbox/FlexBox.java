@@ -21,8 +21,6 @@ public class FlexBox extends WidgetGroup {
     
     public FlexBox() {
         this.config = YogaConfigFactory.create();
-        this.config.setUseWebDefaults(true);
-
         this.root = YogaNodeFactory.create();
     }
     
