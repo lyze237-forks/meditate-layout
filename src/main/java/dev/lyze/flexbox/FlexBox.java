@@ -153,16 +153,14 @@ public class FlexBox extends WidgetGroup {
      * Removes all child actors and nodes.
      */
     @Override
-    public void clear() {
-        for (int i = root.getChildCount() - 1; i >= 0; i--)
-            root.removeChildAt(i);
-
+    public void clearChildren() {
+        super.clearChildren();
         for (YogaActor node : nodes)
             removeActor(node.getActor());
-
+    
         nodes.clear();
     }
-
+    
     private static class YogaActor {
         private final YogaNode node;
         private final Actor actor;
