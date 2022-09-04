@@ -1,6 +1,7 @@
 package dev.lyze.flexbox;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Array;
@@ -225,5 +226,91 @@ public class FlexBox extends WidgetGroup {
             maxHeight = Math.max(maxHeight, node.getLayoutY() + node.getLayoutHeight());
         }
         prefHeight = maxHeight;
+    }
+    
+    /**
+     *
+     * @param actor
+     * @see #add(Actor)
+     */
+    @Override
+    @Deprecated
+    public void addActor(Actor actor) {
+        super.addActor(actor);
+    }
+    
+    /**
+     *
+     * @param index May be greater than the number of children.
+     * @param actor
+     * @see #addAt(Actor, int)
+     */
+    @Override
+    @Deprecated
+    public void addActorAt(int index, Actor actor) {
+        super.addActorAt(index, actor);
+    }
+    
+    /**
+     *
+     * @param actorBefore
+     * @param actor
+     * @see #addAt(Actor, int)
+     */
+    @Override
+    @Deprecated
+    public void addActorBefore(Actor actorBefore, Actor actor) {
+        super.addActorBefore(actorBefore, actor);
+    }
+    
+    /**
+     *
+     * @param actorAfter
+     * @param actor
+     * @see #addAt(Actor, int)
+     */
+    @Override
+    @Deprecated
+    public void addActorAfter(Actor actorAfter, Actor actor) {
+        super.addActorAfter(actorAfter, actor);
+    }
+    
+    /**
+     *
+     * @param actor
+     * @return
+     * @see #remove(YogaNode)
+     */
+    @Override
+    @Deprecated
+    public boolean removeActor(Actor actor) {
+        return super.removeActor(actor);
+    }
+    
+    /**
+     *
+     * @param actor
+     * @param unfocus
+     * @return
+     * @see #remove(YogaNode)
+     */
+    @Override
+    @Deprecated
+    public boolean removeActor(Actor actor, boolean unfocus) {
+        return super.removeActor(actor, unfocus);
+    }
+    
+    /**
+     *
+     * @param index
+     * @param unfocus If true, {@link Stage#unfocus(Actor)} is called.
+     * @return
+     *
+     * @see #remove(YogaNode)
+     */
+    @Override
+    @Deprecated
+    public Actor removeActorAt(int index, boolean unfocus) {
+        return super.removeActorAt(index, unfocus);
     }
 }
