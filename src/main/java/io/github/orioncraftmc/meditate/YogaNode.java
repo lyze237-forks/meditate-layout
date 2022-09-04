@@ -9,7 +9,6 @@ package io.github.orioncraftmc.meditate;
 
 import io.github.orioncraftmc.meditate.enums.*;
 import io.github.orioncraftmc.meditate.interfaces.*;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class YogaNode implements YogaProps {
 
@@ -17,7 +16,7 @@ public abstract class YogaNode implements YogaProps {
   public interface Inputs {
 
     /** Requests the data object to disable mutations of its inputs. */
-    void freeze(final YogaNode node, final @Nullable YogaNode parent);
+    void freeze(final YogaNode node, final  YogaNode parent);
   }
 
   public abstract void reset();
@@ -40,12 +39,12 @@ public abstract class YogaNode implements YogaProps {
    *     {@link YogaNode} when the {@link YogaNode} only belongs to one YogaTree or null when the
    *     {@link YogaNode} is shared between two or more YogaTrees.
    */
-  @Nullable
+  
   public abstract YogaNode getOwner();
 
   /** @deprecated Use #getOwner() instead. This will be removed in the next version. */
   @Deprecated
-  @Nullable
+  
   public abstract YogaNode getParent();
 
   public abstract int indexOf(YogaNode child);
@@ -216,7 +215,7 @@ public abstract class YogaNode implements YogaProps {
 
   public abstract void setData(Object data);
 
-  @Nullable
+  
   public abstract Object getData();
 
   public abstract void print();
