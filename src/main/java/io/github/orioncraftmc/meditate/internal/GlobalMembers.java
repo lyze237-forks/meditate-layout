@@ -1333,8 +1333,8 @@ public class GlobalMembers {
         return isUndefined(value);
     }
 
-    public static  YGConfig YGConfigClone(final  YGConfig oldConfig) {
-         YGConfig config = oldConfig.clone();
+    public static  YGConfig YGConfigClone(final YGConfig oldConfig) {
+        YGConfig config = oldConfig.shallowClone();
         YGAssert(config != null, "Could not allocate memory for config");
         gConfigInstanceCount++;
         return config;
