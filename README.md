@@ -6,9 +6,10 @@ Meditate Layout is a full Java port of [Yoga Layout by Facebook](https://github.
 [![License](https://img.shields.io/github/license/lyze237-forks/meditate-layout)](https://github.com/lyze237-forks/meditate-layout/blob/main/LICENSE)
 [![Jitpack](https://jitpack.io/v/lyze237-forks/meditate-layout.svg)](https://jitpack.io/#lyze237-forks/meditate-layout)
 
-This fork downgrades the project to Java 8 and supports GWT.
+This fork downgrades the project to Java 8 and supports GWT for compatibility with libGDX. It adds the FlexBox class to 
+implement Yoga Layout in Scene2D UI's. 
 
-### Simple Example
+### Yoga Layout Simple Example
 
 Check out https://yogalayout.com/playground for a playground and https://yogalayout.com/docs (Or any other flexbox tutorial) for docs.
 
@@ -37,6 +38,35 @@ public class Example {
         // root.getChildAt(0).getLayoutWidth();
         // root.getChildAt(0).getLayoutHeight();
     }
+}
+```
+
+### libGDX Scene2D Example
+
+```java
+@Override
+public void create() {
+    ...
+    stage = new Stage(new ScreenViewport());
+    stage.setDebugAll(true);
+
+    flexBox = new FlexBox();
+    flexBox.setFillParent(true);
+    flexBox.getRoot().setFlexDirection(YogaFlexDirection.ROW);
+    flexBox.getRoot().setWrap(YogaWrap.WRAP);
+    stage.addActor(flexBox);
+        
+    Label label = new Label("Item 1", skin);
+    label.setAlignment(Align.center);
+    YogaNode node = flexBox.add(label);
+    node.setWidth(100);
+    node.setHeight(100);
+        
+    label = new Label("Item 2", skin);
+    label.setAlignment(Align.center);
+    YogaNode node = flexBox.add(label);
+    node.setWidth(100);
+    node.setHeight(100);
 }
 ```
 
