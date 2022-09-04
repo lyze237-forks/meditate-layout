@@ -7,6 +7,7 @@
 
 package io.github.orioncraftmc.meditate.interfaces;
 
+import io.github.orioncraftmc.meditate.YogaNode;
 import io.github.orioncraftmc.meditate.YogaValue;
 import io.github.orioncraftmc.meditate.enums.*;
 
@@ -14,99 +15,115 @@ public interface YogaProps {
 
   /* Width properties */
 
-  void setWidth(float width);
+  YogaNode setWidth(float width);
 
-  void setWidthPercent(float percent);
+  YogaNode setWidthPercent(float percent);
 
-  void setMinWidth(float minWidth);
+  YogaNode setMinWidth(float minWidth);
 
-  void setMinWidthPercent(float percent);
+  YogaNode setMinWidthPercent(float percent);
 
-  void setMaxWidth(float maxWidth);
+  YogaNode setMaxWidth(float maxWidth);
 
-  void setMaxWidthPercent(float percent);
+  YogaNode setMaxWidthPercent(float percent);
 
-  void setWidthAuto();
+  YogaNode setWidthAuto();
 
   /* Height properties */
 
-  void setHeight(float height);
+  YogaNode setHeight(float height);
 
-  void setHeightPercent(float percent);
+  YogaNode setHeightPercent(float percent);
 
-  void setMinHeight(float minHeight);
+  YogaNode setMinHeight(float minHeight);
 
-  void setMinHeightPercent(float percent);
+  YogaNode setMinHeightPercent(float percent);
 
-  void setMaxHeight(float maxHeight);
+  YogaNode setMaxHeight(float maxHeight);
 
-  void setMaxHeightPercent(float percent);
+  YogaNode setMaxHeightPercent(float percent);
 
-  void setHeightAuto();
+  YogaNode setHeightAuto();
+  
+  /* Size convenience methods */
+  
+  YogaNode setSize(float size);
+  
+  YogaNode setSizePercent(float percent);
+  
+  YogaNode setMinSize(float minSize);
+  
+  YogaNode setMinSizePercent(float percent);
+  
+  YogaNode setMaxSize(float minSize);
+  
+  YogaNode setMaxSizePercent(float percent);
+  
+  YogaNode setSizeAuto();
 
   /* Margin properties */
 
-  void setMargin(YogaEdge edge, float margin);
+  YogaNode setMargin(YogaEdge edge, float margin);
 
-  void setMarginPercent(YogaEdge edge, float percent);
+  YogaNode setMarginPercent(YogaEdge edge, float percent);
 
-  void setMarginAuto(YogaEdge edge);
+  YogaNode setMarginAuto(YogaEdge edge);
 
   /* Padding properties */
 
-  void setPadding(YogaEdge edge, float padding);
+  YogaNode setPadding(YogaEdge edge, float padding);
 
-  void setPaddingPercent(YogaEdge edge, float percent);
+  YogaNode setPaddingPercent(YogaEdge edge, float percent);
 
   /* Position properties */
 
-  void setPositionType(YogaPositionType positionType);
+  YogaNode setPositionType(YogaPositionType positionType);
 
-  void setPosition(YogaEdge edge, float position);
+  YogaNode setPosition(YogaEdge edge, float position);
 
-  void setPositionPercent(YogaEdge edge, float percent);
+  YogaNode setPositionPercent(YogaEdge edge, float percent);
 
   /* Alignment properties */
 
-  void setAlignContent(YogaAlign alignContent);
+  YogaNode setAlignContent(YogaAlign alignContent);
 
-  void setAlignItems(YogaAlign alignItems);
+  YogaNode setAlignItems(YogaAlign alignItems);
 
-  void setAlignSelf(YogaAlign alignSelf);
+  YogaNode setAlignSelf(YogaAlign alignSelf);
 
   /* Flex properties */
 
-  void setFlex(float flex);
+  YogaNode setFlex(float flex);
 
-  void setFlexBasisAuto();
+  YogaNode setFlexBasisAuto();
 
-  void setFlexBasisPercent(float percent);
+  YogaNode setFlexBasisPercent(float percent);
 
-  void setFlexBasis(float flexBasis);
+  YogaNode setFlexBasis(float flexBasis);
 
-  void setFlexDirection(YogaFlexDirection direction);
+  YogaNode setFlexDirection(YogaFlexDirection direction);
 
-  void setFlexGrow(float flexGrow);
+  YogaNode setFlexGrow(float flexGrow);
 
-  void setFlexShrink(float flexShrink);
+  YogaNode setFlexShrink(float flexShrink);
 
   /* Other properties */
 
-  void setJustifyContent(YogaJustify justifyContent);
+  YogaNode setJustifyContent(YogaJustify justifyContent);
 
-  void setDirection(YogaDirection direction);
+  YogaNode setDirection(YogaDirection direction);
 
-  void setBorder(YogaEdge edge, float value);
+  YogaNode setBorder(YogaEdge edge, float value);
 
-  void setWrap(YogaWrap wrap);
+  YogaNode setWrap(YogaWrap wrap);
 
-  void setAspectRatio(float aspectRatio);
+  YogaNode setAspectRatio(float aspectRatio);
 
-  void setIsReferenceBaseline(boolean isReferenceBaseline);
+  YogaNode setIsReferenceBaseline(boolean isReferenceBaseline);
 
   void setMeasureFunction(YogaMeasureFunction measureFunction);
 
-  void setBaselineFunction(YogaBaselineFunction yogaBaselineFunction);
+  YogaNode setBaselineFunction(YogaBaselineFunction yogaBaselineFunction);
 
   /* Getters */
 

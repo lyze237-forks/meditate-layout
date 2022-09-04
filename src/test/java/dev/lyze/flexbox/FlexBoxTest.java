@@ -48,8 +48,7 @@ public class FlexBoxTest extends ApplicationAdapter {
 			VisLabel label = new VisLabel(Integer.toString(i));
 			label.setAlignment(Align.center);
 			YogaNode node = flexBox.add(label);
-			node.setWidth(100);
-			node.setHeight(100);
+			node.setWidth(100).setHeight(100);
 		}
 	}
 
