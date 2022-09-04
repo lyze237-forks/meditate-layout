@@ -18,6 +18,11 @@ group 'io.github.orioncraftmc'
 version '1.0.' + getGitHash()
 apply from: 'publishing.gradle'
 
+ext {
+    gdxVersion = '1.11.0'
+    visuiVersion = '1.5.0'
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -25,10 +30,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly "org.jetbrains:annotations:$jetbrainsAnnotationsVersion"
-
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testImplementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    testImplementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    api "com.kotcrab.vis:vis-ui:$visuiVersion"
 }
 
 java {

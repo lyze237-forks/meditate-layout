@@ -10,8 +10,6 @@ import io.github.orioncraftmc.meditate.internal.enums.*;
 import io.github.orioncraftmc.meditate.internal.interfaces.*;
 import java.util.*;
 import java.util.function.BiConsumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class YGNode {
 
@@ -23,23 +21,23 @@ public class YGNode {
     private static final int baselineUsesContext_ = 5;
     private static final int printUsesContext_ = 6;
     private static final int useWebDefaults_ = 7;
-    private @Nullable Object context_ = null;
+    private  Object context_ = null;
     private Map<Object, Object> flags = new HashMap<>();
     private byte reserved_ = 0;
     private measure_Struct measure_ = new measure_Struct();
     private baseline_Struct baseline_ = new baseline_Struct();
     private print_Struct print_ = new print_Struct();
-    private @Nullable YGDirtiedFunc dirtied_ = null;
+    private  YGDirtiedFunc dirtied_ = null;
     private YGStyle style_ = new YGStyle();
     private YGLayout layout_ = new YGLayout();
     private int lineIndex_ = 0;
-    private @Nullable YGNode owner_ = null;
+    private  YGNode owner_ = null;
     private ArrayList<YGNode> children_ = new ArrayList<>();
-    private @Nullable YGConfig config_ = new YGConfig(null);
+    private  YGConfig config_ = new YGConfig(null);
     private ArrayList<YGValue> resolvedDimensions_ = new ArrayList<>(
             Arrays.asList(GlobalMembers.YGValueUndefined, GlobalMembers.YGValueUndefined));
 
-    public YGNode(@NotNull YGNode node) {
+    public YGNode( YGNode node) {
         context_ = node.context_;
         flags = node.flags;
         measure_ = node.measure_;
@@ -58,7 +56,7 @@ public class YGNode {
         }
     }
 
-    public YGNode(final @NotNull YGNode node, @NotNull YGConfig config) {
+    public YGNode(final  YGNode node,  YGConfig config) {
         this(node);
         config_ = config;
         if (config.useWebDefaults) {
@@ -66,14 +64,14 @@ public class YGNode {
         }
     }
 
-    public YGNode(@NotNull YGConfig config) {
+    public YGNode( YGConfig config) {
         config_ = config;
         if (config.useWebDefaults) {
             useWebDefaults();
         }
     }
 
-    public static CompactValue computeEdgeValueForRow(final @NotNull Values<YGEdge> edges, @NotNull YGEdge rowEdge, @NotNull YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp
+    public static CompactValue computeEdgeValueForRow(final  Values<YGEdge> edges,  YGEdge rowEdge,  YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp
     {
         if (!edges.getCompactValue(rowEdge).isUndefined()) {
             return edges.getCompactValue(rowEdge);
@@ -88,7 +86,7 @@ public class YGNode {
         }
     }
 
-    public static CompactValue computeEdgeValueForColumn(final @NotNull Values<YGEdge> edges, @NotNull YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp
+    public static CompactValue computeEdgeValueForColumn(final  Values<YGEdge> edges,  YGEdge edge, CompactValue defaultValue) //Method definition originates from: YGNode.cpp
     {
         if (!edges.getCompactValue(edge).isUndefined()) {
             return edges.getCompactValue(edge);
@@ -184,7 +182,7 @@ public class YGNode {
         return getEnumData(YGNodeType.class, flags, nodeType_);
     }
 
-    public final void setNodeType(@NotNull YGNodeType nodeType) {
+    public final void setNodeType( YGNodeType nodeType) {
         setEnumData(YGNodeType.class, flags, nodeType_, nodeType);
     }
 
@@ -223,28 +221,28 @@ public class YGNode {
         }
     }
 
-    public @NotNull YGFloatOptional getLeadingPosition(final @NotNull YGFlexDirection axis, final float axisSize) {
+    public  YGFloatOptional getLeadingPosition(final  YGFlexDirection axis, final float axisSize) {
         CompactValue leadingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValue(leadingPosition, axisSize);
     }
 
-    public @NotNull YGFloatOptional getTrailingPosition(final @NotNull YGFlexDirection axis, final float axisSize) {
+    public  YGFloatOptional getTrailingPosition(final  YGFlexDirection axis, final float axisSize) {
         CompactValue trailingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.position(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValue(trailingPosition, axisSize);
     }
 
-    public boolean isLeadingPositionDefined(final @NotNull YGFlexDirection axis) {
+    public boolean isLeadingPositionDefined(final  YGFlexDirection axis) {
         CompactValue leadingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofUndefined()) : computeEdgeValueForColumn(style_.position(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofUndefined());
         return !leadingPosition.isUndefined();
     }
 
-    public boolean isTrailingPosDefined(final @NotNull YGFlexDirection axis) {
+    public boolean isTrailingPosDefined(final  YGFlexDirection axis) {
         CompactValue trailingPosition = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.position(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofUndefined()) : computeEdgeValueForColumn(
                 style_.position(),
@@ -252,21 +250,21 @@ public class YGNode {
         return !trailingPosition.isUndefined();
     }
 
-    public @NotNull YGFloatOptional getLeadingMargin(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public  YGFloatOptional getLeadingMargin(final  YGFlexDirection axis, final float widthSize) {
         CompactValue leadingMargin = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValueMargin(leadingMargin, widthSize);
     }
 
-    public @NotNull YGFloatOptional getTrailingMargin(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public  YGFloatOptional getTrailingMargin(final  YGFlexDirection axis, final float widthSize) {
         CompactValue trailingMargin = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.margin(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.margin(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGResolveValueMargin(trailingMargin, widthSize);
     }
 
-    public @NotNull YGFloatOptional getMarginForAxis(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public  YGFloatOptional getMarginForAxis(final  YGFlexDirection axis, final float widthSize) {
         return GlobalMembers.plus(getLeadingMargin(axis, widthSize), getTrailingMargin(axis, widthSize));
     }
 
@@ -280,7 +278,7 @@ public class YGNode {
                 layoutContext) : baseline_.noContext.invoke(this, width, height);
     }
 
-    public void setMeasureFunc(@NotNull measure_Struct measureFunc) {
+    public void setMeasureFunc( measure_Struct measureFunc) {
         if (measureFunc.noContext == null) {
             setNodeType(YGNodeType.YGNodeTypeDefault);
         } else {
@@ -370,12 +368,12 @@ public class YGNode {
         layout_.dimensions.set(index, dimension);
     }
 
-    public @NotNull YGFloatOptional relativePosition(final @NotNull YGFlexDirection axis, final float axisSize) {
+    public  YGFloatOptional relativePosition(final  YGFlexDirection axis, final float axisSize) {
         if (isLeadingPositionDefined(axis)) {
             return getLeadingPosition(axis, axisSize);
         }
 
-        @NotNull YGFloatOptional trailingPosition = getTrailingPosition(axis, axisSize);
+         YGFloatOptional trailingPosition = getTrailingPosition(axis, axisSize);
         if (!trailingPosition.isUndefined()) {
             trailingPosition = new YGFloatOptional((-1 * trailingPosition.unwrap()));
         }
@@ -385,13 +383,13 @@ public class YGNode {
     public void setPosition(final YGDirection direction, final float mainSize, final float crossSize, final float ownerWidth) {
 
 
-        final @NotNull YGDirection directionRespectingRoot = owner_ != null ? direction : YGDirection.YGDirectionLTR;
+        final  YGDirection directionRespectingRoot = owner_ != null ? direction : YGDirection.YGDirectionLTR;
         final YGFlexDirection mainAxis = GlobalMembers.YGResolveFlexDirection(style_.flexDirection(), directionRespectingRoot);
         final YGFlexDirection crossAxis = GlobalMembers.YGFlexDirectionCross(mainAxis, directionRespectingRoot);
 
 
-        final @NotNull YGFloatOptional relativePositionMain = relativePosition(mainAxis, mainSize);
-        final @NotNull YGFloatOptional relativePositionCross = relativePosition(crossAxis, crossSize);
+        final  YGFloatOptional relativePositionMain = relativePosition(mainAxis, mainSize);
+        final  YGFloatOptional relativePositionCross = relativePosition(crossAxis, crossSize);
 
         setLayoutPosition(GlobalMembers.plus(getLeadingMargin(mainAxis, ownerWidth), relativePositionMain).unwrap(),
                 GlobalMembers.leading.get(mainAxis.getValue()).getValue());
@@ -403,7 +401,7 @@ public class YGNode {
                 GlobalMembers.trailing.get(crossAxis.getValue()).getValue());
     }
 
-    public YGValue marginLeadingValue(final @NotNull YGFlexDirection axis) {
+    public YGValue marginLeadingValue(final  YGFlexDirection axis) {
         if (GlobalMembers.YGFlexDirectionIsRow(axis) && !style_.margin().getCompactValue(YGEdge.YGEdgeStart).isUndefined()) {
             return style_.margin().get(YGEdge.YGEdgeStart.getValue());
         } else {
@@ -411,7 +409,7 @@ public class YGNode {
         }
     }
 
-    public YGValue marginTrailingValue(final @NotNull YGFlexDirection axis) {
+    public YGValue marginTrailingValue(final  YGFlexDirection axis) {
         if (GlobalMembers.YGFlexDirectionIsRow(axis) && !style_.margin().getCompactValue(YGEdge.YGEdgeEnd).isUndefined()) {
             return style_.margin().get(YGEdge.YGEdgeEnd.getValue());
         } else {
@@ -432,7 +430,7 @@ public class YGNode {
 
     public void resolveDimension() {
         final YGStyle style = getStyle();
-        YGDimension @NotNull [] dimensions = new YGDimension[]{YGDimension.YGDimensionWidth, YGDimension.YGDimensionHeight};
+        YGDimension  [] dimensions = new YGDimension[]{YGDimension.YGDimensionWidth, YGDimension.YGDimensionHeight};
         for (YGDimension dim : dimensions) {
             if (!style.maxDimensions().getCompactValue(dim.getValue()).isUndefined() && GlobalMembers.YGValueEqual(
                     style.maxDimensions().getCompactValue(dim.getValue()),
@@ -444,7 +442,7 @@ public class YGNode {
         }
     }
 
-    public YGDirection resolveDirection(final @NotNull YGDirection ownerDirection) {
+    public YGDirection resolveDirection(final  YGDirection ownerDirection) {
         if (style_.direction() == YGDirection.YGDirectionInherit) {
             return ownerDirection.getValue() > YGDirection.YGDirectionInherit.getValue() ? ownerDirection : YGDirection.YGDirectionLTR;
         } else {
@@ -463,9 +461,9 @@ public class YGNode {
     }
 
 
-    public final <T> void iterChildrenAfterCloningIfNeeded(@NotNull BiConsumer<YGNode, Object> callback, Object cloneContext) {
+    public final <T> void iterChildrenAfterCloningIfNeeded( BiConsumer<YGNode, Object> callback, Object cloneContext) {
         int i = 0;
-        for (@NotNull YGNode child : children_) {
+        for ( YGNode child : children_) {
             if (child.getOwner() != this) {
                 child = config_.cloneNode(child, this, i, cloneContext);
                 child.setOwner(this);
@@ -522,7 +520,7 @@ public class YGNode {
         return ((style_.positionType() != YGPositionType.YGPositionTypeAbsolute) && (resolveFlexGrow() != 0 || resolveFlexShrink() != 0));
     }
 
-    public float getLeadingBorder(final @NotNull YGFlexDirection axis) {
+    public float getLeadingBorder(final  YGFlexDirection axis) {
         YGValue leadingBorder = (GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.border(),
                 YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.border(),
@@ -530,32 +528,32 @@ public class YGNode {
         return Math.max(leadingBorder.value, 0.0f);
     }
 
-    public float getTrailingBorder(final @NotNull YGFlexDirection axis) {
+    public float getTrailingBorder(final  YGFlexDirection axis) {
         YGValue trailingBorder = (GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.border(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.border(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero())).convertToYgValue();
         return Math.max(trailingBorder.value, 0.0f);
     }
 
-    public YGFloatOptional getLeadingPadding(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public YGFloatOptional getLeadingPadding(final  YGFlexDirection axis, final float widthSize) {
         CompactValue leadingPadding = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeStart,
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
                 GlobalMembers.leading.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGFloatOptionalMax(GlobalMembers.YGResolveValue(leadingPadding, widthSize), new YGFloatOptional(0.0f));
     }
 
-    public YGFloatOptional getTrailingPadding(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public YGFloatOptional getTrailingPadding(final  YGFlexDirection axis, final float widthSize) {
         CompactValue trailingPadding = GlobalMembers.YGFlexDirectionIsRow(axis) ? computeEdgeValueForRow(style_.padding(), YGEdge.YGEdgeEnd,
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero()) : computeEdgeValueForColumn(style_.padding(),
                 GlobalMembers.trailing.get(axis.getValue()), CompactValue.ofZero());
         return GlobalMembers.YGFloatOptionalMax(GlobalMembers.YGResolveValue(trailingPadding, widthSize), new YGFloatOptional(0.0f));
     }
 
-    public @NotNull YGFloatOptional getLeadingPaddingAndBorder(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public  YGFloatOptional getLeadingPaddingAndBorder(final  YGFlexDirection axis, final float widthSize) {
         return GlobalMembers.plus(getLeadingPadding(axis, widthSize), new YGFloatOptional(getLeadingBorder(axis)));
     }
 
-    public @NotNull YGFloatOptional getTrailingPaddingAndBorder(final @NotNull YGFlexDirection axis, final float widthSize) {
+    public  YGFloatOptional getTrailingPaddingAndBorder(final  YGFlexDirection axis, final float widthSize) {
         return GlobalMembers.plus(getTrailingPadding(axis, widthSize), new YGFloatOptional(getTrailingBorder(axis)));
     }
 
@@ -581,7 +579,7 @@ public class YGNode {
         layout_.setDidUseLegacyFlag(didUseLegacyFlag);
     }
 
-    public boolean isLayoutTreeEqualToNode(final @NotNull YGNode node) {
+    public boolean isLayoutTreeEqualToNode(final  YGNode node) {
         if (children_.size() != node.children_.size()) {
             return false;
         }
@@ -616,7 +614,7 @@ public class YGNode {
         }
     }
 
-    public @Nullable Object getContext() {
+    public  Object getContext() {
         return context_;
     }
 
@@ -640,7 +638,7 @@ public class YGNode {
         this.reserved_ = reserved_;
     }
 
-    public @NotNull measure_Struct getMeasure() {
+    public  measure_Struct getMeasure() {
         return measure_;
     }
 
@@ -648,7 +646,7 @@ public class YGNode {
         this.measure_ = measure_;
     }
 
-    public @NotNull baseline_Struct getBaseline() {
+    public  baseline_Struct getBaseline() {
         return baseline_;
     }
 
@@ -656,7 +654,7 @@ public class YGNode {
         this.baseline_ = baseline_;
     }
 
-    public @NotNull print_Struct getPrint() {
+    public  print_Struct getPrint() {
         return print_;
     }
 
@@ -664,7 +662,7 @@ public class YGNode {
         this.print_ = print_;
     }
 
-    public @NotNull YGDirtiedFunc getDirtied() {
+    public  YGDirtiedFunc getDirtied() {
         return dirtied_;
     }
 
@@ -697,7 +695,7 @@ public class YGNode {
         this.lineIndex_ = lineIndex_;
     }
 
-    public @Nullable YGNode getOwner() {
+    public  YGNode getOwner() {
         return owner_;
     }
 
@@ -713,7 +711,7 @@ public class YGNode {
         this.children_ = children_;
     }
 
-    public @Nullable YGConfig getConfig() {
+    public  YGConfig getConfig() {
         return config_;
     }
 
@@ -731,21 +729,21 @@ public class YGNode {
 
     public static class measure_Struct {
 
-        public @Nullable YGMeasureFunc noContext = null;
+        public  YGMeasureFunc noContext = null;
         public MeasureWithContextFn withContext;
 
     }
 
     public static class baseline_Struct {
 
-        public @Nullable YGBaselineFunc noContext = null;
+        public  YGBaselineFunc noContext = null;
         public BaselineWithContextFn withContext;
 
     }
 
     public static class print_Struct {
 
-        public @Nullable YGPrintFunc noContext = null;
+        public  YGPrintFunc noContext = null;
         public PrintWithContextFn withContext;
 
     }

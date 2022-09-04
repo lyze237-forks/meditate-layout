@@ -5,8 +5,6 @@ package io.github.orioncraftmc.meditate.internal.detail;
 
 import io.github.orioncraftmc.meditate.internal.YGValue;
 import io.github.orioncraftmc.meditate.internal.enums.YGUnit;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class CompactValue //Type originates from: CompactValue.h
 {
@@ -25,7 +23,7 @@ public class CompactValue //Type originates from: CompactValue.h
         this.payload_ = data;
     }
 
-    public static @NotNull CompactValue of(float value, YGUnit Unit) {
+    public static  CompactValue of(float value, YGUnit Unit) {
         if ((value < LOWER_BOUND && value > -LOWER_BOUND)) {
             return new CompactValue(new Payload(0f, Unit));
         }
@@ -39,23 +37,23 @@ public class CompactValue //Type originates from: CompactValue.h
         return new CompactValue(data);
     }
 
-    public static @NotNull CompactValue ofMaybe(float value, YGUnit Unit) {
+    public static  CompactValue ofMaybe(float value, YGUnit Unit) {
         return Float.isNaN(value) || Float.isInfinite(value) ? ofUndefined() : CompactValue.of(value, Unit);
     }
 
-    public static @NotNull CompactValue ofZero() {
+    public static  CompactValue ofZero() {
         return new CompactValue(new Payload(0f, YGUnit.YGUnitPoint));
     }
 
-    public static @NotNull CompactValue ofUndefined() {
+    public static  CompactValue ofUndefined() {
         return new CompactValue();
     }
 
-    public static @NotNull CompactValue ofAuto() {
+    public static  CompactValue ofAuto() {
         return new CompactValue(new Payload(0f, YGUnit.YGUnitAuto));
     }
 
-    public static @NotNull CompactValue createCompactValue(final @NotNull YGValue x) {
+    public static  CompactValue createCompactValue(final  YGValue x) {
         CompactValue compactValue;
         switch (x.unit) {
             case YGUnitUndefined:
@@ -77,7 +75,7 @@ public class CompactValue //Type originates from: CompactValue.h
         return compactValue;
     }
 
-    public static boolean equalsTo(@NotNull CompactValue a, @NotNull CompactValue b) //Method definition originates from: CompactValue.h
+    public static boolean equalsTo( CompactValue a,  CompactValue b) //Method definition originates from: CompactValue.h
     {
         return a.payload_.unit.equals(b.payload_.unit);
     }

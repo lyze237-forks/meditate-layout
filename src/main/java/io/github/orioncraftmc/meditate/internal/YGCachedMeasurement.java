@@ -2,7 +2,6 @@ package io.github.orioncraftmc.meditate.internal;
 
 import static io.github.orioncraftmc.meditate.internal.GlobalMembers.isUndefined;
 import io.github.orioncraftmc.meditate.internal.enums.YGMeasureMode;
-import org.jetbrains.annotations.NotNull;
 
 public class YGCachedMeasurement {
     public float availableWidth;
@@ -22,7 +21,7 @@ public class YGCachedMeasurement {
         this.computedHeight = -1F;
     }
 
-    public boolean equalsTo(@NotNull YGCachedMeasurement measurement) {
+    public boolean equalsTo( YGCachedMeasurement measurement) {
         boolean isEqual = widthMeasureMode == measurement.widthMeasureMode && heightMeasureMode == measurement.heightMeasureMode;
 
         if (!isUndefined(availableWidth) || !isUndefined(measurement.availableWidth)) {
