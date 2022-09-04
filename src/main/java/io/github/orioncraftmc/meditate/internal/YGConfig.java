@@ -7,16 +7,16 @@ import io.github.orioncraftmc.meditate.internal.interfaces.YGCloneNodeFunc;
 import io.github.orioncraftmc.meditate.internal.interfaces.YGLogger;
 import java.util.ArrayList;
 
-public class YGConfig implements Cloneable //Type originates from: YGConfig.h
+public class YGConfig //Type originates from: YGConfig.h
 {
-    private final  logger_Struct logger_struct = new logger_Struct();
+    private logger_Struct logger_struct = new logger_Struct();
     public boolean useWebDefaults = false;
     public boolean useLegacyStretchBehaviour = false;
     public boolean shouldDiffLayoutWithoutLegacyStretchBehaviour = false;
     public boolean printTree = false;
     public float pointScaleFactor = 1.0f;
-    public final  ArrayList<Boolean> experimentalFeatures = new ArrayList<>();
-    public  Object context = null;
+    public ArrayList<Boolean> experimentalFeatures = new ArrayList<>();
+    public Object context = null;
     private cloneNodeCallback_Struct cloneNodeCallback_struct = new cloneNodeCallback_Struct();
     private boolean cloneNodeUsesContext_;
     private boolean loggerUsesContext_;
@@ -31,13 +31,22 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
         }
     }
 
-    @Override
-    public  YGConfig clone() {
-        try {
-            return (YGConfig) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+    public YGConfig shallowClone() {
+        YGConfig clone = new YGConfig(logger_struct.noContext);
+
+        clone.logger_struct = this.logger_struct;
+        clone.useWebDefaults = this.useWebDefaults;
+        clone.useLegacyStretchBehaviour = this.useLegacyStretchBehaviour;
+        clone.shouldDiffLayoutWithoutLegacyStretchBehaviour = this.shouldDiffLayoutWithoutLegacyStretchBehaviour;
+        clone.printTree = this.printTree;
+        clone.pointScaleFactor = this.pointScaleFactor;
+        clone.experimentalFeatures = this.experimentalFeatures;
+        clone.context = this.context;
+        clone.cloneNodeCallback_struct = this.cloneNodeCallback_struct;
+        clone.cloneNodeUsesContext_ = this.cloneNodeUsesContext_;
+        clone.loggerUsesContext_ = this.loggerUsesContext_;
+
+        return clone;
     }
 
     public final void log(YGConfig config, YGNode node, YGLogLevel logLevel, Object logContext, String format, Object... args) //Method definition originates from: YGConfig.cpp

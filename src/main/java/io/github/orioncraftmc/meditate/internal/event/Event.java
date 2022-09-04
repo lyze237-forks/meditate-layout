@@ -1,6 +1,8 @@
 package io.github.orioncraftmc.meditate.internal.event;
 
 import io.github.orioncraftmc.meditate.internal.YGNode;
+
+import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -19,7 +21,7 @@ public class Event //Type originates from: event.h
 
     public static <T extends CallableEvent> void subscribe(Class<T> clazz, Consumer<T> listener) //Method definition originates from: event.cpp
     {
-        listeners.computeIfAbsent(clazz, aClass -> new ConcurrentLinkedDeque<>()).add(
+        listeners.computeIfAbsent(clazz, aClass -> new ArrayDeque<>()).add(
                 (Consumer<CallableEvent>) listener);
     }
 

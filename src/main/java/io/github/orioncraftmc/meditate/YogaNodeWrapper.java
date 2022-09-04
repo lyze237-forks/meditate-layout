@@ -15,7 +15,7 @@ import io.github.orioncraftmc.meditate.internal.enums.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YogaNodeWrapper extends YogaNode implements Cloneable {
+public class YogaNodeWrapper extends YogaNode {
 
     /* Those flags needs be in sync with YGJNI.h */
     private static final byte MARGIN = 1;
@@ -118,40 +118,44 @@ public class YogaNodeWrapper extends YogaNode implements Cloneable {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeSwapChild(mNativePointer, child.mNativePointer, position);
     }
 
+    private YogaNodeWrapper cloneShallow() {
+        YogaNodeWrapper clone = new YogaNodeWrapper();
+
+        clone.mNativePointer = this.mNativePointer;
+        clone.mOwner = this.mOwner;
+        clone.mChildren = this.mChildren;
+        clone.mMeasureFunction = this.mMeasureFunction;
+        clone.mBaselineFunction = this.mBaselineFunction;
+        clone.mData = this.mData;
+        clone.mLayoutDirection = this.mLayoutDirection;
+
+        return clone;
+    }
+
     @Override
     public YogaNodeWrapper cloneWithChildren() {
-        try {
-            YogaNodeWrapper clonedYogaNode = (YogaNodeWrapper) super.clone();
-            if (clonedYogaNode.mChildren != null) {
-                clonedYogaNode.mChildren = new ArrayList<>(clonedYogaNode.mChildren);
-            }
-             YGNode clonedNativePointer = io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeClone(mNativePointer);
-            clonedYogaNode.mOwner = null;
-            clonedYogaNode.mNativePointer = clonedNativePointer;
-            for (int i = 0; i < clonedYogaNode.getChildCount(); i++) {
-                clonedYogaNode.swapChildAt(clonedYogaNode.getChildAt(i).cloneWithChildren(), i);
-            }
-
-            return clonedYogaNode;
-        } catch (CloneNotSupportedException ex) {
-            // This class implements Cloneable, this should not happen
-            throw new RuntimeException(ex);
+        YogaNodeWrapper clonedYogaNode = cloneShallow();
+        if (clonedYogaNode.mChildren != null) {
+            clonedYogaNode.mChildren = new ArrayList<>(clonedYogaNode.mChildren);
         }
+         YGNode clonedNativePointer = io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeClone(mNativePointer);
+        clonedYogaNode.mOwner = null;
+        clonedYogaNode.mNativePointer = clonedNativePointer;
+        for (int i = 0; i < clonedYogaNode.getChildCount(); i++) {
+            clonedYogaNode.swapChildAt(clonedYogaNode.getChildAt(i).cloneWithChildren(), i);
+        }
+
+        return clonedYogaNode;
     }
 
     @Override
     public YogaNodeWrapper cloneWithoutChildren() {
-        try {
-            YogaNodeWrapper clonedYogaNode = (YogaNodeWrapper) super.clone();
-             YGNode clonedNativePointer = io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeClone(mNativePointer);
-            clonedYogaNode.mOwner = null;
-            clonedYogaNode.mNativePointer = clonedNativePointer;
-            clonedYogaNode.clearChildren();
-            return clonedYogaNode;
-        } catch (CloneNotSupportedException ex) {
-            // This class implements Cloneable, this should not happen
-            throw new RuntimeException(ex);
-        }
+        YogaNodeWrapper clonedYogaNode = cloneShallow();
+        YGNode clonedNativePointer = io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeClone(mNativePointer);
+        clonedYogaNode.mOwner = null;
+        clonedYogaNode.mNativePointer = clonedNativePointer;
+        clonedYogaNode.clearChildren();
+        return clonedYogaNode;
     }
 
     private void clearChildren() {
