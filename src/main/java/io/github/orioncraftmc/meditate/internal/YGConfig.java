@@ -6,19 +6,17 @@ import io.github.orioncraftmc.meditate.internal.enums.YGLogLevel;
 import io.github.orioncraftmc.meditate.internal.interfaces.YGCloneNodeFunc;
 import io.github.orioncraftmc.meditate.internal.interfaces.YGLogger;
 import java.util.ArrayList;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 {
-    private final @NotNull logger_Struct logger_struct = new logger_Struct();
+    private final  logger_Struct logger_struct = new logger_Struct();
     public boolean useWebDefaults = false;
     public boolean useLegacyStretchBehaviour = false;
     public boolean shouldDiffLayoutWithoutLegacyStretchBehaviour = false;
     public boolean printTree = false;
     public float pointScaleFactor = 1.0f;
-    public final @NotNull ArrayList<Boolean> experimentalFeatures = new ArrayList<>();
-    public @Nullable Object context = null;
+    public final  ArrayList<Boolean> experimentalFeatures = new ArrayList<>();
+    public  Object context = null;
     private cloneNodeCallback_Struct cloneNodeCallback_struct = new cloneNodeCallback_Struct();
     private boolean cloneNodeUsesContext_;
     private boolean loggerUsesContext_;
@@ -34,7 +32,7 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
     }
 
     @Override
-    public @NotNull YGConfig clone() {
+    public  YGConfig clone() {
         try {
             return (YGConfig) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -66,9 +64,9 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
         loggerUsesContext_ = false;
     }
 
-    public final @NotNull YGNode cloneNode(YGNode node, YGNode owner, int childIndex, Object cloneContext) //Method definition originates from: YGConfig.cpp
+    public final  YGNode cloneNode(YGNode node, YGNode owner, int childIndex, Object cloneContext) //Method definition originates from: YGConfig.cpp
     {
-        @Nullable YGNode clone = null;
+         YGNode clone = null;
         if (cloneNodeCallback_struct.noContext != null) {
             clone = cloneNodeUsesContext_ ? cloneNodeCallback_struct.withContext.invoke(node, owner, childIndex,
                     cloneContext) : cloneNodeCallback_struct.noContext.invoke(node, owner, childIndex);
@@ -101,20 +99,20 @@ public class YGConfig implements Cloneable //Type originates from: YGConfig.h
 
     @FunctionalInterface
     public interface CloneWithContextFn {
-        @NotNull YGNode invoke(YGNode node, YGNode owner, int childIndex, Object cloneContext);
+         YGNode invoke(YGNode node, YGNode owner, int childIndex, Object cloneContext);
     }
 
     private static class cloneNodeCallback_Struct {
 
         CloneWithContextFn withContext;
-        @Nullable YGCloneNodeFunc noContext;
+         YGCloneNodeFunc noContext;
 
     }
 
     private static class logger_Struct {
 
         LogWithContextFn withContext;
-        @Nullable YGLogger noContext;
+         YGLogger noContext;
 
     }
 }
