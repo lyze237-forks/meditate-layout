@@ -12,8 +12,8 @@ import io.github.orioncraftmc.meditate.YogaNodeFactory;
 
 /**
  * A Scene2D widget that implements Yoga Layout by Facebook. FlexBox is a clean and powerful alternative to group
- * widgets like {@link com.badlogic.gdx.scenes.scene2d.ui.Table} and
- * {@link com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup}. {@link #add(Actor) Add} an {@link Actor} to the widget
+ * widgets like {@link com.badlogic.gdx.scenes.scene2d.ui.Table Table} and
+ * {@link com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup HorizontalGroup}. {@link #add(Actor) Add} an {@link Actor} to the widget
  * and use the returned {@link YogaNode} to modify its FlexBox properties. {@link #getRoot() Get the root node} to
  * modify the properties of the top level element.
  *
