@@ -1,7 +1,5 @@
 package io.github.orioncraftmc.meditate.internal.enums;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public enum YGPrintOptions {
     YGPrintOptionsLayout(1),
@@ -14,8 +12,8 @@ public enum YGPrintOptions {
         this.value = value;
     }
 
-    public static @Nullable YGPrintOptions forValue(int value) {
-        for (@NotNull YGPrintOptions options : values()) {
+    public static  YGPrintOptions forValue(int value) {
+        for ( YGPrintOptions options : values()) {
             if (options.value == value) {
                 return options;
             }

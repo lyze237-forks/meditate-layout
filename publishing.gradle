@@ -4,6 +4,7 @@ javadoc {
 
 java {
     withJavadocJar()
+    withSourcesJar()
 }
 
 publishing {
