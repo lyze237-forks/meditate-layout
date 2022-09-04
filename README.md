@@ -1,10 +1,10 @@
-# Meditate Layout
+# gdx-FlexBox
 
-Meditate Layout is a full Java port of [Yoga Layout by Facebook](https://github.com/facebook/yoga)
+gdx-FlexBox is a flexbox implementation based on meditate layout which is a full Java port of [Yoga Layout by Facebook](https://github.com/facebook/yoga)
 ---
 
-[![License](https://img.shields.io/github/license/lyze237-forks/meditate-layout)](https://github.com/lyze237-forks/meditate-layout/blob/main/LICENSE)
-[![Jitpack](https://jitpack.io/v/lyze237-forks/meditate-layout.svg)](https://jitpack.io/#lyze237-forks/meditate-layout)
+[![License](https://img.shields.io/github/license/lyze237/gdx-FlexBox)](https://github.com/lyze237/gdx-FlexBox/blob/main/LICENSE)
+[![Jitpack](https://jitpack.io/v/lyze237/gdx-FlexBox.svg)](https://jitpack.io/#lyze237/gdx-FlexBox)
 
 This fork downgrades the project to Java 8 and supports GWT for compatibility with libGDX. It adds the FlexBox class to 
 implement Yoga Layout in Scene2D UI's. 
@@ -81,10 +81,20 @@ allprojects {
     }
 }
 ```
-2. Add the dependency 
-````gradle
+2. Add the dependency to the core modules dependencies
+```gradle
 dependencies {
-        implementation 'com.github.lyze237-forks:meditate-layout:$version'
+        api "com.github.lyze237:gdx-FlexBox:$version"
 }
-````
-3. Change the `$version` string to the latest version from jitpack.
+```
+3. Add the dependency to the html modules dependencies
+```gradle
+dependencies {
+        api "com.github.lyze237:gdx-FlexBox:$version:sources"
+}
+```
+4. Change the `$version` string to the latest version from jitpack in both files.
+5. Include the following in your applications `.gwt.xml` file (Normall `GdxDefinitions.gwt.xml`):
+```xml
+<inherits name="dev.lyze.flexbox"/>
+```
