@@ -99,8 +99,9 @@ public class YogaNodeWrapper extends YogaNode {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeInsertChild(mNativePointer, child.mNativePointer, i);
     }
 
-    public void setIsReferenceBaseline(boolean isReferenceBaseline) {
+    public YogaNode setIsReferenceBaseline(boolean isReferenceBaseline) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeSetIsReferenceBaseline(mNativePointer, isReferenceBaseline);
+        return this;
     }
 
     public boolean isReferenceBaseline() {
@@ -260,8 +261,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetDirection(mNativePointer).getValue());
     }
 
-    public void setDirection(YogaDirection direction) {
+    public YogaNode setDirection(YogaDirection direction) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetDirection(mNativePointer, YGDirection.forValue(direction.intValue()));
+        return this;
     }
 
     public YogaFlexDirection getFlexDirection() {
@@ -269,8 +271,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetFlexDirection(mNativePointer).getValue());
     }
 
-    public void setFlexDirection(YogaFlexDirection flexDirection) {
+    public YogaNode setFlexDirection(YogaFlexDirection flexDirection) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexDirection(mNativePointer, YGFlexDirection.forValue(flexDirection.intValue()));
+        return this;
     }
 
     public YogaJustify getJustifyContent() {
@@ -278,8 +281,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetJustifyContent(mNativePointer).getValue());
     }
 
-    public void setJustifyContent(YogaJustify justifyContent) {
+    public YogaNode setJustifyContent(YogaJustify justifyContent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetJustifyContent(mNativePointer, YGJustify.forValue(justifyContent.intValue()));
+        return this;
     }
 
     public YogaAlign getAlignItems() {
@@ -287,8 +291,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetAlignItems(mNativePointer).getValue());
     }
 
-    public void setAlignItems(YogaAlign alignItems) {
+    public YogaNode setAlignItems(YogaAlign alignItems) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetAlignItems(mNativePointer, YGAlign.forValue(alignItems.intValue()));
+        return this;
     }
 
     public YogaAlign getAlignSelf() {
@@ -296,8 +301,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetAlignSelf(mNativePointer).getValue());
     }
 
-    public void setAlignSelf(YogaAlign alignSelf) {
+    public YogaNode setAlignSelf(YogaAlign alignSelf) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetAlignSelf(mNativePointer, YGAlign.forValue(alignSelf.intValue()));
+        return this;
     }
 
     public YogaAlign getAlignContent() {
@@ -305,8 +311,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetAlignContent(mNativePointer).getValue());
     }
 
-    public void setAlignContent(YogaAlign alignContent) {
+    public YogaNode setAlignContent(YogaAlign alignContent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetAlignContent(mNativePointer, YGAlign.forValue(alignContent.intValue()));
+        return this;
     }
 
     public YogaPositionType getPositionType() {
@@ -314,8 +321,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetPositionType(mNativePointer).getValue());
     }
 
-    public void setPositionType(YogaPositionType positionType) {
+    public YogaNode setPositionType(YogaPositionType positionType) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetPositionType(mNativePointer, YGPositionType.forValue(positionType.intValue()));
+        return this;
     }
 
     public YogaWrap getWrap() {
@@ -323,8 +331,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetFlexWrap(mNativePointer).getValue());
     }
 
-    public void setWrap(YogaWrap flexWrap) {
+    public YogaNode setWrap(YogaWrap flexWrap) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexWrap(mNativePointer, YGWrap.forValue(flexWrap.intValue()));
+        return this;
     }
 
     public YogaOverflow getOverflow() {
@@ -332,8 +341,9 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetOverflow(mNativePointer).getValue());
     }
 
-    public void setOverflow(YogaOverflow overflow) {
+    public YogaNode setOverflow(YogaOverflow overflow) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetOverflow(mNativePointer, YGOverflow.forValue(overflow.intValue()));
+        return this;
     }
 
     public YogaDisplay getDisplay() {
@@ -341,48 +351,55 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetDisplay(mNativePointer).getValue());
     }
 
-    public void setDisplay(YogaDisplay display) {
+    public YogaNode setDisplay(YogaDisplay display) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetDisplay(mNativePointer, YGDisplay.forValue(display.intValue()));
+        return this;
     }
 
     public float getFlex() {
         return io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetFlex(mNativePointer);
     }
 
-    public void setFlex(float flex) {
+    public YogaNode setFlex(float flex) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlex(mNativePointer, flex);
+        return this;
     }
 
     public float getFlexGrow() {
         return io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetFlexGrow(mNativePointer);
     }
 
-    public void setFlexGrow(float flexGrow) {
+    public YogaNode setFlexGrow(float flexGrow) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexGrow(mNativePointer, flexGrow);
+        return this;
     }
 
     public float getFlexShrink() {
         return io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetFlexShrink(mNativePointer);
     }
 
-    public void setFlexShrink(float flexShrink) {
+    public YogaNode setFlexShrink(float flexShrink) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexShrink(mNativePointer, flexShrink);
+        return this;
     }
 
     public YogaValue getFlexBasis() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetFlexBasis(mNativePointer));
     }
 
-    public void setFlexBasis(float flexBasis) {
+    public YogaNode setFlexBasis(float flexBasis) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexBasis(mNativePointer, flexBasis);
+        return this;
     }
 
-    public void setFlexBasisPercent(float percent) {
+    public YogaNode setFlexBasisPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexBasisPercent(mNativePointer, percent);
+        return this;
     }
 
-    public void setFlexBasisAuto() {
+    public YogaNode setFlexBasisAuto() {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetFlexBasisAuto(mNativePointer);
+        return this;
     }
 
     public YogaValue getMargin(YogaEdge edge) {
@@ -390,16 +407,19 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetMargin(mNativePointer, YGEdge.forValue(edge.intValue())));
     }
 
-    public void setMargin(YogaEdge edge, float margin) {
+    public YogaNode setMargin(YogaEdge edge, float margin) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMargin(mNativePointer, YGEdge.forValue(edge.intValue()), margin);
+        return this;
     }
 
-    public void setMarginPercent(YogaEdge edge, float percent) {
+    public YogaNode setMarginPercent(YogaEdge edge, float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMarginPercent(mNativePointer, YGEdge.forValue(edge.intValue()), percent);
+        return this;
     }
 
-    public void setMarginAuto(YogaEdge edge) {
+    public YogaNode setMarginAuto(YogaEdge edge) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMarginAuto(mNativePointer, YGEdge.forValue(edge.intValue()));
+        return this;
     }
 
     public YogaValue getPadding(YogaEdge edge) {
@@ -407,20 +427,23 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetPadding(mNativePointer, YGEdge.forValue(edge.intValue())));
     }
 
-    public void setPadding(YogaEdge edge, float padding) {
+    public YogaNode setPadding(YogaEdge edge, float padding) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetPadding(mNativePointer, YGEdge.forValue(edge.intValue()), padding);
+        return this;
     }
 
-    public void setPaddingPercent(YogaEdge edge, float percent) {
+    public YogaNode setPaddingPercent(YogaEdge edge, float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetPaddingPercent(mNativePointer, YGEdge.forValue(edge.intValue()), percent);
+        return this;
     }
 
     public float getBorder(YogaEdge edge) {
         return io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetBorder(mNativePointer, YGEdge.forValue(edge.intValue()));
     }
 
-    public void setBorder(YogaEdge edge, float border) {
+    public YogaNode setBorder(YogaEdge edge, float border) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetBorder(mNativePointer, YGEdge.forValue(edge.intValue()), border);
+        return this;
     }
 
     public YogaValue getPosition(YogaEdge edge) {
@@ -428,100 +451,159 @@ public class YogaNodeWrapper extends YogaNode {
                 io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetPosition(mNativePointer, YGEdge.forValue(edge.intValue())));
     }
 
-    public void setPosition(YogaEdge edge, float position) {
+    public YogaNode setPosition(YogaEdge edge, float position) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetPosition(mNativePointer, YGEdge.forValue(edge.intValue()), position);
+        return this;
     }
 
-    public void setPositionPercent(YogaEdge edge, float percent) {
+    public YogaNode setPositionPercent(YogaEdge edge, float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetPositionPercent(mNativePointer, YGEdge.forValue(edge.intValue()), percent);
+        return this;
     }
 
     public YogaValue getWidth() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetWidth(mNativePointer));
     }
 
-    public void setWidth(float width) {
+    public YogaNode setWidth(float width) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetWidth(mNativePointer, width);
+        return this;
     }
 
-    public void setWidthPercent(float percent) {
+    public YogaNode setWidthPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetWidthPercent(mNativePointer, percent);
+        return this;
     }
 
-    public void setWidthAuto() {
+    public YogaNode setWidthAuto() {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetWidthAuto(mNativePointer);
+        return this;
     }
 
     public YogaValue getHeight() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetHeight(mNativePointer));
     }
 
-    public void setHeight(float height) {
+    public YogaNode setHeight(float height) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetHeight(mNativePointer, height);
+        return this;
     }
 
-    public void setHeightPercent(float percent) {
+    public YogaNode setHeightPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetHeightPercent(mNativePointer, percent);
+        return this;
     }
 
-    public void setHeightAuto() {
+    public YogaNode setHeightAuto() {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetHeightAuto(mNativePointer);
+        return this;
     }
 
     public YogaValue getMinWidth() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetMinWidth(mNativePointer));
     }
 
-    public void setMinWidth(float minWidth) {
+    public YogaNode setMinWidth(float minWidth) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinWidth(mNativePointer, minWidth);
+        return this;
     }
 
-    public void setMinWidthPercent(float percent) {
+    public YogaNode setMinWidthPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinWidthPercent(mNativePointer, percent);
+        return this;
     }
 
     public YogaValue getMinHeight() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetMinHeight(mNativePointer));
     }
 
-    public void setMinHeight(float minHeight) {
+    public YogaNode setMinHeight(float minHeight) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinHeight(mNativePointer, minHeight);
+        return this;
     }
 
-    public void setMinHeightPercent(float percent) {
+    public YogaNode setMinHeightPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinHeightPercent(mNativePointer, percent);
+        return this;
     }
 
     public YogaValue getMaxWidth() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetMaxWidth(mNativePointer));
     }
 
-    public void setMaxWidth(float maxWidth) {
+    public YogaNode setMaxWidth(float maxWidth) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMaxWidth(mNativePointer, maxWidth);
+        return this;
     }
 
-    public void setMaxWidthPercent(float percent) {
+    public YogaNode setMaxWidthPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMaxWidthPercent(mNativePointer, percent);
+        return this;
     }
 
     public YogaValue getMaxHeight() {
         return valueFromNative(io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetMaxHeight(mNativePointer));
     }
 
-    public void setMaxHeight(float maxheight) {
+    public YogaNode setMaxHeight(float maxheight) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMaxHeight(mNativePointer, maxheight);
+        return this;
     }
 
-    public void setMaxHeightPercent(float percent) {
+    public YogaNode setMaxHeightPercent(float percent) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMaxHeightPercent(mNativePointer, percent);
+        return this;
+    }
+    
+    public YogaNode setSize(float size) {
+        setWidth(size);
+        setHeight(size);
+        return this;
+    }
+    
+    public YogaNode setSizePercent(float percent) {
+        setWidthPercent(percent);
+        setHeightPercent(percent);
+        return this;
+    }
+    
+    public YogaNode setMinSize(float minSize) {
+        setMinWidth(minSize);
+        setMinHeight(minSize);
+        return this;
+    }
+    
+    public YogaNode setMinSizePercent(float minSizePercent) {
+        setMinWidthPercent(minSizePercent);
+        setMinHeightPercent(minSizePercent);
+        return this;
+    }
+    
+    public YogaNode setMaxSize(float maxSize) {
+        setMaxWidth(maxSize);
+        setMaxHeight(maxSize);
+        return this;
+    }
+    
+    public YogaNode setMaxSizePercent(float maxSizePercent) {
+        setMaxWidthPercent(maxSizePercent);
+        setMaxHeightPercent(maxSizePercent);
+        return this;
+    }
+    
+    public YogaNode setSizeAuto() {
+        setWidthAuto();
+        setHeightAuto();
+        return this;
     }
 
     public float getAspectRatio() {
         return io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleGetAspectRatio(mNativePointer);
     }
 
-    public void setAspectRatio(float aspectRatio) {
+    public YogaNode setAspectRatio(float aspectRatio) {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetAspectRatio(mNativePointer, aspectRatio);
+        return this;
     }
 
     public void setMeasureFunction(YogaMeasureFunction measureFunction) {
@@ -548,9 +630,10 @@ public class YogaNodeWrapper extends YogaNode {
                 YogaMeasureMode.fromInt(heightMode));
     }
 
-    public void setBaselineFunction(YogaBaselineFunction baselineFunction) {
+    public YogaNode setBaselineFunction(YogaBaselineFunction baselineFunction) {
         mBaselineFunction = baselineFunction;
         mNativePointer.setBaselineFunc((node, width, height) -> this.baseline(width, height));
+        return this;
     }
 
     public final float baseline(float width, float height) {
@@ -571,8 +654,9 @@ public class YogaNodeWrapper extends YogaNode {
         return mData;
     }
 
-    public void setData(Object data) {
+    public YogaNode setData(Object data) {
         mData = data;
+        return this;
     }
 
     /**
