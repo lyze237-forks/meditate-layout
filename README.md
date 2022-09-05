@@ -1,6 +1,8 @@
 # gdx-FlexBox
 
-gdx-FlexBox is a flexbox implementation based on meditate layout which is a full Java port of [Yoga Layout by Facebook](https://github.com/facebook/yoga)
+gdx-FlexBox is a fork of [meditate layout](https://github.com/OrionCraftMC/meditate-layout) to make it compatible with libGDX.
+
+Meditate Layotu is a full java port of [Yoga Layout by Facebook](https://github.com/facebook/yoga) which implements Flexbox.
 ---
 
 [![License](https://img.shields.io/github/license/lyze237/gdx-FlexBox)](https://github.com/lyze237/gdx-FlexBox/blob/main/LICENSE)
