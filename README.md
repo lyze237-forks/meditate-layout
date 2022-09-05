@@ -54,15 +54,14 @@ public void create() {
 
     flexBox = new FlexBox();
     flexBox.setFillParent(true);
-    flexBox.getRoot().setFlexDirection(YogaFlexDirection.ROW);
-    flexBox.getRoot().setWrap(YogaWrap.WRAP);
+    flexBox.getRoot().setFlexDirection(YogaFlexDirection.ROW)
+        .setWrap(YogaWrap.WRAP);
     stage.addActor(flexBox);
         
     Label label = new Label("Item 1", skin);
     label.setAlignment(Align.center);
     YogaNode node = flexBox.add(label);
-    node.setWidth(100);
-    node.setHeight(100);
+    node.setSize(100);
         
     label = new Label("Item 2", skin);
     label.setAlignment(Align.center);

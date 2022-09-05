@@ -27,7 +27,7 @@ public abstract class YogaNode implements YogaProps {
 
   public abstract void addChildAt(YogaNode child, int i);
 
-  public abstract void setIsReferenceBaseline(boolean isReferenceBaseline);
+  public abstract YogaNode setIsReferenceBaseline(boolean isReferenceBaseline);
 
   public abstract boolean isReferenceBaseline();
 
@@ -63,131 +63,145 @@ public abstract class YogaNode implements YogaProps {
 
   public abstract YogaDirection getStyleDirection();
 
-  public abstract void setDirection(YogaDirection direction);
+  public abstract YogaNode setDirection(YogaDirection direction);
 
   public abstract YogaFlexDirection getFlexDirection();
 
-  public abstract void setFlexDirection(YogaFlexDirection flexDirection);
+  public abstract YogaNode setFlexDirection(YogaFlexDirection flexDirection);
 
   public abstract YogaJustify getJustifyContent();
 
-  public abstract void setJustifyContent(YogaJustify justifyContent);
+  public abstract YogaNode setJustifyContent(YogaJustify justifyContent);
 
   public abstract YogaAlign getAlignItems();
 
-  public abstract void setAlignItems(YogaAlign alignItems);
+  public abstract YogaNode setAlignItems(YogaAlign alignItems);
 
   public abstract YogaAlign getAlignSelf();
 
-  public abstract void setAlignSelf(YogaAlign alignSelf);
+  public abstract YogaNode setAlignSelf(YogaAlign alignSelf);
 
   public abstract YogaAlign getAlignContent();
 
-  public abstract void setAlignContent(YogaAlign alignContent);
+  public abstract YogaNode setAlignContent(YogaAlign alignContent);
 
   public abstract YogaPositionType getPositionType();
 
-  public abstract void setPositionType(YogaPositionType positionType);
+  public abstract YogaNode setPositionType(YogaPositionType positionType);
 
   public abstract YogaWrap getWrap();
 
-  public abstract void setWrap(YogaWrap flexWrap);
+  public abstract YogaNode setWrap(YogaWrap flexWrap);
 
   public abstract YogaOverflow getOverflow();
 
-  public abstract void setOverflow(YogaOverflow overflow);
+  public abstract YogaNode setOverflow(YogaOverflow overflow);
 
   public abstract YogaDisplay getDisplay();
 
-  public abstract void setDisplay(YogaDisplay display);
+  public abstract YogaNode setDisplay(YogaDisplay display);
 
   public abstract float getFlex();
 
-  public abstract void setFlex(float flex);
+  public abstract YogaNode setFlex(float flex);
 
   public abstract float getFlexGrow();
 
-  public abstract void setFlexGrow(float flexGrow);
+  public abstract YogaNode setFlexGrow(float flexGrow);
 
   public abstract float getFlexShrink();
 
-  public abstract void setFlexShrink(float flexShrink);
+  public abstract YogaNode setFlexShrink(float flexShrink);
 
   public abstract YogaValue getFlexBasis();
 
-  public abstract void setFlexBasis(float flexBasis);
+  public abstract YogaNode setFlexBasis(float flexBasis);
 
-  public abstract void setFlexBasisPercent(float percent);
+  public abstract YogaNode setFlexBasisPercent(float percent);
 
-  public abstract void setFlexBasisAuto();
+  public abstract YogaNode setFlexBasisAuto();
 
   public abstract YogaValue getMargin(YogaEdge edge);
 
-  public abstract void setMargin(YogaEdge edge, float margin);
+  public abstract YogaNode setMargin(YogaEdge edge, float margin);
 
-  public abstract void setMarginPercent(YogaEdge edge, float percent);
+  public abstract YogaNode setMarginPercent(YogaEdge edge, float percent);
 
-  public abstract void setMarginAuto(YogaEdge edge);
+  public abstract YogaNode setMarginAuto(YogaEdge edge);
 
   public abstract YogaValue getPadding(YogaEdge edge);
 
-  public abstract void setPadding(YogaEdge edge, float padding);
+  public abstract YogaNode setPadding(YogaEdge edge, float padding);
 
-  public abstract void setPaddingPercent(YogaEdge edge, float percent);
+  public abstract YogaNode setPaddingPercent(YogaEdge edge, float percent);
 
   public abstract float getBorder(YogaEdge edge);
 
-  public abstract void setBorder(YogaEdge edge, float border);
+  public abstract YogaNode setBorder(YogaEdge edge, float border);
 
   public abstract YogaValue getPosition(YogaEdge edge);
 
-  public abstract void setPosition(YogaEdge edge, float position);
+  public abstract YogaNode setPosition(YogaEdge edge, float position);
 
-  public abstract void setPositionPercent(YogaEdge edge, float percent);
+  public abstract YogaNode setPositionPercent(YogaEdge edge, float percent);
 
   public abstract YogaValue getWidth();
 
-  public abstract void setWidth(float width);
+  public abstract YogaNode setWidth(float width);
 
-  public abstract void setWidthPercent(float percent);
+  public abstract YogaNode setWidthPercent(float percent);
 
-  public abstract void setWidthAuto();
+  public abstract YogaNode setWidthAuto();
 
   public abstract YogaValue getHeight();
 
-  public abstract void setHeight(float height);
+  public abstract YogaNode setHeight(float height);
 
-  public abstract void setHeightPercent(float percent);
+  public abstract YogaNode setHeightPercent(float percent);
 
-  public abstract void setHeightAuto();
+  public abstract YogaNode setHeightAuto();
 
   public abstract YogaValue getMinWidth();
 
-  public abstract void setMinWidth(float minWidth);
+  public abstract YogaNode setMinWidth(float minWidth);
 
-  public abstract void setMinWidthPercent(float percent);
+  public abstract YogaNode setMinWidthPercent(float percent);
 
   public abstract YogaValue getMinHeight();
 
-  public abstract void setMinHeight(float minHeight);
+  public abstract YogaNode setMinHeight(float minHeight);
 
-  public abstract void setMinHeightPercent(float percent);
+  public abstract YogaNode setMinHeightPercent(float percent);
 
   public abstract YogaValue getMaxWidth();
 
-  public abstract void setMaxWidth(float maxWidth);
+  public abstract YogaNode setMaxWidth(float maxWidth);
 
-  public abstract void setMaxWidthPercent(float percent);
+  public abstract YogaNode setMaxWidthPercent(float percent);
 
   public abstract YogaValue getMaxHeight();
 
-  public abstract void setMaxHeight(float maxheight);
+  public abstract YogaNode setMaxHeight(float maxheight);
 
-  public abstract void setMaxHeightPercent(float percent);
+  public abstract YogaNode setMaxHeightPercent(float percent);
 
+  public abstract YogaNode setSize(float size);
+  
+  public abstract YogaNode setSizePercent(float percent);
+  
+  public abstract YogaNode setMinSize(float minSize);
+  
+  public abstract YogaNode setMinSizePercent(float percent);
+  
+  public abstract YogaNode setMaxSize(float minSize);
+  
+  public abstract YogaNode setMaxSizePercent(float percent);
+  
+  public abstract YogaNode setSizeAuto();
+  
   public abstract float getAspectRatio();
 
-  public abstract void setAspectRatio(float aspectRatio);
+  public abstract YogaNode setAspectRatio(float aspectRatio);
 
   public abstract float getLayoutX();
 
@@ -207,13 +221,13 @@ public abstract class YogaNode implements YogaProps {
 
   public abstract void setMeasureFunction(YogaMeasureFunction measureFunction);
 
-  public abstract void setBaselineFunction(YogaBaselineFunction baselineFunction);
+  public abstract YogaNode setBaselineFunction(YogaBaselineFunction baselineFunction);
 
   public abstract boolean isMeasureDefined();
 
   public abstract boolean isBaselineDefined();
 
-  public abstract void setData(Object data);
+  public abstract YogaNode setData(Object data);
 
   
   public abstract Object getData();
