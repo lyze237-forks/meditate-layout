@@ -95,7 +95,7 @@ dependencies {
 }
 ```
 4. Change the `$version` string to the latest version from jitpack in both files.
-5. Include the following in your applications `.gwt.xml` file (Normall `GdxDefinitions.gwt.xml`):
+5. Include the following in your applications `.gwt.xml` file (Normall `GdxDefinition.gwt.xml`):
 ```xml
 <inherits name="dev.lyze.flexbox"/>
 ```
