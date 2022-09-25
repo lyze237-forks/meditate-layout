@@ -54,7 +54,8 @@ public void create() {
 
     flexBox = new FlexBox();
     flexBox.setFillParent(true);
-    flexBox.getRoot().setFlexDirection(YogaFlexDirection.ROW)
+    flexBox.getRoot()
+        .setFlexDirection(YogaFlexDirection.ROW)
         .setWrap(YogaWrap.WRAP);
     stage.addActor(flexBox);
         
