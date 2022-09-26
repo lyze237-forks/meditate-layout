@@ -76,9 +76,7 @@ public class FlexBox extends WidgetGroup {
      * @return The node associated with the actor. Change the properties of the node to modify the FlexBox layout.
      */
     public YogaNode add() {
-        YogaNode node = YogaNodeFactory.create(config);
-        root.addChildAt(node, root.getChildCount());
-        return node;
+        return addAt(null, root.getChildCount());
     }
     
     /**
@@ -120,6 +118,11 @@ public class FlexBox extends WidgetGroup {
     public YogaNode addAsChild(YogaNode parent, Actor actor, int i) {
         YogaNode node = YogaNodeFactory.create(config);
 
+        if (actor == null) {
+            parent.addChildAt(node, i);
+            return node;
+        }
+        
         if (actor instanceof Layout) {
             Layout layout = (Layout) actor;
 
