@@ -72,6 +72,16 @@ public class FlexBox extends WidgetGroup {
     }
     
     /**
+     * Adds an empty node to the end of the root elements list. This node can be used to nest children with {@link #addAsChild(YogaNode, Actor)}.
+     * @return The node associated with the actor. Change the properties of the node to modify the FlexBox layout.
+     */
+    public YogaNode add() {
+        YogaNode node = YogaNodeFactory.create(config);
+        root.addChildAt(node, root.getChildCount());
+        return node;
+    }
+    
+    /**
      * Adds an actor to the end of the root elements list.
      * @param actor The {@link Actor Scene2D Actor} to be added to the list.
      * @return The node associated with the actor. Change the properties of the node to modify the FlexBox layout.
