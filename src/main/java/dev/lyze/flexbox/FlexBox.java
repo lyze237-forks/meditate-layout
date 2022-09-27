@@ -173,6 +173,10 @@ public class FlexBox extends WidgetGroup {
             removeActor(node.getActor());
     
         nodes.clear();
+        
+        while (root.getChildCount() > 0) {
+            root.removeChildAt(0);
+        }
     }
     
     private static class YogaActor {
