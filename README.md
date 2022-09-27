@@ -54,20 +54,20 @@ public void create() {
 
     flexBox = new FlexBox();
     flexBox.setFillParent(true);
-    flexBox.getRoot().setFlexDirection(YogaFlexDirection.ROW)
+    flexBox.getRoot()
+        .setFlexDirection(YogaFlexDirection.ROW)
         .setWrap(YogaWrap.WRAP);
     stage.addActor(flexBox);
         
     Label label = new Label("Item 1", skin);
     label.setAlignment(Align.center);
-    YogaNode node = flexBox.add(label);
-    node.setSize(100);
+    flexBox.add(label).setSize(100);
         
     label = new Label("Item 2", skin);
     label.setAlignment(Align.center);
-    YogaNode node = flexBox.add(label);
-    node.setWidth(100);
-    node.setHeight(100);
+    flexBox.add(label)
+        .setWidth(100)
+        .setHeight(100);
 }
 ```
 
@@ -95,7 +95,7 @@ dependencies {
 }
 ```
 4. Change the `$version` string to the latest version from jitpack in both files.
-5. Include the following in your applications `.gwt.xml` file (Normall `GdxDefinitions.gwt.xml`):
+5. Include the following in your applications `.gwt.xml` file (Normally `GdxDefinition.gwt.xml`):
 ```xml
 <inherits name="dev.lyze.flexbox"/>
 ```
