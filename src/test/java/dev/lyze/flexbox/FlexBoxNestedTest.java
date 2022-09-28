@@ -67,7 +67,7 @@ public class FlexBoxNestedTest extends ApplicationAdapter {
 		testlabel.setAlignment(Align.center);
 		flexBox.addAsChild(parentNode, testlabel);
 		
-		parentNode = flexBox.addAsChild(parentNode, null).setFlexDirection(YogaFlexDirection.ROW);
+		parentNode = flexBox.addAsChild(parentNode).setFlexDirection(YogaFlexDirection.ROW);
 		testlabel = new VisLabel("test5");
 		testlabel.setAlignment(Align.center);
 		flexBox.addAsChild(parentNode, testlabel);

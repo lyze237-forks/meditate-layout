@@ -98,6 +98,16 @@ public class FlexBox extends WidgetGroup {
     }
     
     /**
+     * Adds an empty node to the specified position of the root elements list. This node can be used to nest children
+     * with {@link #addAsChild(YogaNode, Actor)}.
+     * @param i The position to place the actor.
+     * @return The node associated with the actor. Change the properties of the node to modify the FlexBox layout.
+     */
+    public YogaNode addAt(int i) {
+        return addAsChild(root, null, i);
+    }
+    
+    /**
      * Adds an actor to the specified position in the root elements list.
      * @param actor The {@link Actor Scene2D Actor} to be added to the list.
      * @param i The position to place the actor.
@@ -108,6 +118,16 @@ public class FlexBox extends WidgetGroup {
     }
     
     /**
+     * Adds an empty node as a child to the specified node at the end of the elements list. This node can be used to
+     * nest children with {@link #addAsChild(YogaNode, Actor)}.
+     * @param parent The parent node that the actor will be added as a child to.
+     * @return The node associated with the actor. Change the properties of the node to modify the FlexBox layout.
+     */
+    public YogaNode addAsChild(YogaNode parent) {
+        return addAsChild(parent, null, parent.getChildCount());
+    }
+    
+    /**
      * Adds an actor as a child to the specified node at the end of the elements list.
      * @param parent The parent node that the actor will be added as a child to.
      * @param actor The {@link Actor Scene2D Actor} to be added.
@@ -115,6 +135,17 @@ public class FlexBox extends WidgetGroup {
      */
     public YogaNode addAsChild(YogaNode parent, Actor actor) {
         return addAsChild(parent, actor, parent.getChildCount());
+    }
+    
+    /**
+     * Adds an empty node as a child to the specified node to the specified position of the elements list. This node can
+     * be used to nest children with {@link #addAsChild(YogaNode, Actor)}.
+     * @param parent The parent node that the actor will be added as a child to.
+     * @param i The position to place the actor.
+     * @return The node associated with the actor. Change the properties of the node to modify the FlexBox layout.
+     */
+    public YogaNode addAsChild(YogaNode parent, int i) {
+        return addAsChild(parent, null, i);
     }
     
     /**
