@@ -83,20 +83,6 @@ public class FlexBoxNestedTest extends ApplicationAdapter {
 
 		stage.act();
 		stage.draw();
-		
-		if (Gdx.input.isButtonJustPressed(Buttons.LEFT)) {
-			VisLabel label = new VisLabel(Integer.toString(flexBox.getChildren().size + 1));
-			label.setAlignment(Align.center);
-			YogaNode node = flexBox.add(label);
-			node.setWidth(100);
-			node.setHeight(100);
-		}
-		
-		if (Gdx.input.isButtonJustPressed(Buttons.RIGHT)) {
-			if (flexBox.getChildren().size > 0) {
-				flexBox.remove(flexBox.getRoot().getChildAt(flexBox.getChildren().size - 1));
-			}
-		}
 	}
 
 	@Override
