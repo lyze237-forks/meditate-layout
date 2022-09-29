@@ -77,7 +77,7 @@ public class CompactValue //Type originates from: CompactValue.h
 
     public static boolean equalsTo( CompactValue a,  CompactValue b) //Method definition originates from: CompactValue.h
     {
-        return a.payload_.unit.equals(b.payload_.unit);
+        return a.payload_.unit.equals(b.payload_.unit) && a.payload_.value == b.payload_.value;
     }
 
     public YGValue convertToYgValue() {
