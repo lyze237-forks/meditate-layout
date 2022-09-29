@@ -5,10 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Array;
-import io.github.orioncraftmc.meditate.YogaConfig;
-import io.github.orioncraftmc.meditate.YogaConfigFactory;
-import io.github.orioncraftmc.meditate.YogaNode;
-import io.github.orioncraftmc.meditate.YogaNodeFactory;
+import io.github.orioncraftmc.meditate.*;
+import io.github.orioncraftmc.meditate.enums.YogaUnit;
 
 /**
  * A Scene2D widget that implements Yoga Layout by Facebook. FlexBox is a clean and powerful alternative to group
@@ -58,8 +56,15 @@ public class FlexBox extends WidgetGroup {
             Actor actor = yogaActor.actor;
             if (actor instanceof Layout) {
                 Layout layout = (Layout) actor;
-                yogaNode.setMinWidth(layout.getMinWidth());
-                yogaNode.setMinHeight(layout.getMinHeight());
+
+                if (!((YogaNodeWrapper) yogaNode).minWidthManuallySet) {
+                    yogaNode.setMinWidth(layout.getMinWidth());
+                    ((YogaNodeWrapper)yogaNode).minWidthManuallySet = false;
+                }
+                if (!((YogaNodeWrapper) yogaNode).minHeightManuallySet) {
+                    yogaNode.setMinHeight(layout.getMinHeight());
+                    ((YogaNodeWrapper)yogaNode).minHeightManuallySet = false;
+                }
             }
         }
         
@@ -178,6 +183,8 @@ public class FlexBox extends WidgetGroup {
 
             node.setMinWidth(layout.getMinWidth());
             node.setMinHeight(layout.getMinHeight());
+            ((YogaNodeWrapper)node).minWidthManuallySet = false;
+            ((YogaNodeWrapper)node).minHeightManuallySet = false;
         } else {
             node.setWidth(actor.getWidth());
             node.setHeight(actor.getHeight());

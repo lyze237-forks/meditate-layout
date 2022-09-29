@@ -46,6 +46,9 @@ public class YogaNodeWrapper extends YogaNode {
     private Object mData;
 
     private int mLayoutDirection = 0;
+    
+    public boolean minWidthManuallySet;
+    public boolean minHeightManuallySet;
 
     private YogaNodeWrapper(YGNode nativePointer) {
         mNativePointer = nativePointer;
@@ -504,11 +507,13 @@ public class YogaNodeWrapper extends YogaNode {
     }
 
     public YogaNode setMinWidth(float minWidth) {
+        minWidthManuallySet = true;
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinWidth(mNativePointer, minWidth);
         return this;
     }
 
     public YogaNode setMinWidthPercent(float percent) {
+        minWidthManuallySet = true;
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinWidthPercent(mNativePointer, percent);
         return this;
     }
@@ -518,11 +523,13 @@ public class YogaNodeWrapper extends YogaNode {
     }
 
     public YogaNode setMinHeight(float minHeight) {
+        minHeightManuallySet = true;
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinHeight(mNativePointer, minHeight);
         return this;
     }
 
     public YogaNode setMinHeightPercent(float percent) {
+        minHeightManuallySet = true;
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetMinHeightPercent(mNativePointer, percent);
         return this;
     }
