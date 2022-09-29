@@ -53,6 +53,16 @@ public class FlexBox extends WidgetGroup {
     public void layout() {
         super.layout();
     
+        for (YogaActor yogaActor : nodes) {
+            YogaNode yogaNode  = yogaActor.node;
+            Actor actor = yogaActor.actor;
+            if (actor instanceof Layout) {
+                Layout layout = (Layout) actor;
+                yogaNode.setMinWidth(layout.getMinWidth());
+                yogaNode.setMinHeight(layout.getMinHeight());
+            }
+        }
+        
         //update the bounds of the FlexBox
         if (prefSizeInvalid) calcPrefSize();
         if (prefWidth != lastPrefWidth || prefHeight != lastPrefHeight) {
