@@ -48,6 +48,8 @@ compileTestJava {
     targetCompatibility = 8
 }
 
+sourceSets.test.resources.srcDirs += [rootProject.file('src/test/assets').path]
+
 test {
     useJUnitPlatform()
 
