@@ -7,6 +7,7 @@
 
 package io.github.orioncraftmc.meditate;
 
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import io.github.orioncraftmc.meditate.enums.*;
 import io.github.orioncraftmc.meditate.interfaces.YogaBaselineFunction;
 import io.github.orioncraftmc.meditate.interfaces.YogaMeasureFunction;
@@ -49,6 +50,8 @@ public class YogaNodeWrapper extends YogaNode {
     
     public boolean minWidthManuallySet;
     public boolean minHeightManuallySet;
+    
+    private Drawable background;
 
     private YogaNodeWrapper(YGNode nativePointer) {
         mNativePointer = nativePointer;
@@ -612,7 +615,22 @@ public class YogaNodeWrapper extends YogaNode {
         io.github.orioncraftmc.meditate.internal.GlobalMembers.YGNodeStyleSetAspectRatio(mNativePointer, aspectRatio);
         return this;
     }
-
+    
+    @Override
+    public YogaNode setBackground(Drawable background) {
+        this.background = background;
+        setPadding(YogaEdge.LEFT, background.getLeftWidth());
+        setPadding(YogaEdge.TOP,  background.getTopHeight());
+        setPadding(YogaEdge.RIGHT, background.getRightWidth());
+        setPadding(YogaEdge.BOTTOM, background.getBottomHeight());
+        return this;
+    }
+    
+    @Override
+    public Drawable getBackground() {
+        return background;
+    }
+    
     public void setMeasureFunction(YogaMeasureFunction measureFunction) {
         mMeasureFunction = measureFunction;
         mNativePointer.getMeasure().noContext = (node, width, widthMode, height, heightMode) -> measure(width,
