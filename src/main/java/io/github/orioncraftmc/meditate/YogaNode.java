@@ -7,6 +7,7 @@
 
 package io.github.orioncraftmc.meditate;
 
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import io.github.orioncraftmc.meditate.enums.*;
 import io.github.orioncraftmc.meditate.interfaces.*;
 
@@ -202,6 +203,22 @@ public abstract class YogaNode implements YogaProps {
   public abstract float getAspectRatio();
 
   public abstract YogaNode setAspectRatio(float aspectRatio);
+  
+  /**
+   * Sets the background of the node to a Scene2D Drawable. If the drawable has padding specified, the node's padding is
+   * set to these values. The background is ignored outside Scene2D layouts as Yoga/Meditate do not do drawing on their
+   * own. See {@link dev.lyze.flexbox.FlexBox}.
+   * @param background The Drawable to be set as the background of the node.
+   * @return The node for chaining methods together.
+   */
+  public abstract YogaNode setBackground(Drawable background);
+  
+  /**
+   * Returns the background of the node to a Scene2D Drawable. The background is ignored outside Scene2D layouts as
+   * Yoga/Meditate do not do drawing on their own. See {@link dev.lyze.flexbox.FlexBox}.
+   * @return The Drawable to be set as the background of the node.
+   */
+  public abstract Drawable getBackground();
 
   public abstract float getLayoutX();
 

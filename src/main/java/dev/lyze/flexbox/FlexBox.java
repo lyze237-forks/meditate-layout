@@ -1,12 +1,15 @@
 package dev.lyze.flexbox;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Array;
 import io.github.orioncraftmc.meditate.*;
-import io.github.orioncraftmc.meditate.enums.YogaUnit;
+import io.github.orioncraftmc.meditate.enums.YogaEdge;
 
 /**
  * A Scene2D widget that implements Yoga Layout by Facebook. FlexBox is a clean and powerful alternative to group
@@ -36,6 +39,8 @@ public class FlexBox extends WidgetGroup {
     public FlexBox() {
         this.config = YogaConfigFactory.create();
         this.root = YogaNodeFactory.create();
+        setTransform(false);
+        setTouchable(Touchable.childrenOnly);
     }
     
     /**
@@ -58,11 +63,11 @@ public class FlexBox extends WidgetGroup {
                 Layout layout = (Layout) actor;
 
                 if (!((YogaNodeWrapper) yogaNode).minWidthManuallySet) {
-                    yogaNode.setMinWidth(layout.getMinWidth());
+                    yogaNode.setMinWidth(layout.getMinWidth() + yogaNode.getLayoutPadding(YogaEdge.LEFT) + yogaNode.getLayoutPadding(YogaEdge.RIGHT));
                     ((YogaNodeWrapper)yogaNode).minWidthManuallySet = false;
                 }
                 if (!((YogaNodeWrapper) yogaNode).minHeightManuallySet) {
-                    yogaNode.setMinHeight(layout.getMinHeight());
+                    yogaNode.setMinHeight(layout.getMinHeight() + yogaNode.getLayoutPadding(YogaEdge.BOTTOM) + yogaNode.getLayoutPadding(YogaEdge.TOP));
                     ((YogaNodeWrapper)yogaNode).minHeightManuallySet = false;
                 }
             }
@@ -91,7 +96,43 @@ public class FlexBox extends WidgetGroup {
                 y += parent.getLayoutY();
                 parent = parent.getOwner();
             }
-            actor.setBounds(x, getHeight() - y - node.getLayoutHeight(), node.getLayoutWidth(), node.getLayoutHeight());
+            actor.setBounds(x + node.getLayoutPadding(YogaEdge.LEFT), getHeight() - y - node.getLayoutHeight() + node.getLayoutPadding(YogaEdge.BOTTOM), node.getLayoutWidth() - node.getLayoutPadding(YogaEdge.LEFT) - node.getLayoutPadding(YogaEdge.RIGHT), node.getLayoutHeight()  - node.getLayoutPadding(YogaEdge.BOTTOM) - node.getLayoutPadding(YogaEdge.TOP));
+        }
+    }
+    
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        validate();
+        if (isTransform()) {
+            applyTransform(batch, computeTransform());
+            drawBackground(root, batch, 0, 0);
+            drawChildren(batch, parentAlpha);
+            resetTransform(batch);
+        } else {
+            drawBackground(root, batch, getX(), getY());
+            super.draw(batch, parentAlpha);
+        }
+    }
+    
+    private void drawBackground(YogaNode node, Batch batch, float offsetX, float offsetY) {
+        Drawable background = node.getBackground();
+    
+        if (background != null) {
+            float x = node.getLayoutX();
+            float y = node.getLayoutY();
+            YogaNode parent = node.getOwner();
+            while (parent != null) {
+                x += parent.getLayoutX();
+                y += parent.getLayoutY();
+                parent = parent.getOwner();
+            }
+            background.draw(batch, x + offsetX, getHeight() - y - node.getLayoutHeight() + offsetY, node.getLayoutWidth(),
+                    node.getLayoutHeight());
+        }
+        
+        for (int i = 0; i < node.getChildCount(); i++) {
+            YogaNode child = node.getChildAt(i);
+            drawBackground(child, batch, offsetX, offsetY);
         }
     }
     
