@@ -80,7 +80,6 @@ public class FlexBox extends WidgetGroup {
             lastPrefHeight = prefHeight;
             invalidateHierarchy();
         }
-        setBounds(0, 0, getWidth(), getHeight());
     
         //update the bounds of the children
         root.calculateLayout(getWidth(), getHeight());
