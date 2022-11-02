@@ -11,6 +11,14 @@ Meditate Layout is a full java port of [Yoga Layout by Facebook](https://github.
 This fork downgrades the project to Java 8 and supports GWT for compatibility with libGDX. It adds the FlexBox class to 
 implement Yoga Layout in Scene2D UI's. 
 
+### Video
+
+[![Youtube video tutorial](http://img.youtube.com/vi/eBE2t1B7ZZU/0.jpg)](http://www.youtube.com/watch?v=eBE2t1B7ZZU)
+
+### Tutorials
+
+https://github.com/raeleus/FlexBoxTutorial#flexboxtutorial
+
 ### Yoga Layout Simple Example
 
 Check out https://yogalayout.com/playground for a playground and https://yogalayout.com/docs (Or any other flexbox tutorial) for docs.
